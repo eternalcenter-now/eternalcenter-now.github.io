@@ -1,0 +1,495 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>SFTP &#8211; Eternal Center</title>
+	<atom:link href="https://eternalcenter-now.github.io/category/services/storage-services/sftp/feed/" rel="self" type="application/rss+xml" />
+	<link>https://eternalcenter-now.github.io/</link>
+	<description></description>
+	<lastBuildDate>Tue, 15 Feb 2022 14:54:27 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	
+	<item>
+		<title>[工具] Shell 监控普通登录记录 （排除 SFTP 登录记录只监控普通登录记录）</title>
+		<link>https://eternalcenter-now.github.io/shell-login-log-exclude-sftp/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Tue, 15 Feb 2022 14:52:50 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Languages (语言)]]></category>
+		<category><![CDATA[Other Services (其他服务)]]></category>
+		<category><![CDATA[Services (服务)]]></category>
+		<category><![CDATA[SFTP]]></category>
+		<category><![CDATA[Shell]]></category>
+		<category><![CDATA[Shell Monitor (监控)]]></category>
+		<category><![CDATA[Shell Tool (工具)]]></category>
+		<category><![CDATA[Storage Services (存储服务)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System General Log (系统普通日志)]]></category>
+		<category><![CDATA[System Log (系统日志)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=21977</guid>
+
+					<description><![CDATA[注意： 在排除 SFTP 登录记录只监控普通登录记录前要先开启 SFTP 日志： 介绍： 作者：朱明宇名称：监控普通登录记录 （排除 SFTP 登录记录只监控普通登录记录）作用：监控普通登录记录 （排除 SFTP 登录记录只监控普通登录记录） 使用方法：1. 在此脚本的分割线内写入相应的内容2. 给此脚本添加执行权限3. 执行此脚本4. 普通登录记录会同时记录在系统日志和 $logfile 里 脚本分割线里的变量：1. logfile=logfile.txt #用户保存记录的文件2. prompt=&#8221;and no sftp info&#8221; #记录里普通登录记录的文件 脚本：]]></description>
+										<content:encoded><![CDATA[
+<h2 id="注意">注意：</h2>
+
+
+
+<p>在排除 SFTP 登录记录只监控普通登录记录前要先开启 SFTP 日志：</p>
+
+
+
+<div class="wp-container-1 wp-block-buttons">
+<div class="wp-block-button aligncenter is-style-outline"><a class="wp-block-button__link" href="https://eternalcenter-now.github.io/sftp-log/" style="border-radius:0px">SFTP 日志的开启</a></div>
+</div>
+
+
+
+<h2 id="介绍">介绍：</h2>
+
+
+
+<p>作者：朱明宇<br>名称：监控普通登录记录 （排除 SFTP 登录记录只监控普通登录记录）<br>作用：监控普通登录记录 （排除 SFTP 登录记录只监控普通登录记录）</p>
+
+
+
+<p>使用方法：<br>1. 在此脚本的分割线内写入相应的内容<br>2. 给此脚本添加执行权限<br>3. 执行此脚本<br>4. 普通登录记录会同时记录在系统日志和 $logfile 里</p>
+
+
+
+<p>脚本分割线里的变量：<br>1. logfile=logfile.txt #用户保存记录的文件<br>2. prompt=&#8221;and no sftp info&#8221; #记录里普通登录记录的文件</p>
+
+
+
+<h2 id="脚本">脚本：</h2>
+
+
+
+<pre class="wp-block-code"><code>#!/bin/bash
+
+####################### Separator ########################
+
+logfile=logfile.txt
+prompt="and no sftp info"
+
+####################### Separator ########################
+
+checktime=`date +%Y-%m-%dT%H -d "-1 day"`
+
+for i in `cat -n /var/log/messages | grep $check_time | grep 'Started Session' | grep -v 'root' | awk '{print $1}'`
+
+do
+   line=`sed -n $&#91;i]p /var/log/messages`
+   time=`echo $line | awk '{print $1}'`
+   session=`echo $line | awk '{print $6}'`
+   user=`echo $line | awk '{print $9}'`
+   user=${user%.}
+
+   message="ACCESS CHECK LOG: Time:$time Session:$session $user has accessed `hostname`, $prompt"
+
+   let sftpline=i+3
+
+   sed -n $&#91;sftpline]p /var/log/messages | grep sftp-server &amp;&gt; /dev/null
+   if &#91; $? -ne 0 ];then
+           echo $message
+           echo $message &gt;&gt; $logfile.txt
+           logger $message
+   fi
+   echo
+done</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] SFTP 日志的开启</title>
+		<link>https://eternalcenter-now.github.io/sftp-log/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Wed, 26 Jan 2022 14:34:34 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Services (服务)]]></category>
+		<category><![CDATA[SFTP]]></category>
+		<category><![CDATA[Storage Services (存储服务)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=21410</guid>
+
+					<description><![CDATA[如果是 CentOS Linux &#38; RHEL，将以下内容： 修改为： 如果是 openSUSE &#38; SLE， 将以下内容： 修改为： （补充：此时当通过 SFTP 登录系统时，系统日志记录文件 /var/log/messages 里登录记录后面会紧跟一行带 sftp-server 的记录）]]></description>
+										<content:encoded><![CDATA[
+<pre class="wp-block-code"><code># vim /etc/sshd/sshd_config</code></pre>
+
+
+
+<p>如果是 CentOS Linux &amp; RHEL，将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+Subsystem       sftp    /usr/libexec/openssh/sftp-server
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+Subsystem       sftp    /usr/libexec/openssh/sftp-server -l INFO
+......</code></pre>
+
+
+
+<p>如果是 openSUSE &amp; SLE， 将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+Subsystem       sftp    /usr/lib/ssh/sftp-server
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+Subsystem       sftp    /usr/lib/ssh/sftp-server -l INFO
+......</code></pre>
+
+
+
+<p>（补充：此时当通过 SFTP 登录系统时，系统日志记录文件 /var/log/messages 里登录记录后面会紧跟一行带 sftp-server 的记录）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] SFTP 的安全使用</title>
+		<link>https://eternalcenter-now.github.io/sftp-safe/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Thu, 16 Jul 2020 12:16:20 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Services (服务)]]></category>
+		<category><![CDATA[SFTP]]></category>
+		<category><![CDATA[Storage Services (存储服务)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=10068</guid>
+
+					<description><![CDATA[步骤目录： 步骤一：创建 SFTP 用户的组 步骤二：创建用于 SFTP 的主目录2.1 创建用于 SFTP 的主目录2.2 设置用于 SFTP 的主目录的所属组和所属主2.3 设置用于 SFTP 的主目录的权限 步骤三：开启 SFTP 服务3.1 修改 sshd 配置文件3.2 重启 sshd 服务 步骤四：创建 SFTP 用户4.1 创建 SFTP 用户4.1.1 创建 SFTP 用户4.1.2 给 SFTP 用户设置密码4.2 创建 SFTP 用户的主目录4.2.1 创建 SFTP 用户的主目录4.2.2 设置 SFTP 用户的主目录的所属组和所属主4.2.3 设置 SFTP 用户的主目录的权限4.3 创建 SFTP 用户有写入权限的目录4.3.1 创建 SFTP 用户有写入权限的目录4.3.2 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/sftp-safe/" class="more-link">Continue reading<span class="screen-reader-text"> "[步骤] SFTP 的安全使用"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2 id="步骤目录">步骤目录：</h2>
+
+
+
+<h4 id="步骤一-创建-sftp-用户的组">步骤一：创建 SFTP 用户的组</h4>
+
+
+
+<h4 id="步骤二-创建用于-sftp-的主目录2-1-创建用于-sftp-的主目录2-2-设置用于-sftp-的主目录的所属组和所属主2-3-设置用于-sftp-的主目录的权限">步骤二：创建用于 SFTP 的主目录<br>2.1 创建用于 SFTP 的主目录<br>2.2 设置用于 SFTP 的主目录的所属组和所属主<br>2.3 设置用于 SFTP 的主目录的权限</h4>
+
+
+
+<h4 id="步骤三-开启-sftp-服务3-1-修改-sshd-配置文件3-2-重启-sshd-服务">步骤三：开启 SFTP 服务<br>3.1 修改 sshd 配置文件<br>3.2 重启 sshd 服务</h4>
+
+
+
+<h4 id="步骤四-创建-sftp-用户4-1-创建-sftp-用户4-1-1-创建-sftp-用户4-1-2-给-sftp-用户设置密码4-2-创建-sftp-用户的主目录4-2-1-创建-sftp-用户的主目录4-2-2-设置-sftp-用户的主目录的所属组和所属主4-2-3-设置-sftp-用户的主目录的权限4-3-创建-sftp-用户有写入权限的目录4-3-1-创建-sftp-用户有写入权限的目录4-3-2-设置-sftp-用户有写入权限的目录的所属组和所属主4-3-3-创建-sftp-用户有写入权限的目录的权限">步骤四：创建 SFTP 用户<br>4.1 创建 SFTP 用户<br>4.1.1 创建 SFTP 用户<br>4.1.2 给 SFTP 用户设置密码<br>4.2 创建 SFTP 用户的主目录<br>4.2.1 创建 SFTP 用户的主目录<br>4.2.2 设置 SFTP 用户的主目录的所属组和所属主<br>4.2.3 设置 SFTP 用户的主目录的权限<br>4.3 创建 SFTP 用户有写入权限的目录<br>4.3.1 创建 SFTP 用户有写入权限的目录<br>4.3.2 设置 SFTP 用户有写入权限的目录的所属组和所属主<br>4.3.3 创建 SFTP 用户有写入权限的目录的权限</h4>
+
+
+
+<h4 id="步骤五-sftp-的使用5-1-登陆-sftp5-2-sftp-可使用的命令5-2-1-显示当前目录下的所有文件和目录5-2-2-创建某一个目录5-2-3-从被远程的主机上下载一个文件5-2-4-将本地的一个文件上传到被远程的主机上">步骤五： SFTP 的使用<br>5.1 登陆 SFTP<br>5.2 SFTP 可使用的命令<br>5.2.1 显示当前目录下的所有文件和目录<br>5.2.2 创建某一个目录<br>5.2.3 从被远程的主机上下载一个文件<br>5.2.4 将本地的一个文件上传到被远程的主机上</h4>
+
+
+
+<h2 id="具体的操作步骤">具体的操作步骤：</h2>
+
+
+
+<h4 id="步骤一-创建-sftp-用户的组">步骤一：创建 SFTP 用户的组</h4>
+
+
+
+<pre class="wp-block-code"><code># groupadd sftp</code></pre>
+
+
+
+<h4 id="步骤二-创建用于-sftp-的主目录2-1-创建用于-sftp-的主目录">步骤二：创建用于 SFTP 的主目录<br>2.1 创建用于 SFTP 的主目录</h4>
+
+
+
+<pre class="wp-block-code"><code># mkdir /sftp</code></pre>
+
+
+
+<p>（补充：这里以创建 /sftp 目录为例）</p>
+
+
+
+<h4 id="2-2-设置用于-sftp-的主目录的所属组和所属主">2.2 设置用于 SFTP 的主目录的所属组和所属主</h4>
+
+
+
+<pre class="wp-block-code"><code># chown root:sftp /sftp</code></pre>
+
+
+
+<p>（补充：这里以给 /sftp 设置 root 主和 sftp 组为例）</p>
+
+
+
+<h4 id="2-3-设置用于-sftp-的主目录的权限">2.3 设置用于 SFTP 的主目录的权限</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod 755 /sftp</code></pre>
+
+
+
+<p>（补充：这里以给 /sftp 目录权限为例）</p>
+
+
+
+<h4 id="步骤三-开启-sftp-服务3-1-修改-sshd-配置文件">步骤三：开启 SFTP 服务<br>3.1 修改 sshd 配置文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/ssh/sshd_config</code></pre>
+
+
+
+<p>如果是 RHEL &amp; CentOS Linux，将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+Subsystem       sftp    /usr/libexec/openssh/sftp-server
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+# Subsystem       sftp    /usr/libexec/openssh/sftp-server
+......</code></pre>
+
+
+
+<p>如果是 openSUSE &amp; SLE， 将以下内容： </p>
+
+
+
+<pre class="wp-block-code"><code>......
+Subsystem       sftp    /usr/lib/ssh/sftp-server
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+# Subsystem       sftp    /usr/lib/ssh/sftp-server
+......</code></pre>
+
+
+
+<p>并添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+Subsystem       sftp    internal-sftp
+Match Group sftp
+ChrootDirectory /sftp/%u
+ForceCommand    internal-sftp
+AllowTcpForwarding no
+X11Forwarding no</code></pre>
+
+
+
+<p>（<br>补充：这里以<br>（1）sftp 的所属组是 sftp<br>（2）以 /sftp/%u 作为 sftp 的家目录<br>为例<br>）</p>
+
+
+
+<h4 id="3-2-重启-sshd-服务">3.2 重启 sshd 服务</h4>
+
+
+
+<pre class="wp-block-code"><code># systemctl restart sshd</code></pre>
+
+
+
+<h4 id="步骤四-创建-sftp-用户4-1-创建-sftp-用户4-1-1-创建-sftp-用户">步骤四：创建 SFTP 用户<br>4.1 创建 SFTP 用户<br>4.1.1 创建 SFTP 用户</h4>
+
+
+
+<pre class="wp-block-code"><code># useradd -g sftp -s /bin/false sftpuser</code></pre>
+
+
+
+<p>（补充：这里以创建名为 sftpuser ，所属组为 sftp，解释器是 /bin/false 的用户为例）</p>
+
+
+
+<h4 id="4-1-2-给-sftp-用户设置密码">4.1.2 给 SFTP 用户设置密码</h4>
+
+
+
+<pre class="wp-block-code"><code># passwd sftpuser</code></pre>
+
+
+
+<p>（补充：这里以给 sftpuser 用户设置密码为例）</p>
+
+
+
+<h4 id="4-2-创建-sftp-用户的主目录4-2-1-创建-sftp-用户的主目录">4.2 创建 SFTP 用户的主目录<br>4.2.1 创建 SFTP 用户的主目录</h4>
+
+
+
+<pre class="wp-block-code"><code># mkdir /sftp/sftpuser</code></pre>
+
+
+
+<p>（补充：这里以创建 /sftp/sftpuser 目录为例）</p>
+
+
+
+<h4 id="4-2-2-设置-sftp-用户的主目录的所属组和所属主">4.2.2 设置 SFTP 用户的主目录的所属组和所属主</h4>
+
+
+
+<pre class="wp-block-code"><code># chown root:sftp /sftp/sftpuser</code></pre>
+
+
+
+<p>（补充：这里以给 /sftp/sftpuser 设置 root 主和 sftp 组为例）</p>
+
+
+
+<h4 id="4-2-3-设置-sftp-用户的主目录的权限">4.2.3 设置 SFTP 用户的主目录的权限</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod 755 /sftp/sftpuser</code></pre>
+
+
+
+<p>（补充：这里以给 /sftp/sftpuser 目录权限为例）</p>
+
+
+
+<h4 id="4-3-创建-sftp-用户有写入权限的目录4-3-1-创建-sftp-用户有写入权限的目录">4.3 创建 SFTP 用户有写入权限的目录<br>4.3.1 创建 SFTP 用户有写入权限的目录</h4>
+
+
+
+<pre class="wp-block-code"><code># mkdir /sftp/sftpuser/write</code></pre>
+
+
+
+<p>（补充：这里以创建 /sftp/sftpuser/write 目录为例）</p>
+
+
+
+<h4 id="4-3-2-设置-sftp-用户有写入权限的目录的所属组和所属主">4.3.2 设置 SFTP 用户有写入权限的目录的所属组和所属主</h4>
+
+
+
+<pre class="wp-block-code"><code># chown sftpuser:sftp /sftp/sftpuser/write</code></pre>
+
+
+
+<p>（补充：这里以给 /sftp/sftpuser/write 设置 sftpuser 主和 sftp 组为例）</p>
+
+
+
+<h4 id="4-3-3-创建-sftp-用户有写入权限的目录的权限">4.3.3 创建 SFTP 用户有写入权限的目录的权限</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod 755 /sftp/sftpuser/write</code></pre>
+
+
+
+<p>（补充：这里以给 /sftp/sftpuser/write 目录权限为例）</p>
+
+
+
+<h4 id="步骤五-sftp-的使用5-1-登陆-sftp">步骤五： SFTP 的使用<br>5.1 登陆 SFTP</h4>
+
+
+
+<pre class="wp-block-code"><code># sftp sftpuser@127.0.0.0.1</code></pre>
+
+
+
+<p>（补充：这里以使用 sftpuser 用户登陆 IP 地址为 127.0.0.1 的 sftp 为例）</p>
+
+
+
+<h4 id="5-2-sftp-可使用的命令5-2-1-显示当前目录下的所有文件和目录">5.2 SFTP 可使用的命令<br>5.2.1 显示当前目录下的所有文件和目录</h4>
+
+
+
+<pre class="wp-block-code"><code>sftp&gt; ls</code></pre>
+
+
+
+<h4 id="5-2-2-创建某一个目录">5.2.2 创建某一个目录</h4>
+
+
+
+<pre class="wp-block-code"><code>sftp&gt; mkdir test</code></pre>
+
+
+
+<p>（补充：这里以创建 test 目录为例）</p>
+
+
+
+<h4 id="5-2-3-从被远程的主机上下载一个文件">5.2.3 从被远程的主机上下载一个文件</h4>
+
+
+
+<pre class="wp-block-code"><code>sftp&gt; get test.txt</code></pre>
+
+
+
+<p>（补充：这里以下载 test.txt 文件为例）</p>
+
+
+
+<h4 id="5-2-4-将本地的一个文件上传到被远程的主机上">5.2.4 将本地的一个文件上传到被远程的主机上</h4>
+
+
+
+<pre class="wp-block-code"><code>sftp&gt; put local.txt</code></pre>
+
+
+
+<p>（补充：这里以上传 local.txt 文件为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

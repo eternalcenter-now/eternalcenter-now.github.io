@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>DRBD + Pacemaker + NFS &#8211; Eternal Center</title>
+	<atom:link href="https://eternalcenter-now.github.io/category/clusters/high-availability-clusters/storage-services-highly-availability-clusters/drbd-pacemaker-nfs/feed/" rel="self" type="application/rss+xml" />
+	<link>https://eternalcenter-now.github.io/</link>
+	<description></description>
+	<lastBuildDate>Sun, 26 Dec 2021 09:11:06 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	
+	<item>
+		<title>[内容] 实现数据存储高可用的思路</title>
+		<link>https://eternalcenter-now.github.io/data-ha/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 20 Sep 2019 08:32:03 +0000</pubDate>
+				<category><![CDATA[Big Data (大数据)]]></category>
+		<category><![CDATA[Ceph]]></category>
+		<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Cluster High Availability Tools (集群高可用工具)]]></category>
+		<category><![CDATA[Clusters (集群)]]></category>
+		<category><![CDATA[Distributed Cloud Storage Clusters (分布式云存储集群)]]></category>
+		<category><![CDATA[Distributed Replicated Block Device (DRBD)]]></category>
+		<category><![CDATA[DRBD + Keepalived + NFS + Shell]]></category>
+		<category><![CDATA[DRBD + Pacemaker + NFS]]></category>
+		<category><![CDATA[Hadoop]]></category>
+		<category><![CDATA[High Availability Clusters (高可用集群)]]></category>
+		<category><![CDATA[Inotifywait + Rsync]]></category>
+		<category><![CDATA[Keepalived]]></category>
+		<category><![CDATA[Load Balancing and High Availability Clusters (负载均衡加高可用集群)]]></category>
+		<category><![CDATA[Project (项目)]]></category>
+		<category><![CDATA[Project Ideas (项目思路)]]></category>
+		<category><![CDATA[Storage Services Highly Availability Clusters (存储服务高可用集群)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=5832</guid>
+
+					<description><![CDATA[方法一：以目录级数据同步工具 rsync 为核心的同步方法 通过 inotify + rsync 实现两个目录的数据实时同步特点：如果数据量太大就不合适了，数据量最好小于 10G，如果文件多最好要小于 5G 甚至小于 3G 方法二：以硬盘级数据同步工具 drbd 为核心的同步方法 drbd + heartbeat 或者 drbd + keepalive + shell 实现两个数据存储节点的主从同步、主从切换特点：最好用于小于 300G 的数据同步 方法三：分布式云存储 通过 hdfs 或者 ceph 实现分布式云存储特点：可以用于大于 300G 的数据同步]]></description>
+										<content:encoded><![CDATA[
+<h4>方法一：以目录级数据同步工具 rsync 为核心的同步方法</h4>
+
+
+
+<p>通过 inotify + rsync 实现两个目录的数据实时同步<br>特点：如果数据量太大就不合适了，数据量最好小于 10G，如果文件多最好要小于 5G 甚至小于 3G</p>
+
+
+
+<h4>方法二：以硬盘级数据同步工具 drbd 为核心的同步方法</h4>
+
+
+
+<p>drbd + heartbeat 或者 drbd + keepalive + shell 实现两个数据存储节点的主从同步、主从切换<br>特点：最好用于小于 300G 的数据同步</p>
+
+
+
+<h4>方法三：分布式云存储</h4>
+
+
+
+<p>通过 hdfs 或者 ceph 实现分布式云存储<br>特点：可以用于大于 300G 的数据同步</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

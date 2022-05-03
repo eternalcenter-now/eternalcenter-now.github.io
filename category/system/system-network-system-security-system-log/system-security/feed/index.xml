@@ -1,0 +1,2586 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>System Security (系统安全) &#8211; Eternal Center</title>
+	<atom:link href="https://eternalcenter-now.github.io/category/system/system-network-system-security-system-log/system-security/feed/" rel="self" type="application/rss+xml" />
+	<link>https://eternalcenter-now.github.io/</link>
+	<description></description>
+	<lastBuildDate>Fri, 29 Apr 2022 14:47:22 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	
+	<item>
+		<title>[步骤] Linux SSH 密钥的批量更新</title>
+		<link>https://eternalcenter-now.github.io/ssh-key-batch-renew/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 29 Apr 2022 14:36:55 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Port Security (系统端口安全)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23423</guid>
+
+					<description><![CDATA[步骤目录： 步骤一：生成新的 SSH 密钥1.1 进入 ~/.ssh 目录1.2 生成新的 SSH 密钥 步骤二：将新的 SSH 公钥拷贝到目标服务器 步骤三：更新 SSH 密钥3.1 更新 SSH 私钥3.1.1 备份旧有的 SSH 私钥3.1.2 更新 SSH 私钥3.2 更新 SSH 公钥3.2.1 备份旧有的 SSH 公钥3.2.2 更新 SSH 公钥 步骤四：删除目标服务器的旧有 SSH 公钥4.1 删除目标服务器的旧有 SSH 公钥4.2 确定目标服务器就有的 SSH 已经删除 具体的操作步骤： 步骤一：生成新的 SSH 密钥1.1 进入 ~/.ssh 目录 1.2 生成新的 SSH 密钥 步骤二：将新的 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/ssh-key-batch-renew/" class="more-link">Continue reading<span class="screen-reader-text"> "[步骤] Linux SSH 密钥的批量更新"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2>步骤目录：</h2>
+
+
+
+<h4>步骤一：生成新的 SSH 密钥<br>1.1 进入 ~/.ssh 目录<br>1.2 生成新的 SSH 密钥</h4>
+
+
+
+<h4>步骤二：将新的 SSH 公钥拷贝到目标服务器</h4>
+
+
+
+<h4>步骤三：更新 SSH 密钥<br>3.1 更新 SSH 私钥<br>3.1.1 备份旧有的 SSH 私钥<br>3.1.2 更新 SSH 私钥<br>3.2 更新 SSH 公钥<br>3.2.1 备份旧有的 SSH 公钥<br>3.2.2 更新 SSH 公钥</h4>
+
+
+
+<h4>步骤四：删除目标服务器的旧有 SSH 公钥<br>4.1 删除目标服务器的旧有 SSH 公钥<br>4.2 确定目标服务器就有的 SSH 已经删除</h4>
+
+
+
+<h2>具体的操作步骤：</h2>
+
+
+
+<h4>步骤一：生成新的 SSH 密钥<br>1.1 进入 ~/.ssh 目录</h4>
+
+
+
+<pre class="wp-block-code"><code># cd ~/.ssh</code></pre>
+
+
+
+<h4>1.2 生成新的 SSH 密钥</h4>
+
+
+
+<pre class="wp-block-code"><code># ssh-keygen -b 4096 -t rsa -C "&lt;content&gt;" -f "&lt;public private key name&gt;"</code></pre>
+
+
+
+<h4>步骤二：将新的 SSH 公钥拷贝到目标服务器</h4>
+
+
+
+<pre class="wp-block-code"><code># for i in `cat &lt;server list&gt;`;do echo $i;ssh-copy-id -i ~/.ssh/&lt;public private key name&gt;.pub $i;echo;done</code></pre>
+
+
+
+<h4>步骤三：更新 SSH 密钥<br>3.1 更新 SSH 私钥<br>3.1.1 备份旧有的 SSH 私钥</h4>
+
+
+
+<pre class="wp-block-code"><code># mv id_rsa id_rsa.backup</code></pre>
+
+
+
+<h4>3.1.2 更新 SSH 私钥</h4>
+
+
+
+<pre class="wp-block-code"><code># cp &lt;public private key name&gt; id_rsa</code></pre>
+
+
+
+<h4>3.2 更新 SSH 公钥<br>3.2.1 备份旧有的 SSH 公钥</h4>
+
+
+
+<pre class="wp-block-code"><code># mv id_rsa.pub id_rsa.pub.backup</code></pre>
+
+
+
+<h4>3.2.2 更新 SSH 公钥</h4>
+
+
+
+<pre class="wp-block-code"><code># cp &lt;public private key name&gt;.pub id_rsa.pub</code></pre>
+
+
+
+<h4>步骤四：删除目标服务器的旧有 SSH 公钥<br>4.1 删除目标服务器的旧有 SSH 公钥</h4>
+
+
+
+<pre class="wp-block-code"><code># for i in `cat &lt;server list&gt;`;do echo $i;ssh $i "sed -i /&lt;old SSH key content&gt;/d ~/.ssh/authorized_keys";echo;done</code></pre>
+
+
+
+<h4>4.2 确定目标服务器就有的 SSH 已经删除</h4>
+
+
+
+<pre class="wp-block-code"><code># for i in `cat &lt;server list&gt;`;do echo $i;ssh $i "cat ~/.ssh/authorized_keys | egrep -v '&lt;content&gt;'";echo;done</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Linux 系统被删根 （rm -rf /*） 后锁定删根 （rm -rf /*） 用户的尝试 （系统层面）</title>
+		<link>https://eternalcenter-now.github.io/rm-rf-user/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Thu, 28 Apr 2022 15:03:04 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23353</guid>
+
+					<description><![CDATA[步骤目录： 步骤一：系统被删根 （rm -rf /*） 后的现象 步骤二：挂载官方镜像 步骤三：登录拯救模式3.1 进入拯救模式3.2 登录拯救模式 步骤四：在救援模式确定系统的根目录分区 步骤五：在救援模式将系统的分区挂载到救援模式的 /mnt 目录5.1 在救援模式将系统的根分区挂载到救援模式的 /mnt 目录5.2 在救援模式将救援模式的 /dev 目录关联到救援模式的 /mnt/dev 目录5.3 在救援模式将救援模式的 /proc 目录关联到救援模式的 /mnt/proc 目录5.4 在救援模式将救援模式的 /sys 目录关联到救援模式的 /mnt/sys 目录5.5 在救援模式将救援模式的 /run 目录关联到救援模式的 /mnt/run 目录 步骤六：显示系统被删根 （rm -rf /*） 后的现象6.1 尝试将当前根目录从救援模式的根目录切换到系统的根目录时会报错 “chroot: failed to run command #/bin/bash#: No such file or directory”6.2 在救援模式显示 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/rm-rf-user/" class="more-link">Continue reading<span class="screen-reader-text"> "[步骤] Linux 系统被删根 （rm -rf /*） 后锁定删根 （rm -rf /*） 用户的尝试 （系统层面）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2>步骤目录：</h2>
+
+
+
+<h4>步骤一：系统被删根 （rm -rf /*） 后的现象</h4>
+
+
+
+<h4>步骤二：挂载官方镜像</h4>
+
+
+
+<h4>步骤三：登录拯救模式<br>3.1 进入拯救模式<br>3.2 登录拯救模式</h4>
+
+
+
+<h4>步骤四：在救援模式确定系统的根目录分区</h4>
+
+
+
+<h4>步骤五：在救援模式将系统的分区挂载到救援模式的 /mnt 目录<br>5.1 在救援模式将系统的根分区挂载到救援模式的 /mnt 目录<br>5.2 在救援模式将救援模式的 /dev 目录关联到救援模式的 /mnt/dev 目录<br>5.3 在救援模式将救援模式的 /proc 目录关联到救援模式的 /mnt/proc 目录<br>5.4 在救援模式将救援模式的 /sys 目录关联到救援模式的 /mnt/sys 目录<br>5.5 在救援模式将救援模式的 /run 目录关联到救援模式的 /mnt/run 目录</h4>
+
+
+
+<h4>步骤六：显示系统被删根 （rm -rf /*） 后的现象<br>6.1 尝试将当前根目录从救援模式的根目录切换到系统的根目录时会报错 “chroot: failed to run command #/bin/bash#: No such file or directory”<br>6.2 在救援模式显示 /boot 目录里的文件时，会发现此目录下只有 grub2 目录，而此 grub2 目录里也是空的<br>6.3 在救援模式显示 /bin 目录时，会显示并无此目录<br>6.4 在救援模式显示 /etc 目录里的文件时，会发现此目录下只有 lvm 文件</h4>
+
+
+
+<h4>步骤七：在救援模式修复系统的 /bin 目录和里面的文件<br>7.1 在救援模式创建 /mnt/bin 目录<br>7.2 在救援模式挂载官方镜像<br>7.2.1 在救援模式创建用于挂载镜像的 /media 目录<br>7.2.2 在救援模式挂将官方镜像挂载到 /media 目录<br>7.3 在救援模式安装 bash 软件<br>7.3.1 在救援模式安装拷贝 bash 软件包到当前目录<br>7.3.2 在救援模式创建用于安装 bash 软件的 bash 目录<br>7.3.3 在救援模式进入 bash 目录<br>7.3.4 在救援模式安装 bash 软件<br>7.3.5 在救援模式显示安装 bash 软件后生成的目录<br>7.4 在救援模式将 bin 目录拷贝到 /mnt/bin 目录</h4>
+
+
+
+<h4>步骤八：将当前的根目录从救援模式的根目录切换到系统的根目录<br>8.1 将当前的根目录从救援模式的根目录切换到系统的根目录<br>8.2 在系统模式下确认当前的挂载状态<br>8.3 在系统模式下确认当前根目录下的目录</h4>
+
+
+
+<h4>步骤九：锁定有删根 （rm -rf /*<em>） 操作的用户</em><br><em>9.1 在系统模式显示历史命令以确认有没有用户输入过 rm -rf /* 命令</em><br><em>9.2 在系统模式显示用户登录记录</em><br><em>9.3 根据步骤 9.1 和步骤 9.2 推测是哪个用户进行过删根 （rm -rf /</em>*） 操作</h4>
+
+
+
+<h2>具体的操作步骤：</h2>
+
+
+
+<h4>步骤一：系统被删根 （rm -rf /*） 后的现象总结</h4>
+
+
+
+<p>1) 系统无法被 ssh<br>2) 通过 console 口登录系统在输入密码时会卡住<br>3) 尝试将当前根目录从救援模式的根目录切换到系统的根目录时会报错 “chroot: failed to run command #/bin/bash#: No such file or directory”<br>4) 重启系统后无法进入系统，并提示：/grub2/i386-pc/normoal.mod not found gpt<br>5）在救援模式显示 /boot 目录里的文件时，会发现此目录下只有 grub2 目录，而此 grub2 目录里也是空的<br>6) 在救援模式显示 /bin 目录时，会显示并无此目录<br>7) 在救援模式显示 /etc 目录里的文件时，会发现此目录下只有 lvm 文件</p>
+
+
+
+<h4>步骤二：挂载官方镜像</h4>
+
+
+
+<p>（步骤略）</p>
+
+
+
+<h4>步骤三：登录拯救模式<br>3.1 进入拯救模式</h4>
+
+
+
+<p>（步骤略）</p>
+
+
+
+<h4>3.2 登录拯救模式</h4>
+
+
+
+<pre class="wp-block-code"><code>rescue login:root</code></pre>
+
+
+
+<h4>步骤四：在救援模式确定系统的根目录分区</h4>
+
+
+
+<p>（步骤略）</p>
+
+
+
+<p>（<br>补充：<br>1) 物理分区可以使用 lsblk 命令和 fdisk -l 命令辅助确定<br>2) 逻辑分区还可以可以使用 pvs 命令和 lvs 命令辅助确定<br>）</p>
+
+
+
+<h4>步骤五：在救援模式将系统的分区挂载到救援模式的 /mnt 目录<br>5.1 在救援模式将系统的根分区挂载到救援模式的 /mnt 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount &lt;root spartition&gt; /mnt</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 如果是物理分区，系统的根分区就在救援模式的 /dev/ 目录里，例如救援模式的 /dev/sda1<br>2) 如果是逻辑分区，Rocky Linux &amp; RHEL 的系统根分区就是救援模式里的 /dev/&lt;volume group>/&lt;logical volume> 例如救援模式里的 /dev/vg/lv，openSUSE &amp; SUSE 的系统根分区就是救援模式里的 /dev/mapper/&lt;volume group>-&lt;logical volume> 例如救援模式里的 /dev/mapper/vg-lv<br>）</p>
+
+
+
+<h4>5.2 在救援模式将救援模式的 /dev 目录关联到救援模式的 /mnt/dev 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount --bind /dev /mnt/dev</code></pre>
+
+
+
+<p>（补充：此时所有对救援模式的 /mnt/dev 目录的访问都会变成对救援模式的 /dev 目录的访问）</p>
+
+
+
+<h4>5.3 在救援模式将救援模式的 /proc 目录关联到救援模式的 /mnt/proc 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount --bind /proc /mnt/proc</code></pre>
+
+
+
+<p>（补充：此时所有对救援模式的 /mnt/proc 目录的访问都会变成对救援模式的 /proc 目录的访问）</p>
+
+
+
+<h4>5.4 在救援模式将救援模式的 /sys 目录关联到救援模式的 /mnt/sys 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount --bind /sys /mnt/sys</code></pre>
+
+
+
+<p>（补充：此时所有对救援模式的 /mnt/sys 目录的访问都会变成对救援模式的 /sys 目录的访问）</p>
+
+
+
+<h4>5.5 在救援模式将救援模式的 /run 目录关联到救援模式的 /mnt/run 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount --bind /run /mnt/run</code></pre>
+
+
+
+<p>（补充：此时所有对救援模式的 /mnt/run 目录的访问都会变成对救援模式的 /run 目录的访问）</p>
+
+
+
+<h4>步骤六：显示系统被删根 （rm -rf /*） 后的现象<br>6.1 尝试将当前根目录从救援模式的根目录切换到系统的根目录时会报错 “chroot: failed to run command #/bin/bash#: No such file or directory”</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # chroot /mnt
+chroot: failed to run command #/bin/bash#: No such file or directory</code></pre>
+
+
+
+<p>（补充：这里以 /mnt 作为系统根目录为例）</p>
+
+
+
+<p>（注意：因为在使用 rm -rf /* 命令删过根以后，/bin/bash 已经被删除，所以会报错：chroot: failed to run command #/bin/bash#: No such file or directory）</p>
+
+
+
+<h4>6.2 在救援模式显示 /boot 目录里的文件时，会发现此目录下只有 grub2 目录，而此 grub2 目录里也是空的</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # ls /boot 
+grub2</code></pre>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # ls /boot</code></pre>
+
+
+
+<p>此步骤也可以通过以下方法实现：</p>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # ls -l /mounts/mp_0001/boot
+total 0
+......grub2</code></pre>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # ls -l /mounts/mp_0001/boot/grub2
+total 0</code></pre>
+
+
+
+<h4>6.3 在救援模式显示 /bin 目录时，会显示并无此目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # ls /mnt/bin
+ls: cannot access '/mnt/bin' : No such file or directory</code></pre>
+
+
+
+<h4>6.4 在救援模式显示 /etc 目录里的文件时，会发现此目录下只有 lvm 文件</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # ls /etc/
+lvm</code></pre>
+
+
+
+<h4>步骤七：在救援模式修复系统的 /bin 目录和里面的文件<br>7.1 在救援模式创建 /mnt/bin 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mkdir /mnt/bin</code></pre>
+
+
+
+<h4>7.2 在救援模式挂载官方镜像<br>7.2.1 在救援模式创建用于挂载镜像的 /media 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # /media</code></pre>
+
+
+
+<h4>7.2.2 在救援模式挂将官方镜像挂载到 /media 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount /dev/dvd /media</code></pre>
+
+
+
+<h4>7.3 在救援模式安装 bash 软件<br>7.3.1 在救援模式安装拷贝 bash 软件包到当前目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # cp /media/suse/x86_64/bash-4.3-83.23.1.x86_64.rpm .</code></pre>
+
+
+
+<p>（补充：这里以拷贝 /media/suse/x86_64/bash-4.3-83.23.1.x86_64.rpm）</p>
+
+
+
+<h4>7.3.2 在救援模式创建用于安装 bash 软件的 bash 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mkdir bash</code></pre>
+
+
+
+<h4>7.3.3 在救援模式进入 bash 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # cd bash</code></pre>
+
+
+
+<h4>7.3.4 在救援模式安装 bash 软件</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ /bash # rpm2cpio ../bash-4.3-83.23.1.x86_64.rpm | cpio -ivd</code></pre>
+
+
+
+<p>（补充：这里以安装 bash-4.3-83.23.1.x86_64.rpm 软件为例）</p>
+
+
+
+<h4>7.3.5 在救援模式显示安装 bash 软件后生成的目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ /bash # ls
+bin etc usr</code></pre>
+
+
+
+<h4>7.4 在救援模式将 bin 目录拷贝到 /bin/mnt 目录下</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ /bash # cp -rpv bin /mnt/bin
+'bin/bash' -&gt; '/mnt/bin/bash'
+'bin/sh' -&gt; '/mnt/bin/sh'</code></pre>
+
+
+
+<h4>步骤八：将当前的根目录从救援模式的根目录切换到系统的根目录<br>8.1 将当前的根目录从救援模式的根目录切换到系统的根目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ /bash # chroot /mnt</code></pre>
+
+
+
+<p>（补充：这里以 /mnt 作为系统根目录为例）</p>
+
+
+
+<h4>8.2 在系统模式下确认当前的挂载状态</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# mount -a</code></pre>
+
+
+
+<h4>8.3 在系统模式下确认当前根目录下的目录</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# ls
+bin boot dev home lib lib64 mnt opt proc root run sbin selinux srv sys tmp usr var</code></pre>
+
+
+
+<h4>步骤九：锁定有删根 （rm -rf /*<em>） 操作的用户 </em><br><em>9.1 在系统模式显示历史命令以确认有没有用户输入过 rm -rf /</em> 命令</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# history | less</code></pre>
+
+
+
+<h4>9.2 在系统模式显示用户登录记录</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# last | less</code></pre>
+
+
+
+<p>（补充：此时会显示最后登录系统的用户、登陆时间、且可能最后 1 个登录系统的用户无退出时间）</p>
+
+
+
+<h4>9.3 根据步骤 9.1 和步骤 9.2 推测是哪个用户进行过删根 （rm -rf /*） 操作</h4>
+
+
+
+<p>（步骤略）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[工具] Shell 显示系统常用信息</title>
+		<link>https://eternalcenter-now.github.io/shell-display-system-common-information/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Tue, 26 Apr 2022 16:14:48 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Languages (语言)]]></category>
+		<category><![CDATA[Shell]]></category>
+		<category><![CDATA[Shell Monitor (监控)]]></category>
+		<category><![CDATA[Shell Tool (工具)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Computer & System Hardware & System Installation & System Upgradation (系统电脑 & 系统硬件 & 系统安装 & 系统升级)]]></category>
+		<category><![CDATA[System Directory (系统目录)]]></category>
+		<category><![CDATA[System Hardware (系统硬件)]]></category>
+		<category><![CDATA[System Network (系统网络)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Performance (系统性能)]]></category>
+		<category><![CDATA[System Port Security (系统端口安全)]]></category>
+		<category><![CDATA[System Process & System Performance (系统进程 & 系统性能)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Software (系统软件)]]></category>
+		<category><![CDATA[System Storage (系统存储)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23311</guid>
+
+					<description><![CDATA[介绍： 作者：朱明宇名称：显示系统常用信息作用：显示系统常用信息 使用方法：1. 在此脚本的分割线内写入相应的内容2. 给此脚本添加执行权限3. 执行此脚本 脚本分割线里的变量：1) times=2 #显示系统常用信息的次数2) sleeptime=0.1 #大部分行与行之间显示的间隔时间 注意：部分功能需要安装了 sysstat 软件或搭建了 KVM 虚拟化平台后执行此脚本的用户能够使用 sudo virsh list 命令后才能实现 脚本：]]></description>
+										<content:encoded><![CDATA[
+<h2>介绍：</h2>
+
+
+
+<p>作者：朱明宇<br>名称：显示系统常用信息<br>作用：显示系统常用信息</p>
+
+
+
+<p>使用方法：<br>1. 在此脚本的分割线内写入相应的内容<br>2. 给此脚本添加执行权限<br>3. 执行此脚本</p>
+
+
+
+<p>脚本分割线里的变量：<br>1) times=2 #显示系统常用信息的次数<br>2) sleeptime=0.1 #大部分行与行之间显示的间隔时间</p>
+
+
+
+<p>注意：部分功能需要安装了 sysstat 软件或搭建了 KVM 虚拟化平台后执行此脚本的用户能够使用 sudo virsh list 命令后才能实现</p>
+
+
+
+<h2>脚本：</h2>
+
+
+
+<pre class="wp-block-code"><code>#!/bin/bash
+
+####################### Separator ########################
+times=2
+sleeptime=0.1
+####################### Separator ########################
+
+nowtime=1
+
+while (( nowtime &lt;= times))
+do
+        echo -e "Start Monitoring: \c"
+	for i in {1..100}
+	do
+	        echo -e "#\c"
+		sleep 0.01
+        done
+	echo
+
+	sleep $sleeptime
+        host=`hostname`
+        echo -e "Name:\t\t\t\t\t\t \033&#91;1m$host\033&#91;0m"
+
+        ip=`ip a s | awk '/&#91;1-2]?&#91;0-9]{0,2}\.&#91;1-2]?&#91;0-9]{0,2}/&amp;&amp;!/127.0.0.1/{print $2}' | awk -F/ '{print $1}'`
+        for iip in `echo $ip`
+        do
+		sleep $sleeptime
+                echo -e "IP Address:\t\t\t\t\t \033&#91;1m$iip\033&#91;0m"
+        done
+
+        sleep $sleeptime
+
+        cpu=`top -bn 1 | awk -F',' '/^%Cpu/{print $4 }' | awk '{print $1}' | awk '{print 100-$1}'`
+        echo -e "CPU Usage (Total):\t\t\t\t \033&#91;1m$cpu%\033&#91;0m"
+
+        sleep $sleeptime
+
+        mem=`free | grep Mem | awk '{print $3/$2 * 100.0}' | egrep -o "&#91;1]?&#91;0-9]{0,2}\.&#91;0-9]"`
+        echo -e "Memory Usage (Total):\t\t\t\t \033&#91;1m$mem%\033&#91;0m"
+
+	directory=`df -h | grep -v run | grep -v boot | awk '$1~/\/dev/{print $6}'`
+        for idirectory in `echo $directory`
+        do
+                sleep $sleeptime
+                directoryusage=`df -h | grep -v run | grep -v boot | awk '$1~/\/dev/{print}' | grep $idirectory$ | awk '{print $5}'`
+		if &#91; $idirectory == / -o $idirectory == /ec  ];then
+                        echo -e "Directory Usage ($idirectory):\t\t\t\t \033&#91;1m$directoryusage\033&#91;0m"
+	        else
+                        echo -e "Directory Usage ($idirectory):\t\t\t \033&#91;1m$directoryusage\033&#91;0m"
+		fi
+        done
+
+	sudo -l | grep 'virsh list' &amp;&gt; /dev/null
+        if &#91; $? -eq 0 ];then
+	        sleep $sleeptime
+	        virtual=`sudo virsh list | egrep &#91;0-9] | wc -l`
+	        echo -e "Number of Virtual Machines (Total):\t\t \033&#91;1m$virtual\033&#91;0m"
+        fi
+
+        sleep $sleeptime
+
+        user=`who | wc -l`
+        echo -e "Number of User Logins (Total):\t\t\t \033&#91;1m$user\033&#91;0m"
+
+        soft=`rpm -qa | wc -l`
+        echo -e "Number of Softwares (Total):\t\t\t \033&#91;1m$soft\033&#91;0m"
+
+        sleep $sleeptime
+
+        port=`ss -ntulap | wc -l`
+        echo -e "Number of Open Ports (Total):\t\t\t \033&#91;1m$port\033&#91;0m"
+
+        which sar &amp;&gt; /dev/null
+        if &#91; $? -eq 0 ];then
+                networkcard=`ifconfig | awk -F: '/flags/&amp;&amp;!/lo/{print $1}'`
+                for inetworkcard in `echo $networkcard`
+                do
+                        networkread="`sar -n DEV 1 1 | grep $inetworkcard | awk '/&#91;0-9]&#91;0-9]:&#91;0-9]&#91;0-9]/{print $3/1000}'` m/s"
+                        networkwrite="`sar -n DEV 1 1 | grep $inetworkcard | awk '/&#91;0-9]&#91;0-9]:&#91;0-9]&#91;0-9]/{print $4/1000}'` m/s"
+			echo $inetworkcard | grep eth &amp;&gt; /dev/null
+			if &#91; $?  -ne 0 ];then
+	                echo -e "Network Card IO ($inetworkcard):\t\t\t \033&#91;1m$networkread\033&#91;0m (Read)\t\033&#91;1m$networkwrite\033&#91;0m (Write)"
+		        else
+	                echo -e "Network Card IO ($inetworkcard):\t\t\t\t \033&#91;1m$networkread\033&#91;0m (Read)\t\033&#91;1m$networkwrite\033&#91;0m (Write)"
+			fi
+                done
+        fi
+
+        which iostat &amp;&gt; /dev/null
+        if &#91; $? -eq 0 ];then
+	        disk=`iostat -d -k 1 1 | awk '!/^$/&amp;&amp;!/Device/&amp;&amp;!/Linux/{print $1}'`
+                for idisk in `echo $disk`
+	        do
+			sleep $sleeptime
+		        diskread="`iostat -d -k 1 1 | grep $idisk |  awk '{print $3/1000}'` m/s"
+		        diskwrite="`iostat -d -k 1 1 | grep $idisk |  awk '{print $4/1000}'` m/s"
+			echo $idisk | grep 'nvme' &amp;&gt; /dev/null
+			if &#91; $? -eq 0 ];then
+		                echo -e "Disk IO (/dev/$idisk):\t\t\t\t \033&#91;1m$diskread\033&#91;0m (Read)\t\033&#91;1m$diskwrite\033&#91;0m (Write)"
+		        else
+		                echo -e "Disk IO (/dev/$idisk):\t\t\t\t \033&#91;1m$diskread\033&#91;0m (Read)\t\033&#91;1m$diskwrite\033&#91;0m (Write)"
+			fi
+	        done
+
+        fi
+
+        echo -e "Complete Monitoring: \c"
+        for i in {1..97}
+        do
+                echo -e "#\c"
+                sleep 0.01
+        done
+        echo
+        sleep $sleeptime
+
+        let nowtime++
+done
+
+        echo -e "Terminal Monitoring: \c"
+        for i in {1..97}
+        do
+                echo -e "#\c"
+                sleep 0.01
+        done
+
+exit</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] iptables 防火墙规则持久化 （让防火墙规则开机自启）</title>
+		<link>https://eternalcenter-now.github.io/iptables-rule-permanent/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 25 Apr 2022 07:28:11 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Firewall (系统防火墙)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network (系统网络)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Port Security (系统端口安全)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23270</guid>
+
+					<description><![CDATA[内容一：Rocky Linux &#38; RHEL iptables 防火墙规则持久化 内容二：Rocky Linux &#38; RHEL 和 openSUSE &#38; SUSE iptables 防火墙规则持久化2.1 导出现在 iptables 防火墙的规则 （补充：这里以将 iptables 防火墙规则导出到 /root/iptables_save 文件为例） 2.2 创建用于加载 iptables 防火墙规则的 systemctl 管理文件 创建以下内容： （补充：这里以创建 systemctl 管理文件 /etc/systemd/system/iptables_save.service 将 /root/iptables_save 文件里的内容导入到 iptables 防火墙为例） 2.3 加载刚刚创建的 systemctl 管理文件 2.4 给刚刚创建的 systemctl 管理文件添加执行权限 （补充：这里以给 systemctl 管理文件 /etc/systemd/system/iptables_save.service 添加执行权限为例） 2.5 让防火墙规则开机自启 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/iptables-rule-permanent/" class="more-link">Continue reading<span class="screen-reader-text"> "[内容] iptables 防火墙规则持久化 （让防火墙规则开机自启）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h4>内容一：Rocky Linux &amp; RHEL iptables 防火墙规则持久化</h4>
+
+
+
+<pre class="wp-block-code"><code># service iptables save</code></pre>
+
+
+
+<h4>内容二：Rocky Linux &amp; RHEL 和 openSUSE &amp; SUSE iptables 防火墙规则持久化<br>2.1 导出现在 iptables 防火墙的规则</h4>
+
+
+
+<pre class="wp-block-code"><code># iptables-save &gt; /root/iptables_save</code></pre>
+
+
+
+<p>（补充：这里以将 iptables 防火墙规则导出到 /root/iptables_save 文件为例）</p>
+
+
+
+<h4>2.2 创建用于加载 iptables 防火墙规则的 systemctl 管理文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/systemd/system/iptables_save.service</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>&#91;Unit]
+Description=iptables_save
+After=default.target
+
+&#91;Service]
+Type=oneshot
+ExecStart=/usr/sbin/iptables-restore &lt; /root/iptables_save
+
+&#91;Install]
+WantedBy=default.target</code></pre>
+
+
+
+<p>（补充：这里以创建 systemctl 管理文件 /etc/systemd/system/iptables_save.service 将 /root/iptables_save 文件里的内容导入到 iptables 防火墙为例）</p>
+
+
+
+<h4>2.3 加载刚刚创建的 systemctl 管理文件</h4>
+
+
+
+<pre class="wp-block-code"><code># systemctl daemon-reload</code></pre>
+
+
+
+<h4>2.4 给刚刚创建的 systemctl 管理文件添加执行权限</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod u+x /etc/systemd/system/iptables_save.service</code></pre>
+
+
+
+<p>（补充：这里以给 systemctl 管理文件 /etc/systemd/system/iptables_save.service 添加执行权限为例）</p>
+
+
+
+<h4>2.5 让防火墙规则开机自启</h4>
+
+
+
+<pre class="wp-block-code"><code># systemctl enable iptables_save.service</code></pre>
+
+
+
+<p>（补充：这里以开机自启 iptables_save.service 服务为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] iptables 防火墙规则的导出和导入</title>
+		<link>https://eternalcenter-now.github.io/iptables-rule-export-import/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 25 Apr 2022 07:20:19 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Firewall (系统防火墙)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network (系统网络)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Port Security (系统端口安全)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23267</guid>
+
+					<description><![CDATA[内容一：导出 iptables 防火墙规则 （补充：这里以将 iptables 防火墙规则导出到 /root/iptables_save 文件为例） 内容二：导入 iptables 防火墙规则 （补充：这里以将 /root/iptables_save 文件里的内容导入到 iptables 防火墙为例）]]></description>
+										<content:encoded><![CDATA[
+<h4>内容一：导出 iptables 防火墙规则</h4>
+
+
+
+<pre class="wp-block-code"><code># iptables-save &gt; /root/iptables_save</code></pre>
+
+
+
+<p>（补充：这里以将 iptables 防火墙规则导出到 /root/iptables_save 文件为例）</p>
+
+
+
+<h4>内容二：导入 iptables 防火墙规则</h4>
+
+
+
+<pre class="wp-block-code"><code># iptables-restore &lt; /root/iptables_save</code></pre>
+
+
+
+<p>（补充：这里以将 /root/iptables_save 文件里的内容导入到 iptables 防火墙为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[排错] 解决 Linux 运行 authselect 命令时报错 “[error] [/etc/authselect/system-auth] has unexpected content!” 或者 “[error] [/etc/authselect/password-auth] has unexpected content!”</title>
+		<link>https://eternalcenter-now.github.io/debug-error-etc-authselect-system-auth-has-unexpected-content-or-error-etc-authselect-passwor/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 11 Apr 2022 15:40:00 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<category><![CDATA[System User (系统用户)]]></category>
+		<category><![CDATA[System User & System Privilege (系统用户 & 系统权限)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23013</guid>
+
+					<description><![CDATA[报错代码： 或者： 或者： 分析： /etc/authselect/system-auth 文件或 /etc/authselect/password-auth 文件是不应该被手动修改的，如果被手动修改了，再使用 authselect select sssd 命令或者 authselect apply-changes 命令时则会有此类报错 解决方法： （注意：此方法会刷新 /etc/authselect/system-auth 文件和 /etc/authselect/password-auth 文件里的所有内容）]]></description>
+										<content:encoded><![CDATA[
+<h2>报错代码：</h2>
+
+
+
+<pre class="wp-block-code"><code>&#91;error] &#91;/etc/authselect/system-auth] has unexpected content!
+&#91;error] &#91;/etc/authselect/password-auth] has unexpected content!
+&#91;error] Unexpected changes to the configuration were detected.
+&#91;error] Refusing to activate profile unless those changes are removed or overwrite is requested.</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code>&#91;error] &#91;/etc/authselect/system-auth] has unexpected content!
+&#91;error] Unexpected changes to the configuration were detected.
+&#91;error] Refusing to activate profile unless those changes are removed or overwrite is requested.</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code>&#91;error] &#91;/etc/authselect/password-auth] has unexpected content!
+&#91;error] Unexpected changes to the configuration were detected.
+&#91;error] Refusing to activate profile unless those changes are removed or overwrite is requested.</code></pre>
+
+
+
+<h2>分析：</h2>
+
+
+
+<p>/etc/authselect/system-auth 文件或 /etc/authselect/password-auth 文件是不应该被手动修改的，如果被手动修改了，再使用 authselect select sssd 命令或者 authselect apply-changes 命令时则会有此类报错</p>
+
+
+
+<h2>解决方法：</h2>
+
+
+
+<pre class="wp-block-code"><code># authselect apply-changes</code></pre>
+
+
+
+<p>（注意：此方法会刷新 /etc/authselect/system-auth 文件和 /etc/authselect/password-auth 文件里的所有内容）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 目标网站 SSL 证书的显示 （OpenSSL 版）</title>
+		<link>https://eternalcenter-now.github.io/ssl-display-openssl/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Tue, 15 Feb 2022 13:39:10 +0000</pubDate>
+				<category><![CDATA[Apache]]></category>
+		<category><![CDATA[Basic Guidelines for Website building (网站建设基础指南)]]></category>
+		<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Django Service (服务)]]></category>
+		<category><![CDATA[Nginx]]></category>
+		<category><![CDATA[Nginx Security (安全)]]></category>
+		<category><![CDATA[Personal Website Building (个人网站建设)]]></category>
+		<category><![CDATA[Project (项目)]]></category>
+		<category><![CDATA[Services (服务)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Port Security (系统端口安全)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[Tomcat]]></category>
+		<category><![CDATA[Web Application Firewall (WAF)]]></category>
+		<category><![CDATA[Website Services (网站服务)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=21971</guid>
+
+					<description><![CDATA[内容一：查看完整信息 （补充：这里以显示 eternalcenter.com 的 443 端口的 SSL 证书为例） 内容二：查看主要信息 （补充：这里以显示 eternalcenter.com 的 443 端口的 SSL 证书为例）]]></description>
+										<content:encoded><![CDATA[
+<h4>内容一：查看完整信息</h4>
+
+
+
+<pre class="wp-block-code"><code># openssl s_client -connect eternalcenter.com:443
+CONNECTED(00000003)
+depth=2 C = US, O = Internet Security Research Group, CN = ISRG Root X1
+verify return:1
+depth=1 C = US, O = Let's Encrypt, CN = R3
+verify return:1
+depth=0 CN = eternalcenter.com
+verify return:1
+---
+Certificate chain
+ 0 s:CN = eternalcenter.com
+   i:C = US, O = Let's Encrypt, CN = R3
+ 1 s:C = US, O = Let's Encrypt, CN = R3
+   i:C = US, O = Internet Security Research Group, CN = ISRG Root X1
+ 2 s:C = US, O = Internet Security Research Group, CN = ISRG Root X1
+   i:O = Digital Signature Trust Co., CN = DST Root CA X3
+---
+Server certificate
+-----BEGIN CERTIFICATE-----
+MIIFKjCCBBKgAwIBAgISAxDxly99eBiarmHggFEmDJoMMA0GCSqGSIb3DQEBCwUA
+MDIxCzAJBgNVBAYTAlVTMRYwFAYDVQQKEw1MZXQncyBFbmNyeXB0MQswCQYDVQQD
+EwJSMzAeFw0yMTEyMTkxMzA4MzJaFw0yMjAzMTkxMzA4MzFaMBwxGjAYBgNVBAMT
+EWV0ZXJuYWxjZW50ZXIuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKC
+AQEAtCcCuOqBrWP4eo//VBEXh668EjwrE1eXz2CS4GIN4ddn0rS8LHGFOrB92R8E
+OnaYeTKpZjzNM3NA/AG/Gq5mTRZGTpyTasHEb/phwXdhrtJWdbMtQjGFSg8rXSB8
+cap5NGP/NxAy8FV0MbXftg5t9VgBoCMGUzioSHZTEjefq+/OZwlP7RzxZN3bwj1D
+61gWSw6q1X3bsi8ttwbkkiJfvjXo2KIeGOAnY10X+FPJmVa7jonhOuljrX4CYgnd
+SCxmsfgwGMUzRu27VB1rEbKqvSr6tb9KfwFiqsZd5tTi7RW6WMqA0VbDV7BbDqLP
+OzcturwRtXfzHjJxssy9zhnrQQIDAQABo4ICTjCCAkowDgYDVR0PAQH/BAQDAgWg
+MB0GA1UdJQQWMBQGCCsGAQUFBwMBBggrBgEFBQcDAjAMBgNVHRMBAf8EAjAAMB0G
+A1UdDgQWBBQMGBCfBuZxTAS8VcBI/13ugqc2RDAfBgNVHSMEGDAWgBQULrMXt1hW
+y65QCUDmH6+dixTCxjBVBggrBgEFBQcBAQRJMEcwIQYIKwYBBQUHMAGGFWh0dHA6
+Ly9yMy5vLmxlbmNyLm9yZzAiBggrBgEFBQcwAoYWaHR0cDovL3IzLmkubGVuY3Iu
+b3JnLzAcBgNVHREEFTATghFldGVybmFsY2VudGVyLmNvbTBMBgNVHSAERTBDMAgG
+BmeBDAECATA3BgsrBgEEAYLfEwEBATAoMCYGCCsGAQUFBwIBFhpodHRwOi8vY3Bz
+LmxldHNlbmNyeXB0Lm9yZzCCAQYGCisGAQQB1nkCBAIEgfcEgfQA8gB3AN+lXqto
+gk8fbK3uuF9OPlrqzaISpGpejjsSwCBEXCpzAAABfdMFzUsAAAQDAEgwRgIhAMFF
+1orPZPnpCyhzwX2xZAZjJnOmDGmBjAl0tHnX4nEWAiEAqZTUwjrdwZAL+kDAgpzG
+Me2RnGMseDBY8Oy2sefUgsAAdwBGpVXrdfqRIDC1oolp9PN9ESxBdL79SbiFq/L8
+cP5tRwAAAX3TBc1zAAAEAwBIMEYCIQDLhR0nbVHEIL1uw9hRuv/ZbFjf91W/M4Jp
+od7NTMQZbAIhAKEAAfmdu0nVHklyS2At1VValwQ6vNbqd0NQ85giG606MA0GCSqG
+SIb3DQEBCwUAA4IBAQB/s+rZEaNrlUyBVnbxv5X9NTBd8buBOkR1qVswlS1R2i8B
+pRjeJmgbiMzM2z5Mvx0yTIiCyXXUc3YaqoyxvddaQam9nlLGr0nKX9T5DkE7y0Fh
+Qg0/ievRQF86XnDqQBxDR32jj5A1nKEiJrNCqugCWTAABndW3tvzK5DOsF2BfjJC
+mcjwiKaSCjFVpf+KzLWS3UEW+DRTKOLBucXpenS7QEcQu4K6ShNSL7+K6UOZEbFu
+uCRjOawCJFF7EH5vzRBy696Fu4EmzCV+c4rV8K8EcuCCQQeOTWJ/93Jv6U6kGrmE
+P6wlcHFy1tZhTAmXf/qcpE3sGeH58OlNNiVmNJdH
+-----END CERTIFICATE-----
+subject=CN = eternalcenter.com
+
+issuer=C = US, O = Let's Encrypt, CN = R3
+
+---
+No client certificate CA names sent
+Peer signing digest: SHA256
+Peer signature type: RSA-PSS
+Server Temp Key: X25519, 253 bits
+---
+SSL handshake has read 4695 bytes and written 412 bytes
+Verification: OK
+---
+New, TLSv1.2, Cipher is ECDHE-RSA-AES256-GCM-SHA384
+Server public key is 2048 bit
+Secure Renegotiation IS supported
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+SSL-Session:
+    Protocol  : TLSv1.2
+    Cipher    : ECDHE-RSA-AES256-GCM-SHA384
+    Session-ID: D63BC88824810A4D43ACE901AD4FF2D82073BC6F0D8B2DE71F6310CA1C87707F
+    Session-ID-ctx: 
+    Master-Key: A6836430C394B96DDD5552867D49802F94AAC8BF5E882100F0D27185CF5CFD6A946B94D87652E44A6684FC9781D16D90
+    PSK identity: None
+    PSK identity hint: None
+    SRP username: None
+    TLS session ticket lifetime hint: 300 (seconds)
+    TLS session ticket:
+    0000 - bb be 55 e0 4b 6d c3 08-cd bc 45 6e 79 67 fc eb   ..U.Km....Enyg..
+    0010 - 30 d5 4c 8a 5a c8 f7 13-42 4b 1d 02 ce 94 c0 b8   0.L.Z...BK......
+    0020 - d7 cf f6 f0 ee 9d 49 5b-0a c8 a4 1a 8b dd 8a e0   ......I&#91;........
+    0030 - 66 83 52 9b 31 4d da 9e-d5 05 1a 70 ca e9 86 5e   f.R.1M.....p...^
+    0040 - f5 09 a1 1c 92 6b 64 90-b7 e1 0e ec 30 e2 26 68   .....kd.....0.&amp;h
+    0050 - 49 13 10 9e 3e a5 e0 13-a2 f1 7a 7c c5 ad 99 6c   I...&gt;.....z|...l
+    0060 - e9 f6 1d 46 5f cc f6 f9-c5 f6 05 49 53 78 7e ea   ...F_......ISx~.
+    0070 - 8c 17 eb 8d 96 c3 3f 92-fe e0 f0 f6 86 59 05 c8   ......?......Y..
+    0080 - d2 8c 27 6b 9d 65 38 20-84 d4 23 54 35 70 19 4d   ..'k.e8 ..#T5p.M
+    0090 - db 35 6d f4 44 50 d7 6e-a5 87 2b 32 e5 f8 42 88   .5m.DP.n..+2..B.
+    00a0 - 28 e2 ab 35 e1 2c 06 71-e5 b2 82 cb 3a 75 cc 72   (..5.,.q....:u.r
+    00b0 - ed ae e1 12 ff 82 6c 3a-3a 38 7a 8c 3c 9c f1 10   ......l::8z.&lt;...
+    00c0 - 78 b8 37 87 c3 a2 00 76-01 72 8c ef 3b 20 48 28   x.7....v.r..; H(
+
+    Start Time: 1644931899
+    Timeout   : 7200 (sec)
+    Verify return code: 0 (ok)
+    Extended master secret: yes
+---
+closed</code></pre>
+
+
+
+<p>（补充：这里以显示 eternalcenter.com 的 443 端口的 SSL 证书为例）</p>
+
+
+
+<h4>内容二：查看主要信息</h4>
+
+
+
+<pre class="wp-block-code"><code># echo | openssl s_client -connect scc.suse.com:443 | head -n 16
+CONNECTED(00000003)
+depth=2 C = US, O = Internet Security Research Group, CN = ISRG Root X1
+verify return:1
+depth=1 C = US, O = Let's Encrypt, CN = R3
+verify return:1
+depth=0 CN = eternalcenter.com
+verify return:1
+---
+Certificate chain
+ 0 s:CN = eternalcenter.com
+   i:C = US, O = Let's Encrypt, CN = R3
+ 1 s:C = US, O = Let's Encrypt, CN = R3
+   i:C = US, O = Internet Security Research Group, CN = ISRG Root X1
+ 2 s:C = US, O = Internet Security Research Group, CN = ISRG Root X1
+   i:O = Digital Signature Trust Co., CN = DST Root CA X3
+---</code></pre>
+
+
+
+<p>（补充：这里以显示 eternalcenter.com 的 443 端口的 SSL 证书为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Linux 用户登录相关日志</title>
+		<link>https://eternalcenter-now.github.io/login-log/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sat, 12 Feb 2022 15:49:11 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System General Log (系统普通日志)]]></category>
+		<category><![CDATA[System Log (系统日志)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Security Log (系统安全日志)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=21918</guid>
+
+					<description><![CDATA[内容一：所有正在登录的用户 内容二：所有的登录和登出记录 内容三：所有用户最有一次登录记录 内容四：所有错误登录尝试记录 内容五：所有信息 （其中也包括登录相关的记录）]]></description>
+										<content:encoded><![CDATA[
+<h4 id="内容一-所有正在登录的用户">内容一：所有正在登录的用户</h4>
+
+
+
+<pre class="wp-block-code"><code>/var/run/utmp</code></pre>
+
+
+
+<h4 id="内容二-所有的登录和登出记录">内容二：所有的登录和登出记录</h4>
+
+
+
+<pre class="wp-block-code"><code>/var/log/wtmp</code></pre>
+
+
+
+<h4 id="内容三-所有用户最有一次登录记录">内容三：所有用户最有一次登录记录</h4>
+
+
+
+<pre class="wp-block-code"><code>/var/log/lastlog</code></pre>
+
+
+
+<h4 id="内容四-所有错误登录尝试记录">内容四：所有错误登录尝试记录</h4>
+
+
+
+<pre class="wp-block-code"><code>/var/log/btmp</code></pre>
+
+
+
+<h4 id="内容五-所有信息-其中也包括登录相关的记录">内容五：所有信息 （其中也包括登录相关的记录）</h4>
+
+
+
+<pre class="wp-block-code"><code>/var/log/messages</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Rocky Linux 8 &#038; RHEL 8 命令 update-crypto-policies</title>
+		<link>https://eternalcenter-now.github.io/update-crypto-policies/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sat, 12 Feb 2022 09:12:59 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Network (系统网络)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Port Security (系统端口安全)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=21893</guid>
+
+					<description><![CDATA[内容一：update-crypto-policies 参数的意义 1) DEFAULT 不严格的安全等级，可以让系统使用 TLSv1.22) FUTURE 严格的安全等级，只能让系统使用 TLSv1.2 不能使用 TLSv1.3 内容二：显示当前的 update-crypto-policies 参数 （补充：从这里可以看出目前的 update-crypto-policies 参数是 DEFAULT） 内容三：设置 update-crypto-policies 参数 （补充：这里以将 update-crypto-policies 参数设置为 FUTURE 为例）]]></description>
+										<content:encoded><![CDATA[
+<h4 id="内容一-update-crypto-policies-参数的意义">内容一：update-crypto-policies 参数的意义</h4>
+
+
+
+<p>1) DEFAULT 不严格的安全等级，可以让系统使用 TLSv1.2<br>2) FUTURE 严格的安全等级，只能让系统使用 TLSv1.2 不能使用 TLSv1.3</p>
+
+
+
+<h4 id="内容二-查看当前的-update-crypto-policies-参数">内容二：显示当前的 update-crypto-policies 参数</h4>
+
+
+
+<pre class="wp-block-code"><code># update-crypto-policies --show
+DEFAULT</code></pre>
+
+
+
+<p>（补充：从这里可以看出目前的 update-crypto-policies 参数是 DEFAULT）</p>
+
+
+
+<h4 id="内容三-设置-update-crypto-policies-参数">内容三：设置 update-crypto-policies 参数</h4>
+
+
+
+<pre class="wp-block-code"><code># update-crypto-policies --set=FUTURE</code></pre>
+
+
+
+<p>（补充：这里以将 update-crypto-policies 参数设置为 FUTURE 为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[排错] 解决 Linux 执行 curl 命令时报错 “curl: (35) error:14094410:SSL routines:ssl3_read_bytes:sslv3 alert handshake failure”</title>
+		<link>https://eternalcenter-now.github.io/debug-35-error14094410ssl-routinesssl3_read_bytessslv3-alert-handshake-failure/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sat, 12 Feb 2022 09:03:09 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Network (系统网络)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Port Security (系统端口安全)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=21890</guid>
+
+					<description><![CDATA[报错代码： 分析： Rocky Linux 8 &#38; RHEL 8 已经默认废弃 TLSv1.2可以使用 TLSv1.3 替代 TLSv1.2 或者将 update-crypto-policies 参数设置为 DEFAULT 以解决此报错 解决方法： 步骤一：显示当前的 update-crypto-policies 参数 （补充：从这里可以看出目前的 update-crypto-policies 参数是 FUTURE） 步骤二：将 update-crypto-policies 参数设置为 DEFAULT （补充：这里以将 update-crypto-policies 参数设置为 DEFAULT 为例）]]></description>
+										<content:encoded><![CDATA[
+<h2 id="报错代码">报错代码：</h2>
+
+
+
+<pre class="wp-block-code"><code>curl: (35) error:14094410:SSL routines:ssl3_read_bytes:sslv3 alert handshake failure</code></pre>
+
+
+
+<h2 id="分析">分析：</h2>
+
+
+
+<p>Rocky Linux 8 &amp; RHEL 8 已经默认废弃 TLSv1.2<br>可以使用 TLSv1.3 替代 TLSv1.2 或者将 update-crypto-policies 参数设置为 DEFAULT 以解决此报错</p>
+
+
+
+<h2 id="解决方法">解决方法：</h2>
+
+
+
+<h4 id="步骤一-查看当前的-update-crypto-policies-参数">步骤一：显示当前的 update-crypto-policies 参数</h4>
+
+
+
+<pre class="wp-block-code"><code># update-crypto-policies --show
+FUTURE</code></pre>
+
+
+
+<p>（补充：从这里可以看出目前的 update-crypto-policies 参数是 FUTURE）</p>
+
+
+
+<h4 id="步骤二-将-update-crypto-policies-参数设置为-default">步骤二：将 update-crypto-policies 参数设置为 DEFAULT</h4>
+
+
+
+<pre class="wp-block-code"><code># update-crypto-policies --set=DEFAULT</code></pre>
+
+
+
+<p>（补充：这里以将 update-crypto-policies 参数设置为 DEFAULT 为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] sudo 提权的实现 （sudo 提权的同时可以使用代理） （openSUSE &#038; SLE）</title>
+		<link>https://eternalcenter-now.github.io/sudo-self-proxy-opensuse-sle/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sat, 15 Jan 2022 14:47:45 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Privilege (系统权限)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<category><![CDATA[System User & System Privilege (系统用户 & 系统权限)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=21217</guid>
+
+					<description><![CDATA[步骤一：给用户添加相应的 sudo 权限 添加以下内容： （补充：这里以给用户 zhumingyu 添加 /usr/bin/mysql 命令为例） 步骤二：设置用户使用自己的密码实现 sudo 提权 在 这一行下面添加： （补充：这里以允许用户在进行 sudo 提权的同时也能使用 http_proxy、https_proxy 为例）]]></description>
+										<content:encoded><![CDATA[
+<h4>步骤一：给用户添加相应的 sudo 权限</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/sudoers</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>……
+zhumingyu ALL=(ALL) /usr/bin/mysql</code></pre>
+
+
+
+<p>（补充：这里以给用户 zhumingyu 添加 /usr/bin/mysql 命令为例）</p>
+
+
+
+<h4>步骤二：设置用户使用自己的密码实现 sudo 提权</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/sudoers</code></pre>
+
+
+
+<p>在</p>
+
+
+
+<pre class="wp-block-code"><code>......
+env_reset
+......</code></pre>
+
+
+
+<p>这一行下面添加：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+Defaults env_keep += "http_proxy https_proxy"
+......</code></pre>
+
+
+
+<p>（补充：这里以允许用户在进行 sudo 提权的同时也能使用 http_proxy、https_proxy 为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Linux 本地和 SSH 输错密码次数的限制 （pam_faillock 版） （CentOS Linux 8 &#038; RHEL 8 版）</title>
+		<link>https://eternalcenter-now.github.io/local-ssh-login-attempt-pam_faillock-centos-linux-8-rhel-8/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sun, 02 Jan 2022 08:34:31 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=21068</guid>
+
+					<description><![CDATA[步骤目录： 步骤一：背景了解 步骤二：设置 SSH 的登录限制2.1 在 sshd 中开启 UsePAM2.1.1 修改 sshd 的配置文件2.1.2 让修改的 sshd 配置文件生效2.2 确保 /etc/pam.d/login 包含 password-auth2.3 添加 pam_faillock 模块 步骤三：远程登录密码输错次数的用户管理3.1 显示某个用户近期输错了几次密码3.2 重制所有远程登录密码输错次数 具体的操作步骤： 步骤一：背景了解 从 CentOS Linux 8 &#38; RHEL 8 开始，系统的身份验证模块从 CentOS Linux 7 &#38; RHEL 7 的 pam_tally2 换成了 pam_faillock 步骤二：设置 SSH 的登录限制2.1 在 sshd 中开启 UsePAM2.1.1 修改 sshd 的配置文件 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/local-ssh-login-attempt-pam_faillock-centos-linux-8-rhel-8/" class="more-link">Continue reading<span class="screen-reader-text"> "[步骤] Linux 本地和 SSH 输错密码次数的限制 （pam_faillock 版） （CentOS Linux 8 &#038; RHEL 8 版）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2 id="步骤目录">步骤目录：</h2>
+
+
+
+<h4 id="步骤一-背景了解">步骤一：背景了解</h4>
+
+
+
+<h4 id="步骤二-设置-ssh-的登录限制-2-1-在-sshd-中开启-usepam-2-1-1-修改-sshd-配置文件-2-1-2-让-sshd-的配置生效-2-2-确保-etc-pam-d-login-包含-password-auth-2-3-添加-pam-faillock-模块">步骤二：设置 SSH 的登录限制<br>2.1 在 sshd 中开启 UsePAM<br>2.1.1 修改 sshd 的配置文件<br>2.1.2 让修改的 sshd 配置文件生效<br>2.2 确保 /etc/pam.d/login 包含 password-auth<br>2.3 添加 pam_faillock 模块</h4>
+
+
+
+<h4 id="步骤三-远程登录密码输错次数的用户管理-3-1-显示某个用户近期输错了几次密码-3-2-重制所有远程登录密码输错次数">步骤三：远程登录密码输错次数的用户管理<br>3.1 显示某个用户近期输错了几次密码<br>3.2 重制所有远程登录密码输错次数</h4>
+
+
+
+<h2 id="具体的操作步骤">具体的操作步骤：</h2>
+
+
+
+<h4 id="步骤一-背景了解">步骤一：背景了解</h4>
+
+
+
+<p>从 CentOS Linux 8 &amp; RHEL 8 开始，系统的身份验证模块从 CentOS Linux 7 &amp; RHEL 7 的 pam_tally2 换成了 pam_faillock</p>
+
+
+
+<h4 id="步骤二-设置-ssh-的登录限制-2-1-在-sshd-中开启-usepam-2-1-1-修改-sshd-配置文件">步骤二：设置 SSH 的登录限制<br>2.1 在 sshd 中开启 UsePAM<br>2.1.1 修改 sshd 的配置文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/ssh/sshd_config</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+#UsePAM no
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+UsePAM yes
+......</code></pre>
+
+
+
+<h4 id="2-1-2-让-sshd-的配置生效">2.1.2 让修改的 sshd 配置文件生效</h4>
+
+
+
+<pre class="wp-block-code"><code># systemctl restart sshd</code></pre>
+
+
+
+<h4 id="2-2-确保-etc-pam-d-login-包含-password-auth">2.2 确保 /etc/pam.d/login 包含 password-auth</h4>
+
+
+
+<pre class="wp-block-code"><code># cat /etc/pam.d/login | grep password-auth
+auth       substack     password-auth
+account    include      password-auth
+password   include      password-auth
+session    include      password-auth</code></pre>
+
+
+
+<p>（注意：如果输出结果中不包含这 4 条内容则需要手动添加）</p>
+
+
+
+<h4 id="2-3-添加-pam-faillock-模块">2.3 添加 pam_faillock 模块</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/pam.d/password-auth</code></pre>
+
+
+
+<p>在</p>
+
+
+
+<pre class="wp-block-code"><code>......
+auth required pam_env.so
+......</code></pre>
+
+
+
+<p>这一行下面添加：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+auth  required  pam_faillock.so preauth silent audit even_deny_root deny=6 unlock_time=180
+......</code></pre>
+
+
+
+<p>在</p>
+
+
+
+<pre class="wp-block-code"><code>auth sufficient pam_unix.so try_first_pass nullok</code></pre>
+
+
+
+<p>这一行下面添加：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+auth  &#91;default=die] pam_faillock.so authfail audit even_deny_root deny=6 unlock_time=180
+......</code></pre>
+
+
+
+<p>在</p>
+
+
+
+<pre class="wp-block-code"><code>account required pam_unix.so</code></pre>
+
+
+
+<p>这一行下面添加：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+account required pam_faillock.so
+......</code></pre>
+
+
+
+<p>（补充：这里以包括 root 用户每使用密码 ssh 远程登录失败 6 次则被锁定 180 秒为例）</p>
+
+
+
+<h4 id="步骤三-远程登录密码输错次数的用户管理-3-1-显示某个用户近期输错了几次密码">步骤三：远程登录密码输错次数的用户管理<br>3.1 显示某个用户近期输错了几次密码</h4>
+
+
+
+<pre class="wp-block-code"><code># faillock --user root</code></pre>
+
+
+
+<p>（补充：这里以显示 root 用户近期输错了几次密码为例）</p>
+
+
+
+<h4 id="3-2-重制所有登录密码输错次数">3.2 重制所有登录密码输错次数</h4>
+
+
+
+<pre class="wp-block-code"><code># faillock --reset</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Linux 本地和 SSH 输错密码次数的限制 （pam_faillock 版） （authselect 版） （CentOS Linux 8 &#038; RHEL 8 版）</title>
+		<link>https://eternalcenter-now.github.io/ssh-attempt-pam_faillock-authselect-centos-linux-8-rhel-8/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sat, 01 Jan 2022 14:04:37 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<category><![CDATA[System User (系统用户)]]></category>
+		<category><![CDATA[System User & System Privilege (系统用户 & 系统权限)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=20768</guid>
+
+					<description><![CDATA[步骤目录： 步骤一：了解背景 步骤二：设置 SSH 的登录限制2.1 在 sshd 中开启 UsePAM2.1.1 修改 sshd 的配置文件2.1.2 让修改的 sshd 配置文件生效2.2 确保 /etc/pam.d/sshd 包含 password-auth 步骤三：检查是否选择了 authselect 自定义认证 步骤四：配置认证4.1 如果 authselect 自定义认证存在4.1.1 修改 system-auth 文件4.1.2 修改 password-auth 文件4.2 如果 authselect 自定义认证不存在4.2.1 生成新的自定义认证4.2.1.1 备份当前的自定义认证4.2.1.2 创建新的自定义认证4.2.1.3 选择自定义认证4.2.1.4 显示当前选择的自定义认证4.2 修改自定义认证4.2.1 修改 system-auth 文件4.2.2 修改 password-auth 文件 步骤五：让配置的认证生效 步骤六：管理远程登录密码输错次数的用户6.1 显示某个用户近期输错了几次密码6.2 重制所有远程登录密码输错次数 具体的操作步骤： 步骤一：了解背景 从 CentOS &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/ssh-attempt-pam_faillock-authselect-centos-linux-8-rhel-8/" class="more-link">Continue reading<span class="screen-reader-text"> "[步骤] Linux 本地和 SSH 输错密码次数的限制 （pam_faillock 版） （authselect 版） （CentOS Linux 8 &#038; RHEL 8 版）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2 id="步骤目录">步骤目录：</h2>
+
+
+
+<h4 id="步骤一-背景了解">步骤一：了解背景</h4>
+
+
+
+<h4 id="步骤二-设置-ssh-的登录限制-2-1-在-sshd-中开启-usepam-2-1-1-修改-sshd-配置文件-2-1-2-让-sshd-的配置生效-2-2-确保-etc-pam-d-sshd-包含-password-auth">步骤二：设置 SSH 的登录限制<br>2.1 在 sshd 中开启 UsePAM<br>2.1.1 修改 sshd 的配置文件<br>2.1.2 让修改的 sshd 配置文件生效<br>2.2 确保 /etc/pam.d/sshd 包含 password-auth</h4>
+
+
+
+<h4 id="步骤三-检查是否选择了-authselect-自定义认证">步骤三：检查是否选择了  authselect  自定义认证</h4>
+
+
+
+<h4>步骤四：配置认证<br>4.1 如果 authselect 自定义认证存在<br>4.1.1 修改 system-auth 文件<br>4.1.2 修改 password-auth 文件<br>4.2 如果 authselect 自定义认证不存在<br>4.2.1 生成新的自定义认证<br>4.2.1.1 备份当前的自定义认证<br>4.2.1.2 创建新的自定义认证<br>4.2.1.3 选择自定义认证<br>4.2.1.4 显示当前选择的自定义认证<br>4.2 修改自定义认证<br>4.2.1 修改 system-auth 文件<br>4.2.2 修改 password-auth 文件</h4>
+
+
+
+<h4 id="步骤五-让配置的认证生效">步骤五：让配置的认证生效</h4>
+
+
+
+<h4 id="步骤六-远程登录密码输错次数的用户管理-6-1-显示某个用户近期输错了几次密码-6-2-重制所有远程登录密码输错次数">步骤六：管理远程登录密码输错次数的用户<br>6.1 显示某个用户近期输错了几次密码<br>6.2 重制所有远程登录密码输错次数</h4>
+
+
+
+<h2 id="具体的操作步骤">具体的操作步骤：</h2>
+
+
+
+<h4 id="步骤一-背景了解">步骤一：了解背景</h4>
+
+
+
+<p>从 CentOS Linux 8 &amp; RHEL 8 开始，系统的身份验证模块从 CentOS Linux 7 &amp; RHEL 7 的 pam_tally2 换成了 pam_faillock</p>
+
+
+
+<h4 id="步骤二-设置-ssh-的登录限制-2-1-在-sshd-中开启-usepam-2-1-1-修改-sshd-配置文件">步骤二：设置 SSHd 的登录限制<br>2.1 在 sshd 中开启 UsePAM<br>2.1.1 修改 sshd 的配置文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/ssh/sshd_config</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+#UsePAM no
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+UsePAM yes
+......</code></pre>
+
+
+
+<h4 id="2-1-2-让-sshd-的配置生效">2.1.2 让修改 sshd 配置文件生效</h4>
+
+
+
+<pre class="wp-block-code"><code># systemctl restart sshd</code></pre>
+
+
+
+<h4 id="2-2-确保-etc-pam-d-sshd-包含-password-auth">2.2 确保 /etc/pam.d/sshd 包含 password-auth</h4>
+
+
+
+<pre class="wp-block-code"><code># cat /etc/pam.d/sshd | grep password-auth
+auth       substack     password-auth
+account    include      password-auth
+password   include      password-auth
+session    include      password-auth</code></pre>
+
+
+
+<p>（注意：如果输出结果中不包含这 4 条内容则需要手动添加）</p>
+
+
+
+<h4 id="步骤三-检查是否选择了-authselect-自定义认证">步骤三：检查是否选择了  authselect  自定义认证</h4>
+
+
+
+<pre class="wp-block-code"><code># authselect current | awk 'NR == 1 {print $3}' | grep custom/
+custom/password-policy</code></pre>
+
+
+
+<p>（<br>补充：<br>（1）如果这条命令里没有输出则代表没有选择自定义认证<br>（2）从这里的输出结果可以看出这里选择的自定义认证是 custom/password-policy<br>）</p>
+
+
+
+<h4 id="步骤四-配置认证-4-1-如果-authselect-自定义认证存在-4-1-1-修改-system-auth-文件">步骤四：配置认证<br>4.1 如果  authselect  自定义认证存在<br>4.1.1 修改 system-auth 文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/authselect/custom/password-policy/system-auth</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+auth        required                                     pam_faillock.so preauth silent                               {include if "with-faillock"}
+......
+auth        required                                     pam_faillock.so authfail                               {include if "with-faillock"}
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+auth        required                                     pam_faillock.so preauth silent audit even_deny_root deny=6 unlock_time=180                               {include if "with-faillock"}
+......
+auth        required                                     pam_faillock.so authfail audit even_deny_root deny=6 unlock_time=180                               {include if "with-faillock"}
+......</code></pre>
+
+
+
+<p>（补充：这里以包括 root 用户每使用密码 ssh 远程登录失败 6 次则被锁定 180 秒为例）</p>
+
+
+
+<h4 id="4-1-2-修改-password-auth-文件"> 4.1.2 修改 password-auth 文件 </h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/authselect/custom/password-policy/password-auth</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+auth        required                                     pam_faillock.so preauth silent                               {include if "with-faillock"}
+......
+auth        required                                     pam_faillock.so authfail                               {include if "with-faillock"}
+......
+
+修改为：
+......
+auth        required                                     pam_faillock.so preauth silent audit even_deny_root deny=6 unlock_time=180                               {include if "with-faillock"}
+......
+auth        required                                     pam_faillock.so authfail audit even_deny_root deny=6 unlock_time=180                               {include if "with-faillock"}
+......</code></pre>
+
+
+
+<p>（补充：这里以包括 root 用户每使用密码 ssh 远程登录失败 6 次则被锁定 180 秒为例）</p>
+
+
+
+<h4>4.2 如果 authselect 自定义认证不存在<br>4.2.1 生成新的自定义认证<br>4.2.1.1 备份当前的自定义认证</h4>
+
+
+
+<pre class="wp-block-code"><code># authselect apply-changes -b --backup=sssd.backup</code></pre>
+
+
+
+<p>（补充：这里以创建 sssd.backup 备份文件为例）</p>
+
+
+
+<h4>4.2.1.2 创建新的自定义认证</h4>
+
+
+
+<pre class="wp-block-code"><code># authselect create-profile password-policy -b sssd --symlink-meta --symlink-pam</code></pre>
+
+
+
+<p>（补充：这里以生成名为 password-policy 的自定义认证为例）</p>
+
+
+
+<h4>4.2.1.3 选择自定义认证</h4>
+
+
+
+<pre class="wp-block-code"><code># authselect select custom/password-policy with-sudo with-faillock without-nullok with-mkhomedir</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里以选择名为 password-policy 的自定义认证为例<br>2) 这里设置了 with-sudo、with-faillock、without-nullok 和 with-mkhomedir 参数<br>）</p>
+
+
+
+<h4>4.2.1.4 显示当前选择的自定义认证</h4>
+
+
+
+<pre class="wp-block-code"><code># authselect current</code></pre>
+
+
+
+<p>（补充：这里以生成并选择名为 password-policy 的自定义认证为例）</p>
+
+
+
+<h4 id="4-2-如果-authselect-自定义认证不存在-4-2-1-修改-system-auth-文件">4.2 修改自定义认证<br>4.2.1 修改 system-auth 文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/authselect/custom/password-policy/password-auth</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+auth        required                                     pam_faillock.so preauth silent                               {include if "with-faillock"}
+......
+auth        required                                     pam_faillock.so authfail                               {include if "with-faillock"}
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+auth        required                                     pam_faillock.so preauth silent audit even_deny_root deny=6 unlock_time=180                               {include if "with-faillock"}
+......
+auth        required                                     pam_faillock.so authfail audit even_deny_root deny=6 unlock_time=180                               {include if "with-faillock"}
+......</code></pre>
+
+
+
+<p>（补充：这里以包括 root 用户每使用密码 ssh 远程登录失败 6 次则被锁定 180 秒为例）</p>
+
+
+
+<h4 id="4-2-2-修改-password-auth-文件">4.2.2 修改 password-auth 文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/authselect/custom/password-policy/password-auth</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+auth        required                                     pam_faillock.so preauth silent                               {include if "with-faillock"}
+......
+auth        required                                     pam_faillock.so authfail                               {include if "with-faillock"}
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+auth        required                                     pam_faillock.so preauth silent audit even_deny_root deny=6 unlock_time=180                               {include if "with-faillock"}
+......
+auth        required                                     pam_faillock.so authfail audit even_deny_root deny=6 unlock_time=180                               {include if "with-faillock"}
+......</code></pre>
+
+
+
+<p>（补充：这里以包括 root 用户每使用密码 ssh 远程登录失败 6 次则被锁定 180 秒为例）</p>
+
+
+
+<h4 id="步骤五-让配置的认证生效">步骤五：让配置的认证生效</h4>
+
+
+
+<pre class="wp-block-code"><code># authselect apply-changes</code></pre>
+
+
+
+<p>（注意：此步骤会刷新 /etc/authselect/system-auth 文件和 /etc/authselect/password-auth 文件）</p>
+
+
+
+<h4 id="步骤六-远程登录密码输错次数的用户管理-6-1-显示某个用户近期输错了几次密码">步骤六：管理远程登录密码输错次数的用户<br>6.1 显示某个用户近期输错了几次密码</h4>
+
+
+
+<pre class="wp-block-code"><code># faillock --user root</code></pre>
+
+
+
+<p>（补充：这里以显示 root 用户近期输错了几次密码为例）</p>
+
+
+
+<h4 id="6-2-重制所有远程登录密码输错次数">6.2 重制所有远程登录密码输错次数</h4>
+
+
+
+<pre class="wp-block-code"><code># faillock --reset</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Linux SSL 证书的生成 （Let&#8217;s Encrypt certbot 版）</title>
+		<link>https://eternalcenter-now.github.io/ssl-lets-encrypt-certbot/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sun, 19 Dec 2021 15:12:46 +0000</pubDate>
+				<category><![CDATA[Apache]]></category>
+		<category><![CDATA[Basic Guidelines for Website building (网站建设基础指南)]]></category>
+		<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Django Service (服务)]]></category>
+		<category><![CDATA[Nginx]]></category>
+		<category><![CDATA[Nginx Security (安全)]]></category>
+		<category><![CDATA[Personal Website Building (个人网站建设)]]></category>
+		<category><![CDATA[Project (项目)]]></category>
+		<category><![CDATA[Services (服务)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Port Security (系统端口安全)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[Website Services (网站服务)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=19886</guid>
+
+					<description><![CDATA[步骤目录： 步骤一：将要申请 Let&#8217;s Encrypt SSL 的域名解析到要进行操作的服务器 IP 地址上 步骤二：安装 certbot 步骤三：使用 certbot 生成 Let&#8217;s Encrypt SSL 证书 步骤四：显示已经生成的 Let&#8217;s Encrypt SSL 证书 步骤五：延期 Let&#8217;s Encrypt SSL 证书5.1 显示 Let&#8217;s Encrypt SSL 证书的延期策略5.2 手动延期 Let&#8217;s Encrypt SSL 证书5.3 自动延期 Let&#8217;s Encrypt SSL 证书 步骤六：Let’s Encrypt SSL 证书的生成限制 具体的操作步骤： 步骤一：将要申请 Let&#8217;s Encrypt SSL 的域名解析到要进行操作的服务器 IP 地址上 （步骤略） &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/ssl-lets-encrypt-certbot/" class="more-link">Continue reading<span class="screen-reader-text"> "[步骤] Linux SSL 证书的生成 （Let&#8217;s Encrypt certbot 版）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2 id="步骤目录">步骤目录：</h2>
+
+
+
+<h4 id="步骤一-将要申请-let-s-encrypt-ssl-的域名解析到要进行操作的服务器-ip-地址上">步骤一：将要申请 Let&#8217;s Encrypt SSL 的域名解析到要进行操作的服务器 IP 地址上</h4>
+
+
+
+<h4 id="步骤二-安装-certbot">步骤二：安装 certbot</h4>
+
+
+
+<h4 id="步骤三-使用-certbot-生成-let-s-encrypt-ssl-证书">步骤三：使用 certbot 生成 Let&#8217;s Encrypt SSL 证书</h4>
+
+
+
+<h4 id="步骤四-查看已经生成的-let-s-encrypt-ssl-证书">步骤四：显示已经生成的 Let&#8217;s Encrypt SSL 证书</h4>
+
+
+
+<h4 id="步骤五-延期-let-s-encrypt-ssl-证书-5-1-显示-let-s-encrypt-ssl-证书的延期策略-5-2-手动延期-let-s-encrypt-ssl-证书-5-3-自动延期-let-s-encrypt-ssl-证书">步骤五：延期 Let&#8217;s Encrypt SSL 证书<br>5.1 显示 Let&#8217;s Encrypt SSL 证书的延期策略<br>5.2 手动延期 Let&#8217;s Encrypt SSL 证书<br>5.3 自动延期 Let&#8217;s Encrypt SSL 证书</h4>
+
+
+
+<h4 id="步骤六-let-s-encrypt-ssl-证书的生成限制">步骤六：Let’s Encrypt SSL 证书的生成限制</h4>
+
+
+
+<h2 id="具体的操作步骤">具体的操作步骤：</h2>
+
+
+
+<h4 id="步骤一-将要申请-let-s-encrypt-ssl-的域名解析到要进行操作的服务器-ip-地址上">步骤一：将要申请 Let&#8217;s Encrypt SSL 的域名解析到要进行操作的服务器 IP 地址上</h4>
+
+
+
+<p>（步骤略）</p>
+
+
+
+<h4 id="步骤二-安装-certbot">步骤二：安装 certbot</h4>
+
+
+
+<pre class="wp-block-code"><code># yum -y install certbot</code></pre>
+
+
+
+<p>（补充：这里以在 Fedora 35 上安装 certbot 为例）</p>
+
+
+
+<h4 id="步骤三-使用-certbot-生成-let-s-encrypt-ssl-证书">步骤三：使用 certbot 生成 Let&#8217;s Encrypt SSL 证书</h4>
+
+
+
+<pre class="wp-block-code"><code># certbot certonly --email mingyu.zhu@eternalcenter.com -n --agree-tos --webroot -w /usr/share/nginx/html/ -d eternalcenter.com
+Saving debug log to /var/log/letsencrypt/letsencrypt.log
+Plugins selected: Authenticator webroot, Installer None
+Requesting a certificate for eternalcenter.com
+Performing the following challenges:
+http-01 challenge for eternalcenter.com
+Using the webroot path /usr/share/nginx/html for all unmatched domains.
+Waiting for verification...
+Cleaning up challenges
+
+IMPORTANT NOTES:
+ - Congratulations! Your certificate and chain have been saved at:
+   /etc/letsencrypt/live/eternalcenter.com/fullchain.pem
+   Your key file has been saved at:
+   /etc/letsencrypt/live/eternalcenter.com/privkey.pem
+   Your certificate will expire on 2022-03-20. To obtain a new or
+   tweaked version of this certificate in the future, simply run
+   certbot again. To non-interactively renew *all* of your
+   certificates, run "certbot renew"
+ - If you like Certbot, please consider supporting our work by:
+
+   Donating to ISRG / Let's Encrypt:   https://letsencrypt.org/donate
+   Donating to EFF:                    https://eff.org/donate-le</code></pre>
+
+
+
+<p>（<br>补充：这里以<br>1) 使用 mingyu.zhu@eternalcenter.com 邮箱<br>2) 以非交互式的方式<br>3) 通过给 /usr/share/nginx/html/ 网站目录里添加验证文件进行验证<br>4) 给 eternalcenter.com 域名<br>申请 Let&#8217;s Encrypt SSL 证书为例<br>）</p>
+
+
+
+<h4 id="步骤四-查看已经生成的-let-s-encrypt-ssl-证书">步骤四：显示已经生成的 Let&#8217;s Encrypt SSL 证书</h4>
+
+
+
+<pre class="wp-block-code"><code># certbot certificates
+Saving debug log to /var/log/letsencrypt/letsencrypt.log
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+Found the following certs:
+  Certificate Name: eternalcenter.com
+    Serial Number: 3e8cdb74a1abfbf3d535ec1c3f8cb3e4e4c
+    Key Type: RSA
+    Domains: eternalcenter.com
+    Expiry Date: 2022-03-20 13:48:48+00:00 (VALID: 89 days)
+    Certificate Path: /etc/letsencrypt/live/eternalcenter.com/fullchain.pem
+    Private Key Path: /etc/letsencrypt/live/eternalcenter.com/privkey.pem
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+</code></pre>
+
+
+
+<p>（<br>补充：<br>1) /etc/letsencrypt/live/eternalcenter.com/fullchain.pem 是公钥<br>2) /etc/letsencrypt/live/eternalcenter.com/privkey.pem 是私钥<br>）</p>
+
+
+
+<h4 id="步骤五-延期-let-s-encrypt-ssl-证书-5-1-显示-let-s-encrypt-ssl-证书的延期策略">步骤五：延期 Let&#8217;s Encrypt SSL 证书<br>5.1 显示 Let&#8217;s Encrypt SSL 证书的延期策略</h4>
+
+
+
+<pre class="wp-block-code"><code># cat /etc/letsencrypt/renewal/eternalcenter.com.conf 
+# renew_before_expiry = 30 days
+version = 1.20.0
+archive_dir = /etc/letsencrypt/archive/eternalcenter.com
+cert = /etc/letsencrypt/live/eternalcenter.com/cert.pem
+privkey = /etc/letsencrypt/live/eternalcenter.com/privkey.pem
+chain = /etc/letsencrypt/live/eternalcenter.com/chain.pem
+fullchain = /etc/letsencrypt/live/eternalcenter.com/fullchain.pem</code></pre>
+
+
+
+<p>（补充：可以看出 Let&#8217;s Encrypt SSL 证书是在过期前 30 天才能更新）</p>
+
+
+
+<h4 id="5-2-手动延期-let-s-encrypt-ssl-证书">5.2 手动延期 Let&#8217;s Encrypt SSL 证书</h4>
+
+
+
+<pre class="wp-block-code"><code># /usr/bin/certbot renew</code></pre>
+
+
+
+<p>（补充：这里以延期 Let&#8217;s Encrypt SSL 证书为例）</p>
+
+
+
+<h4 id="5-3-自动延期-let-s-encrypt-ssl-证书">5.3 自动延期 Let&#8217;s Encrypt SSL 证书</h4>
+
+
+
+<pre class="wp-block-code"><code># crontab -e</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+0 0 */30 * * /usr/bin/certbot renew</code></pre>
+
+
+
+<p>（补充：这里以每过 30 天的 0 时 0 分延期 Let&#8217;s Encrypt SSL 证书为例）</p>
+
+
+
+<h4 id="步骤六-let-s-encrypt-ssl-证书的生成限制">步骤六：Let’s Encrypt SSL 证书的生成限制</h4>
+
+
+
+<p>1) 一个域名申请次数不能超过 5 次/周<br>2) 允许申请失败次数不能超过 5 次/时<br>3) 属于同一个顶级域名的二级域名申请次数不能超过 20 次/周<br>4) 申请请求频率不能超过 20 次/秒<br>5) 一个 IP 地址创建用户个数不能超过 10 个/3 小时<br>6) 一个用户最多 pending 审核的数不能超过 300 个</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 SSH （远程登录）</title>
+		<link>https://eternalcenter-now.github.io/ssh/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 26 Nov 2021 15:56:06 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=19146</guid>
+
+					<description><![CDATA[案例一：脚本中常用的方式 （补充：这里以1) 安静模式2) 打开新端口的模式3) 不检查服务器记录4) 超时时间为 5 秒5) 通过 eternalcenter 用户6) 登录 eternalcenter.com 服务器为例） 案例二：在操作中常用的方式 （补充：这里以1) 带图形的模式2) 通过 eternalcenter 用户3) 登录 eternalcenter.com 服务器为例）]]></description>
+										<content:encoded><![CDATA[
+<h2>案例一：脚本中常用的方式</h2>
+
+
+
+<pre class="wp-block-code"><code># ssh -q -t -t -o StrictHostKeyChecking=no -o ConnectTimeout=5 -l eternalcenter eternalcenter.com</code></pre>
+
+
+
+<p>（<br>补充：这里以<br>1) 安静模式<br>2) 打开新端口的模式<br>3) 不检查服务器记录<br>4) 超时时间为 5 秒<br>5) 通过 eternalcenter 用户<br>6) 登录 eternalcenter.com 服务器<br>为例<br>）</p>
+
+
+
+<h2>案例二：在操作中常用的方式</h2>
+
+
+
+<pre class="wp-block-code"><code># ssh -X eternalcenter@eternalcenter.com</code></pre>
+
+
+
+<p>（<br>补充：这里以<br>1) 带图形的模式<br>2) 通过 eternalcenter 用户<br>3) 登录 eternalcenter.com 服务器<br>为例<br>）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Linux 加密压缩 （tar 版）</title>
+		<link>https://eternalcenter-now.github.io/encryption-compression-tar/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 15 Nov 2021 15:52:52 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Directory (系统目录)]]></category>
+		<category><![CDATA[System File (系统文件)]]></category>
+		<category><![CDATA[System File Security (系统文件安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Storage (系统存储)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=18392</guid>
+
+					<description><![CDATA[步骤一：创建测试文件 （补充：这里以创建 test.txt 文件为例） 步骤二：加密压缩文件或目录2.1 交互式加密压缩文件或目录 （补充：1) 这里以将 test.txt 文件加密压缩成 test1.tar.gz （压缩）包为例2) 如果要以 bzip2 的格式进行压缩，则将命令中的 -zcf 换成 -jcvf 将 test1.tar.gz 换成 test1.tar.bz23) 如果要以 xz 的格式进行压缩，则将命令中的 -zcf 换成 -Jcvf 将 test1.tar.gz 换成 test1.tar.xz） 2.2 非交互式加密压缩文件或目录 （补充：1) 这里以将 test.txt 文件加密压缩成 test1.tar.gz （压缩）包并且将密码设置为 eternalcenter 为例2) 如果要以 bzip2 的格式进行压缩，则将命令中的 -zcf 换成 -jcvf 将 test1.tar.gz 换成 test2.tar.bz23) 如果要以 xz 的格式进行压缩，则将命令中的 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/encryption-compression-tar/" class="more-link">Continue reading<span class="screen-reader-text"> "[步骤] Linux 加密压缩 （tar 版）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h4>步骤一：创建测试文件</h4>
+
+
+
+<pre class="wp-block-code"><code># touch test.txt</code></pre>
+
+
+
+<p>（补充：这里以创建 test.txt 文件为例）</p>
+
+
+
+<h4>步骤二：加密压缩文件或目录<br>2.1 交互式加密压缩文件或目录</h4>
+
+
+
+<pre class="wp-block-code"><code># tar -zcf - test.txt | openssl des3 -salt | dd of=test1.tar.gz
+enter des-ede3-cbc encryption password:
+Verifying - enter des-ede3-cbc encryption password:
+*** WARNING : deprecated key derivation used.
+Using -iter or -pbkdf2 would be better.
+0+1 records in
+0+1 records out
+224 bytes copied, 7.04902 s, 0.0 kB/s</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里以将 test.txt 文件加密压缩成 test1.tar.gz （压缩）包为例<br>2) 如果要以 bzip2 的格式进行压缩，则将命令中的 -zcf 换成 -jcvf 将 test1.tar.gz 换成 test1.tar.bz2<br>3) 如果要以 xz 的格式进行压缩，则将命令中的 -zcf 换成 -Jcvf 将 test1.tar.gz 换成 test1.tar.xz<br>）</p>
+
+
+
+<h4>2.2 非交互式加密压缩文件或目录</h4>
+
+
+
+<pre class="wp-block-code"><code># tar -zcf - test.txt | openssl des3 -salt -f eternalcenter | dd of=test2.tar.gz
+des3: Unrecognized flag f
+des3: Use -help for summary.
+0+0 records in
+0+0 records out
+0 bytes copied, 0.00376576 s, 0.0 kB/s</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里以将 test.txt 文件加密压缩成 test1.tar.gz （压缩）包并且将密码设置为 eternalcenter 为例<br>2) 如果要以 bzip2 的格式进行压缩，则将命令中的 -zcf 换成 -jcvf 将 test1.tar.gz 换成 test2.tar.bz2<br>3) 如果要以 xz 的格式进行压缩，则将命令中的 -zcf 换成 -Jcvf 将 test1.tar.gz 换成 test2.tar.xz<br>）</p>
+
+
+
+<h4>步骤三：解压加密文件或目录<br>3.1 交互式解压加密文件或目录<br>3.1.1 删除原测试目录和里面的文件</h4>
+
+
+
+<pre class="wp-block-code"><code># rm -rf test.txt</code></pre>
+
+
+
+<p>（补充：这里以删除 test.txt 文件为例）</p>
+
+
+
+<h4>3.1.2 交互式解压加密文件或目录</h4>
+
+
+
+<pre class="wp-block-code"><code># dd if=test2.tar.gz | openssl des3 -d | tar zxf -
+0+1 records in
+0+1 records out
+224 bytes copied, 0.000589721 s, 380 kB/s
+enter des-ede3-cbc decryption password:
+*** WARNING : deprecated key derivation used.
+Using -iter or -pbkdf2 would be better.</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里以解压 test2.tar.gz （压缩）包为例<br>2) 如果是 bzip2 格式的（压缩）包，则将命令中的 -zxf 换成 -jcvf 将 test1.tar.gz 换成 test1.tar.bz2<br>3) 如果是 xz 格式的（压缩）包，则将命令中的 -zxf 换成 -Jcvf 将 test1.tar.gz 换成 test1.tar.xz<br>）</p>
+
+
+
+<h4>3.2 非交互式解压加密文件或目录<br>3.2.1 删除原测试目录和里面的文件</h4>
+
+
+
+<pre class="wp-block-code"><code># rm -rf test.txt</code></pre>
+
+
+
+<p>（补充：这里以删除 test.txt 文件为例）</p>
+
+
+
+<h4>3.2.2 非交互式解压加密文件或目录</h4>
+
+
+
+<pre class="wp-block-code"><code># dd if=test1.tar.gz | openssl des3 -d -k eternalcenter | tar zxf -
+0+1 records in
+0+1 records out
+224 bytes copied, 0.000574539 s, 390 kB/s
+*** WARNING : deprecated key derivation used.
+Using -iter or -pbkdf2 would be better.</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里以解压 test1.tar.gz （压缩）包并且解压密码为 eternalcenter 为例<br>2) 如果是 bzip2 格式的（压缩）包，则将命令中的 -zxf 换成 -jcvf 将 test1.tar.gz 换成 test1.tar.bz2<br>3) 如果是 xz 格式的（压缩）包，则将命令中的 -zxf 换成 -Jcvf 将 test1.tar.gz 换成 test1.tar.xz<br>）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Linux 加密压缩 （zip 版）</title>
+		<link>https://eternalcenter-now.github.io/encryption-compression-zip/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 15 Nov 2021 15:48:09 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Directory (系统目录)]]></category>
+		<category><![CDATA[System File (系统文件)]]></category>
+		<category><![CDATA[System File Security (系统文件安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Storage (系统存储)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=18388</guid>
+
+					<description><![CDATA[步骤一：创建测试目录和测试文件 （补充：这里以创建 test 目录和里面的 test.txt 文件为例） 步骤二：加密压缩文件或目录2.1 交互式加密压缩文件或目录 （补充：这里以将 test 目录和里面的 test.txt 文件加密压缩成 test1.zip （压缩）包为例） 2.2 非交互式加密解压文件或目录 （补充：这里以将 test 目录和里面的 test.txt 文件加密压缩成 test2.zip （压缩）包并且将密码设置为 eternalcenter 为例） 步骤三：解压加密文件或目录3.1 交互式解压加密文件或目录3.1.1 删除原测试目录和里面的文件 （补充：这里以删除 test 目录和里面的文件为例） 3.1.2 交互式解压加密文件或目录 （补充：这里以解压 test2.zip （压缩）包为例） 3.2 非交互式解压加密文件或目录3.2.1 删除原测试目录和里面的文件 （补充：这里以删除 test 目录和里面的文件为例） 3.2.2 非交互式解压加密文件 （补充：这里以解压 test2.zip （压缩）包并且解压密码为 eternalcenter 为例）]]></description>
+										<content:encoded><![CDATA[
+<h4>步骤一：创建测试目录和测试文件</h4>
+
+
+
+<pre class="wp-block-code"><code># mkdir test
+# touch test/test.txt</code></pre>
+
+
+
+<p>（补充：这里以创建 test 目录和里面的 test.txt 文件为例）</p>
+
+
+
+<h4>步骤二：加密压缩文件或目录<br>2.1 交互式加密压缩文件或目录</h4>
+
+
+
+<pre class="wp-block-code"><code># zip -re test1.zip test
+Enter password: 
+Verify password: 
+  adding: test/ (stored 0%)
+  adding: test/test.txt (stored 0%)</code></pre>
+
+
+
+<p>（补充：这里以将 test 目录和里面的 test.txt 文件加密压缩成 test1.zip （压缩）包为例）</p>
+
+
+
+<h4>2.2 非交互式加密解压文件或目录</h4>
+
+
+
+<pre class="wp-block-code"><code># zip -rP eternalcenter test2.zip test
+  adding: test/ (stored 0%)
+  adding: test/test.txt (stored 0%)</code></pre>
+
+
+
+<p>（补充：这里以将 test 目录和里面的 test.txt 文件加密压缩成 test2.zip （压缩）包并且将密码设置为 eternalcenter 为例）</p>
+
+
+
+<h4>步骤三：解压加密文件或目录<br>3.1 交互式解压加密文件或目录<br>3.1.1 删除原测试目录和里面的文件</h4>
+
+
+
+<pre class="wp-block-code"><code># rm -rf test</code></pre>
+
+
+
+<p>（补充：这里以删除 test 目录和里面的文件为例）</p>
+
+
+
+<h4>3.1.2 交互式解压加密文件或目录</h4>
+
+
+
+<pre class="wp-block-code"><code># unzip test2.zip
+Archive:  test2.zip
+   creating: test/
+&#91;test2.zip] test/test.txt password: 
+ extracting: test/test.txt</code></pre>
+
+
+
+<p>（补充：这里以解压 test2.zip （压缩）包为例）</p>
+
+
+
+<h4>3.2 非交互式解压加密文件或目录<br>3.2.1 删除原测试目录和里面的文件</h4>
+
+
+
+<pre class="wp-block-code"><code># rm -rf test</code></pre>
+
+
+
+<p>（补充：这里以删除 test 目录和里面的文件为例）</p>
+
+
+
+<h4>3.2.2 非交互式解压加密文件</h4>
+
+
+
+<pre class="wp-block-code"><code># unzip -P eternalcenter test1.zip 
+Archive:  test1.zip
+   creating: test/
+ extracting: test/test.txt  </code></pre>
+
+
+
+<p>（补充：这里以解压 test2.zip （压缩）包并且解压密码为 eternalcenter 为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Linux rm 命令的监控</title>
+		<link>https://eternalcenter-now.github.io/rm-monitor/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sun, 07 Nov 2021 13:29:10 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System File (系统文件)]]></category>
+		<category><![CDATA[System File Security (系统文件安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=18208</guid>
+
+					<description><![CDATA[步骤一：将原来的 rm 命令进行备份 步骤二：创建一个记录 rm 命令使用的脚本 步骤三：给记录 rm 命令使用的脚本执行权限 步骤四：下次使用 rm 命令后就可以监控 /var/log/rm_command.log 日志了 （步骤略）]]></description>
+										<content:encoded><![CDATA[
+<h4>步骤一：将原来的 rm 命令进行备份</h4>
+
+
+
+<pre class="wp-block-code"><code># cp /usr/bin/rm  /usr/bin/rm.original</code></pre>
+
+
+
+<h4>步骤二：创建一个记录 rm 命令使用的脚本</h4>
+
+
+
+<pre class="wp-block-code"><code># cat /usr/bin/rm
+#!/bin/bash
+log=/var/log/rm_command.log
+echo "The $$ is calling rm command" &gt;&gt; $log
+echo "The full command is $*" &gt;&gt; $log
+echo
+echo "now use this command to get more information: /bin/ps axwwo user,pid,ppid,%cpu,%mem,vsz,rss,stat,time,cmd" &gt;&gt;$log
+/bin/ps axwwo user,pid,ppid,%cpu,%mem,vsz,rss,stat,time,cmd &gt;&gt;$log
+/usr/bin/rm.original $*
+echo "============================================================" &gt;&gt;$log</code></pre>
+
+
+
+<h4>步骤三：给记录 rm 命令使用的脚本执行权限</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod 755 /usr/bin/rm.original</code></pre>
+
+
+
+<h4>步骤四：下次使用 rm 命令后就可以监控 /var/log/rm_command.log 日志了</h4>
+
+
+
+<p>（步骤略）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[工具] Shell 批量修改多个远程服务器某一个用户的密码 （精致版）</title>
+		<link>https://eternalcenter-now.github.io/shell-password-change-refined-version/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sun, 10 Oct 2021 13:08:50 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Languages (语言)]]></category>
+		<category><![CDATA[Shell]]></category>
+		<category><![CDATA[Shell Deployment (部署)]]></category>
+		<category><![CDATA[Shell Others (其他)]]></category>
+		<category><![CDATA[Shell Tool (工具)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System User (系统用户)]]></category>
+		<category><![CDATA[System User & System Privilege (系统用户 & 系统权限)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=18100</guid>
+
+					<description><![CDATA[介绍： 作者：朱明宇名称：批量修改多个远程服务器某一个用户的密码作用：批量修改多个远程服务器某一个用户的密码 使用方法：1. 将此脚本和清单 $list 文件放在同一目录下2. 清单 $list 里每服务器名占用一行3. 给脚本分割线里的变量赋值4. 给此脚本添加执行权限5. 执行此脚本 脚本分割线里的变量：1. list=”list.txt” #指定清单的目录和名称2. user=eternalcenter #指定要修改密码的用户3. password=eternalcenter #指定要修改的密码 注意：此脚本执行前必须要先保证执行本脚本的用户能无密码 ssh 远程这些远程服务器，并且可以通过 sudo 获得 su 的 root 权限 脚本：]]></description>
+										<content:encoded><![CDATA[
+<h2>介绍：</h2>
+
+
+
+<p>作者：朱明宇<br>名称：批量修改多个远程服务器某一个用户的密码<br>作用：批量修改多个远程服务器某一个用户的密码</p>
+
+
+
+<p>使用方法：<br>1. 将此脚本和清单 $list 文件放在同一目录下<br>2. 清单 $list 里每服务器名占用一行<br>3. 给脚本分割线里的变量赋值<br>4. 给此脚本添加执行权限<br>5. 执行此脚本</p>
+
+
+
+<p>脚本分割线里的变量：<br>1. list=”list.txt” #指定清单的目录和名称<br>2. user=eternalcenter #指定要修改密码的用户<br>3. password=eternalcenter #指定要修改的密码</p>
+
+
+
+<p>注意：<br>此脚本执行前必须要先保证执行本脚本的用户能无密码 ssh 远程这些远程服务器，并且可以通过 sudo 获得 su 的 root 权限</p>
+
+
+
+<h2>脚本：</h2>
+
+
+
+<pre class="wp-block-code"><code>#!/bin/bash
+
+####################### Separator ########################
+
+list="list.txt"
+user=eternalcenter
+password=eternalcenter
+
+####################### Separator ########################
+
+num=1
+
+cat $list
+for i in `cat $list`
+do
+        echo $num
+        echo $i
+
+	ssh -t $i "type lsb_release" &amp;> /dev/null
+        if &#91; $? -ne 0 ]; then
+              distribution=`ssh -t $i "cat /etc/*release | grep '^NAME'"`
+	      if &#91; $? -ne 0 ];then
+		      distribution=`ssh -t $i "cat /etc/*release"`
+	      fi
+        else
+              distribution=`ssh -t $i "lsb_release -i | grep 'ID' | grep -v 'n/a'"`
+        fi;
+
+        echo $distribution
+
+	case $distribution in
+		*"RedHat"* | *"Red Hat"*)
+		ssh -t $i "sudo -u root su - root -c \"echo $password | passwd --stdin $user\""
+		if &#91; $? -eq 0 ];then
+			echo -e "\033&#91;32m$i is success\033&#91;0m"
+		else
+			echo -e "\033&#91;31m$i is fail\033&#91;0m"
+		fi
+		;;
+
+		*"CentOS"*)
+		ssh -t $i "sudo -u root su - root -c \"echo $password | passwd --stdin $user\""
+		if &#91; $? -eq 0 ];then
+			echo -e "\033&#91;32m$i is success\033&#91;0m"
+		else
+			echo -e "\033&#91;31m$i is fail\033&#91;0m"
+		fi
+		;;
+
+		*"SUSE"* | *"SLES"*)
+		ssh -t $i "sudo -u root su - root -c \"echo $user:$password | chpasswd\""
+		if &#91; $? -eq 0 ];then
+			echo -e "\033&#91;32m$i is success\033&#91;0m"
+		else
+			echo -e "\033&#91;31m$i is fail\033&#91;0m"
+		fi
+		;;
+               
+		*"openSUSE"*)
+		ssh -t $i "sudo -u root su - root -c \"echo $user:$password | chpasswd\""
+		if &#91; $? -eq 0 ];then
+			echo -e "\033&#91;32m$i is success\033&#91;0m"
+		else
+			echo -e "\033&#91;31m$i is fail\033&#91;0m"
+		fi
+		;;
+
+		*)
+                echo -e "\033&#91;31m$i is fail \033&#91;0m" 
+		;;
+        esac
+
+        let num++
+
+        echo
+done</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] 通过 zypper 升级内核保留旧内核数量的设置 （openSUSE &#038; SLE ）</title>
+		<link>https://eternalcenter-now.github.io/zypper-kernel-reserve-opensuse-sle/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 27 Sep 2021 14:06:47 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Computer & System Hardware & System Installation & System Upgradation (系统电脑 & 系统硬件 & 系统安装 & 系统升级)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Patch (系统补丁)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<category><![CDATA[System Upgradation (系统升级)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=17666</guid>
+
+					<description><![CDATA[将以下内容： 修改为： （补充：这里以使用 zypper 升级内核时保留内核的数量从 3 个增加到 5 个为例）]]></description>
+										<content:encoded><![CDATA[
+<pre class="wp-block-code"><code># vim /etc/zypp/zypp.conf</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+multiversion.kernels = latest,latest-1,running
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+multiversion.kernels = latest,latest-1,latest-2,latest-3,running
+......</code></pre>
+
+
+
+<p>（补充：这里以使用 zypper 升级内核时保留内核的数量从 3 个增加到 5 个为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

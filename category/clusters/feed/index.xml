@@ -1,0 +1,4961 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Clusters (集群) &#8211; Eternal Center</title>
+	<atom:link href="https://eternalcenter-now.github.io/category/clusters/feed/" rel="self" type="application/rss+xml" />
+	<link>https://eternalcenter-now.github.io/</link>
+	<description></description>
+	<lastBuildDate>Sun, 03 Apr 2022 14:54:43 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	
+	<item>
+		<title>分布式存储算法介绍</title>
+		<link>https://eternalcenter-now.github.io/introduction-to-distributed-storage-algorithm/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 20 Aug 2021 07:45:22 +0000</pubDate>
+				<category><![CDATA[Ceph]]></category>
+		<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Cloud Computing (云计算)]]></category>
+		<category><![CDATA[Clusters (集群)]]></category>
+		<category><![CDATA[Distributed Cloud Storage Clusters (分布式云存储集群)]]></category>
+		<category><![CDATA[Load Balancing and High Availability Clusters (负载均衡加高可用集群)]]></category>
+		<category><![CDATA[OpenStack]]></category>
+		<category><![CDATA[Virtualization Clouds (虚拟化云)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=17540</guid>
+
+					<description><![CDATA[章节一：传统的 Hash 存储算法1.1 传统的 Hash 存储算法简介 　　将数据进行切片，对每份切片进行 Hash 取值，并对获取的 Hash 值除以存储节点的数量以取余，余数是多少就将此切片存在第几个 OSD 节点里，主要是 Swift 在使用。 1.2 传统的 Hash 存储算法的缺点 　　如果要增加存或减少存储节点，需要对所有已存储数据切片的 Hash 值重新取余，大概 90% 的数据需要重新均衡数据（rebalance）。 章节二：一致性 Hash 算法2.1 一致性 Hash 算法简介 　　1) 给电脑也计算 Hash 值（可以是给电脑名计算 Hash 值，也可以给 IP 地址计算 Hash 值）　　2) 再给数据也计算 Hash 值，将数据存到比它的 Hash 值大，且与它的差值最小的一台电脑上，如果没有 Hash 值比它大的电脑就直接将数据存在 Hash 值最小的电脑上　　3) 整个架构类似一个环 2.2 一致性 Hash 算法的缺点 　　1) &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/introduction-to-distributed-storage-algorithm/" class="more-link">Continue reading<span class="screen-reader-text"> "分布式存储算法介绍"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h4>章节一：传统的 Hash 存储算法<br>1.1 传统的 Hash 存储算法简介</h4>
+
+
+
+<p>　　将数据进行切片，对每份切片进行 Hash 取值，并对获取的 Hash 值除以存储节点的数量以取余，余数是多少就将此切片存在第几个 OSD 节点里，主要是 Swift 在使用。</p>
+
+
+
+<h4>1.2 传统的 Hash 存储算法的缺点</h4>
+
+
+
+<p>　　如果要增加存或减少存储节点，需要对所有已存储数据切片的 Hash 值重新取余，大概 90% 的数据需要重新均衡数据（rebalance）。</p>
+
+
+
+<h4>章节二：一致性 Hash 算法<br>2.1 一致性 Hash 算法简介</h4>
+
+
+
+<p>　　1) 给电脑也计算 Hash 值（可以是给电脑名计算 Hash 值，也可以给 IP 地址计算 Hash 值）<br>　　2) 再给数据也计算 Hash 值，将数据存到比它的 Hash 值大，且与它的差值最小的一台电脑上，如果没有 Hash 值比它大的电脑就直接将数据存在 Hash 值最小的电脑上<br>　　3) 整个架构类似一个环</p>
+
+
+
+<h4>2.2 一致性 Hash 算法的缺点</h4>
+
+
+
+<p>　　1) 电脑太少时切换数据也会有较大的数据量，但是可以多设置几个虚拟节点，给以后新增加的节点使用，虚拟节点里的数据会影射到对应的物理节点里面去<br>　　2) 电脑太少时，两台电脑的 Hash 值比较接近导致，数据分配极度不平均</p>
+
+
+
+<p>（注意：在开始创建数据架构时，要评估未来数据的规模，如果最后要添加的电脑数量超过了虚拟节点数量，那么这个架构就不能使用了。此时只能备份数据，然后新建一个架构出来）</p>
+
+
+
+<h4>章节三：CRUSH<br>3.1 CRUSH 简介</h4>
+
+
+
+<p>　　CRUSH（Controlled Replication Under Scalable Hashing）算法，在可扩展 Hash 算法下的可控制复制，主要是 Ceph 在使用。</p>
+
+
+
+<h4>3.2 CRUSH 算法<br>3.2.1 CRUSH 算法的第一层</h4>
+
+
+
+<p>　　由 Ceph 的 OSD（Object Storage Deivces）组成。</p>
+
+
+
+<h4>3.2.2 CRUSH 算法的第二层<br>3.2.3 CRUSH 算法的第二层的组成</h4>
+
+
+
+<p>　　由 Ceph 的 PG（Placement Group）归置组组成。</p>
+
+
+
+<h4>3.2.4 CRUSH 算法的第二层的由来</h4>
+
+
+
+<p>　　在 OSD 节点上虚拟出多个 PG，每个 PG 默认会被指定对应 3 个 OSD 节点（每个 OSD 节点同时可以属于多个 PG），其中第一个 OSD 节点为主要（primary）的硬盘，其他两 OSD 节点为从（second）硬盘，PG 会对应几个 OSD 节点取决于 Ceph 的存储副本被设置了几份。</p>
+
+
+
+<h4>3.2.5 CRUSH 算法的第二层的算法</h4>
+
+
+
+<p>　　1) 给每个 OSD 节点设置一个权重值，OSD 节点的容量越大则其权重值越大<br>　　2) 主要（primary）硬盘的 OSD 节点：将 PG 的 ID 值和 OSD 的 ID 值组合在一起并计算 Hash 值，将得到的 Hash 值乘以此 OSD 节点的权重，当最终获得的值最大时，此 PG 就和此 OSD 绑定在一起<br>　　3) 第一个从（second）硬盘的 OSD 节点：将 PG 的 ID 值逐一和 OSD 的 ID 值和一个随机的常数组合在一起并计算 Hash 值（这个值在 Ceph 的代码里被叫做 draw），将得到的 Hash 值乘以此 OSD 节点的权重，当最终获得的值最大时（这个值在 Ceph 的源代码里叫做 straw）则此 PG 就和此 OSD 绑定在一起<br>　　4) 第二个从（second）硬盘的 OSD 节点：将 PG 的 ID 值逐一和 OSD 的 ID 值和上一个随机常数加 1 的和组合在一起并计算 Hash 值（这个值在 Ceph 的代码里被叫做 draw），将得到的 Hash 值乘以此 OSD 节点的权重，当最终获得的值最大时（这个值在 Ceph 的源代码里叫做 straw），则此 PG 就和此 OSD 绑定在一起（如果找到的 OSD 节点和前面的 OSD 节点重复，则将这个随机常数再加 1 并进行重复操作，最终获得和前面不通的 OSD 节点为止）<br>……</p>
+
+
+
+<h4>3.3 CRUSH 算法的第三层<br>3.3.1 CRUSH 算法的第三层的组成</h4>
+
+
+
+<p>　　由池组成。</p>
+
+
+
+<h4>3.3.2 CRUSH 算法的第三层的由来</h4>
+
+
+
+<p>　　1) 在 PG 上虚拟出多个池，每个池对应多个 PG，数据可以存储到指定的池里<br>　　2) 总硬盘容量有多大，每个池最大可以使用的容量就有多大，但是如果如果一个池使用了一部分容量，其他的池就要少使用一部分容量</p>
+
+
+
+<h4>3.4 CRUSH 算法的第四层<br>3.4.1 CRUSH 算法的第四层的组成</h4>
+
+
+
+<p>　　由数据组成。</p>
+
+
+
+<h4>3.4.2 CRUSH 算法的第四层的算法</h4>
+
+
+
+<p>　　1) 对要放入某个池里的数据进行切片，默认每片 4M<br>　　2) 对每份切片进行 Hash 取值，并对获取的 Hash 值除以这个池里 PG 节点的数量以取余，余数是多少就存在第几个 OSD 节点里</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Ceph 介绍</title>
+		<link>https://eternalcenter-now.github.io/introduction-of-ceph/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 20 Aug 2021 07:13:01 +0000</pubDate>
+				<category><![CDATA[Ceph]]></category>
+		<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Cloud Computing (云计算)]]></category>
+		<category><![CDATA[Clusters (集群)]]></category>
+		<category><![CDATA[Distributed Cloud Storage Clusters (分布式云存储集群)]]></category>
+		<category><![CDATA[Load Balancing and High Availability Clusters (负载均衡加高可用集群)]]></category>
+		<category><![CDATA[OpenStack]]></category>
+		<category><![CDATA[Virtualization Clouds (虚拟化云)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=17526</guid>
+
+					<description><![CDATA[内容一：Ceph 简介 Ceph 是一种分布式存储架构和技术。此项目是 2004 年由 Sage Weil 在加州大学 Santa Cruz 分校攻读博士期间的创建和研究的课题，并于 2006 年将其开源，同时成立 Inktank 公司专注 Ceph 的研发。2014 年 5 月 Inktank 公司被 Red Hat 收购。 内容二：Ceph 的特点 1) 高性能（硬盘越多性能越高，所有硬盘可以同时读写）2) 高可用（硬盘越多高可用越高） 内容三：Ceph 使用的方式 1) 自己写程序：通过 C C++ Java Python Ruby PHP 等语言写程序调用 Ceph 底层存储 LIBRADOS，此方法性能最高2) 自己写脚本：写对象脚本，通过 RGW（RADOSGW）对象存储网关的 Rest API 接口去访问 Ceph 的底层存储 LIBRADOS，此方法性能第二高3) 挂载块存储：通过 Linux &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/introduction-of-ceph/" class="more-link">Continue reading<span class="screen-reader-text"> "[内容] Ceph 介绍"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h4>内容一：Ceph 简介</h4>
+
+
+
+<p>Ceph 是一种分布式存储架构和技术。此项目是 2004 年由 Sage Weil 在加州大学 Santa Cruz 分校攻读博士期间的创建和研究的课题，并于 2006 年将其开源，同时成立 Inktank 公司专注 Ceph 的研发。2014 年 5 月 Inktank 公司被 Red Hat 收购。</p>
+
+
+
+<h4>内容二：Ceph 的特点</h4>
+
+
+
+<p>1) 高性能（硬盘越多性能越高，所有硬盘可以同时读写）<br>2) 高可用（硬盘越多高可用越高）</p>
+
+
+
+<h4>内容三：Ceph 使用的方式</h4>
+
+
+
+<p>1) 自己写程序：通过 C C++ Java Python Ruby PHP 等语言写程序调用 Ceph 底层存储 LIBRADOS，此方法性能最高<br>2) 自己写脚本：写对象脚本，通过 RGW（RADOSGW）对象存储网关的 Rest API 接口去访问 Ceph 的底层存储 LIBRADOS，此方法性能第二高<br>3) 挂载块存储：通过 Linux 内核或者 KVM 等虚拟机存储驱动访问 Ceph 的块存储，此方法性能第三高<br>4) 挂载文件系统：通过 Linux 内核（POSIX 命令）挂载 Ceph 的文件系统存储，此方法性能最弱</p>
+
+
+
+<h4>内容四：Ceph 的组成</h4>
+
+
+
+<p>1) OSD（Object Storage Deivces）：负责存储、复制、恢复数据等，默认要有 3 台以上才能实现高可用，因为 Ceph 默认有三副本<br>2) MON（Monitor）：负责监控集群状态制作和更新存储地图（map），供客户端从下载，在生产环境里必须要有 3 台以上，且最好是奇数台，因为必须遵循过半原则<br>3) MDS（Metadata Servers）：实现文件系统存储，允许客户端通过 Linux 内核（POSIX 命令）挂载 Ceph 的文件系统存储<br>4) RGW（RADOSGW）：实现对象存储网关，允许客户端通过 RGW（RADOSGW）对象存储网关的 Rest API 接口去访问 Ceph 的底层存储 LIBRADOS<br>5) 客户端：使用从 MON 下载和更新的存储地图，通过算法，直接从 OSD 访问数据</p>
+
+
+
+<h4>内容五：Ceph 架构<br>5.1 Ceph 使用架构<br>5.1.1 Ceph 的上层</h4>
+
+
+
+<p>自己写程序、自己写脚本、挂载块存储、挂载文件系统 4 种使用方式。</p>
+
+
+
+<h4>5.1.2 Ceph 的下层</h4>
+
+
+
+<p>RADOS，基于对象的存储（比我们平时所说的对象存储更原始，更底层），通过软件实现自我检查、自我备份和自我修复的功能。</p>
+
+
+
+<h4>5.2 Ceph 组成架构</h4>
+
+
+
+<pre class="wp-block-code"><code>                                  File
+
+                  Cut1(Objects1) Cut2(Objects2) Cut3(Objects3)......
+
+                              choice Pool
+
+              Pool1                                   Pool2
+     PG1                PG2                  PG2               PG3
+OSD1 OSD2 OSD3    OSD2 OSD5 OSD3        OSD1 OSD4 OSD3    OSD4 OSD5 OSD3
+Disk Disk Disk    Disk Disk Disk        Disk Disk Disk    Disk Disk Disk</code></pre>
+
+
+
+<h4>内容六：Ceph 的算法：CRUSH<br>6.1 CRUSH 简介</h4>
+
+
+
+<p>CRUSH（Controlled Replication Under Scalable Hashing）算法，在可扩展 Hash 算法下的可控制复制</p>
+
+
+
+<h4>6.2 CRUSH 算法的第一层</h4>
+
+
+
+<p>由 OSD（Object Storage Deivces）组成。</p>
+
+
+
+<h4>6.3 CRUSH 算法的第二层<br>6.3.1 CRUSH 算法的第二层的组成</h4>
+
+
+
+<p>由 PG（Placement Group）归置组组成。</p>
+
+
+
+<h4>6.3.2 CRUSH 算法的第二层的由来</h4>
+
+
+
+<p>在 OSD 节点上虚拟出多个 PG，每个 PG 默认会被指定对应 3 个 OSD 节点（每个 OSD 节点同时可以属于多个 PG），其中第一个 OSD 节点为主要（primary）的硬盘，其他两 OSD 节点为从（second）硬盘，PG 会对应几个 OSD 节点取决于 Ceph 的存储副本被设置了几份。</p>
+
+
+
+<h4>6.3.3 CRUSH 算法的第二层的算法</h4>
+
+
+
+<p>1) 给每个 OSD 节点设置一个权重值，OSD 节点的容量越大则其权重值越大<br>2) 主要（primary）硬盘的 OSD 节点：将 PG 的 ID 值和 OSD 的 ID 值组合在一起并计算 Hash 值，将得到的 Hash 值乘以此 OSD 节点的权重，当最终获得的值最大时，此 PG 就和此 OSD 绑定在一起<br>3) 第一个从（second）硬盘的 OSD 节点：将 PG 的 ID 值逐一和 OSD 的 ID 值和一个随机的常数组合在一起并计算 Hash 值（这个值在 Ceph 的代码里被叫做 draw），将得到的 Hash 值乘以此 OSD 节点的权重，当最终获得的值最大时（这个值在 Ceph 的源代码里叫做 straw）则此 PG 就和此 OSD 绑定在一起<br>4) 第二个从（second）硬盘的 OSD 节点：将 PG 的 ID 值逐一和 OSD 的 ID 值和上一个随机常数加 1 的和组合在一起并计算 Hash 值（这个值在 Ceph 的代码里被叫做 draw），将得到的 Hash 值乘以此 OSD 节点的权重，当最终获得的值最大时（这个值在 Ceph 的源代码里叫做 straw），则此 PG 就和此 OSD 绑定在一起（如果找到的 OSD 节点和前面的 OSD 节点重复，则将这个随机常数再加 1 并进行重复操作，最终获得和前面不通的 OSD 节点为止）<br>5) 第三个从（second）硬盘的 OSD 节点：仿照第二个从（second）硬盘的 OSD 节点方式以此类推</p>
+
+
+
+<h4>6.4 CRUSH 算法的第三层<br>6.4.1 CRUSH 算法的第三层的组成</h4>
+
+
+
+<p>由池组成。</p>
+
+
+
+<h4>6.4.2 CRUSH 算法的第三层的由来</h4>
+
+
+
+<p>1) 在 PG 上虚拟出多个池，每个池对应多个 PG，数据可以存储到指定的池里<br>2) 总硬盘容量有多大，每个池最大可以使用的容量就有多大，但是如果如果一个池使用了一部分容量，其他的池就要少使用一部分容量</p>
+
+
+
+<h4>6.5 CRUSH 算法的第四层<br>6.5.1 CRUSH 算法的第四层的组成</h4>
+
+
+
+<p>由数据组成。</p>
+
+
+
+<h4>6.5.2 CRUSH 算法的第四层的算法</h4>
+
+
+
+<p>1) 对要放入某个池里的数据进行切片，默认每片 4M<br>2) 对每份切片进行 Hash 取值，并对获取的 Hash 值除以这个池里 PG 节点的数量以取余，余数是多少就存在第几个 OSD 节点里</p>
+
+
+
+<h4>内容七：Ceph 的工作流程</h4>
+
+
+
+<p>1) 客户端从 MON 上下载最新的存储地图（map）<br>2) 存储地图（map）把集群里所有 MON、OSD 和 MDS 的信息告诉客户端，但是客户端依然不知道想要找的数据存放在哪<br>3) 客户端通过 CRUSH 计算出所需要读写的数据存放的 OSD 节点位置<br>4) 客户端直接在 OSD 节点位置上读写数据<br>5) 用户只需要把数据数据写入主要 OSD 节点硬盘上，然后 Ceph 自动同步给其他的从 OSD 节点硬盘上</p>
+
+
+
+<h4>内容八：Ceph 的维护</h4>
+
+
+
+<p>1) PG 的个数肯定要大于 OSD 节点的数量，在生产的环境中 PG 设计的数量往往会远远大于 OSD 节点的数量，以满足未来可能几年的需求，可能会在 3 个硬盘上添加上百个 PG<br>2) 当增加存或减少存储节点时，PG 的数量不会发生变化，只有 PG 对应 OSD 节点有变化的数据才会需要重新均衡数据（rebalance）的数据<br>3) 当增加存或减少 PG 数量时，就需要像传统的 Hash 存储算法那样，对所有已存储数据切片的 Hash 值重新取余，大概 90 % 的数据需要重新均衡数据（rebalance）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Linux 格式化特点</title>
+		<link>https://eternalcenter-now.github.io/linux-formatting-features/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Thu, 19 Aug 2021 12:02:18 +0000</pubDate>
+				<category><![CDATA[Ceph]]></category>
+		<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Clusters (集群)]]></category>
+		<category><![CDATA[Distributed Cloud Storage Clusters (分布式云存储集群)]]></category>
+		<category><![CDATA[Load Balancing and High Availability Clusters (负载均衡加高可用集群)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Computer & System Hardware & System Installation & System Upgradation (系统电脑 & 系统硬件 & 系统安装 & 系统升级)]]></category>
+		<category><![CDATA[System Hardware (系统硬件)]]></category>
+		<category><![CDATA[System Storage (系统存储)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=17520</guid>
+
+					<description><![CDATA[内容一：格式化后会产生的分区 格式化会格式出 inode 区和 block 区 内容二：inode 区和 block 区的作用 inode 区默认一格大小是 512 个字节，存储哪一份数据存在了哪些 block 里以及数据的所属者、权限创建时间等 metadata 元数据block 区默认一格大小是 4k，只存储数据本身 内容三：Linux 文件格式的特点 ext3 和 ext4 的 inode 区每一格较小，而 xfs 的 inode 区每一格更大，可以存储更多种类，例如快照等 metadata 元数据]]></description>
+										<content:encoded><![CDATA[
+<h4>内容一：格式化后会产生的分区</h4>
+
+
+
+<p>格式化会格式出 inode 区和 block 区</p>
+
+
+
+<h4>内容二：inode 区和 block 区的作用</h4>
+
+
+
+<p>inode 区默认一格大小是 512 个字节，存储哪一份数据存在了哪些 block 里以及数据的所属者、权限创建时间等 metadata 元数据<br>block 区默认一格大小是 4k，只存储数据本身</p>
+
+
+
+<h4>内容三：Linux 文件格式的特点</h4>
+
+
+
+<p>ext3 和 ext4 的 inode 区每一格较小，而 xfs 的 inode 区每一格更大，可以存储更多种类，例如快照等 metadata 元数据</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Ansible 使用方法层级</title>
+		<link>https://eternalcenter-now.github.io/ansible-use-level/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sun, 27 Jun 2021 10:02:06 +0000</pubDate>
+				<category><![CDATA[Ansible]]></category>
+		<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Cluster Management Tools (集群管理工具)]]></category>
+		<category><![CDATA[Clusters (集群)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=16159</guid>
+
+					<description><![CDATA[第一层：直接通过命令行使用 Ansible 命令第二层：将 Ansible 里的内容写入到 Playbook 里，执行 Playbook，Playbook 类似于一个脚本第三层：制作一个 Ansible role，之后在 Playbook 里调用 role，一次性调用多个 role 时可以用分号 “;” 相隔，role 类似于一个自定义的模块]]></description>
+										<content:encoded><![CDATA[
+<p>第一层：直接通过命令行使用 Ansible 命令<br>第二层：将 Ansible 里的内容写入到 Playbook 里，执行 Playbook，Playbook 类似于一个脚本<br>第三层：制作一个 Ansible role，之后在 Playbook 里调用 role，一次性调用多个 role 时可以用分号 “;” 相隔，role 类似于一个自定义的模块</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Ansible 常模模块 （转载）</title>
+		<link>https://eternalcenter-now.github.io/ansible-norm-module/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sat, 05 Jun 2021 12:35:13 +0000</pubDate>
+				<category><![CDATA[Ansible]]></category>
+		<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Cluster Management Tools (集群管理工具)]]></category>
+		<category><![CDATA[Clusters (集群)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=14608</guid>
+
+					<description><![CDATA[注明：所有转载内容皆直接从被转载文章网页的标题和内容的文本中复制而来]]></description>
+										<content:encoded><![CDATA[
+<pre class="wp-block-code"><code>Ansible常用模块详解
+
+Ansible常用模块详解
+
+命令模块
+command
+shell
+文件模块
+copy
+fetch
+file
+安装模块
+yum
+服务模块
+service
+挂载模块
+mount
+定时任务
+cron
+用户模块
+group
+user
+压缩解压
+unarchive
+
+ansible内置了丰富的模块供用户使用，但是经常使用到的模块却不多。本文主要记录了ansible的一些常用模块以及详细参数 、注意事项等 ，供大家学习。
+命令模块
+
+command
+
+概要
+命令模块 适合使用简单的命令 无法支持"&lt;"，"&gt;"，"|"，";"，"&amp;"等符号
+官方文档：https://docs.ansible.com/ansible/latest/modules/command_module.html#command-module
+
+参数	选项/默认值	释义
+chdir		在执行命令前，进入到指定目录中
+creates		判断指定文件是否存在，如果存在，不执行后面的操作
+removes		判断指定文件是否存在，如果存在，执行后面的操作
+free_form		必须要输入一个合理的命令
+备注:无法支持"&lt;"，"&gt;"，"|"，";"，"&amp;"等符号
+示例:
+
+root@m01 ~]# ansible dkaiyun -m command -a "hostname"
+web01 | CHANGED | rc=0 &gt;&gt;
+web01
+
+nfs01 | CHANGED | rc=0 &gt;&gt;
+nfs01
+
+backup01 | CHANGED | rc=0 &gt;&gt;
+backup
+1
+2
+3
+4
+5
+6
+7
+8
+9
+chdir
+
+&#91;root@m01 ~]# ansible dkaiyun -m command -a "chdir=/data ls -l"
+web01 | CHANGED | rc=0 &gt;&gt;
+total 4
+-rw-r--r-- 1 root root 158 Jan 12 11:11 hosts
+
+backup01 | CHANGED | rc=0 &gt;&gt;
+total 4
+-rw-r--r-- 1 root root 4 Jan 13 18:06 lol.txt
+
+nfs01 | CHANGED | rc=0 &gt;&gt;
+total 4
+-rw-r--r-- 1 root root 13 Jan 17 18:45 bbb.txt
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+creates
+
+&#91;root@m01 ~]# ansible dkaiyun -m command -a "touch /data/lol.txt creates=/data/lol.txt"
+ &#91;WARNING]: Consider using the file module with state=touch rather than running touch.  If you need to use command because file is insufficient you can add
+warn=False to this command task or set command_warnings=False in ansible.cfg to get rid of this message.
+
+nfs01 | CHANGED | rc=0 &gt;&gt;
+
+
+backup01 | SUCCESS | rc=0 &gt;&gt;
+skipped, since /data/lol.txt exists
+
+web01 | CHANGED | rc=0 &gt;&gt;
+
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+removes
+
+&#91;root@m01 ~]# ansible dkaiyun -m command -a "rm -f /data/hosts removes=/data/hosts"
+nfs01 | SUCCESS | rc=0 &gt;&gt;
+skipped, since /data/hosts does not exist
+
+backup01 | SUCCESS | rc=0 &gt;&gt;
+skipped, since /data/hosts does not exist
+
+ &#91;WARNING]: Consider using the file module with state=absent rather than running rm.  If you need to use command because file is insufficient you can add
+warn=False to this command task or set command_warnings=False in ansible.cfg to get rid of this message.
+
+web01 | CHANGED | rc=0 &gt;&gt;
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+shell
+
+概要
+类似command模块升级版—万能模块
+官方文档：https://docs.ansible.com/ansible/latest/modules/shell_module.html#shell-module
+
+参数	选项/默认值	释义
+chdir		在执行命令前，进入到指定目录中
+creates		判断指定文件是否存在，如果存在，不执行后面的操作
+removes		判断指定文件是否存在，如果存在，执行后面的操作
+free_form		必须要输入一个合理的命令
+备注：可以使用"&lt;"，"&gt;"，"|"，";"，"&amp;"等符号特殊符号
+示例:
+
+&#91;root@m01 ~]# ansible dkaiyun -m shell -a "ps -ef |grep /&#91;s]sh"
+backup01 | CHANGED | rc=0 &gt;&gt;
+root       2042      1  0 09:06 ?        00:00:00 /usr/sbin/sshd -D
+
+nfs01 | CHANGED | rc=0 &gt;&gt;
+root       1258      1  0 08:32 ?        00:00:00 /usr/sbin/sshd -D
+
+web01 | CHANGED | rc=0 &gt;&gt;
+root       1197      1  0 11:39 ?        00:00:00 /usr/sbin/sshd -D
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+注：其它参数参考command模块 使用方法一致
+
+文件模块
+
+copy
+
+概要
+主要用于将管理主机上的数据信息传送给多台主机
+官方文档：https://docs.ansible.com/ansible/latest/modules/copy_module.html#copy-module
+
+参数	选项/默认值	释义
+src		指定将本地管理主机的什么数据信息进行远程复制
+backup	no* yes	默认数据复制到远程主机，会覆盖原有文件（yes 将源文件进行备份）
+content		在文件中添加信息
+dest（required）		将数据复制到远程节点的路径信息
+group		文件数据复制到远程主机，设置文件属组用户信息
+mode		文件数据复制到远程主机，设置数据的权限 eg 0644 0755
+owner		文件数据复制到远程主机，设置文件属主用户信息
+remote_src	no* yes	如果设置为yes，表示将远程主机上的数据进行移动操作如果设置为no， 表示将管理主机上的数据进行分发操作
+备注 （required）为必须使用的参数
+*为默认参数
+copy模块在复制数据时，如果数据为软链接文件，会将链接指定源文件进行复制
+修改权限时候 需要加0 例如：chmod 0644 0755
+示例:
+
+&#91;root@m01 ~]# ansible web01 -m copy -a "src=./anaconda-ks.cfg  dest=/data"
+web01 | CHANGED =&gt; {
+    "changed": true, 
+    "checksum": "9d791df2961e299fac1206c2e1c6ab1cde2c86a2", 
+    "dest": "/data/anaconda-ks.cfg", 
+    "gid": 0, 
+    "group": "root", 
+    "md5sum": "221e5656c9b59aec6c7596568fff8ad3", 
+    "mode": "0644", 
+    "owner": "root", 
+    "size": 1499, 
+    "src": "/root/.ansible/tmp/ansible-tmp-1548229670.84-2879942383233/source", 
+    "state": "file", 
+    "uid": 0
+}
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+backup
+
+&#91;root@m01 ~]# ansible web01 -m copy -a "src=./anaconda-ks.cfg  dest=/data backup=yes"
+web01 | CHANGED =&gt; {
+    "backup_file": "/data/anaconda-ks.cfg.4263.2019-01-23@15:52:43~", 
+    "changed": true, 
+    "checksum": "9d791df2961e299fac1206c2e1c6ab1cde2c86a2", 
+    "dest": "/data/anaconda-ks.cfg", 
+    "gid": 0, 
+    "group": "root", 
+    "md5sum": "221e5656c9b59aec6c7596568fff8ad3", 
+    "mode": "0644", 
+    "owner": "root", 
+    "size": 1499, 
+    "src": "/root/.ansible/tmp/ansible-tmp-1548229931.86-180942706957431/source", 
+    "state": "file", 
+    "uid": 0
+}
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+&#91;root@web01 ~]# ll /data/
+total 8
+-rw-r--r-- 1 root root 1499 Jan 23 15:52 anaconda-ks.cfg
+-rw-r--r-- 1 root root 1505 Jan 23 15:52 anaconda-ks.cfg.4263.2019-01-23@15:52:43~
+1
+2
+3
+4
+owner group mode
+
+&#91;root@m01 ~]# ansible web01 -m copy -a "src=./anaconda-ks.cfg  dest=/data owner=www group=www mode=0644"
+web01 | CHANGED =&gt; {
+    "changed": true, 
+    "checksum": "9d791df2961e299fac1206c2e1c6ab1cde2c86a2", 
+    "dest": "/data/anaconda-ks.cfg", 
+    "gid": 1086, 
+    "group": "www", 
+    "md5sum": "221e5656c9b59aec6c7596568fff8ad3", 
+    "mode": "0644", 
+    "owner": "www", 
+    "size": 1499, 
+    "src": "/root/.ansible/tmp/ansible-tmp-1548230667.08-106764271060692/source", 
+    "state": "file", 
+    "uid": 1086
+}
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+&#91;root@web01 data]# ll
+total 4
+-rw-r--r-- 1 www www 1499 Jan 23 16:04 anaconda-ks.cfg
+1
+2
+3
+content
+
+&#91;root@m01 ~]# ansible web01 -m copy -a "content=test  dest=/data/anaconda-ks.cfg "
+web01 | CHANGED =&gt; {
+    "changed": true, 
+    "checksum": "a94a8fe5ccb19ba61c4c0873d391e987982fbbd3", 
+    "dest": "/data/anaconda-ks.cfg", 
+    "gid": 1086, 
+    "group": "www", 
+    "md5sum": "098f6bcd4621d373cade4e832627b4f6", 
+    "mode": "0644", 
+    "owner": "www", 
+    "size": 4, 
+    "src": "/root/.ansible/tmp/ansible-tmp-1548231000.52-150895010308573/source", 
+    "state": "file", 
+    "uid": 1086
+}
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+&#91;root@web01 data]# cat anaconda-ks.cfg 
+test&#91;root@web01 data]#
+注：content添加内容不会添加回车符 
+1
+2
+3
+fetch
+
+概要
+抓取文件到管理机上
+官方文档：https://docs.ansible.com/ansible/latest/modules/fetch_module.html#fetch-module
+
+参数	选项/默认值	释义
+src（required）		要获取的远程系统上的文件，必须是文件，而不是目录
+dest		用于保存文件的目录
+备注
+示例:
+
+&#91;root@m01 ~]# ansible web01 -m fetch -a "src=/root/lol.txt dest=/root"
+web01 | CHANGED =&gt; {
+    "changed": true, 
+    "checksum": "da39a3ee5e6b4b0d3255bfef95601890afd80709", 
+    "dest": "/root/web01/root/lol.txt", 
+    "md5sum": "d41d8cd98f00b204e9800998ecf8427e", 
+    "remote_checksum": "da39a3ee5e6b4b0d3255bfef95601890afd80709", 
+    "remote_md5sum": null
+}
+&#91;root@m01 ~]# tree ~
+/root
+└── web01
+    └── root
+        └── lol.txt
+
+2 directories, 1 file
+&#91;root@m01 ~]# 
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+file
+
+概要
+实现创建/删除文件信息 对数据权限进行修改
+官方文档：https://docs.ansible.com/ansible/latest/modules/file_module.html#file-module
+
+参数	选项/默认值	释义
+dest/path/name（required）		将数据复制到远程节点的路径信息
+group		文件数据复制到远程主机，设置文件属组用户信息
+mode		文件数据复制到远程主机，设置数据的权限 eg 0644 0755
+owner		文件数据复制到远程主机，设置文件属主用户信息
+src		指定将本地管理主机的什么数据信息进行远程复制
+state	absent	将数据进行删除
+=	directory	创建一个空目录信息
+=	file	查看指定目录信息是否存在
+=	touch	创建一个空文件信息
+=	hard/link	创建链接文件
+备注
+示例:
+
+安装模块
+
+yum
+
+概要
+使用yum软件包管理器安装，升级，降级，删除和列出软件包和组。
+官方文档：https://docs.ansible.com/ansible/latest/modules/yum_repository_module.html#yum-repository-module
+
+参数	选项/默认值	释义
+name（required）		指定软件名称信息
+state	absent/removed	将软件进行卸载（慎用）
+=	present/installed	将软件进行安装
+latest		安装最新的软件 yum update
+备注
+示例:
+
+&#91;root@m01 ~]# ansible web01 -m yum -a "name=httpd-tools state=installed"
+1
+服务模块
+
+service
+
+概要
+用于管理服务运行状态
+官方文档：https://docs.ansible.com/ansible/latest/modules/service_module.html#service-module
+
+参数	选项/默认值	释义
+enabled	no yes	设置服务是否开机自启动 如果参数不指定，原有服务开机自启动状态进行保留
+name （required）		设置要启动/停止服务名称
+state=	reloaded	平滑重启
+=	restarted	重启
+=	started	启动
+=	stopped	停止
+备注
+示例:
+
+&#91;root@m01 ~]# ansible web01 -m service -a "name=crond state=started enabled=yes"
+1
+挂载模块
+
+mount
+
+概要
+用于批量管理主机进行挂载卸载操作
+官方文档：https://docs.ansible.com/ansible/latest/modules/mount_module.html#mount-module
+
+参数	选项/默认值	释义
+fstype		指定挂载的文件系统类型
+opts		指定挂载的参数信息
+path		定义一个挂载点信息
+src		定义设备文件信息
+state	absent	会进行卸载，也会修改fstab文件信息
+=	unmounted	会进行卸载，不会修改fstab文件
+=	present	不会挂载，只会修改fstab文件
+=	mounted	会进行挂载，会修改fstab文件
+在进行挂载的时候，使用state=mounted
+在进行卸载的时候，使用state=absent
+示例:
+
+&#91;root@m01 ~]# ansible web01 -m mount -a "src=172.16.1.31:/data/  path=/mnt fstype=nfs state=present"
+以上信息只是在/etc/fstab文件中添加了配置信息，不会真正进行挂载（mount -a）
+&#91;root@m01 ~]# ansible web01 -m mount -a "src=172.16.1.31:/data/  path=/mnt fstype=nfs state=mounted"
+以上信息是在/etc/fstab文件中添加了配置信息，并且也会真正进行挂载
+1
+2
+3
+4
+定时任务
+
+cron
+
+概要
+定时任务模块
+官方文档：https://docs.ansible.com/ansible/latest/modules/cron_module.html#cron-module
+
+参数	选项/默认值	释义
+minute/hour/day/month/weekday		和设置时间信息相关参数
+job		和设置定时任务相关参数
+name（required）		设置定时任务注释信息
+state	absent	删除指定定时任务
+disabled	yes	将指定定时任务进行注释
+=	no	取消注释
+备注：时间参数不写时，默认为 *
+示例:
+每五分钟同步一次时间
+
+&#91;root@m01 ~]# ansible web01 -m cron -a "name='ntpdate time' minute=*/5 job='/usr/sbin/ntpdate ntp1.aliyun.com &amp;&gt;/dev/null' "
+web01 | CHANGED =&gt; {
+    "changed": true, 
+    "envs": &#91;], 
+    "jobs": &#91;
+        "None", 
+        "ntpdate time"
+    ]
+}
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+结果
+
+&#91;root@web01 data]# crontab -l
+#Ansible: ntpdate time
+*/5 * * * * /usr/sbin/ntpdate ntp1.aliyun.com &amp;&gt;/dev/null
+1
+2
+3
+删除定时任务
+
+&#91;root@m01 ~]# ansible web01 -m cron -a "name='ntpdate time' state=absent"
+web01 | CHANGED =&gt; {
+    "changed": true, 
+    "envs": &#91;], 
+    "jobs": &#91;]
+}
+
+1
+2
+3
+4
+5
+6
+7
+注释定时任务
+注意：注释和取消注释时必须填写 job和时间 参数
+
+&#91;root@m01 ~]# ansible web01 -m cron -a "name='ntpdate time' minute=*/5 job='/usr/sbin/ntpdate ntp1.aliyun.com &amp;&gt;/dev/null' disabled=yes"
+web01 | CHANGED =&gt; {
+    "changed": true, 
+    "envs": &#91;], 
+    "jobs": &#91;
+        "ntpdate time"
+    ]
+}
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+结果
+
+&#91;root@web01 data]# crontab -l
+#Ansible: ntpdate time
+#*/5 * * * * /usr/sbin/ntpdate ntp1.aliyun.com &amp;&gt;/dev/null
+
+1
+2
+3
+4
+取消注释
+
+&#91;root@m01 ~]# ansible web01 -m cron -a "name='ntpdate time' minute=*/5 job='/usr/sbin/ntpdate ntp1.aliyun.com &amp;&gt;/dev/null' disabled=no"
+web01 | CHANGED =&gt; {
+    "changed": true, 
+    "envs": &#91;], 
+    "jobs": &#91;
+        "ntpdate time"
+    ]
+}
+
+1
+2
+3
+4
+5
+6
+7
+8
+9
+结果
+
+&#91;root@web01 data]# crontab -l
+#Ansible: ntpdate time
+*/5 * * * * /usr/sbin/ntpdate ntp1.aliyun.com &amp;&gt;/dev/null
+
+1
+2
+3
+4
+用户模块
+
+group
+
+概要
+远程批量创建用户组信息
+官方文档：https://docs.ansible.com/ansible/latest/modules/group_module.html#group-module
+
+参数	选项/默认值	释义
+gid		指创建的组ID信息
+name		指创建组名称信息
+state	absent	删除指定的用户组
+=	present	创建指定的用户组
+备注
+示例:
+创建一个指定的用户组dkaiyun gid=1055
+
+ansible web01 -m group -a "name=dkaiyun gid=1055"
+1
+删除一个指定的用户组dkaiyun gid=1055
+
+ansible web01 -m group -a "dkaiyun gid=1055 state=absent"
+1
+user
+
+概要
+远程批量创建用户信息
+官方文档：https://docs.ansible.com/ansible/latest/modules/user_module.html#user-module
+
+参数	选项/默认值	释义
+password		请输入密码信息
+name		指定用户名信息
+uid		指定用户uid信息
+group		指定用户主要属于哪个组
+groups		指定用户属于哪个附加组信息
+shell	/bin/bash或/sbin/nologin	指定是否能够登录
+create_home	yes/no	是否创建家目录信息
+home		指定家目录创建在什么路径 默认/home
+备注：password设置密码时不能使用明文方式，只能使用密文方式
+可以给用户设置密码 还可以给用户修改密码
+示例:
+
+压缩解压
+
+unarchive
+
+概要
+
+官方文档：https://docs.ansible.com/ansible/latest/modules/unarchive_module.html#unarchive-module
+
+参数	选项/默认值	释义
+备注
+示例:
+
+
+————————————————
+版权声明：本文为CSDN博主「最爱下一站」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/qq_34646546/article/details/86606408</code></pre>
+
+
+
+<p>注明：所有转载内容皆直接从被转载文章网页的标题和内容的文本中复制而来</p>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter size-large"><img width="1014" height="192" src="https://eternalcenter-now.github.io/wp-content/uploads/2021/06/版权申明证明-Ansible-模块.png" alt="" class="wp-image-14609" srcset="https://eternalcenter-now.github.io/wp-content/uploads/2021/06/版权申明证明-Ansible-模块.png 1014w, https://eternalcenter-now.github.io/wp-content/uploads/2021/06/版权申明证明-Ansible-模块-300x57.png 300w, https://eternalcenter-now.github.io/wp-content/uploads/2021/06/版权申明证明-Ansible-模块-768x145.png 768w" sizes="(max-width: 767px) 89vw, (max-width: 1000px) 54vw, (max-width: 1071px) 543px, 580px" /><figcaption><em>CC 4.0 BY-SA 版权协议网址：https://creativecommons.org/licenses/by-sa/4.0/deed.z</em></figcaption></figure></div>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Ansible 条件判断 when</title>
+		<link>https://eternalcenter-now.github.io/ansible-when/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Tue, 20 Apr 2021 07:13:32 +0000</pubDate>
+				<category><![CDATA[Ansible]]></category>
+		<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Cluster Management Tools (集群管理工具)]]></category>
+		<category><![CDATA[Clusters (集群)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=14025</guid>
+
+					<description><![CDATA[注意： 在使用 Ansible 魔法变量之前，要先安装 Ansible、添加被 Ansible 管理的主机，并且需要 root 权限 正文： 案例一：判断某一个变量是否是一个固定值 添加以下内容： （补充：1) 这里以在 test.yml 中， test 为服务器的所属组为条件判断为例2) group_names 在这里是魔法变量） 案例二：判断某一个变量是否和另一个变量的值相等 添加以下内容： （补充：1) 这里以在 test.yml 中，服务器名在 test 组中为条件判断为例2) inventory_hostname 和 groups.test 在这里都是魔法变量） 案例三：判断某一个变量是否小于或等于一个值 添加以下内容： （补充：1) 这里以在 test.yml 中，系统的版本是否小于或等于 7.6 为条件判断为例2) inventory_hostname 和 groups.test 在这里都是魔法变量） 案例四：判断某一个变量是否大于一个值 添加以下内容： （补充：1) 这里以在 test.yml 中，系统的版本是否大于 7.6 为条件判断为例2) inventory_hostname 和 groups.test &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/ansible-when/" class="more-link">Continue reading<span class="screen-reader-text"> "[内容] Ansible 条件判断 when"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2>注意：</h2>
+
+
+
+<p>在使用 Ansible 魔法变量之前，要先安装 Ansible、添加被 Ansible 管理的主机，并且需要 root 权限</p>
+
+
+
+<div class="wp-container-1 wp-block-buttons is-content-justification-center">
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/ansible-install/">Ansible 的安装方法</a></div>
+
+
+
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/ansible-node/">Ansible 所管理的服务器的添加和分组</a></div>
+</div>
+
+
+
+<div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
+
+
+
+<h2>正文：</h2>
+
+
+
+<h4>案例一：判断某一个变量是否是一个固定值</h4>
+
+
+
+<pre class="wp-block-code"><code># vim test.yml</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+when: "'test' in group_names"
+......</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里以在 test.yml 中， test 为服务器的所属组为条件判断为例<br>2) group_names 在这里是魔法变量<br>）</p>
+
+
+
+<h4>案例二：判断某一个变量是否和另一个变量的值相等</h4>
+
+
+
+<pre class="wp-block-code"><code># vim test.yml</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+when: inventory_hostname in groups.test
+......</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里以在 test.yml 中，服务器名在 test 组中为条件判断为例<br>2) inventory_hostname 和 groups.test 在这里都是魔法变量<br>）</p>
+
+
+
+<h4>案例三：判断某一个变量是否小于或等于一个值</h4>
+
+
+
+<pre class="wp-block-code"><code># vim test.yml</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+when: ansible_distribution_version is version("7.6","le")
+......</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里以在 test.yml 中，系统的版本是否小于或等于 7.6 为条件判断为例<br>2) inventory_hostname 和 groups.test 在这里都是魔法变量<br>）</p>
+
+
+
+<h4>案例四：判断某一个变量是否大于一个值</h4>
+
+
+
+<pre class="wp-block-code"><code># vim test.yml</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+when: ansible_distribution_version is version("7.6","gt")
+......</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里以在 test.yml 中，系统的版本是否大于 7.6 为条件判断为例<br>2) inventory_hostname 和 groups.test 在这里都是魔法变量<br>）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[实验] 通过 Nginx + Keepalived 实现网站负载均衡加高可用</title>
+		<link>https://eternalcenter-now.github.io/nginx-keepalived-web/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 19 Feb 2021 09:24:24 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Cluster High Availability Tools (集群高可用工具)]]></category>
+		<category><![CDATA[Clusters (集群)]]></category>
+		<category><![CDATA[High Availability Clusters (高可用集群)]]></category>
+		<category><![CDATA[Keepalived]]></category>
+		<category><![CDATA[Load Balancing and High Availability Clusters (负载均衡加高可用集群)]]></category>
+		<category><![CDATA[Nginx]]></category>
+		<category><![CDATA[Nginx + Keepalived]]></category>
+		<category><![CDATA[Nginx Function (功能)]]></category>
+		<category><![CDATA[Services (服务)]]></category>
+		<category><![CDATA[Website Service Redundant Agent or Redundant Dispatch Clusters (网站服务冗余代理或冗余调度集群)]]></category>
+		<category><![CDATA[Website Services (网站服务)]]></category>
+		<category><![CDATA[纪念 Anniversary]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=13543</guid>
+
+					<description><![CDATA[纪念：站主于 2021 年 2 月完成了此开源实验，并将过程中的所有命令经过整理和注释以后，形成以下教程 步骤目录： 步骤一：拓扑图1.1 服务器列表1.2 拓扑图1.3 拓扑图简介 步骤二： 系统环境要求 步骤三：搭建网站服务3.1 在 web1 上搭建网站服务3.1.1 在 web1 上安装 Nginx3.1.2 给 web1 制定网页3.1.3 启动 Nginx 并将它设置为开机自启3.2 在 web2 上搭建网站服务3.2.1 在 web2 上安装 Apache3.2.2 给 web2 制定网页3.2.3 启动 Apache 并将它设置为开机自启 步骤四：搭建代理服务4.1 安装 Nginx4.2 修改 Nginx 配置文件4.3 启动 Nginx 并将它设置为开机自启 步骤五：搭建高可用服务5.1 安装 Keepalived5.2 创建 Keepalived 检查脚本5.3 修改 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/nginx-keepalived-web/" class="more-link">Continue reading<span class="screen-reader-text"> "[实验] 通过 Nginx + Keepalived 实现网站负载均衡加高可用"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<p class="has-vivid-red-color has-text-color has-medium-font-size"><strong>纪念：站主于 2021 年 2 月完成了此开源实验，并将过程中的所有命令经过整理和注释以后，形成以下教程</strong></p>
+
+
+
+<h2>步骤目录：</h2>
+
+
+
+<h4>步骤一：拓扑图<br>1.1 服务器列表<br>1.2 拓扑图<br>1.3 拓扑图简介</h4>
+
+
+
+<h4>步骤二： 系统环境要求</h4>
+
+
+
+<h4>步骤三：搭建网站服务<br>3.1 在 web1 上搭建网站服务<br>3.1.1 在 web1 上安装 Nginx<br>3.1.2 给 web1 制定网页<br>3.1.3 启动 Nginx 并将它设置为开机自启<br>3.2 在 web2 上搭建网站服务<br>3.2.1 在 web2 上安装 Apache<br>3.2.2 给 web2 制定网页<br>3.2.3 启动 Apache 并将它设置为开机自启</h4>
+
+
+
+<h4>步骤四：搭建代理服务<br>4.1 安装 Nginx<br>4.2 修改 Nginx 配置文件<br>4.3 启动 Nginx 并将它设置为开机自启</h4>
+
+
+
+<h4>步骤五：搭建高可用服务<br>5.1 安装 Keepalived<br>5.2 创建 Keepalived 检查脚本<br>5.3 修改 proxy1 上的 Keepalived 配置文件<br>5.4 修改 proxy2 上的 Keepalived 配置文件<br>5.5 启动 Keepalived 并将它设置为开机自启</h4>
+
+
+
+<h4>步骤六：测试 web 负载均衡加高可用<br>6.1 正常情况下测试网站服务<br>6.2 在单节点故障的情况下测试网站服务<br>6.2.1 关闭 proxy1、proxy2、web1、web2 中的任意一台服务器<br>6.2.2 测试网站服务</h4>
+
+
+
+<h2>具体的操作步骤：</h2>
+
+
+
+<h4>步骤一：拓扑图<br>1.1 服务器列表</h4>
+
+
+
+<p>client enp1s0: 172.16.1.99</p>
+
+
+
+<p>proxy1 enp1s0: 172.16.0.101<br>enp7s0: 172.16.1.101<br>virtual IP: 172.16.1.100</p>
+
+
+
+<p>proxy2 enp1s0: 172.16.0.102<br>enp7s0: 172.16.1.102</p>
+
+
+
+<p>web1 enp1s0: 172.16.0.11</p>
+
+
+
+<p>web2 enp1s0: 172.16.0.12</p>
+
+
+
+<h4>1.2 拓扑图</h4>
+
+
+
+<pre class="wp-block-code"><code>                      proxy1                                       web1
+                      enp7s0:172.16.1.101 enp1s0:172.16.0.101      enp1s0:172.16.0.11
+                      virtual IP:172.16.1.100
+client
+enp1s0:172.16.1.99
+                      proxy2                                       web2
+                      enp7s0:172.16.1.102 enp1s0:172.16.0.102      enp1s0:172.16.0.12</code></pre>
+
+
+
+<h4>1.3 拓扑图简介</h4>
+
+
+
+<p>1) web1 安装 Nginx，web2 安装 Apache 实现网站服务<br>2) proxy1 和 proxy2 安装 Nginx 实现网站代理，轮询代理 web1、web2 上的网站服务实现负载均衡<br>3) 虚拟 IP 172.16.1.90 通过 Keepalived 默认放在 proxy1 的 enp7s0 网卡上，如果 proxy1 宕机或者检测到自己 Nginx 代理进程死掉，则虚拟 IP 172.16.1.90 则挂在 proxy2 的 enp7s0 网卡上实现高可用<br>4) 如果 web1 和 web2 中有一台服务器宕机，则 proxy1 和 proxy2 会自动不再向这台服务器请求网站服务，直到它恢复正常<br>5) 最终达到的效果是 client 向虚拟 IP 请求网站服务，此时如果 proxy1 正常就代表虚拟 IP 轮询调度 web1 和 web2 上的网站服务，再返回给 client。如果 proxy1 宕机则由 proxy2 代表虚拟 IP 完成次操作</p>
+
+
+
+<h4>步骤二： 系统环境要求</h4>
+
+
+
+<p>1) 所有服务器的系统都需要是 CentOS 8 版本<br>2) 所有服务器都要关闭防火墙<br>3) 所有服务器都要关闭 SELinux<br>4) 所有服务器系统都要配置好可用的软件源<br>5) 需要按照拓扑图给对应的服务器配置好 IP 地址和主机名<br>6) client 的 enp1s0 网卡、proxy1 的 enp7s0 网卡和 proxy2 的 enp7s0 网卡要可以相互 ping 通自己和对方的 IP<br>7) proxy1 的 enp1s0 网卡、proxy2 的 enp1s0 网卡、web1 的 enp1s0 网卡和 web2 的 enp1s0 网卡要可以相互 ping 通自己和对方的 IP 地址</p>
+
+
+
+<h4>步骤三：搭建网站服务<br>3.1 在 web1 上搭建网站服务<br>3.1.1 在 web1 上安装 Nginx</h4>
+
+
+
+<p>（只在 web1 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># yum -y install nginx</code></pre>
+
+
+
+<h4>3.1.2 给 web1 制定网页</h4>
+
+
+
+<p>（只在 web1 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># echo web1 &gt; /usr/share/nginx/html/index.html</code></pre>
+
+
+
+<h4>3.1.3 启动 Nginx 并将它设置为开机自启</h4>
+
+
+
+<p>（只在 web1 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># systemctl enable --now nginx</code></pre>
+
+
+
+<h4>3.2 在 web2 上搭建网站服务<br>3.2.1 在 web2 上安装 Apache</h4>
+
+
+
+<p>（只在 web2 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># yum -y install httpd</code></pre>
+
+
+
+<h4>3.2.2 给 web2 制定网页</h4>
+
+
+
+<p>（只在 web2 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># echo web2 &gt; /var/www/html/index.html</code></pre>
+
+
+
+<h4>3.2.3 启动 Apache 并将它设置为开机自启</h4>
+
+
+
+<p>（只在 web2 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># systemctl enable --now httpd</code></pre>
+
+
+
+<h4>步骤四：搭建代理服务<br>4.1 安装 Nginx</h4>
+
+
+
+<p>（分别在 proxy1 和 proxy2 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># yum -y install nginx</code></pre>
+
+
+
+<h4>4.2 修改 Nginx 配置文件</h4>
+
+
+
+<p>（分别在 proxy1 和 proxy2 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># vi /etc/nginx/nginx.conf</code></pre>
+
+
+
+<p>将部分内容修改如下：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+http {
+    upstream webserver {
+        server 172.16.0.11:80;
+        server 172.16.0.12:80;
+    }
+......
+    server {
+        listen       80;
+
+        location / {
+        proxy_pass http://webserver;/
+        }
+    }
+......
+}</code></pre>
+
+
+
+<h4>4.3 启动 Nginx 并将它设置为开机自启</h4>
+
+
+
+<p>（分别在 proxy1 和 proxy2 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># systemctl enable --now nginx</code></pre>
+
+
+
+<h4>步骤五：搭建高可用服务<br>5.1 安装 Keepalived</h4>
+
+
+
+<p>（分别在 proxy1 和 proxy2 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># yum -y install keepalived</code></pre>
+
+
+
+<h4>5.2 创建 Keepalived 检查脚本</h4>
+
+
+
+<p>（分别在 proxy1 和 proxy2 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># vi /etc/keepalived/nginx_check.sh</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>#!/bin/bash
+
+if &#91; `ps -C nginx --no-header | wc -l` -eq 0 ];then
+    systemctl stop nginx
+    sleep 5
+    if &#91; `ps -C nginx --no-header | wc -l` -eq 0 ];then
+        systemctl stop keepalived
+    fi
+fi</code></pre>
+
+
+
+<p>（补充：这里以检测 Nginx 没启动就启动 Nginx，5 秒后 Nginx 要是还没有启动就关闭 keepalived 为例）</p>
+
+
+
+<h4>5.3 修改 proxy1 上的 Keepalived 配置文件</h4>
+
+
+
+<p>（只在 proxy1 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/keepalived/keepalived.conf</code></pre>
+
+
+
+<p>将全部内容修改如下：</p>
+
+
+
+<pre class="wp-block-code"><code>! Configuration File for keepalived
+
+global_defs {
+   notification_email {
+     acassen@firewall.loc
+     failover@firewall.loc
+     sysadmin@firewall.loc
+   }
+   notification_email_from Alexandre.Cassen@firewall.loc
+   smtp_server 192.168.200.1
+   smtp_connect_timeout 30
+   router_id proxy1
+   vrrp_skip_check_adv_addr
+   vrrp_strict
+   vrrp_garp_interval 0
+   vrrp_gna_interval 0
+}
+
+vrrp_script chk_nginx {
+script "/etc/keepalived/nginx_check.sh"
+interval 2
+weight 20
+}
+
+vrrp_instance VI_1 {
+    state MASTER
+    interface enp7s0
+    virtual_router_id 90
+    priority 101
+    advert_int 1
+    authentication {
+        auth_type PASS
+        auth_pass 1111
+    }
+    track_script {
+    chk_nginx
+    }
+    virtual_ipaddress {
+        172.16.1.100
+    }
+}</code></pre>
+
+
+
+<p>（<br>补充：<br>1) script &#8220;/etc/keepalived/nginx_check.sh&#8221; 代表使用的检测脚本是 /etc/keepalived/nginx_check.sh<br>2) interface enp7s0 代表虚拟 IP 将挂载在 enp7s0 网卡上<br>3) priority 代表修建级是 101，数字越大优先级越高<br>4) 172.16.1.100 代表虚拟 IP 是 172.16.1.100<br>）</p>
+
+
+
+<h4>5.4 修改 proxy2 上的 Keepalived 配置文件</h4>
+
+
+
+<p>（只在 proxy2 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/keepalived/keepalived.conf</code></pre>
+
+
+
+<p>将全部内容修改如下：</p>
+
+
+
+<pre class="wp-block-code"><code>! Configuration File for keepalived
+
+global_defs {
+   notification_email {
+     acassen@firewall.loc
+     failover@firewall.loc
+     sysadmin@firewall.loc
+   }
+   notification_email_from Alexandre.Cassen@firewall.loc
+   smtp_server 192.168.200.1
+   smtp_connect_timeout 30
+   router_id proxy1
+   vrrp_skip_check_adv_addr
+   vrrp_strict
+   vrrp_garp_interval 0
+   vrrp_gna_interval 0
+}
+
+vrrp_script chk_nginx {
+script "/etc/keepalived/nginx_check.sh"
+interval 2
+weight 20
+}
+
+vrrp_instance VI_1 {
+    state MASTER
+    interface enp7s0
+    virtual_router_id 90
+    priority 99
+    advert_int 1
+    authentication {
+        auth_type PASS
+        auth_pass 1111
+    }
+    track_script {
+    chk_nginx
+    }
+    virtual_ipaddress {
+        172.16.1.100
+    }
+}</code></pre>
+
+
+
+<p>（<br>补充：<br>1) script &#8220;/etc/keepalived/nginx_check.sh&#8221; 代表使用的检测脚本是 /etc/keepalived/nginx_check.sh<br>2) interface enp7s0 代表虚拟 IP 将挂载在 enp7s0 网卡上<br>3) priority 代表修建级是 99，数字越大优先级越高<br>4) 172.16.1.100 代表虚拟 IP 是 172.16.1.100<br>）</p>
+
+
+
+<h4>5.5 启动 Keepalived 并将它设置为开机自启</h4>
+
+
+
+<p>（分别在 proxy1 和 proxy2 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># systemctl enable --now keepalived.service</code></pre>
+
+
+
+<h4>步骤六：测试网站负载均衡加高可用<br>6.1 正常情况下测试网站服务</h4>
+
+
+
+<p>（只在 client 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># curl 172.16.1.100</code></pre>
+
+
+
+<p>（补充：重复以上命令会发现重复显示 web1 和 web2）</p>
+
+
+
+<h4>6.2 在单节点故障的情况下测试网站服务<br>6.2.1 关闭 proxy1、proxy2、web1、web2 中的任意一台服务器</h4>
+
+
+
+<p>（只在 proxy1、proxy2、web1、web2 中的任意一台服务器上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># poweroff</code></pre>
+
+
+
+<h4>6.2.2 测试网站服务</h4>
+
+
+
+<p>（只在 client 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># curl 172.16.1.100</code></pre>
+
+
+
+<p>（补充：重复以上命令会发现重复显示 web1 和 web2）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[实验] HAproxy 代理的设置</title>
+		<link>https://eternalcenter-now.github.io/haproxy-agent/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Thu, 21 Jan 2021 14:28:29 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Clusters (集群)]]></category>
+		<category><![CDATA[HAProxy]]></category>
+		<category><![CDATA[Website Service Dispatch or Agent Clusters (网站服务代理或调度集群)]]></category>
+		<category><![CDATA[纪念 Anniversary]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=13237</guid>
+
+					<description><![CDATA[纪念：站主于 2021 年 2 月完成了此开源实验，并将过程中的所有命令经过整理和主是以后，形成以下教程 步骤目录： 步骤一：拓扑规划1.1 服务器列表1.2 拓扑图1.3 拓扑图简介 步骤二： 系统环境要求 步骤三：部署集群环境3.1 在 proxy 上安装 HAporxy3.2 在 web1 上安装 web 服务3.2.1 安装 httpd3.2.2 创建网页文件3.2.3 启动 web 服务并设置为开机自启3.3 在 web2 上安装 web 服务3.3.1 安装 httpd3.3.2 创建网页文件3.3.3 启动 web 服务并设置为开机自启 步骤四：配置 HAproxy 实现 web 负载均衡代理集群4.1 开启 proxy 的路由转发4.1.1 在 sysctl.conf 文件里添加路由转发功能4.1.2 使刚刚添加的功能生效4.2 修改 proxy 上的 HAproxy &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/haproxy-agent/" class="more-link">Continue reading<span class="screen-reader-text"> "[实验] HAproxy 代理的设置"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<p class="has-vivid-red-color has-text-color has-medium-font-size"><strong>纪念：站主于 2021 年 2 月完成了此开源实验，并将过程中的所有命令经过整理和主是以后，形成以下教程</strong></p>
+
+
+
+<h2>步骤目录：</h2>
+
+
+
+<h4>步骤一：拓扑规划<br>1.1 服务器列表<br>1.2 拓扑图<br>1.3 拓扑图简介</h4>
+
+
+
+<h4>步骤二： 系统环境要求</h4>
+
+
+
+<h4>步骤三：部署集群环境<br>3.1 在 proxy 上安装 HAporxy<br>3.2 在 web1 上安装 web 服务<br>3.2.1 安装 httpd<br>3.2.2 创建网页文件<br>3.2.3 启动 web 服务并设置为开机自启<br>3.3 在 web2 上安装 web 服务<br>3.3.1 安装 httpd<br>3.3.2 创建网页文件<br>3.3.3 启动 web 服务并设置为开机自启</h4>
+
+
+
+<h4>步骤四：配置 HAproxy 实现 web 负载均衡代理集群<br>4.1 开启 proxy 的路由转发<br>4.1.1 在 sysctl.conf 文件里添加路由转发功能<br>4.1.2 使刚刚添加的功能生效<br>4.2 修改 proxy 上的 HAproxy 配置文件<br>4.3 设置开机自动启动 HAproxy</h4>
+
+
+
+<h4>步骤五：测试 Haproxy 代理集群</h4>
+
+
+
+<h2>具体的操作步骤：</h2>
+
+
+
+<h4>步骤一：拓扑规划<br>1.1 服务器列表</h4>
+
+
+
+<p>client eth0:10.0.0.10/24<br>proxy eth0:10.0.0.5/24<br>eth1:10.0.1.5/24<br>web1 eth1:10.0.1.100/24<br>web2 eht1:10.0.1.200/24</p>
+
+
+
+<h4>1.2 拓扑图</h4>
+
+
+
+<pre class="wp-block-code"><code>                                           web1
+                                           eth1:10.0.1.100/24
+     client                proxy     
+eth0:10.0.0.10/24    eth0:10.0.0.5/24  
+                     eth1:10.0.1.5/24
+                                           web2
+                                           eht2:10.0.1.200/24</code></pre>
+
+
+
+<h4>1.3 拓扑图简介</h4>
+
+
+
+<p>（1）client 向 proxy 的 eth0:10.0.0.5/24 发送 web 请求<br>（2）proxy 收到 web 请求后通过 eth1:10.0.1.5/24 将请求发往 web1 或 web2<br>（3）web1 或 web2 回应 web 请求，并通过 proxy 返回给 client<br>（4）最终实现单点代理器，双网站热备份</p>
+
+
+
+<h4>步骤二： 系统环境要求</h4>
+
+
+
+<p>（1）所有服务器的系统都需要是 CentOS 8 版本<br>（2）所有服务器都要关闭防火墙<br>（3）所有服务器都要关闭 SELinux<br>（4）所有服务器系统都要配置好可用的软件源<br>（5）需要按照拓扑图给对应的服务器配置好 IP 地址和主机名<br>（6）所有服务器都要可以相互 ping 通自己和对方的 IP 地址</p>
+
+
+
+<h4>步骤三：部署集群环境<br>3.1 在 proxy 上安装 HAporxy</h4>
+
+
+
+<p>（只在 proxy 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># yum -y install haproxy</code></pre>
+
+
+
+<h4>3.2 在 web1 上安装 web 服务<br>3.2.1 安装 httpd</h4>
+
+
+
+<p>(只在 web1 上执行以下步骤)</p>
+
+
+
+<pre class="wp-block-code"><code># yum -y install httpd</code></pre>
+
+
+
+<h4>3.2.2 创建网页文件</h4>
+
+
+
+<p>（只在 web1 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># echo "10.0.1.100" &gt; /var/www/html/index.html</code></pre>
+
+
+
+<h4>3.2.3 启动 web 服务并设置为开机自启</h4>
+
+
+
+<p>（只在 web1 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># systemctl start httpd ; systemctl enable httpd</code></pre>
+
+
+
+<h4>3.3 在 web2 上安装 web 服务<br>3.3.1 安装 httpd</h4>
+
+
+
+<p>（只在 web2 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># yum -y install httpd</code></pre>
+
+
+
+<h4>3.3.2 创建网页文件</h4>
+
+
+
+<p>(只在 web2 上执行以下步骤)</p>
+
+
+
+<pre class="wp-block-code"><code># echo "10.0.1.200" &gt; /var/www/html/index.html</code></pre>
+
+
+
+<h4>3.3.3 启动 web 服务并设置为开机自启</h4>
+
+
+
+<p>（只在 web2 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># systemctl start httpd ; systemctl enable httpd</code></pre>
+
+
+
+<h4>步骤四：配置 HAproxy 实现 web 负载均衡代理菌群<br>4.1 开启 proxy 的路由转发<br>4.1.1 在 sysctl.conf 文件里添加路由转发功能</h4>
+
+
+
+<p>（只在 proxy 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/sysctl.conf</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>net.ipv4.ip_forward = 1</code></pre>
+
+
+
+<h4>4.1.2 使刚刚添加的功能生效</h4>
+
+
+
+<p>（只在 proxy 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># sysctl -p</code></pre>
+
+
+
+<h4>4.2 修改 proxy 上的 HAproxy 配置文件</h4>
+
+
+
+<p>(只在 proxy 上执行以下步骤)</p>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/haproxy/haproxy.cfg</code></pre>
+
+
+
+<p>将全部内容修改如下：</p>
+
+
+
+<pre class="wp-block-code"><code>#---------------------------------------------------------------------
+# Example configuration for a possible web application.  See the
+# full configuration options online.
+#
+#   https://www.haproxy.org/download/1.8/doc/configuration.txt
+#
+#---------------------------------------------------------------------
+
+#---------------------------------------------------------------------
+# Global settings
+#---------------------------------------------------------------------
+global
+    # to have these messages end up in /var/log/haproxy.log you will
+    # need to:
+    #
+    # 1) configure syslog to accept network log events.  This is done
+    #    by adding the '-r' option to the SYSLOGD_OPTIONS in
+    #    /etc/sysconfig/syslog
+    #
+    # 2) configure local2 events to go to the /var/log/haproxy.log
+    #   file. A line like the following can be added to
+    #   /etc/sysconfig/syslog
+    #
+    #    local2.*                       /var/log/haproxy.log
+    #
+    log         127.0.0.1 local2
+
+    chroot      /var/lib/haproxy
+    pidfile     /var/run/haproxy.pid
+    maxconn     4000
+    user        haproxy
+    group       haproxy
+    daemon
+
+    # turn on stats unix socket
+    stats socket /var/lib/haproxy/stats
+
+    # utilize system-wide crypto-policies
+    ssl-default-bind-ciphers PROFILE=SYSTEM
+    ssl-default-server-ciphers PROFILE=SYSTEM
+
+#---------------------------------------------------------------------
+# common defaults that all the 'listen' and 'backend' sections will
+# use if not designated in their block
+#---------------------------------------------------------------------
+defaults
+    mode                    http
+    log                     global
+    option                  httplog
+    option                  dontlognull
+    option http-server-close
+    option forwardfor       except 127.0.0.0/8
+    option                  redispatch
+    retries                 3
+    timeout http-request    10s
+    timeout queue           1m
+    timeout connect         10s
+    timeout client          1m
+    timeout server          1m
+    timeout http-keep-alive 10s
+    timeout check           10s
+    maxconn                 3000
+
+#---------------------------------------------------------------------
+# main frontend which proxys to the backends
+#---------------------------------------------------------------------
+frontend main
+    bind *:80
+    acl url_static       path_beg       -i /static /images /javascript /stylesheets
+    acl url_static       path_end       -i .jpg .gif .png .css .js
+
+    use_backend static          if url_static
+    default_backend             app
+
+#---------------------------------------------------------------------
+# static backend for serving up images, stylesheets and such
+#---------------------------------------------------------------------
+backend static
+    balance     roundrobin
+    server      static 127.0.0.1:80 check
+
+#---------------------------------------------------------------------
+# round robin balancing between the various backends
+#---------------------------------------------------------------------
+backend app
+    balance     roundrobin
+    server  app1 10.0.1.100:80 check
+    server  app2 10.0.1.200:80 check</code></pre>
+
+
+
+<h4>4.3 设置开机自动启动 HAproxy</h4>
+
+
+
+<p>（只在 proxy 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># systemctl start haproxy ; systemctl enable haproxy</code></pre>
+
+
+
+<h4>步骤五：测试 Haproxy 代理集群</h4>
+
+
+
+<p>（只在 client 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># curl 10.10.10.5</code></pre>
+
+
+
+<p>（注意：这一步需要多做几次）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Ansible 数据的加密 （vault）</title>
+		<link>https://eternalcenter-now.github.io/ansible-vault/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sun, 27 Sep 2020 13:25:34 +0000</pubDate>
+				<category><![CDATA[Ansible]]></category>
+		<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Cluster Monitor Tools (集群监控工具)]]></category>
+		<category><![CDATA[Clusters (集群)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=10617</guid>
+
+					<description><![CDATA[注意： 在使用 Ansible 数据的加密之前，要先安装 Ansible、添加被 Ansible 管理的主机，并且需要 root 权限 正文： 内容目录： 内容一：加密机密文件1.1 通过密码加密机密文件1.2 通过文件加密机密文件 内容二：更换已加密的机密文件的密码2.1 更换通过密码加密的机密文件的密码2.2 更换通过文件加密的机密文件的密码 内容三：解密机密文件3.1 直接解密机密文件3.2 解密机密文件后再将其另存为 内容四：显示已加密的机密文件 内容五：显示已解密的机密文件 内容六：执行已加密的机密文件 具体的内容： 内容一：加密机密文件1.1 通过密码加密机密文件 1.2 通过文件加密机密文件 （补充：作为密码的文件可以是任意明文文本） 内容二：更换已加密的机密文件的密码2.1 更换通过密码加密的机密文件的密码 或者： 2.2 更换通过文件加密的机密文件的密码 （补充：作为密码的文件可以是任意明文文本） 内容三：解密机密文件3.1 直接解密机密文件 3.2 解密机密文件后再将其另存为 内容四：显示已加密的机密文件 内容五：显示已解密的机密文件 内容六：执行已加密的机密文件 或者：]]></description>
+										<content:encoded><![CDATA[
+<h2 id="注意">注意：</h2>
+
+
+
+<p>在使用 Ansible 数据的加密之前，要先安装 Ansible、添加被 Ansible 管理的主机，并且需要 root 权限</p>
+
+
+
+<div class="wp-container-2 wp-block-buttons">
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/ansible-install/">Ansible 的安装方法</a></div>
+
+
+
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/ansible-node/">Ansible 所管理的服务器的添加和分组</a></div>
+</div>
+
+
+
+<div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
+
+
+
+<h2 id="正文">正文：</h2>
+
+
+
+<h2 id="内容目录">内容目录：</h2>
+
+
+
+<h4 id="内容一-加密机密文件1-1-通过密码加密机密文件1-2-通过文件加密机密文件">内容一：加密机密文件<br>1.1 通过密码加密机密文件<br>1.2 通过文件加密机密文件</h4>
+
+
+
+<h4 id="内容二-更换已加密的机密文件的密码2-1-更换通过密码加密的机密文件的密码2-2-更换通过文件加密的机密文件的密码">内容二：更换已加密的机密文件的密码<br>2.1 更换通过密码加密的机密文件的密码<br>2.2 更换通过文件加密的机密文件的密码</h4>
+
+
+
+<h4 id="内容三-解密机密文件3-1-直接解密机密文件3-2-解密机密文件后再将其另存为">内容三：解密机密文件<br>3.1 直接解密机密文件<br>3.2 解密机密文件后再将其另存为</h4>
+
+
+
+<h4 id="内容四-查看已加密的机密文件">内容四：显示已加密的机密文件</h4>
+
+
+
+<h4 id="内容五-查看已解密的机密文件">内容五：显示已解密的机密文件</h4>
+
+
+
+<h4 id="内容六-执行已加密的机密文件">内容六：执行已加密的机密文件</h4>
+
+
+
+<h2 id="具体的内容">具体的内容：</h2>
+
+
+
+<h4 id="内容一-加密机密文件1-1-通过密码加密机密文件">内容一：加密机密文件<br>1.1 通过密码加密机密文件</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible-vault encrypt &lt;confidential files to encrypt&gt;</code></pre>
+
+
+
+<h4 id="1-2-通过文件加密机密文件">1.2 通过文件加密机密文件</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible-vault reky --vualt-password-file=&lt;file as password&gt; &lt;confidential file to encrypt&gt;</code></pre>
+
+
+
+<p>（补充：作为密码的文件可以是任意明文文本）</p>
+
+
+
+<h4 id="内容二-更换已加密的机密文件的密码2-1-更换通过密码加密的机密文件的密码">内容二：更换已加密的机密文件的密码<br>2.1 更换通过密码加密的机密文件的密码</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible-vault reky --vault-id &lt;encrypted confidential file&gt;</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># ansible-vault reky --ask-vault-pass &lt;encrypted confidential file&gt;</code></pre>
+
+
+
+<h4 id="2-2-更换通过文件加密的机密文件的密码">2.2 更换通过文件加密的机密文件的密码</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible-vault reky --new-vualt-password-file=&lt;file as password&gt; &lt;encrypted confidential file&gt;</code></pre>
+
+
+
+<p>（补充：作为密码的文件可以是任意明文文本）</p>
+
+
+
+<h4 id="内容三-解密机密文件3-1-直接解密机密文件">内容三：解密机密文件<br>3.1 直接解密机密文件</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible-vault decrypt &lt;confidential file to decrypt&gt;</code></pre>
+
+
+
+<h4 id="3-2-解密机密文件后再将其另存为">3.2 解密机密文件后再将其另存为</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible-vault decrypt &lt;confidential file to decrypt&gt; --output &lt;confidential file saved as a decrypted file&gt;</code></pre>
+
+
+
+<h4 id="内容四-查看已加密的机密文件">内容四：显示已加密的机密文件</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible-vault view &lt;encrypted confidential file&gt;</code></pre>
+
+
+
+<h4 id="内容五-查看已解密的机密文件">内容五：显示已解密的机密文件</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible-vault edit &lt;encrypted confidential file&gt;</code></pre>
+
+
+
+<h4 id="内容六-执行已加密的机密文件">内容六：执行已加密的机密文件</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible-playbook --vault-id &lt;encrypted confidential file&gt;</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># ansible-playbook --ask-vault-pass &lt;encrypted confidential file&gt;</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Ansible 执行脚本 Playbook 的循环</title>
+		<link>https://eternalcenter-now.github.io/playbook-loop/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Wed, 19 Aug 2020 14:35:10 +0000</pubDate>
+				<category><![CDATA[Ansible]]></category>
+		<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Cluster Monitor Tools (集群监控工具)]]></category>
+		<category><![CDATA[Clusters (集群)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=10498</guid>
+
+					<description><![CDATA[注意： 在使用 Playbook 之前，要先安装 Ansible、添加被 Ansible 管理的主机，并且需要 root 权限 正文： 内容目录： 内容一：在 playbook 里使用循环1.1 在 playbook 里使用简单的单循环1.2 在 playbook 里使用数组实现单组循环1.3 在 playbook 里使用变量实现单组循环1.4 在 playbook 里使用数组实现多组循环 内容二：在 json 文档上使用单组循环2.1 在 json 文档上使用单组循环2.2 使用 json 文档的 playbook 具体的内容： 内容一：在 playbook 里使用循环1.1 在 playbook 里使用简单的单循环 创建以下内容： （补充：这里以1) 在 test.yml 中2) 创建一个名为 test，3) 在所有服务器上执行，4) 安装 php、nginx 和 mariadb，的 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/playbook-loop/" class="more-link">Continue reading<span class="screen-reader-text"> "[内容] Ansible 执行脚本 Playbook 的循环"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2>注意：</h2>
+
+
+
+<p>在使用 Playbook 之前，要先安装 Ansible、添加被 Ansible 管理的主机，并且需要 root 权限</p>
+
+
+
+<div class="wp-container-3 wp-block-buttons is-content-justification-center">
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/ansible-install/">Ansible 的安装方法</a></div>
+
+
+
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/ansible-node/">Ansible 所管理的服务器的添加和分组</a></div>
+</div>
+
+
+
+<div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
+
+
+
+<h2>正文：</h2>
+
+
+
+<h2>内容目录：</h2>
+
+
+
+<h4>内容一：在 playbook 里使用循环<br>1.1 在 playbook 里使用简单的单循环<br>1.2 在 playbook 里使用数组实现单组循环<br>1.3 在 playbook 里使用变量实现单组循环<br>1.4 在 playbook 里使用数组实现多组循环</h4>
+
+
+
+<h4>内容二：在 json 文档上使用单组循环<br>2.1 在 json 文档上使用单组循环<br>2.2 使用 json 文档的 playbook</h4>
+
+
+
+<h2>具体的内容：</h2>
+
+
+
+<h4>内容一：在 playbook 里使用循环<br>1.1 在 playbook 里使用简单的单循环</h4>
+
+
+
+<pre class="wp-block-code"><code># vim test.yml</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>---
+- name: test
+  hosts: all
+  tasks:
+  - name: install rpms
+    yum:
+    - php
+    - nginx
+    - mariadb</code></pre>
+
+
+
+<p>（<br>补充：这里以<br>1) 在 test.yml 中<br>2) 创建一个名为 test，<br>3) 在所有服务器上执行，<br>4) 安装 php、nginx 和 mariadb，<br>的 playbook 为例<br>）</p>
+
+
+
+<h4>1.2 在 playbook 里使用数组实现单组循环</h4>
+
+
+
+<pre class="wp-block-code"><code># vim test.yml</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>---
+- name: test
+  hosts: all
+  tasks:
+  - user:
+      name: "{{item.name}}"
+      group: "{{item.group}}"
+      password: "{{'1' | password_hash('sha512',mysecretsalt)}}"
+    with_items:
+    - {name: "a1", group: "users"}
+    - {name: "a2", group: "mail"}
+    - {name: "a3", group: "wheel"}
+    - {name: "a4", group: "root"}</code></pre>
+
+
+
+<p>（<br>补充：这里以<br>1) 在 test.yml 中<br>2) 创建一个名为 test<br>3) 在所有服务器上执行<br>4) 创建一个循环组的用户<br>的 playbook 为例<br>）</p>
+
+
+
+<h4>1.3 在 playbook 里使用变量实现单组循环</h4>
+
+
+
+<pre class="wp-block-code"><code># vim test.yml</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>---
+- name: test
+  hosts: all
+  vars:
+    issue_all
+    - issue_name: a
+      issue_cont: 1
+    - issue_name: b
+      issue_cont: 2
+    - issue_name: c
+      issue_cont: 3
+    - issue_name: d
+      issue_cont: 4
+    - issue_name: e
+      issue_cont: 5
+  tasks:
+  - name: issue
+    shell: "echo {{ item.issue_name }}={{ item.issue_cont }}"
+    loop: "{{ issue_all }}"</code></pre>
+
+
+
+<p>（<br>补充：这里以<br>1) 在 test.yml 中<br>2) 创建一个名为 test<br>3) 在所有服务器上执行<br>4) 输出一个循环组的信息<br>的 playbook 为例<br>）</p>
+
+
+
+<h4>1.4 在 playbook 里使用数组实现多组循环</h4>
+
+
+
+<pre class="wp-block-code"><code># vim test.yml</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>---
+- name: test
+  hosts: all
+  remote_user: root
+  vars:
+    name: &#91;a, b, c]
+    id: &#91;1, 2, 3]
+  tasks:
+  - shell: echo {{item}}
+    with_nested:
+    - "{{name}}"
+    - "{{id}}"</code></pre>
+
+
+
+<p>（<br>补充：这里以<br>1) 在 test.yml 中<br>2) 创建一个名为 test<br>3) 在所有服务器上执行<br>4) 循环输出两个循环组的信息（本案例会输出信息：a1、a2、a3、b1、b2、b3、c1、c2、c3）<br>的 playbook 为例<br>）</p>
+
+
+
+<h4>内容二：在 json 文档上使用单组循环<br>2.1 在 json 文档上使用单组循环</h4>
+
+
+
+<pre class="wp-block-code"><code># vim hosts.j2</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>{% for host in groups&#91;'all'] %}
+{{ hostvars&#91;host]&#91;'ansible_facts']&#91;'hostname'] }} {{ hostvars&#91;host]&#91;'ansible_facts']&#91;'default_ipv4']&#91;'address'] }}
+{% endfor %}</code></pre>
+
+
+
+<p>（补充：这里以创建所有服务器名和 IP 地址对应的关系，名为 hosts.j2 的 json 文件为例）</p>
+
+
+
+<h4>2.2 使用 json 文档的 playbook</h4>
+
+
+
+<pre class="wp-block-code"><code># vim test.yml</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+  - name: template
+    template：
+      src: hosts.j2
+      dest: /root/hosts.txt
+......</code></pre>
+
+
+
+<p>（补充：这里以在 test.yml 中，使用 hosts.j2 创建 /root/hosts.txt 为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Ansible 事实变量 （Ansible 内部变量）</title>
+		<link>https://eternalcenter-now.github.io/ansible-fact-variable/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 07 Aug 2020 07:43:10 +0000</pubDate>
+				<category><![CDATA[Ansible]]></category>
+		<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Cluster Monitor Tools (集群监控工具)]]></category>
+		<category><![CDATA[Clusters (集群)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=10431</guid>
+
+					<description><![CDATA[注意： 在使用 Ansible 事实变量之前，要先安装 Ansible、添加被 Ansible 管理的主机，并且需要 root 权限 正文： 内容一： 在命令行使用事实变量1.1 显示所有事实变量 （补充：这里以显示所有服务器上的所有事实变量为例） 1.2 显示某一个事实变量 （补充：这里以显示所有服务器上的 hostname 事实变量为例） 内容二：在 playbook 使用事实变量的方法 创建以下内容： 或者： （补充：这里以在 test.yml 中：1) 创建一个名为 test，2) 在所有服务器上执行，3) 创建名为 IP_ADDRESS 的 IP 地址事实变量和名为 HOST_NAME 的服务器名称的事实变量，的 playbook 为例） 内容三：在 json 文档上使用事实变量 创建以下内容： 或者： （补充：这里以创建一个名称为 index.html.j2，包含服务器名称的事实变量和服务器 IP 地址的事实变量的 json 文件为例） 补充： Ansible 在 playbook 里关闭事实收集的方法 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/ansible-fact-variable/" class="more-link">Continue reading<span class="screen-reader-text"> "[内容] Ansible 事实变量 （Ansible 内部变量）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2 id="注意">注意：</h2>
+
+
+
+<p>在使用 Ansible 事实变量之前，要先安装 Ansible、添加被 Ansible 管理的主机，并且需要 root 权限</p>
+
+
+
+<div class="wp-container-4 wp-block-buttons">
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/ansible-install/">Ansible 的安装方法</a></div>
+
+
+
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/ansible-node/">Ansible 所管理的服务器的添加和分组</a></div>
+</div>
+
+
+
+<div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
+
+
+
+<h2 id="正文">正文：</h2>
+
+
+
+<h4 id="内容一-在命令行使用事实变量1-1-显示所有事实变量">内容一： 在命令行使用事实变量<br>1.1 显示所有事实变量</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible all -m setup</code></pre>
+
+
+
+<p>（补充：这里以显示所有服务器上的所有事实变量为例）</p>
+
+
+
+<h4 id="1-2-显示某一个事实变量">1.2 显示某一个事实变量</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible all -m setup -a filter=*hostname*</code></pre>
+
+
+
+<p>（补充：这里以显示所有服务器上的 hostname 事实变量为例）</p>
+
+
+
+<h4 id="内容二-在-playbook-使用事实变量的方法">内容二：在 playbook 使用事实变量的方法</h4>
+
+
+
+<pre class="wp-block-code"><code># vim test.yml</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>---
+- name: test
+  hosts: all
+  vars:
+  - server_name: IP_ADDRESS
+    server_cont: "{{ ansible_default_ipv4.address }}"
+  - server_name: HOST_NAME
+    server_cont: "{{ ansible_hostname }}"
+  tasks:
+......</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code>---
+- name: test
+  hosts: all
+  vars:
+  - server_name: IP_ADDRESS
+    server_cont: "{{ ansible_facts&#91;'default_ipv4']&#91;'address'] }}"
+  - server_name: HOST_NAME
+    server_cont: "{{ ansible_facts&#91;'hostname'] }}"
+  tasks:
+......</code></pre>
+
+
+
+<p>（<br>补充：<br>这里以在 test.yml 中：<br>1) 创建一个名为 test，<br>2) 在所有服务器上执行，<br>3) 创建名为 IP_ADDRESS 的 IP 地址事实变量和名为 HOST_NAME 的服务器名称的事实变量，<br>的 playbook 为例<br>）</p>
+
+
+
+<h4 id="内容三-在-json-文档上使用事实变量">内容三：在 json 文档上使用事实变量</h4>
+
+
+
+<pre class="wp-block-code"><code># vim index.html.j2</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>{{ ansible_hostname }} {{ ansible_default_ipv4.address }}</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code>{{ ansible_facts&#91;'hostname'] }} {{ ansible_facts&#91;'default_ipv4']&#91;'address'] }}</code></pre>
+
+
+
+<p>（补充：这里以创建一个名称为 index.html.j2，包含服务器名称的事实变量和服务器 IP 地址的事实变量的 json 文件为例）</p>
+
+
+
+<h4 id="补充-ansible-在-playbook-里关闭事实收集的方法">补充： Ansible 在 playbook 里关闭事实收集的方法</h4>
+
+
+
+<pre class="wp-block-code"><code># vim test.yml</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>---
+- name: test
+  hosts: all
+  gather_facts: false
+  tasks:
+......</code></pre>
+
+
+
+<p>（补充：这里以在 test.yml 中，创建一个名称为 test，在所有服务器上取消事实变量的 playbook 为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Ansible 变量的优先级</title>
+		<link>https://eternalcenter-now.github.io/ansible-variable-priority/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sun, 02 Aug 2020 15:24:30 +0000</pubDate>
+				<category><![CDATA[Ansible]]></category>
+		<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Cluster Monitor Tools (集群监控工具)]]></category>
+		<category><![CDATA[Clusters (集群)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=10413</guid>
+
+					<description><![CDATA[第一优先级：全局范围的变量（例如：执行临时命令时指定的变量）第二优先级：playbook 里的变量。第三优先级：主机范围里的变量（例如：清单中的服务器或服务器组） （补充：清单中的服务器优先级高于清单中的服务器组）]]></description>
+										<content:encoded><![CDATA[
+<p>第一优先级：全局范围的变量（例如：执行临时命令时指定的变量）<br>第二优先级：playbook 里的变量。<br>第三优先级：主机范围里的变量（例如：清单中的服务器或服务器组）</p>
+
+
+
+<p>（补充：清单中的服务器优先级高于清单中的服务器组）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Ansible 魔法变量</title>
+		<link>https://eternalcenter-now.github.io/ansible-magic-variable/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 29 Jun 2020 12:17:26 +0000</pubDate>
+				<category><![CDATA[Ansible]]></category>
+		<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Cluster Monitor Tools (集群监控工具)]]></category>
+		<category><![CDATA[Clusters (集群)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=9977</guid>
+
+					<description><![CDATA[注意： 在使用 Ansible 魔法变量之前，要先安装 Ansible、添加被 Ansible 管理的主机，并且需要 root 权限 正文： 内容一：Ansible 常用魔法变量 显示服务器名 显示服务器所在组 显示服务器所在组，以及组里的所有服务器 显示所有相关信息 内容二：Ansible 魔法变量的使用2.1 在命令行使用魔法变量2.1.1 魔法变量的使用格式 2.1.2 魔法变量的使用案例2.1.2.1 显示所有魔法变量 （补充：这里以显示所有服务器上的所有魔法变量为例） 2.1.2.2 显示某一个魔法变量 （补充：这里以显示所有服务器上的 inventory_hostname 魔法变量为例） 2.2 在 playbook 使用魔法变量2.2.1 在 playbook 的变量中使用魔法变量 （补充：这里以1) 在 test.yml 中，2) 创建一个名为 test，3) 在所有服务器上执行，4) 创建名为 server_all 的变量数组，5) 里面有名为 IP_ADDRESS 的 IP 地址事实变量和名为 HOST_NAME 的服务器名称版本事实变量，的 playbook 为例） &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/ansible-magic-variable/" class="more-link">Continue reading<span class="screen-reader-text"> "[内容] Ansible 魔法变量"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2 id="注意">注意：</h2>
+
+
+
+<p>在使用 Ansible 魔法变量之前，要先安装 Ansible、添加被 Ansible 管理的主机，并且需要 root 权限</p>
+
+
+
+<div class="wp-container-5 wp-block-buttons">
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/ansible-install/">Ansible 的安装方法</a></div>
+
+
+
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/ansible-node/">Ansible 所管理的服务器的添加和分组</a></div>
+</div>
+
+
+
+<div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
+
+
+
+<h2 id="正文">正文：</h2>
+
+
+
+<h4 id="内容一-ansible-常用魔法变量">内容一：Ansible 常用魔法变量</h4>
+
+
+
+<pre class="wp-block-code"><code>1) inventory_hostname</code></pre>
+
+
+
+<p>显示服务器名</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<pre class="wp-block-code"><code>2) group_names</code></pre>
+
+
+
+<p>显示服务器所在组</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<pre class="wp-block-code"><code>3) groups</code></pre>
+
+
+
+<p>显示服务器所在组，以及组里的所有服务器</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<pre class="wp-block-code"><code>4) hostvars</code></pre>
+
+
+
+<p>显示所有相关信息</p>
+
+
+
+<h4 id="内容二-ansible-魔法变量的使用2-1-在命令行使用魔法变量2-1-1-魔法变量的使用格式">内容二：Ansible 魔法变量的使用<br>2.1 在命令行使用魔法变量<br>2.1.1 魔法变量的使用格式</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible &lt;Ansible server name or Ansible group name&gt; -m debug -a var=&lt;Ansible magic variable name&gt;</code></pre>
+
+
+
+<h4 id="2-1-2-魔法变量的使用案例2-1-2-1-显示所有魔法变量">2.1.2 魔法变量的使用案例<br>2.1.2.1 显示所有魔法变量</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible -m debug -a var=hostvars all</code></pre>
+
+
+
+<p>（补充：这里以显示所有服务器上的所有魔法变量为例）</p>
+
+
+
+<h4 id="2-1-2-2-显示某一个魔法变量">2.1.2.2 显示某一个魔法变量</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible -m debug -a var=inventory_hostname all</code></pre>
+
+
+
+<p>（补充：这里以显示所有服务器上的 inventory_hostname 魔法变量为例）</p>
+
+
+
+<h4 id="2-2-在-playbook-使用魔法变量2-2-1-在-playbook-的变量中使用魔法变量">2.2 在 playbook 使用魔法变量<br>2.2.1 在 playbook 的变量中使用魔法变量</h4>
+
+
+
+<pre class="wp-block-code"><code># vim test.yml
+---
+- name: test
+  hosts: all
+  vars:
+    server_all:
+    - server_name: IP_ADDRESS
+      server_cont: "{{ ansible_default_ipv4.address }}"
+    - server_name: HOST_NAME
+      server_cont: "{{ inventory_hostname }}"
+  tasks:
+......</code></pre>
+
+
+
+<p>（<br>补充：这里以<br>1) 在 test.yml 中，<br>2) 创建一个名为 test，<br>3) 在所有服务器上执行，<br>4) 创建名为 server_all 的变量数组，<br>5) 里面有名为 IP_ADDRESS 的 IP 地址事实变量和名为 HOST_NAME 的服务器名称版本事实变量，<br>的 playbook 为例<br>）</p>
+
+
+
+<h4 id="2-2-2-在-playbook-的条件判断-when-中使用魔法变量2-2-2-1-案例一-使用一个魔法变量">2.2.2 在 playbook 的条件判断 when 中使用魔法变量<br>2.2.2.1 案例一：使用一个魔法变量</h4>
+
+
+
+<pre class="wp-block-code"><code># vim test.yml</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+when: "'test' in group_names"
+......</code></pre>
+
+
+
+<p>（补充：这里以在 test.yml 中， test 为服务器的所属组为条件判断为例）</p>
+
+
+
+<h4 id="2-2-2-2-案例二-使用两个魔法变量">2.2.2.2 案例二：使用两个魔法变量</h4>
+
+
+
+<pre class="wp-block-code"><code># vim test.yml</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+when: inventory_hostname in groups.test
+......</code></pre>
+
+
+
+<p>（补充：这里以在 test.yml 中，服务器名在 test 组中为条件判断为例）</p>
+
+
+
+<h4 id="2-3-在-json-文档上使用魔法变量2-3-1-在-json-文档上使用魔法变量">2.3 在 json 文档上使用魔法变量<br>2.3.1 在 json 文档上使用魔法变量</h4>
+
+
+
+<pre class="wp-block-code"><code># vim hosts.j2</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>{% for host in groups&#91;'all'] %}
+{{ hostvars&#91;host]&#91;'ansible_facts']&#91;'hostname'] }} {{ hostvars&#91;host]&#91;'ansible_facts']&#91;'default_ipv4']&#91;'address'] }}
+{% endfor %}</code></pre>
+
+
+
+<p>（补充：这里以创建所有服务器名和 IP 地址对应的关系，名为 hosts.j2 的 json 文件为例）</p>
+
+
+
+<h4 id="2-3-2-使用-json-文档的-playbook">2.3.2 使用 json 文档的 Playbook</h4>
+
+
+
+<pre class="wp-block-code"><code># vim test.yml</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+  - name: template
+    template：
+      src: hosts.j2
+      dest: /root/hosts.txt
+......</code></pre>
+
+
+
+<p>（补充：这里以在 test.yml 中，使用 hosts.j2 创建 /root/hosts.txt 为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Ansible 自定义变量</title>
+		<link>https://eternalcenter-now.github.io/ansible-custom-variable/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sat, 27 Jun 2020 13:38:32 +0000</pubDate>
+				<category><![CDATA[Ansible]]></category>
+		<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Cluster Monitor Tools (集群监控工具)]]></category>
+		<category><![CDATA[Clusters (集群)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=9974</guid>
+
+					<description><![CDATA[注意： 在使用 Ansible 自定义变量之前，要先安装 Ansible、添加被 Ansible 管理的主机，并且需要 root 权限 正文： 内容目录： 内容一：Ansible 全局变量的使用 内容二：Ansible 服务器列表变量的设置2.1 给某一台服务器设置变量的案例2.2 给某一个组设置变量的案例2.3 给所有服务器设置变量的案例 内容三：Ansible Playbook 变量的设置3.1 Ansible Playbook 直接设置变量的案例3.2 Ansible Playbook 直接设置数组变量的案例3.3 Ansible Playbook 设置变量文件的案例3.3.1 创建变量文件3.3.2 导入变量文件3.4 Ansible Playbook 设置数组变量文件的案例3.4.1 创建变量文件3.4.2 导入变量文件 具体的内容：内容一：Ansible 全局变量的使用 （补充：这里以 root 是管理被管理服务器所使用的用户，redhat 是这个用户的密码为例） 内容二：Ansible 服务器列表变量的设置2.1 给某一台服务器设置变量的案例 创建以下内容： （补充：这里以1) 在 host 文件里2) 设置 192.168.1.1 的 Ansible &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/ansible-custom-variable/" class="more-link">Continue reading<span class="screen-reader-text"> "[内容] Ansible 自定义变量"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2>注意：</h2>
+
+
+
+<p>在使用 Ansible 自定义变量之前，要先安装 Ansible、添加被 Ansible 管理的主机，并且需要 root 权限</p>
+
+
+
+<div class="wp-container-6 wp-block-buttons is-content-justification-center">
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/ansible-install/">Ansible 的安装方法</a></div>
+
+
+
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/ansible-node/">Ansible 所管理的服务器的添加和分组</a></div>
+</div>
+
+
+
+<div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
+
+
+
+<h2>正文：</h2>
+
+
+
+<h2>内容目录：</h2>
+
+
+
+<h4>内容一：Ansible 全局变量的使用</h4>
+
+
+
+<h4>内容二：Ansible 服务器列表变量的设置<br>2.1 给某一台服务器设置变量的案例<br>2.2 给某一个组设置变量的案例<br>2.3 给所有服务器设置变量的案例</h4>
+
+
+
+<h4>内容三：Ansible Playbook 变量的设置<br>3.1 Ansible Playbook 直接设置变量的案例<br>3.2 Ansible Playbook 直接设置数组变量的案例<br>3.3 Ansible Playbook 设置变量文件的案例<br>3.3.1 创建变量文件<br>3.3.2 导入变量文件<br>3.4 Ansible Playbook 设置数组变量文件的案例<br>3.4.1 创建变量文件<br>3.4.2 导入变量文件</h4>
+
+
+
+<h4>具体的内容：<br>内容一：Ansible 全局变量的使用</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible dev -m shell -a whoami -e ansible_user=root -e ansible_password=redhat</code></pre>
+
+
+
+<p>（补充：这里以 root 是管理被管理服务器所使用的用户，redhat 是这个用户的密码为例）</p>
+
+
+
+<h4>内容二：Ansible 服务器列表变量的设置<br>2.1 给某一台服务器设置变量的案例</h4>
+
+
+
+<pre class="wp-block-code"><code># vim host</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>&#91;web]
+192.168.1.1 ansible_password=root</code></pre>
+
+
+
+<p>（<br>补充：这里以<br>1) 在 host 文件里<br>2) 设置 192.168.1.1 的 Ansible 密码是 root（当它被 Ansible 操作时需要输入此密码）<br>为例<br>）</p>
+
+
+
+<h4>2.2 给某一个组设置变量的案例</h4>
+
+
+
+<pre class="wp-block-code"><code># vim host</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>&#91;web]
+192.168.1.1
+192.168.1.2 
+192.168.1.3 
+
+&#91;web:vars]
+ansible_user=root
+ansible_password=root
+......</code></pre>
+
+
+
+<p>（<br>补充：这里以<br>1) 在 host 文件里<br>2) 设置 web 组的 Ansible 用户是 root，密码是 root（当它们被 Ansible 操作时需要输入此密码）<br>为例<br>）</p>
+
+
+
+<h4>2.3 给所有服务器设置变量的案例</h4>
+
+
+
+<pre class="wp-block-code"><code># vim host</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>&#91;web]
+192.168.1.1
+192.168.1.2
+192.168.1.3
+
+&#91;db]
+192.168.1.4
+192.168.1.5
+192.168.1.6
+
+&#91;all:vars]
+ansible_user=root
+ansible_password=root
+......</code></pre>
+
+
+
+<p>（<br>补充：这里以<br>1) 在 host 文件里<br>2) 设置所有服务器的 Ansible 用户是 root，密码是 root（当它们被 Ansible 操作时需要输入此密码）<br>为例<br>）</p>
+
+
+
+<h4>内容三：Ansible Playbook 变量的设置<br>3.1 Ansible Playbook 直接设置变量的案例</h4>
+
+
+
+<pre class="wp-block-code"><code># vim test.yaml</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>---
+- name: test
+  hosts: all
+  vars:
+    user: tom
+    home: /home/joe
+  tasks:
+  - name: Add a user
+    user:
+      name: "{{ user }}"
+      comment: name is {{ user }}
+......</code></pre>
+
+
+
+<p>（<br>补充：这里以<br>1) 在 test.yml 中<br>2) 创建一个名为 test<br>3) 在所有服务器上执行<br>4) 设置 user 变量为 tom<br>5) home 变量为 /home/joe<br>6) 创建名为 user 注释内容为 user 的用户<br>的 playbook 为例<br>）</p>
+
+
+
+<h4>3.2 Ansible Playbook 直接设置数组变量的案例</h4>
+
+
+
+<pre class="wp-block-code"><code># vim test.yaml</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>---
+- name: test
+  hosts: all
+  vars:
+  - user1:
+      a_name: zhang
+      b_name: san
+  - user2:
+      a_name: li
+      b_name: si
+  tasks:
+  - name: Add a user
+    user:
+      name: "{{ users.user1.a_name }}{{ users.user1.b_name }}"
+......</code></pre>
+
+
+
+<p>（<br>补充：这里以<br>1) 在 test.yml 中<br>2) 创建一个名为 test<br>3) 在所有服务器上执行<br>4) 导入了变量文件 vars.yaml<br>5) 使用其中的变量 users.user1.a_name 和 users.user1.b_name<br>的 playbook 为例<br>）</p>
+
+
+
+<h4>3.3 Ansible Playbook 设置变量文件的案例<br>3.3.1 创建变量文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim vars.yaml</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>user: tom
+home: /home/joe</code></pre>
+
+
+
+<p>（补充：这里以在 vars.ymal 中添加变量 user 值为 tom，变量 home 值为 /home/joe 为例）</p>
+
+
+
+<h4>3.3.2 导入变量文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim test.yaml</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>---
+- name: test
+  hosts: all
+  vars_files:
+    - vars.yaml
+  tasks:
+  - name: Add a user
+    user:
+      name: "{{ user }}"
+      comment: name is {{ user }}
+......</code></pre>
+
+
+
+<p>（<br>补充：这里以<br>1) 在 test.yml 中<br>2) 创建一个名为 test<br>3) 在所有服务器上执行<br>4) 导入了变量文件 vars.yaml<br>5) 使用其中的变量 user 和 home<br>的 playbook 为例<br>）</p>
+
+
+
+<h4>3.4 Ansible Playbook 设置数组变量文件的案例<br>3.4.1 创建变量文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim vars.yaml</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>users:
+  user1:
+    a_name: san
+    b_name: zhang
+    c_name: /home/zhangsan
+  user2:
+    a_name: si
+    b_name: li
+    c_name: /home/lisi</code></pre>
+
+
+
+<p>（补充：这里以在 vars.ymal 中添加 user1 和 user2 两组数组变量为例）</p>
+
+
+
+<h4>3.4.2 导入变量文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim test.yaml</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>---
+- name:
+  hosts:
+  vars_files:
+  - vars.yaml
+  tasks:
+  - name: Add a user
+    user:
+      name: "{{ users.user1.a_name }}{{ users.user1.b_name }}"
+......</code></pre>
+
+
+
+<p>（<br>补充：这里以<br>1) 在 test.yml 中<br>2) 创建一个名为 test<br>3) 在所有服务器上执行<br>4) 导入了变量文件 vars.yaml<br>5) 使用其中的变量 users.user1.a_name 和 users.user1.b_name<br>的 playbook 为例<br>）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Ansible 命令 ansible-doc （显示 ansible 模块的使用方法）</title>
+		<link>https://eternalcenter-now.github.io/ansible-doc/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sun, 21 Jun 2020 15:45:13 +0000</pubDate>
+				<category><![CDATA[Ansible]]></category>
+		<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Cluster Monitor Tools (集群监控工具)]]></category>
+		<category><![CDATA[Clusters (集群)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=9900</guid>
+
+					<description><![CDATA[注意： 在使用 ansible-doc 之前，要先安装 Ansible、添加被 Ansible 管理的主机，并且需要 root 权限 正文： 步骤一：显示 Ansible 模块名单的方法1.1 显示所有 Ansible 模块名单 1.2 显示某一个 Ansible 模块名单 步骤二：显示某一个 Ansible 模块的使用方法2.1 进入 Ansible 模块教程文档 2.2 显示需要显示的部分 按下 “:” 键后再按下 “/” 键后再输入 &#60;keyword> （补充：根据站主的经验，最常用的要显示部分的关键字是：EXAMPLE）]]></description>
+										<content:encoded><![CDATA[
+<h2 id="注意">注意：</h2>
+
+
+
+<p>在使用 ansible-doc 之前，要先安装 Ansible、添加被 Ansible 管理的主机，并且需要 root 权限</p>
+
+
+
+<div class="wp-container-7 wp-block-buttons">
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/ansible-install/">Ansible 的安装方法</a></div>
+
+
+
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/ansible-node/">Ansible 所管理的服务器的添加和分组</a></div>
+</div>
+
+
+
+<div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
+
+
+
+<h2 id="正文">正文：</h2>
+
+
+
+<h4 id="步骤一-显示-ansible-模块名单的方法-1-1-显示所有-ansible-模块名单">步骤一：显示 Ansible 模块名单的方法<br>1.1 显示所有 Ansible 模块名单</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible-doc -l</code></pre>
+
+
+
+<h4 id="1-2-显示某一个-ansible-模块名单">1.2 显示某一个 Ansible 模块名单</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible-doc -l | grep &lt;keywords associated with the module name&gt;</code></pre>
+
+
+
+<h4 id="步骤二-显示某一个-ansible-模块的使用方法-2-1-进入-ansible-模块教程文档">步骤二：显示某一个 Ansible 模块的使用方法<br>2.1 进入 Ansible 模块教程文档</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible-doc &lt;module&gt;</code></pre>
+
+
+
+<h4 id="2-2-显示需要显示的部分">2.2 显示需要显示的部分</h4>
+
+
+
+<p>按下 “:” 键后再按下 “/” 键后再输入 &lt;keyword></p>
+
+
+
+<p>（补充：根据站主的经验，最常用的要显示部分的关键字是：EXAMPLE）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Ansible playbook 的排错技巧</title>
+		<link>https://eternalcenter-now.github.io/playbook-debug/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 03 Feb 2020 08:18:41 +0000</pubDate>
+				<category><![CDATA[Ansible]]></category>
+		<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Cluster Monitor Tools (集群监控工具)]]></category>
+		<category><![CDATA[Clusters (集群)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=8229</guid>
+
+					<description><![CDATA[注意： 在使用 Playbook 之前，要先安装 Ansible、添加被 Ansible 管理的主机，并且需要 root 权限 正文： 内容一：playbook 语法检查的方法 内容二：playbook 测试运行的方法 内容三：playbook 显示执行内容的方法]]></description>
+										<content:encoded><![CDATA[
+<h2>注意：</h2>
+
+
+
+<p>在使用 Playbook 之前，要先安装 Ansible、添加被 Ansible 管理的主机，并且需要 root 权限</p>
+
+
+
+<div class="wp-container-8 wp-block-buttons is-content-justification-center">
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/ansible-install/">Ansible 的安装方法</a></div>
+
+
+
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/ansible-node/">Ansible 所管理的服务器的添加和分组</a></div>
+</div>
+
+
+
+<div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
+
+
+
+<h2>正文：</h2>
+
+
+
+<h4>内容一：playbook 语法检查的方法</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible-playbook --syntax-check &lt;yaml&gt;</code></pre>
+
+
+
+<h4>内容二：playbook 测试运行的方法</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible-playbook -C &lt;yaml&gt;</code></pre>
+
+
+
+<h4>内容三：playbook 显示执行内容的方法</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible-playbook &lt;yaml&gt; --list-tasks</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Ansible 执行脚本 Playbook 的结构</title>
+		<link>https://eternalcenter-now.github.io/playbook-basics/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 03 Feb 2020 07:33:47 +0000</pubDate>
+				<category><![CDATA[Ansible]]></category>
+		<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Cluster Monitor Tools (集群监控工具)]]></category>
+		<category><![CDATA[Clusters (集群)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=8204</guid>
+
+					<description><![CDATA[注意： 在使用 Playbook 之前，要先安装 Ansible、添加被 Ansible 管理的主机，并且需要 root 权限 正文： 内容一：Playbook 的结构1.1 Playbook 的结构介绍 1) playbook 是 yaml 结构2) playbook 默认的执行顺序是从上往下一个层级接着一个层级地执行，若某个命令报错则不会再执行下面的命令 1.2 playbook 的常用目录层级种类 变量层 任务层 触发条件层 文件层 模板层 优先级最低层]]></description>
+										<content:encoded><![CDATA[
+<h2>注意：</h2>
+
+
+
+<p>在使用 Playbook 之前，要先安装 Ansible、添加被 Ansible 管理的主机，并且需要 root 权限</p>
+
+
+
+<div class="wp-container-9 wp-block-buttons is-content-justification-center">
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/ansible-install/">Ansible 的安装方法</a></div>
+
+
+
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/ansible-node/">Ansible 所管理的服务器的添加和分组</a></div>
+</div>
+
+
+
+<div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
+
+
+
+<h2>正文：</h2>
+
+
+
+<h4>内容一：Playbook 的结构<br>1.1 Playbook 的结构介绍</h4>
+
+
+
+<p>1) playbook 是 yaml 结构<br>2) playbook 默认的执行顺序是从上往下一个层级接着一个层级地执行，若某个命令报错则不会再执行下面的命令</p>
+
+
+
+<h4>1.2 playbook 的常用目录层级种类</h4>
+
+
+
+<pre class="wp-block-code"><code>1) vars</code></pre>
+
+
+
+<p>变量层</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<pre class="wp-block-code"><code>2) tasks</code></pre>
+
+
+
+<p>任务层</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<pre class="wp-block-code"><code>3) handlers</code></pre>
+
+
+
+<p>触发条件层</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<pre class="wp-block-code"><code>4) files</code></pre>
+
+
+
+<p>文件层</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<pre class="wp-block-code"><code>5) template</code></pre>
+
+
+
+<p>模板层</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<pre class="wp-block-code"><code>6) default</code></pre>
+
+
+
+<p>优先级最低层</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Ansible 所管理的服务器的添加和分组</title>
+		<link>https://eternalcenter-now.github.io/ansible-node/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sat, 01 Feb 2020 07:36:50 +0000</pubDate>
+				<category><![CDATA[Ansible]]></category>
+		<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Cluster Monitor Tools (集群监控工具)]]></category>
+		<category><![CDATA[Clusters (集群)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=8106</guid>
+
+					<description><![CDATA[注意： 在添加被 Ansible 管理的服务器前要先安装 Ansible 正文： 步骤目录： 步骤一：规划拓扑1.1 服务器列表1.2 服务器列表简介 步骤二：实现管理服务器登陆被管理的服务器2.1 在管理服务器上添加被管理服务器 IP 地址和服务器名的对应关系2.2 实现管理服务器登陆被管理的服务器2.2.1 让管理服务器无密钥登陆要被管理的服务器2.2.1.1 在管理服务器上生成 ssh 公钥和私钥2.2.1.2 将管理服务器生成的 ssh 公钥复制到要被管理的服务器里2.3 让管理服务器通过密钥登陆要被管理的服务器2.3.1 指定管理服务器的 Ansible 远程用户2.3.2 在管理服务器上 Ansible 的服务器列表里给指定的服务器添加登陆密码 步骤三：在管理服务器的 Ansible 上添加服务器列表，并将其分组（从列表优先级的角度来思考）3.1 Ansible 服务器列表分组的不同优先级（从列表优先级的角度来思考）3.2 通过设置 Ansible 服务器配置文件的全局变量的方法来添加服务器列表3.2.1 在管理服务器上修改系统环境变量文件3.2.2 在管理服务器上让系统环境变量生效3.2.3 在管理服务器上在环境变量指定的位置创建 Ansible 的配置文件3.2.4 在管理服务器上指定 Ansible 的服务器列表文件3.3 在管理服务器上添加 Ansible 的服务器列表，并将其分组3.4 通过在当前目录下创建 Ansible 配置文件和服务器列表文件的方法来添加服务器列表3.4.1 在管理服务器上进入到一个任意此用户有权限的目录3.4.2 在管理服务器上的当前位置创建 Ansible 的配置文件3.4.3 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/ansible-node/" class="more-link">Continue reading<span class="screen-reader-text"> "[步骤] Ansible 所管理的服务器的添加和分组"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2 id="注意">注意：</h2>
+
+
+
+<p>在添加被 Ansible 管理的服务器前要先安装 Ansible</p>
+
+
+
+<div class="wp-container-10 wp-block-buttons">
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/ansible-install/">Ansible 的安装方法</a></div>
+</div>
+
+
+
+<div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
+
+
+
+<h2 id="正文">正文：</h2>
+
+
+
+<h2 id="步骤目录">步骤目录：</h2>
+
+
+
+<h4 id="步骤一-规划拓扑1-1-服务器列表1-2-服务器列表简介">步骤一：规划拓扑<br>1.1 服务器列表<br>1.2 服务器列表简介</h4>
+
+
+
+<h4 id="步骤二-实现管理服务器登陆被管理的服务器2-1-在管理服务器上添加被管理服务器-ip-地址和服务器名的对应关系2-2-实现管理服务器登陆被管理的服务器2-2-1-让管理服务器无密钥登陆要被管理的服务器2-2-1-1-在管理服务器上生成-ssh-公钥和私钥2-2-1-2-将管理服务器生成的-ssh-公钥复制到要被管理的服务器里2-3-让管理服务器通过密钥登陆要被管理的服务器2-3-1-指定管理服务器的-ansible-远程用户2-3-2-在管理服务器上-ansible-的服务器列表里给指定的服务器添加登陆密码">步骤二：实现管理服务器登陆被管理的服务器<br>2.1 在管理服务器上添加被管理服务器 IP 地址和服务器名的对应关系<br>2.2 实现管理服务器登陆被管理的服务器<br>2.2.1 让管理服务器无密钥登陆要被管理的服务器<br>2.2.1.1 在管理服务器上生成 ssh 公钥和私钥<br>2.2.1.2 将管理服务器生成的 ssh 公钥复制到要被管理的服务器里<br>2.3 让管理服务器通过密钥登陆要被管理的服务器<br>2.3.1 指定管理服务器的 Ansible 远程用户<br>2.3.2 在管理服务器上 Ansible 的服务器列表里给指定的服务器添加登陆密码</h4>
+
+
+
+<h4 id="步骤三-在管理服务器的-ansible-上添加服务器列表-并将其分组-从列表优先级的角度来思考-3-1-ansible-服务器列表分组的不同优先级-从列表优先级的角度来思考-3-2-通过设置-ansible-服务器配置文件的全局变量的方法来添加服务器列表3-2-1-在管理服务器上修改系统环境变量文件3-2-2-在管理服务器上让系统环境变量生效3-2-3-在管理服务器上在环境变量指定的位置创建-ansible-的配置文件3-2-4-在管理服务器上指定-ansible-的服务器列表文件3-3-在管理服务器上添加-ansible-的服务器列表-并将其分组3-4-通过在当前目录下创建-ansible-配置文件和服务器列表文件的方法来添加服务器列表3-4-1-在管理服务器上进入到一个任意此用户有权限的目录3-4-2-在管理服务器上的当前位置创建-ansible-的配置文件3-4-3-在管理服务器上指定-ansible-的服务器列表文件3-4-4-在管理服务器上添加-ansible-的服务器列表-并将其分组3-5-通过在家目录下创建-ansible-配置文件和服务器列表文件的方法来添加服务器列表3-5-1-在管理服务器上进入到家目录3-5-2-在管理服务器上的家目录位置创建-ansible-的配置文件3-5-3-在管理服务器上指定-ansible-的服务器列表文件3-5-4-在管理服务器上添加-ansible-的服务器列表-并将其分组3-6-通过修改-ansible-默认配置文件和默认服务器列表文件的方法来添加服务器列表3-6-1-在管理服务器上指定-ansible-服务器列表文件3-6-2-在管理服务器上添加-ansible-的服务器列表-并将其分组">步骤三：在管理服务器的 Ansible 上添加服务器列表，并将其分组（从列表优先级的角度来思考）<br>3.1 Ansible 服务器列表分组的不同优先级（从列表优先级的角度来思考）<br>3.2 通过设置 Ansible 服务器配置文件的全局变量的方法来添加服务器列表<br>3.2.1 在管理服务器上修改系统环境变量文件<br>3.2.2 在管理服务器上让系统环境变量生效<br>3.2.3 在管理服务器上在环境变量指定的位置创建 Ansible 的配置文件<br>3.2.4 在管理服务器上指定 Ansible 的服务器列表文件<br>3.3 在管理服务器上添加 Ansible 的服务器列表，并将其分组<br>3.4 通过在当前目录下创建 Ansible 配置文件和服务器列表文件的方法来添加服务器列表<br>3.4.1 在管理服务器上进入到一个任意此用户有权限的目录<br>3.4.2 在管理服务器上的当前位置创建 Ansible 的配置文件<br>3.4.3 在管理服务器上指定 Ansible 的服务器列表文件<br>3.4.4 在管理服务器上添加 Ansible 的服务器列表，并将其分组<br>3.5 通过在家目录下创建 Ansible 配置文件和服务器列表文件的方法来添加服务器列表<br>3.5.1 在管理服务器上进入到家目录<br>3.5.2 在管理服务器上的家目录位置创建 Ansible 的配置文件<br>3.5.3 在管理服务器上指定 Ansible 的服务器列表文件<br>3.5.4 在管理服务器上添加 Ansible 的服务器列表，并将其分组<br>3.6 通过修改 Ansible 默认配置文件和默认服务器列表文件的方法来添加服务器列表<br>3.6.1 在管理服务器上指定 Ansible 服务器列表文件<br>3.6.2 在管理服务器上添加 Ansible 的服务器列表，并将其分组</h4>
+
+
+
+<h4 id="步骤四-在管理服务器的-ansible-上添加服务器列表-并将其分组-从列表种类的角度来思考-4-1-让管理服务器的-ansible-使用文本格式的服务器列表文件4-1-1-分组的方式4-1-1-1-单个服务器4-1-1-2-一组服务器4-1-1-3-一复合组服务器4-1-2-列表的描述方式介绍4-1-2-1-连续的数字4-1-2-2-连续的字母4-2-让管理服务器的-ansible-使用-json-格式的服务器列表文件4-2-1-在管理服务器上进入任意一个此用户有权限的目录4-2-2-在管理服务器上的家目录位置创建-ansible-的配置文件4-2-3-在管理服务器上指定-ansible-的服务器列表文件4-2-4-在管理服务器上使用-python3-编程语言生成-json-格式的服务器列表4-2-4-1-在管理服务器上编写生成-json-格式的-python-程序4-2-4-2-给刚刚编写的-python-程序相应的全权">步骤四：在管理服务器的 Ansible 上添加服务器列表，并将其分组（从列表种类的角度来思考）<br>4.1 让管理服务器的 Ansible 使用文本格式的服务器列表文件<br>4.1.1 分组的方式<br>4.1.1.1 单个服务器<br>4.1.1.2 一组服务器<br>4.1.1.3 一复合组服务器<br>4.1.2 列表的描述方式介绍<br>4.1.2.1 连续的数字<br>4.1.2.2 连续的字母<br>4.2 让管理服务器的 Ansible 使用 json 格式的服务器列表文件<br>4.2.1 在管理服务器上进入任意一个此用户有权限的目录<br>4.2.2 在管理服务器上的家目录位置创建 Ansible 的配置文件<br>4.2.3 在管理服务器上指定 Ansible 的服务器列表文件<br>4.2.4 在管理服务器上使用 Python3 编程语言生成 json 格式的服务器列表<br>4.2.4.1 在管理服务器上编写生成 json 格式的 Python 程序<br>4.2.4.2 给刚刚编写的 Python 程序相应的全权</h4>
+
+
+
+<h4 id="步骤五-在管理服务器的-ansible-上添加服务器列表-并将其分组-多个同优先级相同的列表-从管理的角度来思考-5-2-1-在管理服务器上进入任意一个此用户有权限的目录5-2-2-在管理服务器上的家目录位置创建-ansible-的配置文件5-2-3-在管理服务器上指定-ansible-的服务器列表文件目录5-2-4-创建-ansible-的服务器列表文件目录5-2-4-1-创建第一个-ansible-的服务器列表文件目录5-2-4-2-创建第一个-ansible-的服务器列表文件目录5-2-4-3-创建第三个-ansible-的服务器列表文件目录">步骤五：在管理服务器的 Ansible 上添加服务器列表，并将其分组（多个同优先级相同的列表，从管理的角度来思考）<br>5.2.1 在管理服务器上进入任意一个此用户有权限的目录<br>5.2.2 在管理服务器上的家目录位置创建 Ansible 的配置文件<br>5.2.3 在管理服务器上指定 Ansible 的服务器列表文件目录<br>5.2.4 创建 Ansible 的服务器列表文件目录<br>5.2.4.1 创建第一个 Ansible 的服务器列表文件目录<br>5.2.4.2 创建第一个 Ansible 的服务器列表文件目录<br>5.2.4.3 创建第三个 Ansible 的服务器列表文件目录</h4>
+
+
+
+<h4 id="步骤六-测试管理服务器-ansible-的服务器列表6-1-显示默认服务器列表里的服务器列表6-2-显示-web-组的服务器6-3-显示-db-组的服务器6-4-显示不属于任何组的服务器6-5-显示所有服务器">步骤六：测试管理服务器 Ansible 的服务器列表<br>6.1 显示默认服务器列表里的服务器列表<br>6.2 显示 web 组的服务器<br>6.3 显示 db 组的服务器<br>6.4 显示不属于任何组的服务器<br>6.5 显示所有服务器</h4>
+
+
+
+<h2 id="具体的操作步骤">具体的操作步骤：</h2>
+
+
+
+<h4 id="步骤一-规划拓扑1-1-服务器列表">步骤一：规划拓扑<br>1.1 服务器列表</h4>
+
+
+
+<p>管理服务器 IP 地址：192.168.100.100<br>被管理的服务器 1 IP 地址：192.168.100.101<br>被管理的服务器 2 IP 地址：192.168.100.102<br>被管理的服务器 3 IP 地址：192.168.100.103<br>被管理的服务器 4 IP 地址：192.168.100.104<br>被管理的服务器 3 IP 地址：192.168.100.105<br>被管理的服务器 4 IP 地址：192.168.100.106<br>被管理的服务器 4 IP 地址：192.168.100.107</p>
+
+
+
+<h4 id="1-2-服务器列表简介">1.2 服务器列表简介</h4>
+
+
+
+<p>1) 管理人员只用 ssh 到管理服务器就可以通过 Ansible 管理其他所有的被管理服务器<br>2) 将 192.168.100.101 至 192.168.100.110 视作 web1 至 web10 ，它们属于 web 组<br>3) 将 192.168.100.111 至 192.168.100.115 视作 db1 至 db5 ，它们属于 db 组<br>4) 将 192.168.100.107 视作新添加的要被管理的服务器 ，它不属于任何组</p>
+
+
+
+<h4 id="步骤二-实现管理服务器登陆被管理的服务器2-1-在管理服务器上添加被管理服务器-ip-地址和服务器名的对应关系">步骤二：实现管理服务器登陆被管理的服务器<br>2.1 在管理服务器上添加被管理服务器 IP 地址和服务器名的对应关系</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/hosts</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+192.168.100.100 ansible
+192.168.100.101 web1
+192.168.100.102 web2
+192.168.100.103 web3
+192.168.100.104 db1
+192.168.100.105 db2
+192.168.100.106 db3</code></pre>
+
+
+
+<h4 id="2-2-实现管理服务器登陆被管理的服务器2-2-1-让管理服务器无密钥登陆要被管理的服务器2-2-1-1-在管理服务器上生成-ssh-公钥和私钥">2.2 实现管理服务器登陆被管理的服务器<br>2.2.1 让管理服务器无密钥登陆要被管理的服务器<br>2.2.1.1 在管理服务器上生成 ssh 公钥和私钥</h4>
+
+
+
+<pre class="wp-block-code"><code># ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/root/.ssh/id_rsa): 
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /root/.ssh/id_rsa.
+Your public key has been saved in /root/.ssh/id_rsa.pub.
+The key fingerprint is:
+SHA256:GGqyQU4+u+eNTaWN4SILhm3QN08ZR3jPWC+quRlsP6c root@test1
+The key's randomart image is:
++---&#91;RSA 2048]----+
+|       ..        |
+|      ... .      |
+|  o   o..= .     |
+| *   . *. + .    |
+|. B = = S. .     |
+|.o O * *.        |
+|o.* . Xo.        |
+|.o +.Bo+. .      |
+|  ooo =.E+       |
++----&#91;SHA256]-----+</code></pre>
+
+
+
+<h4 id="2-2-1-2-将管理服务器生成的-ssh-公钥复制到要被管理的服务器里">2.2.1.2 将管理服务器生成的 ssh 公钥复制到要被管理的服务器里</h4>
+
+
+
+<pre class="wp-block-code"><code># for i in {100..107} ; do ssh-copy-id 192.168.100.$i ; done</code></pre>
+
+
+
+<h4 id="2-3-让管理服务器通过密钥登陆要被管理的服务器2-3-1-指定管理服务器的-ansible-远程用户">2.3 让管理服务器通过密钥登陆要被管理的服务器<br>2.3.1 指定管理服务器的 Ansible 远程用户</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/ansible/ansible.cfg</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+# remote_user = root
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+remote_user = root
+......</code></pre>
+
+
+
+<h4 id="2-3-2-在管理服务器上-ansible-的服务器列表里给指定的服务器添加登陆密码">2.3.2 在管理服务器上 Ansible 的服务器列表里给指定的服务器添加登陆密码</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/ansible/hosts</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>&#91;all:vars]
+ansible_password=redhat</code></pre>
+
+
+
+<h4 id="步骤三-在管理服务器的-ansible-上添加服务器列表-并将其分组-从列表优先级的角度来思考-3-1-ansible-服务器列表分组的不同优先级-从列表优先级的角度来思考">步骤三：在管理服务器的 Ansible 上添加服务器列表，并将其分组（从列表优先级的角度来思考）<br>3.1 Ansible 服务器列表分组的不同优先级（从列表优先级的角度来思考）</h4>
+
+
+
+<p>（最高优先级）设置 Ansible 服务器配置文件的全局变量，并在此变量指定的位置创建 Ansible 配置文件和服务器列表文件<br>（第二高优先级）在当前目录下创建 Ansible 配置文件和服务器列表文件<br>（第三高优先级）在当前下创建 Ansible 配置文件和服务器列表文件<br>（第四高优先级）修改 Ansible 在 /etc 目录下的默认配置文件和服务器列表文件</p>
+
+
+
+<p>（注意：Ansible 会严格按照优先级，当有更高优先级的服务器列表时，绝对不会执行低等级的服务器列表）</p>
+
+
+
+<h4 id="3-2-通过设置-ansible-服务器配置文件的全局变量的方法来添加服务器列表3-2-1-在管理服务器上修改系统环境变量文件">3.2 通过设置 Ansible 服务器配置文件的全局变量的方法来添加服务器列表<br>3.2.1 在管理服务器上修改系统环境变量文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/profile</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+export ANSIBLE_CONFIG=/opt/ansible.cfg</code></pre>
+
+
+
+<p>（补充：这里以 /opt 目录为例）</p>
+
+
+
+<h4 id="3-2-2-在管理服务器上让系统环境变量生效">3.2.2 在管理服务器上让系统环境变量生效</h4>
+
+
+
+<pre class="wp-block-code"><code># source /etc/profile</code></pre>
+
+
+
+<h4 id="3-2-3-在管理服务器上在环境变量指定的位置创建-ansible-的配置文件">3.2.3 在管理服务器上在环境变量指定的位置创建 Ansible 的配置文件</h4>
+
+
+
+<pre class="wp-block-code"><code># cp /etc/ansible/ansible.cfg /opt/</code></pre>
+
+
+
+<h4 id="3-2-4-在管理服务器上指定-ansible-的服务器列表文件">3.2.4 在管理服务器上指定 Ansible 的服务器列表文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /opt/ansible.cfg</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+#inventory      = /etc/ansible/hosts
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+inventory      = hosts
+......</code></pre>
+
+
+
+<h4 id="3-3-在管理服务器上添加-ansible-的服务器列表-并将其分组">3.3 在管理服务器上添加 Ansible 的服务器列表，并将其分组</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /opt/hosts</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>192.168.100.107
+
+&#91;web]
+web&#91;1:3]
+
+&#91;db]
+db1
+db2
+db3</code></pre>
+
+
+
+<p>（补充：这里以文本列表为例）</p>
+
+
+
+<h4 id="3-4-通过在当前目录下创建-ansible-配置文件和服务器列表文件的方法来添加服务器列表3-4-1-在管理服务器上进入到一个任意此用户有权限的目录">3.4 通过在当前目录下创建 Ansible 配置文件和服务器列表文件的方法来添加服务器列表<br>3.4.1 在管理服务器上进入到一个任意此用户有权限的目录</h4>
+
+
+
+<pre class="wp-block-code"><code># cd /opt</code></pre>
+
+
+
+<p>（补充：这里以 /opt 目录为例）</p>
+
+
+
+<h4 id="3-4-2-在管理服务器上的当前位置创建-ansible-的配置文件">3.4.2 在管理服务器上的当前位置创建 Ansible 的配置文件</h4>
+
+
+
+<pre class="wp-block-code"><code># cp /etc/ansible/ansible.cfg /opt/</code></pre>
+
+
+
+<h4 id="3-4-3-在管理服务器上指定-ansible-的服务器列表文件">3.4.3 在管理服务器上指定 Ansible 的服务器列表文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /opt/ansible.cfg</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+#inventory      = /etc/ansible/hosts
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+inventory      = hosts
+......</code></pre>
+
+
+
+<h4 id="3-4-4-在管理服务器上添加-ansible-的服务器列表-并将其分组">3.4.4 在管理服务器上添加 Ansible 的服务器列表，并将其分组</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /opt/hosts</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>192.168.100.107
+
+&#91;web]
+web&#91;1:3]
+
+&#91;db]
+db1
+db2
+db3</code></pre>
+
+
+
+<p>（补充：这里以文本列表为例）</p>
+
+
+
+<h4 id="3-5-通过在家目录下创建-ansible-配置文件和服务器列表文件的方法来添加服务器列表3-5-1-在管理服务器上进入到家目录">3.5 通过在家目录下创建 Ansible 配置文件和服务器列表文件的方法来添加服务器列表<br>3.5.1 在管理服务器上进入到家目录</h4>
+
+
+
+<pre class="wp-block-code"><code># cd</code></pre>
+
+
+
+<h4 id="3-5-2-在管理服务器上的家目录位置创建-ansible-的配置文件">3.5.2 在管理服务器上的家目录位置创建 Ansible 的配置文件</h4>
+
+
+
+<pre class="wp-block-code"><code># cp /etc/ansible/ansible.cfg ~/</code></pre>
+
+
+
+<h4 id="3-5-3-在管理服务器上指定-ansible-的服务器列表文件">3.5.3 在管理服务器上指定 Ansible 的服务器列表文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim ~/ansible.cfg</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+#inventory      = /etc/ansible/hosts
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+&#91;defaults]
+inventory      = hosts
+......</code></pre>
+
+
+
+<h4 id="3-5-4-在管理服务器上添加-ansible-的服务器列表-并将其分组">3.5.4 在管理服务器上添加 Ansible 的服务器列表，并将其分组</h4>
+
+
+
+<pre class="wp-block-code"><code># vim ~/hosts</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>192.168.100.107
+
+&#91;web]
+web&#91;1:3]
+
+&#91;db]
+db1
+db2
+db3</code></pre>
+
+
+
+<p>（补充：这里以文本列表为例）</p>
+
+
+
+<h4 id="3-6-通过修改-ansible-默认配置文件和默认服务器列表文件的方法来添加服务器列表3-6-1-在管理服务器上指定-ansible-服务器列表文件">3.6 通过修改 Ansible 默认配置文件和默认服务器列表文件的方法来添加服务器列表<br>3.6.1 在管理服务器上指定 Ansible 服务器列表文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/ansible/ansible.cfg</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+#inventory      = /etc/ansible/hosts
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+inventory      = /etc/ansible/hosts
+......</code></pre>
+
+
+
+<h4 id="3-6-2-在管理服务器上添加-ansible-的服务器列表-并将其分组">3.6.2 在管理服务器上添加 Ansible 的服务器列表，并将其分组</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/ansible/hosts</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>192.168.100.107
+
+&#91;web]
+web&#91;1:3]
+
+&#91;db]
+db1
+db2
+db3</code></pre>
+
+
+
+<p>（补充：这里以文本列表为例）</p>
+
+
+
+<h4 id="步骤四-在管理服务器的-ansible-上添加服务器列表-并将其分组-从列表种类的角度来思考-4-1-让管理服务器的-ansible-使用文本格式的服务器列表文件4-1-1-分组的方式4-1-1-1-单个服务器">步骤四：在管理服务器的 Ansible 上添加服务器列表，并将其分组（从列表种类的角度来思考）<br>4.1 让管理服务器的 Ansible 使用文本格式的服务器列表文件<br>4.1.1 分组的方式<br>4.1.1.1 单个服务器</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/ansible/hosts</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>192.168.100.107</code></pre>
+
+
+
+<h4 id="4-1-1-2-一组服务器">4.1.1.2 一组服务器</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/ansible/hosts</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>192.168.100.107
+
+&#91;web]
+web1
+web2
+web3</code></pre>
+
+
+
+<h4 id="4-1-1-3-一复合组服务器">4.1.1.3 一复合组服务器</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/ansible/hosts</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>192.168.100.107
+
+&#91;web]
+web1
+web2
+web3
+
+&#91;db]
+db1
+db2
+db3
+
+&#91;webdb:children]
+web
+db</code></pre>
+
+
+
+<p>（补充：在这里的 webdb 组会同时包含 web 和 db 里的服务器）</p>
+
+
+
+<h4 id="4-1-2-列表的描述方式介绍4-1-2-1-连续的数字">4.1.2 列表的描述方式介绍<br>4.1.2.1 连续的数字</h4>
+
+
+
+<pre class="wp-block-code"><code>192.168.&#91;0:10].&#91;0:255]</code></pre>
+
+
+
+<p>（补充：这里以从 192.168.0.0 到 192.168.10.255 为例）</p>
+
+
+
+<h4 id="4-1-2-2-连续的字母">4.1.2.2 连续的字母</h4>
+
+
+
+<pre class="wp-block-code"><code>web&#91;a:c]</code></pre>
+
+
+
+<p>（补充：这里以从 weba 到 webc 为例）</p>
+
+
+
+<h4 id="4-2-让管理服务器的-ansible-使用-json-格式的服务器列表文件4-2-1-在管理服务器上进入任意一个此用户有权限的目录">4.2 让管理服务器的 Ansible 使用 json 格式的服务器列表文件<br>4.2.1 在管理服务器上进入任意一个此用户有权限的目录</h4>
+
+
+
+<pre class="wp-block-code"><code># cd ~</code></pre>
+
+
+
+<p>（补充：这里以进入家目录为例）</p>
+
+
+
+<h4 id="4-2-2-在管理服务器上的家目录位置创建-ansible-的配置文件">4.2.2 在管理服务器上的家目录位置创建 Ansible 的配置文件</h4>
+
+
+
+<pre class="wp-block-code"><code># cp /etc/ansible/ansible.cfg ~/</code></pre>
+
+
+
+<h4 id="4-2-3-在管理服务器上指定-ansible-的服务器列表文件">4.2.3 在管理服务器上指定 Ansible 的服务器列表文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim ansible.cfg</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+#inventory      = /etc/ansible/hosts
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+inventory      = ./hosts.py
+......</code></pre>
+
+
+
+<h4 id="4-2-4-在管理服务器上使用-python3-编程语言生成-json-格式的服务器列表4-2-4-1-在管理服务器上编写生成-json-格式的-python-程序">4.2.4 在管理服务器上使用 Python3 编程语言生成 json 格式的服务器列表<br>4.2.4.1 在管理服务器上编写生成 json 格式的 Python 程序</h4>
+
+
+
+<pre class="wp-block-code"><code># vim hosts.py</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>#!/usr/libexec/platform-python
+import json
+hostlist = {}
+hostlist&#91;"web"] = &#91;"192.168.100.101", "192.168.100.103"]
+
+hostlist&#91;"db"] = {
+        "hosts" :&#91;"192.168.100.104", "192.168.100.106"],
+        "vars" :{"ansible_ssh_user":"root", "ansible_ssh_pass":"1"}
+        }
+
+hostlist&#91;"192.168.100.7"] = {
+        "ansible_ssh_user":"root", "ansible_ssh_pass":"pwd"
+        }
+
+print(json.dumps(hostlist))</code></pre>
+
+
+
+<h4 id="4-2-4-2-给刚刚编写的-python-程序相应的全权">4.2.4.2 给刚刚编写的 Python 程序相应的全权</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod 755 hosts.py</code></pre>
+
+
+
+<p>（<br>补充：<br>使用 Python3 出现报错的处理方法：<br>1) 显示 yum 的配置文件位置</p>
+
+
+
+<pre class="wp-block-code"><code># whereis yum
+yum: /usr/bin/yum /etc/yum /etc/yum.conf /usr/share/man/man8/yum.8.gz</code></pre>
+
+
+
+<p>2) 确认 yum 所使用的 Python</p>
+
+
+
+<pre class="wp-block-code"><code># head -1 /usr/bin/yum 
+#!/usr/libexec/platform-python</code></pre>
+
+
+
+<p>3) 将 hosts.py 第一行的 Python 位置修改成和 yum 所使用的一样</p>
+
+
+
+<pre class="wp-block-code"><code># vim hosts.py</code></pre>
+
+
+
+<p>将第一行修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>#!/usr/libexec/platform-python
+......</code></pre>
+
+
+
+<p>）</p>
+
+
+
+<h4 id="步骤五-在管理服务器的-ansible-上添加服务器列表-并将其分组-多个同优先级相同的列表-从管理的角度来思考-5-2-1-在管理服务器上进入任意一个此用户有权限的目录">步骤五：在管理服务器的 Ansible 上添加服务器列表，并将其分组（多个同优先级相同的列表，从管理的角度来思考）<br>5.2.1 在管理服务器上进入任意一个此用户有权限的目录</h4>
+
+
+
+<pre class="wp-block-code"><code># cd ~</code></pre>
+
+
+
+<p>（补充：这里以进入家目录为例）</p>
+
+
+
+<h4 id="5-2-2-在管理服务器上的家目录位置创建-ansible-的配置文件">5.2.2 在管理服务器上的家目录位置创建 Ansible 的配置文件</h4>
+
+
+
+<pre class="wp-block-code"><code># cp /etc/ansible/ansible.cfg ~/</code></pre>
+
+
+
+<h4 id="5-2-3-在管理服务器上指定-ansible-的服务器列表文件目录">5.2.3 在管理服务器上指定 Ansible 的服务器列表文件目录</h4>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+#inventory      = /etc/ansible/hosts
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+inventory      = ~/hosts/
+......</code></pre>
+
+
+
+<h4 id="5-2-4-创建-ansible-的服务器列表文件目录5-2-4-1-创建第一个-ansible-的服务器列表文件目录">5.2.4 创建 Ansible 的服务器列表文件目录<br>5.2.4.1 创建第一个 Ansible 的服务器列表文件目录</h4>
+
+
+
+<pre class="wp-block-code"><code># vim ~/hosts/hostsa</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>&#91;web]
+web1
+web2
+web3</code></pre>
+
+
+
+<h4 id="5-2-4-2-创建第一个-ansible-的服务器列表文件目录">5.2.4.2 创建第一个 Ansible 的服务器列表文件目录</h4>
+
+
+
+<pre class="wp-block-code"><code># vim ~/hosts/hostsb</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>&#91;db]
+db1
+db2
+db3</code></pre>
+
+
+
+<h4 id="5-2-4-3-创建第三个-ansible-的服务器列表文件目录">5.2.4.3 创建第三个 Ansible 的服务器列表文件目录</h4>
+
+
+
+<pre class="wp-block-code"><code># vim ~/hosts/others</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>192.168.100.7</code></pre>
+
+
+
+<h4 id="步骤六-测试管理服务器-ansible-的服务器列表6-1-显示默认服务器列表里的服务器列表">步骤六：测试管理服务器 Ansible 的服务器列表<br>6.1 显示默认服务器列表里的服务器列表</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible all -i /etc/ansible/hosts --list-host
+  hosts (20):
+    web1
+    web2
+    web3
+    db1
+    db2
+    db3
+    192.168.100.107</code></pre>
+
+
+
+<h4 id="6-2-显示-web-组的服务器">6.2 显示 web 组的服务器</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible web --list-host
+  hosts (10):
+    web1
+    web2
+    web3</code></pre>
+
+
+
+<h4 id="6-3-显示-db-组的服务器">6.3 显示 db 组的服务器</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible db --list-host
+  hosts (5):
+    db1
+    db2
+    db3</code></pre>
+
+
+
+<h4 id="6-4-显示不属于任何组的服务器">6.4 显示不属于任何组的服务器</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible ungrouped --list-host
+  hosts (1):
+  192.168.100.7</code></pre>
+
+
+
+<h4 id="6-5-显示所有服务器">6.5 显示所有服务器</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible all --list-host
+  hosts (20):
+    web1
+    web2
+    web3
+    db1
+    db2
+    db3
+    192.168.100.107</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># ansible-inventory --graph</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Ansible 的安装</title>
+		<link>https://eternalcenter-now.github.io/ansible-install/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sat, 01 Feb 2020 03:51:30 +0000</pubDate>
+				<category><![CDATA[Ansible]]></category>
+		<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Cluster Monitor Tools (集群监控工具)]]></category>
+		<category><![CDATA[Clusters (集群)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=8102</guid>
+
+					<description><![CDATA[步骤一：服务器系统要求 1) 服务器的系统需要是 CentOS Linux 8 版本2) 需要 python3(3.5 或以上) 或 python2（2.7或以上）3) 服务器系统配置好可用的软件源 步骤二：安装 Ansible]]></description>
+										<content:encoded><![CDATA[
+<h4>步骤一：服务器系统要求</h4>
+
+
+
+<p>1) 服务器的系统需要是 CentOS Linux 8 版本<br>2) 需要 python3(3.5 或以上) 或 python2（2.7或以上）<br>3) 服务器系统配置好可用的软件源</p>
+
+
+
+<h4>步骤二：安装 Ansible</h4>
+
+
+
+<pre class="wp-block-code"><code># yum install epel-release
+# yum install ansible</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[实验] Redis 数据库集群 Redis 数据库的添加和删除</title>
+		<link>https://eternalcenter-now.github.io/redis-cluster-node/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Tue, 03 Dec 2019 13:37:46 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Clusters (集群)]]></category>
+		<category><![CDATA[Database Load Balancing and High Availability Clusters (数据库负载均衡加高可用集群)]]></category>
+		<category><![CDATA[Databases (数据库)]]></category>
+		<category><![CDATA[Load Balancing and High Availability Clusters (负载均衡加高可用集群)]]></category>
+		<category><![CDATA[Non Relational Databases (NoSQL) (非关系型数据库)]]></category>
+		<category><![CDATA[Redis]]></category>
+		<category><![CDATA[Redis Load Balancing and High Availability (负载均衡加高可用)]]></category>
+		<category><![CDATA[纪念 Anniversary]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=7234</guid>
+
+					<description><![CDATA[纪念：站主于 2019 年 11 月完成了此开源实验，并将过程中的所有命令经过整理和注释以后，形成以下教程 注意： 在给 Redis 数据库集群添加和删除 Redis 数据库之前要先搭建 Redis 数据库集群 软件准备： 在 Redis 的官网上下载软件 Redis： https://redis.io/ 在 rubygems 的官网上下载软件 rubygems https://rubygems.org/ 正文： 步骤目录： 步骤一：规划拓扑1.1 服务器列表1.2 服务器列表简介 步骤二：系统环境要求 步骤三：所有数据库服务器安装 Redis 数据库3.1 安装 Redis 数据库的相关依赖包3.2 安装 Redis 数据库3.2.1 解压安装包3.2.2 进入安装包目录3.2.3 编译安装包3.2.4 安装软件包3.2.5 进入配置目录3.2.6 安装软件包 步骤四：将 Redis 数据库添加到别的集群4.1 修改所有服务器上的 Redis 数据库配置文件4.2 重启所有服务器上的 Redis 数据库4.2.1 关闭 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/redis-cluster-node/" class="more-link">Continue reading<span class="screen-reader-text"> "[实验] Redis 数据库集群 Redis 数据库的添加和删除"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<p class="has-text-align-left has-vivid-red-color has-text-color has-medium-font-size"><strong><strong>纪念：站主于 2019 年 11 月完成了此开源实验，并将过程中的所有命令经过整理和注释以后，形成以下教程</strong></strong></p>
+
+
+
+<h2 id="注意">注意：</h2>
+
+
+
+<p>在给 Redis 数据库集群添加和删除 Redis 数据库之前要先搭建 Redis 数据库集群</p>
+
+
+
+<div class="wp-container-11 wp-block-buttons">
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/redis-cluster/">Redis 数据库集群的搭建</a></div>
+</div>
+
+
+
+<h2 id="软件准备">软件准备：</h2>
+
+
+
+<p>在 Redis 的官网上下载软件 Redis：</p>
+
+
+
+<p class="has-text-align-center"><a href="https://redis.io/" target="_blank" rel="noreferrer noopener">https://redis.io/</a></p>
+
+
+
+<p>在 rubygems 的官网上下载软件 rubygems</p>
+
+
+
+<p class="has-text-align-center"><a href="https://rubygems.org/" target="_blank" rel="noreferrer noopener">https://rubygems.org/</a></p>
+
+
+
+<div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
+
+
+
+<h2 id="正文">正文：</h2>
+
+
+
+<h2 id="步骤目录">步骤目录：</h2>
+
+
+
+<h4 id="步骤一-规划拓扑1-1-服务器列表1-2-服务器列表简介">步骤一：规划拓扑<br>1.1 服务器列表<br>1.2 服务器列表简介</h4>
+
+
+
+<h4 id="步骤二-系统环境要求">步骤二：系统环境要求</h4>
+
+
+
+<h4 id="步骤三-所有数据库服务器安装-redis-数据库3-1-安装-redis-数据库的相关依赖包3-2-安装-redis-数据库3-2-1-解压安装包3-2-2-进入安装包目录3-2-3-编译安装包3-2-4-安装软件包3-2-5-进入配置目录3-2-6-安装软件包">步骤三：所有数据库服务器安装 Redis 数据库<br>3.1 安装 Redis 数据库的相关依赖包<br>3.2 安装 Redis 数据库<br>3.2.1 解压安装包<br>3.2.2 进入安装包目录<br>3.2.3 编译安装包<br>3.2.4 安装软件包<br>3.2.5 进入配置目录<br>3.2.6 安装软件包</h4>
+
+
+
+<h4 id="步骤四-将-redis-数据库添加到别的集群4-1-修改所有服务器上的-redis-数据库配置文件4-2-重启所有服务器上的-redis-数据库4-2-1-关闭-redis-数据库4-2-2-开启-redis-数据库4-3-将-redis7-和-redis8-添加到现有的-redis-集群中4-3-1-显示现有集群的状况4-3-2-添加-redis7-并将其视为主数据库4-3-3-添加-redis8-并将其视为从数据库4-3-4-确认-redis7-和-redis8-已经加入到了集群中4-4-让新加入的-redis-数据库也能存储数据4-4-1-重新分配集群的存储块4-4-2-确认集群的存储块已经覆盖所有主数据库">步骤四：将 Redis 数据库添加到别的集群<br>4.1 修改所有服务器上的 Redis 数据库配置文件<br>4.2 重启所有服务器上的 Redis 数据库<br>4.2.1 关闭 Redis 数据库<br>4.2.2 开启 Redis 数据库<br>4.3 将 redis7 和 redis8 添加到现有的 Redis 集群中<br>4.3.1 显示现有集群的状况<br>4.3.2 添加 redis7 并将其视为主数据库<br>4.3.3 添加 redis8 并将其视为从数据库<br>4.3.4 确认 redis7 和 redis8 已经加入到了集群中<br>4.4 让新加入的 redis 数据库也能存储数据<br>4.4.1 重新分配集群的存储块<br>4.4.2 确认集群的存储块已经覆盖所有主数据库</h4>
+
+
+
+<h4 id="步骤五-将部分-redis-数据库从集群中删除5-1-将存储块从要被删除的-redis-主数据库里拿走5-2-将部分-redis-数据库从集群中删除5-2-1-将作为主库的-redis-数据库从集群中删除5-2-2-将作为从库的-redis-数据库从集群中删除5-3-确认部分-redis-数据库已经从集群中删除">步骤五：将部分 Redis 数据库从集群中删除<br>5.1 将存储块从要被删除的 redis 主数据库里拿走<br>5.2 将部分 Redis 数据库从集群中删除<br>5.2.1 将作为主库的 Redis 数据库从集群中删除<br>5.2.2 将作为从库的 Redis 数据库从集群中删除<br>5.3 确认部分 Redis 数据库已经从集群中删除</h4>
+
+
+
+<h2 id="具体的操作步骤">具体的操作步骤：</h2>
+
+
+
+<h4 id="步骤一-规划拓扑1-1-服务器列表">步骤一：规划拓扑<br>1.1 服务器列表</h4>
+
+
+
+<p>现有的 Redis 集群<br>redis7 IP 地址:192.168.1.57 端口号：1057<br>redis8 IP 地址:192.168.1.58 端口号：1058</p>
+
+
+
+<p>（补充：在本次实验中现有的 redis 集群管理服务器是 redis1，IP 地址是 192.168.1.57，端口号是 1057）</p>
+
+
+
+<h4 id="1-2-服务器列表简介">1.2 服务器列表简介</h4>
+
+
+
+<p>redis7 作为主库 redis8 作为从库加入到一个现有的 Redis 集群中</p>
+
+
+
+<h4 id="步骤二-系统环境要求">步骤二：系统环境要求</h4>
+
+
+
+<p>1) 所有服务器的系统都需要是 CentOS 7 版本<br>2) 所有服务器都要关闭防火墙<br>3) 所有服务器都要关闭 SELinux<br>4) 所有服务器系统都要配置好可用的软件源<br>5) 需要按照拓扑图给对应的服务器配置好 IP 地址和主机名<br>6) 所有服务器都要可以相互 ping 通自己和对方的 IP 地址和主机名</p>
+
+
+
+<p>（注意：现有的 Redis 集群因为已经是创建好了的，所以不用执行以上操作）</p>
+
+
+
+<h4 id="步骤三-所有数据库服务器安装-redis-数据库3-1-安装-redis-数据库的相关依赖包">步骤三：所有数据库服务器安装 Redis 数据库<br>3.1 安装 Redis 数据库的相关依赖包</h4>
+
+
+
+<p>（分别在 redis7 和 redis8 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># yum -y install gcc gcc-c++ make</code></pre>
+
+
+
+<h4 id="3-2-安装-redis-数据库3-2-1-解压安装包">3.2 安装 Redis 数据库<br>3.2.1 解压安装包</h4>
+
+
+
+<p>（分别在 redis7 和 redis8 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># tar -zxf redis-5.0.5.tar.gz</code></pre>
+
+
+
+<p>（补充：这里要安装的 Redis 版本是 5.0.5）</p>
+
+
+
+<h4 id="3-2-2-进入安装包目录">3.2.2 进入安装包目录</h4>
+
+
+
+<p>（分别在 redis7 和 redis8 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># cd redis-5.0.5/</code></pre>
+
+
+
+<p>（补充：这里要安装的 Redis 版本是 5.0.5）</p>
+
+
+
+<h4 id="3-2-3-编译安装包">3.2.3 编译安装包</h4>
+
+
+
+<p>（分别在 redis7 和 redis8 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># make</code></pre>
+
+
+
+<h4 id="3-2-4-安装软件包">3.2.4 安装软件包</h4>
+
+
+
+<p>（分别在 redis7 和 redis8 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># make install</code></pre>
+
+
+
+<h4 id="3-2-5-进入配置目录">3.2.5 进入配置目录</h4>
+
+
+
+<p>（分别在 redis7 和 redis8 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># cd utils/</code></pre>
+
+
+
+<h4 id="3-2-6-安装软件包">3.2.6 安装软件包</h4>
+
+
+
+<p>（分别在 redis7 和 redis8 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># ./install_server.sh
+Welcome to the redis service installer
+This script will help you easily set up a running redis server
+Please select the redis port for this instance: &#91;6379] 
+Selecting default: 6379
+Please select the redis config file name &#91;/etc/redis/6379.conf] 
+Selected default - /etc/redis/6379.conf
+Please select the redis log file name &#91;/var/log/redis_6379.log] 
+Selected default - /var/log/redis_6379.log
+Please select the data directory for this instance &#91;/var/lib/redis/6379] 
+Selected default - /var/lib/redis/6379
+Please select the redis executable path &#91;/usr/local/bin/redis-server] 
+Selected config:
+Port           : 6379
+Config file    : /etc/redis/6379.conf
+Log file       : /var/log/redis_6379.log
+Data dir       : /var/lib/redis/6379
+Executable     : /usr/local/bin/redis-server
+Cli Executable : /usr/local/bin/redis-cli
+Is this ok? Then press ENTER to go on or Ctrl-C to abort.
+Copied /tmp/6379.conf =&gt; /etc/init.d/redis_6379
+Installing service...
+Successfully added to chkconfig!
+Successfully added to runlevels 345!
+Starting Redis server...
+Installation successful!</code></pre>
+
+
+
+<h4 id="步骤四-将-redis-数据库添加到别的集群4-1-修改所有服务器上的-redis-数据库配置文件">步骤四：将 Redis 数据库添加到别的集群<br>4.1 修改所有服务器上的 Redis 数据库配置文件</h4>
+
+
+
+<p>（只在 redis7 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/redis/6379.conf</code></pre>
+
+
+
+<p>将部分内容修改如下：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+#bind 127.0.0.1
+bind 192.168.1.57
+......
+port 1057
+......
+daemonize yes
+......
+pidfile /var/run/redis_1057.pid
+......
+cluster-enabled yes
+......
+cluster-config-file nodes-1057.conf
+......
+cluster-node-timeout 5000
+......</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里的 #bind 127.0.0.1 代表取消数据库可以被本地登录<br>2) 这里的 bind 192.168.1.57 是本机的 IP 地址<br>3) 这里的 port 1057 代表数据库使用到的端口是 1057，集群里的各个数据库端口号不能一样<br>4) 这里的 daemonize yes 代表以进程的形式启动<br>5) 这里的 pidfile /var/run/redis_1057.pid 代表使用的 PID 文件是 /var/run/redis_1057.pid，集群里的各个数据库 PID 文件不能一样<br>6) 这里的 cluster-enabled yes 代表启用集群，但是前面的 daemonize 必须也启用<br>7) 这里的 cluster-config-file nodes-1057.conf 代表使用的数据库配置文件是 nodes-1057.conf，集群里的各个数据库的配置文件不能一样<br>8) 这里的 cluster-node-timeout 5000 代表集群通信超时时间为 5000<br>）</p>
+
+
+
+<p>（只在 redis8 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/redis/6379.conf</code></pre>
+
+
+
+<p>将部分内容修改如下：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+#bind 127.0.0.1
+bind 192.168.1.58
+......
+port 1058
+......
+daemonize yes
+......
+pidfile /var/run/redis_1058.pid
+......
+cluster-enabled yes
+......
+cluster-config-file nodes-1058.conf
+......
+cluster-node-timeout 5000
+......</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里的 #bind 127.0.0.1 代表取消数据库可以被本地登录<br>2) 这里的 bind 192.168.1.58 是本机的 IP 地址<br>3) 这里的 port 1058 代表数据库使用到的端口是 1058，集群里的各个数据库端口号不能一样<br>4) 这里的 daemonize yes 代表以进程的形式启动<br>5) 这里的 pidfile /var/run/redis_1058.pid 代表使用的 PID 文件是 /var/run/redis_1058.pid，集群里的各个数据库 PID 文件不能一样<br>6) 这里的 cluster-enabled yes 代表启用集群，但是前面的 daemonize 必须也启用<br>7) 这里的 cluster-config-file nodes-1058.conf 代表使用的数据库配置文件是 nodes-1058.conf，集群里的各个数据库的配置文件不能一样<br>8) 这里的 cluster-node-timeout 5000 代表集群通信超时时间为 5000<br>）</p>
+
+
+
+<h4 id="4-2-重启所有服务器上的-redis-数据库4-2-1-关闭-redis-数据库">4.2 重启所有服务器上的 Redis 数据库<br>4.2.1 关闭 Redis 数据库</h4>
+
+
+
+<p>（分别在 redis7 和 redis8 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># redis-cli shutdown</code></pre>
+
+
+
+<h4 id="4-2-2-开启-redis-数据库">4.2.2 开启 Redis 数据库</h4>
+
+
+
+<p>（分别在 redis7 和 redis8 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># /etc/init.d/redis_6379 start</code></pre>
+
+
+
+<h4 id="4-3-将-redis7-和-redis8-添加到现有的-redis-集群中4-3-1-显示现有集群的状况">4.3 将 redis7 和 redis8 添加到现有的 Redis 集群中<br>4.3.1 显示现有集群的状况</h4>
+
+
+
+<p>（只在 redis1 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># redis-cli --cluster check 192.168.1.51:1051</code></pre>
+
+
+
+<h4 id="4-3-2-添加-redis7-并将其视为主数据库">4.3.2 添加 redis7 并将其视为主数据库</h4>
+
+
+
+<p>（只在 redis1 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># redis-cli --cluster add-node 192.168.1.57:1057 192.168.1.51:1051</code></pre>
+
+
+
+<h4 id="4-3-3-添加-redis8-并将其视为从数据库">4.3.3 添加 redis8 并将其视为从数据库</h4>
+
+
+
+<p>（只在 redis1 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># redis-cli --cluster add-node 192.168.1.58:1058 192.168.1.51:1051 --cluster-slave</code></pre>
+
+
+
+<h4 id="4-3-4-确认-redis7-和-redis8-已经加入到了集群中">4.3.4 确认 redis7 和 redis8 已经加入到了集群中</h4>
+
+
+
+<p>（只在 redis1 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># redis-cli --cluster check 192.168.1.51:1051
+192.168.1.51:1051 (5d030ec0...) -&gt; 1 keys | 5461 slots | 1 slaves.
+192.168.1.53:1053 (c4f884e7...) -&gt; 2 keys | 5461 slots | 1 slaves.
+192.168.1.52:1052 (7477c04d...) -&gt; 1 keys | 5462 slots | 1 slaves.
+192.168.1.57:1057 (10bb6a57...) -&gt; 0 keys | 0 slots | 1 slaves.
+&#91;OK] 4 keys in 4 masters.
+0.00 keys per slot on average.
+&gt;&gt;&gt; Performing Cluster Check (using node 192.168.1.51:1051)
+M: 5d030ec05f9de86ebeedc1b035b2122addaa61d8 192.168.1.51:1051
+   slots:&#91;0-5460] (5461 slots) master
+   1 additional replica(s)
+S: eac6a0586ad00375bea9aa352951c784be57e9ad 192.168.1.55:1055
+   slots: (0 slots) slave
+   replicates 5d030ec05f9de86ebeedc1b035b2122addaa61d8
+S: 93d8988475c754a3b58d5172522163664c391da2 192.168.1.58:1058
+   slots: (0 slots) slave
+   replicates 10bb6a5732f629ee62801417cb44ddb670e99e86
+S: a5cddda6c1bc7c6d3397e17e1ba29571bb7a1657 192.168.1.54:1054
+   slots: (0 slots) slave
+   replicates c4f884e7e4ce6adb4f5bc4f6eb398680beb26089
+M: c4f884e7e4ce6adb4f5bc4f6eb398680beb26089 192.168.1.53:1053
+   slots:&#91;10923-16383] (5461 slots) master
+   1 additional replica(s)
+M: 7477c04d8ebf9d498ed5586d5f4e6d513fdb3c30 192.168.1.52:1052
+   slots:&#91;5461-10922] (5462 slots) master
+   1 additional replica(s)
+M: 10bb6a5732f629ee62801417cb44ddb670e99e86 192.168.1.57:1057
+   slots: (0 slots) master
+   1 additional replica(s)
+S: fd973bbcc376bfccf5888ba06dba97feb9ef1273 192.168.1.56:1056
+   slots: (0 slots) slave
+   replicates 7477c04d8ebf9d498ed5586d5f4e6d513fdb3c30
+&#91;OK] All nodes agree about slots configuration.
+&gt;&gt;&gt; Check for open slots...
+&gt;&gt;&gt; Check slots coverage...
+&#91;OK] All 16384 slots covered.</code></pre>
+
+
+
+<h4 id="4-4-让新加入的-redis-数据库也能存储数据4-4-1-重新分配集群的存储块">4.4 让新加入的 redis 数据库也能存储数据<br>4.4.1 重新分配集群的存储块</h4>
+
+
+
+<p>（只在 redis1 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># redis-cli --cluster reshard 192.168.1.51:1051
+......
+How many slots do you want to move (from 1 to 16384)? 4096
+What is the receiving node ID? 10bb6a5732f629ee62801417cb44ddb670e99e86
+......
+Source node #1: all
+......
+Do you want to proceed with the proposed reshard plan (yes/no)? yes
+......</code></pre>
+
+
+
+<h4 id="4-4-2-确认集群的存储块已经覆盖所有主数据库">4.4.2 确认集群的存储块已经覆盖所有主数据库</h4>
+
+
+
+<p>（只在 redis1 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># redis-cli --cluster check 192.168.1.51:1051
+192.168.1.51:1051 (5d030ec0...) -&gt; 0 keys | 4096 slots | 1 slaves.
+192.168.1.53:1053 (c4f884e7...) -&gt; 1 keys | 4096 slots | 1 slaves.
+192.168.1.52:1052 (7477c04d...) -&gt; 1 keys | 4096 slots | 1 slaves.
+192.168.1.57:1057 (10bb6a57...) -&gt; 2 keys | 4096 slots | 1 slaves.
+&#91;OK] 4 keys in 4 masters.
+0.00 keys per slot on average.
+&gt;&gt;&gt; Performing Cluster Check (using node 192.168.1.51:1051)
+M: 5d030ec05f9de86ebeedc1b035b2122addaa61d8 192.168.1.51:1051
+   slots:&#91;1365-5460] (4096 slots) master
+   1 additional replica(s)
+S: eac6a0586ad00375bea9aa352951c784be57e9ad 192.168.1.55:1055
+   slots: (0 slots) slave
+   replicates 5d030ec05f9de86ebeedc1b035b2122addaa61d8
+S: 93d8988475c754a3b58d5172522163664c391da2 192.168.1.58:1058
+   slots: (0 slots) slave
+   replicates 10bb6a5732f629ee62801417cb44ddb670e99e86
+S: a5cddda6c1bc7c6d3397e17e1ba29571bb7a1657 192.168.1.54:1054
+   slots: (0 slots) slave
+   replicates c4f884e7e4ce6adb4f5bc4f6eb398680beb26089
+M: c4f884e7e4ce6adb4f5bc4f6eb398680beb26089 192.168.1.53:1053
+   slots:&#91;12288-16383] (4096 slots) master
+   1 additional replica(s)
+M: 7477c04d8ebf9d498ed5586d5f4e6d513fdb3c30 192.168.1.52:1052
+   slots:&#91;6827-10922] (4096 slots) master
+   1 additional replica(s)
+M: 10bb6a5732f629ee62801417cb44ddb670e99e86 192.168.1.57:1057
+   slots:&#91;0-1364],&#91;5461-6826],&#91;10923-12287] (4096 slots) master
+   1 additional replica(s)
+S: fd973bbcc376bfccf5888ba06dba97feb9ef1273 192.168.1.56:1056
+   slots: (0 slots) slave
+   replicates 7477c04d8ebf9d498ed5586d5f4e6d513fdb3c30
+&#91;OK] All nodes agree about slots configuration.
+&gt;&gt;&gt; Check for open slots...
+&gt;&gt;&gt; Check slots coverage...
+&#91;OK] All 16384 slots covered.</code></pre>
+
+
+
+<h4 id="步骤五-将部分-redis-数据库从集群中删除">步骤五：将部分 Redis 数据库从集群中删除</h4>
+
+
+
+<p>（这里以删除 redis7 和 redis8 为例）</p>
+
+
+
+<h4 id="5-1-将存储块从要被删除的-redis-主数据库里拿走">5.1 将存储块从要被删除的 redis 主数据库里拿走</h4>
+
+
+
+<p>（只在 redis1 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># redis-cli --cluster reshard 192.168.1.51:1051
+......
+How many slots do you want to move (from 1 to 16384)? 4096
+What is the receiving node ID? 5d030ec05f9de86ebeedc1b035b2122addaa61d8
+......
+Source node #1: 10bb6a5732f629ee62801417cb44ddb670e99e86
+Source node #2: done
+......
+Do you want to proceed with the proposed reshard plan (yes/no)? yes
+......</code></pre>
+
+
+
+<h4 id="5-2-将部分-redis-数据库从集群中删除5-2-1-将作为主库的-redis-数据库从集群中删除">5.2 将部分 Redis 数据库从集群中删除<br>5.2.1 将作为主库的 Redis 数据库从集群中删除</h4>
+
+
+
+<p>（只在 redis1 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># redis-cli --cluster del-node 192.168.1.57:1057 10bb6a5732f629ee62801417cb44ddb670e99e86
+&gt;&gt;&gt; Removing node 10bb6a5732f629ee62801417cb44ddb670e99e86 from cluster 192.168.1.57:1057
+&gt;&gt;&gt; Sending CLUSTER FORGET messages to the cluster...</code></pre>
+
+
+
+<h4 id="5-2-2-将作为从库的-redis-数据库从集群中删除">5.2.2 将作为从库的 Redis 数据库从集群中删除</h4>
+
+
+
+<p>（只在 redis1 上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># redis-cli --cluster del-node 192.168.1.58:1058 023abbc600cd4fb1ca8bb7ce8c45099e186041f8
+&gt;&gt;&gt; Removing node 023abbc600cd4fb1ca8bb7ce8c45099e186041f8 from cluster 192.168.1.58:1058
+&gt;&gt;&gt; Sending CLUSTER FORGET messages to the cluster...
+&gt;&gt;&gt; SHUTDOWN the node.</code></pre>
+
+
+
+<h4 id="5-3-确认部分-redis-数据库已经从集群中删除">5.3 确认部分 Redis 数据库已经从集群中删除</h4>
+
+
+
+<pre class="wp-block-code"><code># redis-cli --cluster check 192.168.1.51:1051
+192.168.1.51:1051 (5d030ec0...) -&gt; 0 keys | 4096 slots | 1 slaves.
+192.168.1.53:1053 (c4f884e7...) -&gt; 1 keys | 4096 slots | 1 slaves.
+192.168.1.52:1052 (7477c04d...) -&gt; 1 keys | 4096 slots | 1 slaves.
+&#91;OK] 4 keys in 3 masters.
+0.00 keys per slot on average.
+&gt;&gt;&gt; Performing Cluster Check (using node 192.168.1.51:1051)
+M: 5d030ec05f9de86ebeedc1b035b2122addaa61d8 192.168.1.51:1051
+   slots:&#91;0-6826],&#91;10923-12287] (4096 slots) master
+   1 additional replica(s)
+S: eac6a0586ad00375bea9aa352951c784be57e9ad 192.168.1.55:1055
+   slots: (0 slots) slave
+   replicates 5d030ec05f9de86ebeedc1b035b2122addaa61d8
+   replicates 10bb6a5732f629ee62801417cb44ddb670e99e86
+S: a5cddda6c1bc7c6d3397e17e1ba29571bb7a1657 192.168.1.54:1054
+   slots: (0 slots) slave
+   replicates c4f884e7e4ce6adb4f5bc4f6eb398680beb26089
+M: c4f884e7e4ce6adb4f5bc4f6eb398680beb26089 192.168.1.53:1053
+   slots:&#91;12288-16383] (4096 slots) master
+   1 additional replica(s)
+M: 7477c04d8ebf9d498ed5586d5f4e6d513fdb3c30 192.168.1.52:1052
+   slots:&#91;6827-10922] (4096 slots) master
+   1 additional replica(s)
+S: fd973bbcc376bfccf5888ba06dba97feb9ef1273 192.168.1.56:1056
+   slots: (0 slots) slave
+   replicates 7477c04d8ebf9d498ed5586d5f4e6d513fdb3c30
+&#91;OK] All nodes agree about slots configuration.
+&gt;&gt;&gt; Check for open slots...
+&gt;&gt;&gt; Check slots coverage...
+&#91;OK] All 16384 slots covered.</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

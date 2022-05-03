@@ -1,0 +1,2025 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>System Network &amp; System Security &amp; System Log (系统网络 &amp; 系统安全 &amp; 系统日志) &#8211; Eternal Center</title>
+	<atom:link href="https://eternalcenter-now.github.io/category/system/system-network-system-security-system-log/feed/" rel="self" type="application/rss+xml" />
+	<link>https://eternalcenter-now.github.io/</link>
+	<description></description>
+	<lastBuildDate>Fri, 29 Apr 2022 14:47:22 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	
+	<item>
+		<title>[步骤] Linux SSH 密钥的批量更新</title>
+		<link>https://eternalcenter-now.github.io/ssh-key-batch-renew/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 29 Apr 2022 14:36:55 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Port Security (系统端口安全)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23423</guid>
+
+					<description><![CDATA[步骤目录： 步骤一：生成新的 SSH 密钥1.1 进入 ~/.ssh 目录1.2 生成新的 SSH 密钥 步骤二：将新的 SSH 公钥拷贝到目标服务器 步骤三：更新 SSH 密钥3.1 更新 SSH 私钥3.1.1 备份旧有的 SSH 私钥3.1.2 更新 SSH 私钥3.2 更新 SSH 公钥3.2.1 备份旧有的 SSH 公钥3.2.2 更新 SSH 公钥 步骤四：删除目标服务器的旧有 SSH 公钥4.1 删除目标服务器的旧有 SSH 公钥4.2 确定目标服务器就有的 SSH 已经删除 具体的操作步骤： 步骤一：生成新的 SSH 密钥1.1 进入 ~/.ssh 目录 1.2 生成新的 SSH 密钥 步骤二：将新的 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/ssh-key-batch-renew/" class="more-link">Continue reading<span class="screen-reader-text"> "[步骤] Linux SSH 密钥的批量更新"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2>步骤目录：</h2>
+
+
+
+<h4>步骤一：生成新的 SSH 密钥<br>1.1 进入 ~/.ssh 目录<br>1.2 生成新的 SSH 密钥</h4>
+
+
+
+<h4>步骤二：将新的 SSH 公钥拷贝到目标服务器</h4>
+
+
+
+<h4>步骤三：更新 SSH 密钥<br>3.1 更新 SSH 私钥<br>3.1.1 备份旧有的 SSH 私钥<br>3.1.2 更新 SSH 私钥<br>3.2 更新 SSH 公钥<br>3.2.1 备份旧有的 SSH 公钥<br>3.2.2 更新 SSH 公钥</h4>
+
+
+
+<h4>步骤四：删除目标服务器的旧有 SSH 公钥<br>4.1 删除目标服务器的旧有 SSH 公钥<br>4.2 确定目标服务器就有的 SSH 已经删除</h4>
+
+
+
+<h2>具体的操作步骤：</h2>
+
+
+
+<h4>步骤一：生成新的 SSH 密钥<br>1.1 进入 ~/.ssh 目录</h4>
+
+
+
+<pre class="wp-block-code"><code># cd ~/.ssh</code></pre>
+
+
+
+<h4>1.2 生成新的 SSH 密钥</h4>
+
+
+
+<pre class="wp-block-code"><code># ssh-keygen -b 4096 -t rsa -C "&lt;content&gt;" -f "&lt;public private key name&gt;"</code></pre>
+
+
+
+<h4>步骤二：将新的 SSH 公钥拷贝到目标服务器</h4>
+
+
+
+<pre class="wp-block-code"><code># for i in `cat &lt;server list&gt;`;do echo $i;ssh-copy-id -i ~/.ssh/&lt;public private key name&gt;.pub $i;echo;done</code></pre>
+
+
+
+<h4>步骤三：更新 SSH 密钥<br>3.1 更新 SSH 私钥<br>3.1.1 备份旧有的 SSH 私钥</h4>
+
+
+
+<pre class="wp-block-code"><code># mv id_rsa id_rsa.backup</code></pre>
+
+
+
+<h4>3.1.2 更新 SSH 私钥</h4>
+
+
+
+<pre class="wp-block-code"><code># cp &lt;public private key name&gt; id_rsa</code></pre>
+
+
+
+<h4>3.2 更新 SSH 公钥<br>3.2.1 备份旧有的 SSH 公钥</h4>
+
+
+
+<pre class="wp-block-code"><code># mv id_rsa.pub id_rsa.pub.backup</code></pre>
+
+
+
+<h4>3.2.2 更新 SSH 公钥</h4>
+
+
+
+<pre class="wp-block-code"><code># cp &lt;public private key name&gt;.pub id_rsa.pub</code></pre>
+
+
+
+<h4>步骤四：删除目标服务器的旧有 SSH 公钥<br>4.1 删除目标服务器的旧有 SSH 公钥</h4>
+
+
+
+<pre class="wp-block-code"><code># for i in `cat &lt;server list&gt;`;do echo $i;ssh $i "sed -i /&lt;old SSH key content&gt;/d ~/.ssh/authorized_keys";echo;done</code></pre>
+
+
+
+<h4>4.2 确定目标服务器就有的 SSH 已经删除</h4>
+
+
+
+<pre class="wp-block-code"><code># for i in `cat &lt;server list&gt;`;do echo $i;ssh $i "cat ~/.ssh/authorized_keys | egrep -v '&lt;content&gt;'";echo;done</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Linux 系统被删根 （rm -rf /*） 后锁定删根 （rm -rf /*） 用户的尝试 （系统层面）</title>
+		<link>https://eternalcenter-now.github.io/rm-rf-user/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Thu, 28 Apr 2022 15:03:04 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23353</guid>
+
+					<description><![CDATA[步骤目录： 步骤一：系统被删根 （rm -rf /*） 后的现象 步骤二：挂载官方镜像 步骤三：登录拯救模式3.1 进入拯救模式3.2 登录拯救模式 步骤四：在救援模式确定系统的根目录分区 步骤五：在救援模式将系统的分区挂载到救援模式的 /mnt 目录5.1 在救援模式将系统的根分区挂载到救援模式的 /mnt 目录5.2 在救援模式将救援模式的 /dev 目录关联到救援模式的 /mnt/dev 目录5.3 在救援模式将救援模式的 /proc 目录关联到救援模式的 /mnt/proc 目录5.4 在救援模式将救援模式的 /sys 目录关联到救援模式的 /mnt/sys 目录5.5 在救援模式将救援模式的 /run 目录关联到救援模式的 /mnt/run 目录 步骤六：显示系统被删根 （rm -rf /*） 后的现象6.1 尝试将当前根目录从救援模式的根目录切换到系统的根目录时会报错 “chroot: failed to run command #/bin/bash#: No such file or directory”6.2 在救援模式显示 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/rm-rf-user/" class="more-link">Continue reading<span class="screen-reader-text"> "[步骤] Linux 系统被删根 （rm -rf /*） 后锁定删根 （rm -rf /*） 用户的尝试 （系统层面）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2>步骤目录：</h2>
+
+
+
+<h4>步骤一：系统被删根 （rm -rf /*） 后的现象</h4>
+
+
+
+<h4>步骤二：挂载官方镜像</h4>
+
+
+
+<h4>步骤三：登录拯救模式<br>3.1 进入拯救模式<br>3.2 登录拯救模式</h4>
+
+
+
+<h4>步骤四：在救援模式确定系统的根目录分区</h4>
+
+
+
+<h4>步骤五：在救援模式将系统的分区挂载到救援模式的 /mnt 目录<br>5.1 在救援模式将系统的根分区挂载到救援模式的 /mnt 目录<br>5.2 在救援模式将救援模式的 /dev 目录关联到救援模式的 /mnt/dev 目录<br>5.3 在救援模式将救援模式的 /proc 目录关联到救援模式的 /mnt/proc 目录<br>5.4 在救援模式将救援模式的 /sys 目录关联到救援模式的 /mnt/sys 目录<br>5.5 在救援模式将救援模式的 /run 目录关联到救援模式的 /mnt/run 目录</h4>
+
+
+
+<h4>步骤六：显示系统被删根 （rm -rf /*） 后的现象<br>6.1 尝试将当前根目录从救援模式的根目录切换到系统的根目录时会报错 “chroot: failed to run command #/bin/bash#: No such file or directory”<br>6.2 在救援模式显示 /boot 目录里的文件时，会发现此目录下只有 grub2 目录，而此 grub2 目录里也是空的<br>6.3 在救援模式显示 /bin 目录时，会显示并无此目录<br>6.4 在救援模式显示 /etc 目录里的文件时，会发现此目录下只有 lvm 文件</h4>
+
+
+
+<h4>步骤七：在救援模式修复系统的 /bin 目录和里面的文件<br>7.1 在救援模式创建 /mnt/bin 目录<br>7.2 在救援模式挂载官方镜像<br>7.2.1 在救援模式创建用于挂载镜像的 /media 目录<br>7.2.2 在救援模式挂将官方镜像挂载到 /media 目录<br>7.3 在救援模式安装 bash 软件<br>7.3.1 在救援模式安装拷贝 bash 软件包到当前目录<br>7.3.2 在救援模式创建用于安装 bash 软件的 bash 目录<br>7.3.3 在救援模式进入 bash 目录<br>7.3.4 在救援模式安装 bash 软件<br>7.3.5 在救援模式显示安装 bash 软件后生成的目录<br>7.4 在救援模式将 bin 目录拷贝到 /mnt/bin 目录</h4>
+
+
+
+<h4>步骤八：将当前的根目录从救援模式的根目录切换到系统的根目录<br>8.1 将当前的根目录从救援模式的根目录切换到系统的根目录<br>8.2 在系统模式下确认当前的挂载状态<br>8.3 在系统模式下确认当前根目录下的目录</h4>
+
+
+
+<h4>步骤九：锁定有删根 （rm -rf /*<em>） 操作的用户</em><br><em>9.1 在系统模式显示历史命令以确认有没有用户输入过 rm -rf /* 命令</em><br><em>9.2 在系统模式显示用户登录记录</em><br><em>9.3 根据步骤 9.1 和步骤 9.2 推测是哪个用户进行过删根 （rm -rf /</em>*） 操作</h4>
+
+
+
+<h2>具体的操作步骤：</h2>
+
+
+
+<h4>步骤一：系统被删根 （rm -rf /*） 后的现象总结</h4>
+
+
+
+<p>1) 系统无法被 ssh<br>2) 通过 console 口登录系统在输入密码时会卡住<br>3) 尝试将当前根目录从救援模式的根目录切换到系统的根目录时会报错 “chroot: failed to run command #/bin/bash#: No such file or directory”<br>4) 重启系统后无法进入系统，并提示：/grub2/i386-pc/normoal.mod not found gpt<br>5）在救援模式显示 /boot 目录里的文件时，会发现此目录下只有 grub2 目录，而此 grub2 目录里也是空的<br>6) 在救援模式显示 /bin 目录时，会显示并无此目录<br>7) 在救援模式显示 /etc 目录里的文件时，会发现此目录下只有 lvm 文件</p>
+
+
+
+<h4>步骤二：挂载官方镜像</h4>
+
+
+
+<p>（步骤略）</p>
+
+
+
+<h4>步骤三：登录拯救模式<br>3.1 进入拯救模式</h4>
+
+
+
+<p>（步骤略）</p>
+
+
+
+<h4>3.2 登录拯救模式</h4>
+
+
+
+<pre class="wp-block-code"><code>rescue login:root</code></pre>
+
+
+
+<h4>步骤四：在救援模式确定系统的根目录分区</h4>
+
+
+
+<p>（步骤略）</p>
+
+
+
+<p>（<br>补充：<br>1) 物理分区可以使用 lsblk 命令和 fdisk -l 命令辅助确定<br>2) 逻辑分区还可以可以使用 pvs 命令和 lvs 命令辅助确定<br>）</p>
+
+
+
+<h4>步骤五：在救援模式将系统的分区挂载到救援模式的 /mnt 目录<br>5.1 在救援模式将系统的根分区挂载到救援模式的 /mnt 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount &lt;root spartition&gt; /mnt</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 如果是物理分区，系统的根分区就在救援模式的 /dev/ 目录里，例如救援模式的 /dev/sda1<br>2) 如果是逻辑分区，Rocky Linux &amp; RHEL 的系统根分区就是救援模式里的 /dev/&lt;volume group>/&lt;logical volume> 例如救援模式里的 /dev/vg/lv，openSUSE &amp; SUSE 的系统根分区就是救援模式里的 /dev/mapper/&lt;volume group>-&lt;logical volume> 例如救援模式里的 /dev/mapper/vg-lv<br>）</p>
+
+
+
+<h4>5.2 在救援模式将救援模式的 /dev 目录关联到救援模式的 /mnt/dev 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount --bind /dev /mnt/dev</code></pre>
+
+
+
+<p>（补充：此时所有对救援模式的 /mnt/dev 目录的访问都会变成对救援模式的 /dev 目录的访问）</p>
+
+
+
+<h4>5.3 在救援模式将救援模式的 /proc 目录关联到救援模式的 /mnt/proc 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount --bind /proc /mnt/proc</code></pre>
+
+
+
+<p>（补充：此时所有对救援模式的 /mnt/proc 目录的访问都会变成对救援模式的 /proc 目录的访问）</p>
+
+
+
+<h4>5.4 在救援模式将救援模式的 /sys 目录关联到救援模式的 /mnt/sys 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount --bind /sys /mnt/sys</code></pre>
+
+
+
+<p>（补充：此时所有对救援模式的 /mnt/sys 目录的访问都会变成对救援模式的 /sys 目录的访问）</p>
+
+
+
+<h4>5.5 在救援模式将救援模式的 /run 目录关联到救援模式的 /mnt/run 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount --bind /run /mnt/run</code></pre>
+
+
+
+<p>（补充：此时所有对救援模式的 /mnt/run 目录的访问都会变成对救援模式的 /run 目录的访问）</p>
+
+
+
+<h4>步骤六：显示系统被删根 （rm -rf /*） 后的现象<br>6.1 尝试将当前根目录从救援模式的根目录切换到系统的根目录时会报错 “chroot: failed to run command #/bin/bash#: No such file or directory”</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # chroot /mnt
+chroot: failed to run command #/bin/bash#: No such file or directory</code></pre>
+
+
+
+<p>（补充：这里以 /mnt 作为系统根目录为例）</p>
+
+
+
+<p>（注意：因为在使用 rm -rf /* 命令删过根以后，/bin/bash 已经被删除，所以会报错：chroot: failed to run command #/bin/bash#: No such file or directory）</p>
+
+
+
+<h4>6.2 在救援模式显示 /boot 目录里的文件时，会发现此目录下只有 grub2 目录，而此 grub2 目录里也是空的</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # ls /boot 
+grub2</code></pre>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # ls /boot</code></pre>
+
+
+
+<p>此步骤也可以通过以下方法实现：</p>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # ls -l /mounts/mp_0001/boot
+total 0
+......grub2</code></pre>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # ls -l /mounts/mp_0001/boot/grub2
+total 0</code></pre>
+
+
+
+<h4>6.3 在救援模式显示 /bin 目录时，会显示并无此目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # ls /mnt/bin
+ls: cannot access '/mnt/bin' : No such file or directory</code></pre>
+
+
+
+<h4>6.4 在救援模式显示 /etc 目录里的文件时，会发现此目录下只有 lvm 文件</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # ls /etc/
+lvm</code></pre>
+
+
+
+<h4>步骤七：在救援模式修复系统的 /bin 目录和里面的文件<br>7.1 在救援模式创建 /mnt/bin 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mkdir /mnt/bin</code></pre>
+
+
+
+<h4>7.2 在救援模式挂载官方镜像<br>7.2.1 在救援模式创建用于挂载镜像的 /media 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # /media</code></pre>
+
+
+
+<h4>7.2.2 在救援模式挂将官方镜像挂载到 /media 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount /dev/dvd /media</code></pre>
+
+
+
+<h4>7.3 在救援模式安装 bash 软件<br>7.3.1 在救援模式安装拷贝 bash 软件包到当前目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # cp /media/suse/x86_64/bash-4.3-83.23.1.x86_64.rpm .</code></pre>
+
+
+
+<p>（补充：这里以拷贝 /media/suse/x86_64/bash-4.3-83.23.1.x86_64.rpm）</p>
+
+
+
+<h4>7.3.2 在救援模式创建用于安装 bash 软件的 bash 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mkdir bash</code></pre>
+
+
+
+<h4>7.3.3 在救援模式进入 bash 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # cd bash</code></pre>
+
+
+
+<h4>7.3.4 在救援模式安装 bash 软件</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ /bash # rpm2cpio ../bash-4.3-83.23.1.x86_64.rpm | cpio -ivd</code></pre>
+
+
+
+<p>（补充：这里以安装 bash-4.3-83.23.1.x86_64.rpm 软件为例）</p>
+
+
+
+<h4>7.3.5 在救援模式显示安装 bash 软件后生成的目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ /bash # ls
+bin etc usr</code></pre>
+
+
+
+<h4>7.4 在救援模式将 bin 目录拷贝到 /bin/mnt 目录下</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ /bash # cp -rpv bin /mnt/bin
+'bin/bash' -&gt; '/mnt/bin/bash'
+'bin/sh' -&gt; '/mnt/bin/sh'</code></pre>
+
+
+
+<h4>步骤八：将当前的根目录从救援模式的根目录切换到系统的根目录<br>8.1 将当前的根目录从救援模式的根目录切换到系统的根目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ /bash # chroot /mnt</code></pre>
+
+
+
+<p>（补充：这里以 /mnt 作为系统根目录为例）</p>
+
+
+
+<h4>8.2 在系统模式下确认当前的挂载状态</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# mount -a</code></pre>
+
+
+
+<h4>8.3 在系统模式下确认当前根目录下的目录</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# ls
+bin boot dev home lib lib64 mnt opt proc root run sbin selinux srv sys tmp usr var</code></pre>
+
+
+
+<h4>步骤九：锁定有删根 （rm -rf /*<em>） 操作的用户 </em><br><em>9.1 在系统模式显示历史命令以确认有没有用户输入过 rm -rf /</em> 命令</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# history | less</code></pre>
+
+
+
+<h4>9.2 在系统模式显示用户登录记录</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# last | less</code></pre>
+
+
+
+<p>（补充：此时会显示最后登录系统的用户、登陆时间、且可能最后 1 个登录系统的用户无退出时间）</p>
+
+
+
+<h4>9.3 根据步骤 9.1 和步骤 9.2 推测是哪个用户进行过删根 （rm -rf /*） 操作</h4>
+
+
+
+<p>（步骤略）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Linux 网卡的显示</title>
+		<link>https://eternalcenter-now.github.io/network-card/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Wed, 27 Apr 2022 15:36:01 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Computer & System Hardware & System Installation & System Upgradation (系统电脑 & 系统硬件 & 系统安装 & 系统升级)]]></category>
+		<category><![CDATA[System Hardware (系统硬件)]]></category>
+		<category><![CDATA[System Network (系统网络)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23346</guid>
+
+					<description><![CDATA[方法一：ip 命令 方法二：ifconfig 命令 方法三：iwconfig 命令]]></description>
+										<content:encoded><![CDATA[
+<h4>方法一：ip 命令</h4>
+
+
+
+<pre class="wp-block-code"><code># ip a s
+1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 00:1c:42:c9:3c:81 brd ff:ff:ff:ff:ff:ff
+    inet 10.10.10.129/24 brd 10.10.10.255 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet6 fdb2:2c26:f4e4:0:55da:1265:541f:8007/64 scope global temporary dynamic 
+       valid_lft 563315sec preferred_lft 44695sec
+    inet6 fdb2:2c26:f4e4:0:21c:42ff:fec9:3c81/64 scope global dynamic mngtmpaddr 
+       valid_lft 2591846sec preferred_lft 604646sec
+    inet6 fe80::21c:42ff:fec9:3c81/64 scope link 
+       valid_lft forever preferred_lft forever</code></pre>
+
+
+
+<h4>方法二：ifconfig 命令</h4>
+
+
+
+<pre class="wp-block-code"><code># ifconfig
+eth0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
+        inet 10.10.10.129  netmask 255.255.255.0  broadcast 10.10.10.255
+        inet6 fdb2:2c26:f4e4:0:21c:42ff:fec9:3c81  prefixlen 64  scopeid 0x0&lt;global&gt;
+        inet6 fe80::21c:42ff:fec9:3c81  prefixlen 64  scopeid 0x20&lt;link&gt;
+        inet6 fdb2:2c26:f4e4:0:55da:1265:541f:8007  prefixlen 64  scopeid 0x0&lt;global&gt;
+        ether 00:1c:42:c9:3c:81  txqueuelen 1000  (Ethernet)
+        RX packets 698666  bytes 485434755 (462.9 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 372557  bytes 699406543 (667.0 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10&lt;host&gt;
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 73792  bytes 394285172 (376.0 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 73792  bytes 394285172 (376.0 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</code></pre>
+
+
+
+<h4>方法三：<strong>iwconfig</strong> 命令</h4>
+
+
+
+<pre class="wp-block-code"><code># iwconfig 
+lo        no wireless extensions.
+
+eth0      no wireless extensions.
+</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[工具] Shell 显示系统常用信息</title>
+		<link>https://eternalcenter-now.github.io/shell-display-system-common-information/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Tue, 26 Apr 2022 16:14:48 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Languages (语言)]]></category>
+		<category><![CDATA[Shell]]></category>
+		<category><![CDATA[Shell Monitor (监控)]]></category>
+		<category><![CDATA[Shell Tool (工具)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Computer & System Hardware & System Installation & System Upgradation (系统电脑 & 系统硬件 & 系统安装 & 系统升级)]]></category>
+		<category><![CDATA[System Directory (系统目录)]]></category>
+		<category><![CDATA[System Hardware (系统硬件)]]></category>
+		<category><![CDATA[System Network (系统网络)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Performance (系统性能)]]></category>
+		<category><![CDATA[System Port Security (系统端口安全)]]></category>
+		<category><![CDATA[System Process & System Performance (系统进程 & 系统性能)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Software (系统软件)]]></category>
+		<category><![CDATA[System Storage (系统存储)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23311</guid>
+
+					<description><![CDATA[介绍： 作者：朱明宇名称：显示系统常用信息作用：显示系统常用信息 使用方法：1. 在此脚本的分割线内写入相应的内容2. 给此脚本添加执行权限3. 执行此脚本 脚本分割线里的变量：1) times=2 #显示系统常用信息的次数2) sleeptime=0.1 #大部分行与行之间显示的间隔时间 注意：部分功能需要安装了 sysstat 软件或搭建了 KVM 虚拟化平台后执行此脚本的用户能够使用 sudo virsh list 命令后才能实现 脚本：]]></description>
+										<content:encoded><![CDATA[
+<h2>介绍：</h2>
+
+
+
+<p>作者：朱明宇<br>名称：显示系统常用信息<br>作用：显示系统常用信息</p>
+
+
+
+<p>使用方法：<br>1. 在此脚本的分割线内写入相应的内容<br>2. 给此脚本添加执行权限<br>3. 执行此脚本</p>
+
+
+
+<p>脚本分割线里的变量：<br>1) times=2 #显示系统常用信息的次数<br>2) sleeptime=0.1 #大部分行与行之间显示的间隔时间</p>
+
+
+
+<p>注意：部分功能需要安装了 sysstat 软件或搭建了 KVM 虚拟化平台后执行此脚本的用户能够使用 sudo virsh list 命令后才能实现</p>
+
+
+
+<h2>脚本：</h2>
+
+
+
+<pre class="wp-block-code"><code>#!/bin/bash
+
+####################### Separator ########################
+times=2
+sleeptime=0.1
+####################### Separator ########################
+
+nowtime=1
+
+while (( nowtime &lt;= times))
+do
+        echo -e "Start Monitoring: \c"
+	for i in {1..100}
+	do
+	        echo -e "#\c"
+		sleep 0.01
+        done
+	echo
+
+	sleep $sleeptime
+        host=`hostname`
+        echo -e "Name:\t\t\t\t\t\t \033&#91;1m$host\033&#91;0m"
+
+        ip=`ip a s | awk '/&#91;1-2]?&#91;0-9]{0,2}\.&#91;1-2]?&#91;0-9]{0,2}/&amp;&amp;!/127.0.0.1/{print $2}' | awk -F/ '{print $1}'`
+        for iip in `echo $ip`
+        do
+		sleep $sleeptime
+                echo -e "IP Address:\t\t\t\t\t \033&#91;1m$iip\033&#91;0m"
+        done
+
+        sleep $sleeptime
+
+        cpu=`top -bn 1 | awk -F',' '/^%Cpu/{print $4 }' | awk '{print $1}' | awk '{print 100-$1}'`
+        echo -e "CPU Usage (Total):\t\t\t\t \033&#91;1m$cpu%\033&#91;0m"
+
+        sleep $sleeptime
+
+        mem=`free | grep Mem | awk '{print $3/$2 * 100.0}' | egrep -o "&#91;1]?&#91;0-9]{0,2}\.&#91;0-9]"`
+        echo -e "Memory Usage (Total):\t\t\t\t \033&#91;1m$mem%\033&#91;0m"
+
+	directory=`df -h | grep -v run | grep -v boot | awk '$1~/\/dev/{print $6}'`
+        for idirectory in `echo $directory`
+        do
+                sleep $sleeptime
+                directoryusage=`df -h | grep -v run | grep -v boot | awk '$1~/\/dev/{print}' | grep $idirectory$ | awk '{print $5}'`
+		if &#91; $idirectory == / -o $idirectory == /ec  ];then
+                        echo -e "Directory Usage ($idirectory):\t\t\t\t \033&#91;1m$directoryusage\033&#91;0m"
+	        else
+                        echo -e "Directory Usage ($idirectory):\t\t\t \033&#91;1m$directoryusage\033&#91;0m"
+		fi
+        done
+
+	sudo -l | grep 'virsh list' &amp;&gt; /dev/null
+        if &#91; $? -eq 0 ];then
+	        sleep $sleeptime
+	        virtual=`sudo virsh list | egrep &#91;0-9] | wc -l`
+	        echo -e "Number of Virtual Machines (Total):\t\t \033&#91;1m$virtual\033&#91;0m"
+        fi
+
+        sleep $sleeptime
+
+        user=`who | wc -l`
+        echo -e "Number of User Logins (Total):\t\t\t \033&#91;1m$user\033&#91;0m"
+
+        soft=`rpm -qa | wc -l`
+        echo -e "Number of Softwares (Total):\t\t\t \033&#91;1m$soft\033&#91;0m"
+
+        sleep $sleeptime
+
+        port=`ss -ntulap | wc -l`
+        echo -e "Number of Open Ports (Total):\t\t\t \033&#91;1m$port\033&#91;0m"
+
+        which sar &amp;&gt; /dev/null
+        if &#91; $? -eq 0 ];then
+                networkcard=`ifconfig | awk -F: '/flags/&amp;&amp;!/lo/{print $1}'`
+                for inetworkcard in `echo $networkcard`
+                do
+                        networkread="`sar -n DEV 1 1 | grep $inetworkcard | awk '/&#91;0-9]&#91;0-9]:&#91;0-9]&#91;0-9]/{print $3/1000}'` m/s"
+                        networkwrite="`sar -n DEV 1 1 | grep $inetworkcard | awk '/&#91;0-9]&#91;0-9]:&#91;0-9]&#91;0-9]/{print $4/1000}'` m/s"
+			echo $inetworkcard | grep eth &amp;&gt; /dev/null
+			if &#91; $?  -ne 0 ];then
+	                echo -e "Network Card IO ($inetworkcard):\t\t\t \033&#91;1m$networkread\033&#91;0m (Read)\t\033&#91;1m$networkwrite\033&#91;0m (Write)"
+		        else
+	                echo -e "Network Card IO ($inetworkcard):\t\t\t\t \033&#91;1m$networkread\033&#91;0m (Read)\t\033&#91;1m$networkwrite\033&#91;0m (Write)"
+			fi
+                done
+        fi
+
+        which iostat &amp;&gt; /dev/null
+        if &#91; $? -eq 0 ];then
+	        disk=`iostat -d -k 1 1 | awk '!/^$/&amp;&amp;!/Device/&amp;&amp;!/Linux/{print $1}'`
+                for idisk in `echo $disk`
+	        do
+			sleep $sleeptime
+		        diskread="`iostat -d -k 1 1 | grep $idisk |  awk '{print $3/1000}'` m/s"
+		        diskwrite="`iostat -d -k 1 1 | grep $idisk |  awk '{print $4/1000}'` m/s"
+			echo $idisk | grep 'nvme' &amp;&gt; /dev/null
+			if &#91; $? -eq 0 ];then
+		                echo -e "Disk IO (/dev/$idisk):\t\t\t\t \033&#91;1m$diskread\033&#91;0m (Read)\t\033&#91;1m$diskwrite\033&#91;0m (Write)"
+		        else
+		                echo -e "Disk IO (/dev/$idisk):\t\t\t\t \033&#91;1m$diskread\033&#91;0m (Read)\t\033&#91;1m$diskwrite\033&#91;0m (Write)"
+			fi
+	        done
+
+        fi
+
+        echo -e "Complete Monitoring: \c"
+        for i in {1..97}
+        do
+                echo -e "#\c"
+                sleep 0.01
+        done
+        echo
+        sleep $sleeptime
+
+        let nowtime++
+done
+
+        echo -e "Terminal Monitoring: \c"
+        for i in {1..97}
+        do
+                echo -e "#\c"
+                sleep 0.01
+        done
+
+exit</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] iptables 防火墙规则持久化 （让防火墙规则开机自启）</title>
+		<link>https://eternalcenter-now.github.io/iptables-rule-permanent/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 25 Apr 2022 07:28:11 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Firewall (系统防火墙)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network (系统网络)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Port Security (系统端口安全)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23270</guid>
+
+					<description><![CDATA[内容一：Rocky Linux &#38; RHEL iptables 防火墙规则持久化 内容二：Rocky Linux &#38; RHEL 和 openSUSE &#38; SUSE iptables 防火墙规则持久化2.1 导出现在 iptables 防火墙的规则 （补充：这里以将 iptables 防火墙规则导出到 /root/iptables_save 文件为例） 2.2 创建用于加载 iptables 防火墙规则的 systemctl 管理文件 创建以下内容： （补充：这里以创建 systemctl 管理文件 /etc/systemd/system/iptables_save.service 将 /root/iptables_save 文件里的内容导入到 iptables 防火墙为例） 2.3 加载刚刚创建的 systemctl 管理文件 2.4 给刚刚创建的 systemctl 管理文件添加执行权限 （补充：这里以给 systemctl 管理文件 /etc/systemd/system/iptables_save.service 添加执行权限为例） 2.5 让防火墙规则开机自启 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/iptables-rule-permanent/" class="more-link">Continue reading<span class="screen-reader-text"> "[内容] iptables 防火墙规则持久化 （让防火墙规则开机自启）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h4>内容一：Rocky Linux &amp; RHEL iptables 防火墙规则持久化</h4>
+
+
+
+<pre class="wp-block-code"><code># service iptables save</code></pre>
+
+
+
+<h4>内容二：Rocky Linux &amp; RHEL 和 openSUSE &amp; SUSE iptables 防火墙规则持久化<br>2.1 导出现在 iptables 防火墙的规则</h4>
+
+
+
+<pre class="wp-block-code"><code># iptables-save &gt; /root/iptables_save</code></pre>
+
+
+
+<p>（补充：这里以将 iptables 防火墙规则导出到 /root/iptables_save 文件为例）</p>
+
+
+
+<h4>2.2 创建用于加载 iptables 防火墙规则的 systemctl 管理文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/systemd/system/iptables_save.service</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>&#91;Unit]
+Description=iptables_save
+After=default.target
+
+&#91;Service]
+Type=oneshot
+ExecStart=/usr/sbin/iptables-restore &lt; /root/iptables_save
+
+&#91;Install]
+WantedBy=default.target</code></pre>
+
+
+
+<p>（补充：这里以创建 systemctl 管理文件 /etc/systemd/system/iptables_save.service 将 /root/iptables_save 文件里的内容导入到 iptables 防火墙为例）</p>
+
+
+
+<h4>2.3 加载刚刚创建的 systemctl 管理文件</h4>
+
+
+
+<pre class="wp-block-code"><code># systemctl daemon-reload</code></pre>
+
+
+
+<h4>2.4 给刚刚创建的 systemctl 管理文件添加执行权限</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod u+x /etc/systemd/system/iptables_save.service</code></pre>
+
+
+
+<p>（补充：这里以给 systemctl 管理文件 /etc/systemd/system/iptables_save.service 添加执行权限为例）</p>
+
+
+
+<h4>2.5 让防火墙规则开机自启</h4>
+
+
+
+<pre class="wp-block-code"><code># systemctl enable iptables_save.service</code></pre>
+
+
+
+<p>（补充：这里以开机自启 iptables_save.service 服务为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] iptables 防火墙规则的导出和导入</title>
+		<link>https://eternalcenter-now.github.io/iptables-rule-export-import/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 25 Apr 2022 07:20:19 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Firewall (系统防火墙)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network (系统网络)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Port Security (系统端口安全)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23267</guid>
+
+					<description><![CDATA[内容一：导出 iptables 防火墙规则 （补充：这里以将 iptables 防火墙规则导出到 /root/iptables_save 文件为例） 内容二：导入 iptables 防火墙规则 （补充：这里以将 /root/iptables_save 文件里的内容导入到 iptables 防火墙为例）]]></description>
+										<content:encoded><![CDATA[
+<h4>内容一：导出 iptables 防火墙规则</h4>
+
+
+
+<pre class="wp-block-code"><code># iptables-save &gt; /root/iptables_save</code></pre>
+
+
+
+<p>（补充：这里以将 iptables 防火墙规则导出到 /root/iptables_save 文件为例）</p>
+
+
+
+<h4>内容二：导入 iptables 防火墙规则</h4>
+
+
+
+<pre class="wp-block-code"><code># iptables-restore &lt; /root/iptables_save</code></pre>
+
+
+
+<p>（补充：这里以将 /root/iptables_save 文件里的内容导入到 iptables 防火墙为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Linux SNMPv3 客户端自查 （检查 SNMPv3 客户端是否能正常传输数据）</title>
+		<link>https://eternalcenter-now.github.io/snmpv3-client-check/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 25 Apr 2022 07:04:26 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System General Log (系统普通日志)]]></category>
+		<category><![CDATA[System Log (系统日志)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23261</guid>
+
+					<description><![CDATA[]]></description>
+										<content:encoded><![CDATA[
+<pre class="wp-block-code"><code># snmpwalk -v3 -u siemens -l authNoPriv -a MD5 -x DES -A '&lt;user&gt;' -X '&lt;password&gt;' localhost</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 tcpdump （网络抓包）</title>
+		<link>https://eternalcenter-now.github.io/tcpdump/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Tue, 19 Apr 2022 04:09:50 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Network (系统网络)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23246</guid>
+
+					<description><![CDATA[将所有抓到的网络数据包 （注意：此时会抓取所有的网络数据包，并保存到文件 /tmp/telnet.cap，想要退出则同时按下 “ctrl” 键和 “c” 键） （补充：这里以将所有抓到的信息导出到 /tmp/telnet.cap 文件为例）]]></description>
+										<content:encoded><![CDATA[
+<p>将所有抓到的网络数据包</p>
+
+
+
+<pre class="wp-block-code"><code># tcpdump -i any -w /tmp/telnet.cap</code></pre>
+
+
+
+<p>（注意：此时会抓取所有的网络数据包，并保存到文件 /tmp/telnet.cap，想要退出则同时按下 “ctrl” 键和 “c” 键）</p>
+
+
+
+<p>（补充：这里以将所有抓到的信息导出到 /tmp/telnet.cap 文件为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] 全球公共免费 DNS</title>
+		<link>https://eternalcenter-now.github.io/free-dns/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Thu, 14 Apr 2022 15:24:23 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[DNS]]></category>
+		<category><![CDATA[Other Services (其他服务)]]></category>
+		<category><![CDATA[Services (服务)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Network (系统网络)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23164</guid>
+
+					<description><![CDATA[AdGuard Cloudflare COMODO DNS Watch Dyn Level 3 Neustar FreeDNS Google OpenDNS SAFEDNS Symantec]]></description>
+										<content:encoded><![CDATA[
+<h2>AdGuard</h2>
+
+
+
+<pre class="wp-block-code"><code>94.140.14.14
+94.140.14.15
+94.140.15.15
+94.140.15.16</code></pre>
+
+
+
+<h2>Cloudflare</h2>
+
+
+
+<pre class="wp-block-code"><code>1.0.0.1
+1.0.0.2
+1.0.0.3
+1.1.1.1
+1.1.1.2
+1.1.1.3</code></pre>
+
+
+
+<h2>COMODO</h2>
+
+
+
+<pre class="wp-block-code"><code>8.20.247.20
+8.26.56.26</code></pre>
+
+
+
+<h2>DNS Watch</h2>
+
+
+
+<pre class="wp-block-code"><code>84.200.69.80
+84.200.70.40</code></pre>
+
+
+
+<h2>Dyn</h2>
+
+
+
+<pre class="wp-block-code"><code>216.146.35.35
+216.146.36.36</code></pre>
+
+
+
+<h2>Level 3</h2>
+
+
+
+<pre class="wp-block-code"><code>209.244.0.3
+209.244.0.4</code></pre>
+
+
+
+<h2>Neustar</h2>
+
+
+
+<pre class="wp-block-code"><code>156.154.70.1
+156.154.71.1</code></pre>
+
+
+
+<h2>FreeDNS</h2>
+
+
+
+<pre class="wp-block-code"><code>37.235.1.174
+37.235.1.177</code></pre>
+
+
+
+<h2>Google</h2>
+
+
+
+<pre class="wp-block-code"><code>8.8.4.4
+8.8.8.8</code></pre>
+
+
+
+<h2>OpenDNS</h2>
+
+
+
+<pre class="wp-block-code"><code>208.67.220.220
+208.67.222.222</code></pre>
+
+
+
+<h2>SAFEDNS</h2>
+
+
+
+<pre class="wp-block-code"><code>195.46.39.39
+195.46.39.40</code></pre>
+
+
+
+<h2>Symantec</h2>
+
+
+
+<pre class="wp-block-code"><code>199.85.126.10
+199.85.137.10</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[排错] 解决 SSH 远程登录时很慢但 ping 时延迟很低</title>
+		<link>https://eternalcenter-now.github.io/debug-ssh-slow/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Wed, 13 Apr 2022 15:15:39 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Network (系统网络)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23106</guid>
+
+					<description><![CDATA[分析： ssh 远程某台服务器时很慢，但是 ping 时延迟却很低。这可能是 DNS 解析出现问题造成的，禁用服务器上 sshd 的 GSSAPIAuthentication 参数和 UseDNS 参数可以解决，这两个参数的作用是：1) GSSAPIAuthentication，当服务器的 sshd 服务此参数处于开启状态时，客户端 SSH 登录此服务器时，客户端会对服务器的 IP 地址进行 PTR 反解析，获得服务器的域名，再通过服务器的域名对服务器进行 DNS A 正向 IP 地址解析，通过此方法来防止欺骗。2) UseDNS，当服务器的 sshd 服务此参数处于开启状态时，客户端 SSH 登录此服务器时，服务器会对客户端的 IP 地址进行反解析，获得客户端的域名，再通过客户端的域名对客户端进行 DNS A 正向 IP 地址解析，通过此方法来防止欺骗。 解决方法： 步骤一：修改 SSH 的配置文件 将以下内容： 修改为： 步骤二：让修改的 SSH 配置文件生效]]></description>
+										<content:encoded><![CDATA[
+<h2>分析：</h2>
+
+
+
+<p>ssh 远程某台服务器时很慢，但是 ping 时延迟却很低。这可能是 DNS 解析出现问题造成的，禁用服务器上 sshd 的 GSSAPIAuthentication 参数和 UseDNS 参数可以解决，这两个参数的作用是：<br>1) GSSAPIAuthentication，当服务器的 sshd 服务此参数处于开启状态时，客户端 SSH 登录此服务器时，客户端会对服务器的 IP 地址进行 PTR 反解析，获得服务器的域名，再通过服务器的域名对服务器进行 DNS A 正向 IP 地址解析，通过此方法来防止欺骗。<br>2) UseDNS，当服务器的 sshd 服务此参数处于开启状态时，客户端 SSH 登录此服务器时，服务器会对客户端的 IP 地址进行反解析，获得客户端的域名，再通过客户端的域名对客户端进行 DNS A 正向 IP 地址解析，通过此方法来防止欺骗。</p>
+
+
+
+<h2>解决方法：</h2>
+
+
+
+<h4>步骤一：修改 SSH 的配置文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/ssh/sshd_conf</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+UseDNS yes
+......
+GSSAPIAuthentication yes
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+UseDNS no
+......
+GSSAPIAuthentication no
+......</code></pre>
+
+
+
+<h4>步骤二：让修改的  SSH 配置文件生效</h4>
+
+
+
+<pre class="wp-block-code"><code># systemctl restart sshd</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[排错] 解决 Linux 运行 authselect 命令时报错 “[error] [/etc/authselect/system-auth] has unexpected content!” 或者 “[error] [/etc/authselect/password-auth] has unexpected content!”</title>
+		<link>https://eternalcenter-now.github.io/debug-error-etc-authselect-system-auth-has-unexpected-content-or-error-etc-authselect-passwor/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 11 Apr 2022 15:40:00 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<category><![CDATA[System User (系统用户)]]></category>
+		<category><![CDATA[System User & System Privilege (系统用户 & 系统权限)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23013</guid>
+
+					<description><![CDATA[报错代码： 或者： 或者： 分析： /etc/authselect/system-auth 文件或 /etc/authselect/password-auth 文件是不应该被手动修改的，如果被手动修改了，再使用 authselect select sssd 命令或者 authselect apply-changes 命令时则会有此类报错 解决方法： （注意：此方法会刷新 /etc/authselect/system-auth 文件和 /etc/authselect/password-auth 文件里的所有内容）]]></description>
+										<content:encoded><![CDATA[
+<h2>报错代码：</h2>
+
+
+
+<pre class="wp-block-code"><code>&#91;error] &#91;/etc/authselect/system-auth] has unexpected content!
+&#91;error] &#91;/etc/authselect/password-auth] has unexpected content!
+&#91;error] Unexpected changes to the configuration were detected.
+&#91;error] Refusing to activate profile unless those changes are removed or overwrite is requested.</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code>&#91;error] &#91;/etc/authselect/system-auth] has unexpected content!
+&#91;error] Unexpected changes to the configuration were detected.
+&#91;error] Refusing to activate profile unless those changes are removed or overwrite is requested.</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code>&#91;error] &#91;/etc/authselect/password-auth] has unexpected content!
+&#91;error] Unexpected changes to the configuration were detected.
+&#91;error] Refusing to activate profile unless those changes are removed or overwrite is requested.</code></pre>
+
+
+
+<h2>分析：</h2>
+
+
+
+<p>/etc/authselect/system-auth 文件或 /etc/authselect/password-auth 文件是不应该被手动修改的，如果被手动修改了，再使用 authselect select sssd 命令或者 authselect apply-changes 命令时则会有此类报错</p>
+
+
+
+<h2>解决方法：</h2>
+
+
+
+<pre class="wp-block-code"><code># authselect apply-changes</code></pre>
+
+
+
+<p>（注意：此方法会刷新 /etc/authselect/system-auth 文件和 /etc/authselect/password-auth 文件里的所有内容）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Linux 常用日志 （openSUSE &#038; SUSE 版）</title>
+		<link>https://eternalcenter-now.github.io/log-opensusesuse/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Thu, 07 Apr 2022 09:24:12 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Computer & System Hardware & System Installation & System Upgradation (系统电脑 & 系统硬件 & 系统安装 & 系统升级)]]></category>
+		<category><![CDATA[System General Log (系统普通日志)]]></category>
+		<category><![CDATA[System Hardware (系统硬件)]]></category>
+		<category><![CDATA[System Log (系统日志)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Security Log (系统安全日志)]]></category>
+		<category><![CDATA[System Statistic Log (系统统计日志)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=22930</guid>
+
+					<description><![CDATA[1) /var/log/boot.msg，包含系统启动时显示在屏幕上的信息（补充：当进入系统时，可以同时按下 “ctrl” 键和 “alt” 键和 “f10” 键切换到显示日志的界面，之后可以再通过 KVM 显示系统启动时显示在屏幕上的信息。）2) /var/log/boot.omsg，包含上一次系统启动时显示在屏幕上的信息3) /var/log/messages，包含几乎所有日志4) /var/log/warn，包含 WARNING 也就是级别 4 以上的所有日志5) /var/log/wtmp，包含和系统登陆和重启的所有日志（补充：可以通过 last 命令读取）6) /var/log/YaST2/y2log，包含 YaST 的所有日志7) /var/log/xinetd.log，包含 xinetd 服务的所有日志8) /var/log/dump/，包含 Kdump 工具在系统宕机时收集的所有故障信息9) /var/log/atop，包含 Atop 工具收集的系统资源 （CPU、内存、系统进程、IO） 的所有使用信息]]></description>
+										<content:encoded><![CDATA[
+<p>1) /var/log/boot.msg，包含系统启动时显示在屏幕上的信息<br>（补充：当进入系统时，可以同时按下 “ctrl” 键和 “alt” 键和 “f10” 键切换到显示日志的界面，之后可以再通过 KVM 显示系统启动时显示在屏幕上的信息。）<br>2) /var/log/boot.omsg，包含上一次系统启动时显示在屏幕上的信息<br>3) /var/log/messages，包含几乎所有日志<br>4) /var/log/warn，包含 WARNING 也就是级别 4 以上的所有日志<br>5) /var/log/wtmp，包含和系统登陆和重启的所有日志<br>（补充：可以通过 last 命令读取）<br>6) /var/log/YaST2/y2log，包含 YaST 的所有日志<br>7) /var/log/xinetd.log，包含 xinetd 服务的所有日志<br>8) /var/log/dump/，包含 Kdump 工具在系统宕机时收集的所有故障信息<br>9) /var/log/atop，包含 Atop 工具收集的系统资源 （CPU、内存、系统进程、IO） 的所有使用信息</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 mtr （检测网络联通性）</title>
+		<link>https://eternalcenter-now.github.io/mtr/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 04 Apr 2022 08:45:34 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Network (系统网络)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=22681</guid>
+
+					<description><![CDATA[案例一：一直测试某 1 个 IP 地址的联通性并边测试边显示状况 或者： （补充：1) 这里以测试 8.8.8.8 IP 地址为例2) -n 和 &#8211;no-dns 参数代表不使用 DNS 解析主机名） 案例二：测试某 1 个 IP 地址 100 次的联通性并边测试边显示状况 或者： （补充：1) 这里以测试 8.8.8.8 IP 地址为例2) -n 和 &#8211;no-dns 参数代表不使用 DNS 解析主机名3) -c 和 &#8211;report-cycles 参数代表指定次数） 案例三：测试某 1 个域名 100 次的联通性并显示最终报告 或者： （补充：1) 这里以测试 eternalcenter.com 域名为例2) -n 和 &#8211;no-dns 参数代表不使用 DNS &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/mtr/" class="more-link">Continue reading<span class="screen-reader-text"> "[命令] Linux 命令 mtr （检测网络联通性）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h4>案例一：一直测试某 1 个 IP 地址的联通性并边测试边显示状况</h4>
+
+
+
+<pre class="wp-block-code"><code># mtr -n 8.8.8.8</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># mtr --no-dns 8.8.8.8</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里以测试 8.8.8.8 IP 地址为例<br>2) -n 和 &#8211;no-dns 参数代表不使用 DNS 解析主机名<br>）</p>
+
+
+
+<h4>案例二：测试某 1 个 IP 地址 100 次的联通性并边测试边显示状况</h4>
+
+
+
+<pre class="wp-block-code"><code># mtr -nc 100 8.8.8.8</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># mtr --no-dns --report-cycles 100 8.8.8.8</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里以测试 8.8.8.8 IP 地址为例<br>2) -n 和 &#8211;no-dns 参数代表不使用 DNS 解析主机名<br>3) -c 和 &#8211;report-cycles 参数代表指定次数<br>）</p>
+
+
+
+<h4>案例三：测试某 1 个域名 100 次的联通性并显示最终报告</h4>
+
+
+
+<pre class="wp-block-code"><code># mtr -nrc 100 eternalcenter.com</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># mtr --no-dns --report --report-cycles 100 eternalcenter.com</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里以测试 eternalcenter.com 域名为例<br>2) -n 和 &#8211;no-dns 参数代表不使用 DNS 解析主机名<br>3) -r 和 &#8211;report 参数代表生成最终报告<br>4) -c 和 &#8211;report-cycles 参数代表指定次数<br>）</p>
+
+
+
+<h4>案例四：测试某 1 个域名 TCP 443 端口 100 次的联通性并显示最终报告</h4>
+
+
+
+<pre class="wp-block-code"><code># mtr -TP 443 -nrc 100 eternalcenter.com</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># mtr --tcp --port 443 --no-dns --report --report-cycles 100 eternalcenter.com</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里以测试 eternalcenter.com 域名的 443 端口为例<br>2) -n 和 &#8211;no-dns 参数代表不使用 DNS 解析主机名<br>3) -r 和 &#8211;report 参数代表生成最终报告<br>4) -c 和 &#8211;report-cycles 参数代表指定次数<br>5) -T 和 &#8211;tcp 参数代表指定 TCP<br>6) -P 和 &#8211;port 参数代表指定端口号<br>）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 nc （检查网络端口的联通性）</title>
+		<link>https://eternalcenter-now.github.io/nc/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sun, 03 Apr 2022 13:46:48 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Network (系统网络)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=22565</guid>
+
+					<description><![CDATA[案例一：检查某 1 个域名某 1 个 TCP 端口的联通性 （补充：这里以检测 eternalcenter.com 域名的 TCP 443 端口为例） 案例二：检查某 1 个 IP 地址某 1 个 TCP 端口的联通性 （补充：这里以检测 8.8.8.8 IP 地址的 TCP 443 端口为例） 案例三：检查某 1 个域名某 1 个 UDP 端口的联通性 （补充：这里以检测 eternalcenter.com 域名的 UDP 69 端口为例） 案例四：检查某 1 个 IP 地址某 1 个 UDP 端口的联通性 （补充：这里以检测 8.8.8.8 IP 地址的 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/nc/" class="more-link">Continue reading<span class="screen-reader-text"> "[命令] Linux 命令 nc （检查网络端口的联通性）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h4>案例一：检查某 1 个域名某 1 个 TCP 端口的联通性</h4>
+
+
+
+<pre class="wp-block-code"><code># nc -v -z eternalcenter.com 443</code></pre>
+
+
+
+<p>（补充：这里以检测 eternalcenter.com 域名的 TCP 443 端口为例）</p>
+
+
+
+<h4>案例二：检查某 1 个 IP 地址某 1 个 TCP 端口的联通性</h4>
+
+
+
+<pre class="wp-block-code"><code># nc -v -z 8.8.8.8 443</code></pre>
+
+
+
+<p>（补充：这里以检测 8.8.8.8 IP 地址的 TCP 443 端口为例）</p>
+
+
+
+<h4>案例三：检查某 1 个域名某 1 个 UDP 端口的联通性</h4>
+
+
+
+<pre class="wp-block-code"><code># nc -v -z -u eternalcenter.com 69</code></pre>
+
+
+
+<p>（补充：这里以检测 eternalcenter.com 域名的 UDP 69 端口为例）</p>
+
+
+
+<h4>案例四：检查某 1 个 IP 地址某 1 个 UDP 端口的联通性</h4>
+
+
+
+<pre class="wp-block-code"><code># nc -v -z -u 8.8.8.8 69</code></pre>
+
+
+
+<p>（补充：这里以检测 8.8.8.8 IP 地址的 UDP 69 端口为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Linux 提高触发 Kdump 的几率</title>
+		<link>https://eternalcenter-now.github.io/kdump-probability-increase/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 18 Feb 2022 09:12:39 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System General Log (系统普通日志)]]></category>
+		<category><![CDATA[System Log (系统日志)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=22075</guid>
+
+					<description><![CDATA[注意： 在提高触发 Kdump 的几率之前要先开启 Kdump： 正文： 步骤一：配置提高触发 Kdump 几率的参数1.1 配置提高触发 Kdump 几率的参数 添加以下内容： 1.2 让刚刚配置的参数生效 （注意：此时每有一次软锁都会触发 Kdump） 步骤二：当 Kdmup 触发后分析奔溃的信息 步骤三；删除提高触发 Kdump 几率的参数 （重要）3.1 删除提高触发 Kdump 几率的参数 （重要） 删除以下内容： 3.2 让刚刚删除参数的配置生效 （重要） （注意：此时每有一次软锁都会触发 Kdump） 参考文献： https://www.suse.com/support/kb/doc/?id=000019217]]></description>
+										<content:encoded><![CDATA[
+<h2 id="注意">注意：</h2>
+
+
+
+<p>在提高触发 Kdump 的几率之前要先开启 Kdump：</p>
+
+
+
+<div class="wp-container-1 wp-block-buttons">
+<div class="wp-block-button aligncenter is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/kdump/">Linux Kdump 的开启 <br>（用于收集内核崩溃时的信息）</a></div>
+</div>
+
+
+
+<h2 id="正文">正文：</h2>
+
+
+
+<h4 id="步骤一-配置提高触发-kdump-几率的参数1-1-配置提高触发-kdump-几率的参数">步骤一：配置提高触发 Kdump 几率的参数<br>1.1 配置提高触发 Kdump 几率的参数</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/sysctl.conf</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+kernel.softlockup_panic = 1</code></pre>
+
+
+
+<h4 id="1-2-让刚刚配置的参数生效">1.2 让刚刚配置的参数生效</h4>
+
+
+
+<pre class="wp-block-code"><code># sysctl -p</code></pre>
+
+
+
+<p>（注意：此时每有一次软锁都会触发 Kdump）</p>
+
+
+
+<h4 id="步骤二-当-kdmup-触发后分析奔溃的信息">步骤二：当 Kdmup 触发后分析奔溃的信息</h4>
+
+
+
+<div class="wp-container-2 wp-block-buttons">
+<div class="wp-block-button aligncenter is-style-outline"><a class="wp-block-button__link" href="https://eternalcenter-now.github.io/kdump-analysis/" style="border-radius:0px">Linux Kdump 内核奔溃信息的分析</a></div>
+</div>
+
+
+
+<h4 id="步骤三-删除提高触发-kdump-几率的参数-重要-3-1-删除提高触发-kdump-几率的参数-重要">步骤三；删除提高触发 Kdump 几率的参数 （重要）<br>3.1 删除提高触发 Kdump 几率的参数 （重要）</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/sysctl.conf</code></pre>
+
+
+
+<p>删除以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+kernel.softlockup_panic = 1</code></pre>
+
+
+
+<h4 id="3-2-让刚刚删除参数的配置生效-重要">3.2 让刚刚删除参数的配置生效 （重要）</h4>
+
+
+
+<pre class="wp-block-code"><code># sysctl -p</code></pre>
+
+
+
+<p>（注意：此时每有一次软锁都会触发 Kdump）</p>
+
+
+
+<h2>参考文献：</h2>
+
+
+
+<p class="has-text-align-center">https://www.suse.com/support/kb/doc/?id=000019217</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Linux Kdump 的触发 （魔术键版）</title>
+		<link>https://eternalcenter-now.github.io/kdump-trigger-magic-key/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Thu, 17 Feb 2022 09:25:43 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System General Log (系统普通日志)]]></category>
+		<category><![CDATA[System Log (系统日志)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=22041</guid>
+
+					<description><![CDATA[注意： 在触发 Kdump 之前要先开启 Kdump： 正文： 步骤一：在本地登陆系统 （步骤略） 步骤二：强制同步屏幕 同时按下 “Left” 键和 “Alt” 键和 “Print Screen” 键和 “s” 键 步骤三：触发 Kdump 同时按下 “Left” 键和 “Alt” 键和 “Print Screen” 键和 “c” 键]]></description>
+										<content:encoded><![CDATA[
+<h2 id="注意">注意：</h2>
+
+
+
+<p>在触发 Kdump 之前要先开启 Kdump：</p>
+
+
+
+<div class="wp-container-3 wp-block-buttons">
+<div class="wp-block-button aligncenter is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/kdump/">Linux Kdump 的开启 <br>（用于收集内核崩溃时的信息）</a></div>
+</div>
+
+
+
+<h2 id="正文">正文：</h2>
+
+
+
+<h4 id="步骤一-在本地登陆系统">步骤一：在本地登陆系统</h4>
+
+
+
+<p>（步骤略）</p>
+
+
+
+<h4 id="步骤二-强制同步屏幕">步骤二：强制同步屏幕</h4>
+
+
+
+<p>同时按下 “Left” 键和 “Alt” 键和 “Print Screen” 键和 “s” 键</p>
+
+
+
+<h4 id="步骤三-触发-kdump">步骤三：触发 Kdump</h4>
+
+
+
+<p>同时按下 “Left” 键和 “Alt” 键和 “Print Screen” 键和 “c” 键</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[工具] Shell 监控普通登录记录 （排除 SFTP 登录记录只监控普通登录记录）</title>
+		<link>https://eternalcenter-now.github.io/shell-login-log-exclude-sftp/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Tue, 15 Feb 2022 14:52:50 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Languages (语言)]]></category>
+		<category><![CDATA[Other Services (其他服务)]]></category>
+		<category><![CDATA[Services (服务)]]></category>
+		<category><![CDATA[SFTP]]></category>
+		<category><![CDATA[Shell]]></category>
+		<category><![CDATA[Shell Monitor (监控)]]></category>
+		<category><![CDATA[Shell Tool (工具)]]></category>
+		<category><![CDATA[Storage Services (存储服务)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System General Log (系统普通日志)]]></category>
+		<category><![CDATA[System Log (系统日志)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=21977</guid>
+
+					<description><![CDATA[注意： 在排除 SFTP 登录记录只监控普通登录记录前要先开启 SFTP 日志： 介绍： 作者：朱明宇名称：监控普通登录记录 （排除 SFTP 登录记录只监控普通登录记录）作用：监控普通登录记录 （排除 SFTP 登录记录只监控普通登录记录） 使用方法：1. 在此脚本的分割线内写入相应的内容2. 给此脚本添加执行权限3. 执行此脚本4. 普通登录记录会同时记录在系统日志和 $logfile 里 脚本分割线里的变量：1. logfile=logfile.txt #用户保存记录的文件2. prompt=&#8221;and no sftp info&#8221; #记录里普通登录记录的文件 脚本：]]></description>
+										<content:encoded><![CDATA[
+<h2 id="注意">注意：</h2>
+
+
+
+<p>在排除 SFTP 登录记录只监控普通登录记录前要先开启 SFTP 日志：</p>
+
+
+
+<div class="wp-container-4 wp-block-buttons">
+<div class="wp-block-button aligncenter is-style-outline"><a class="wp-block-button__link" href="https://eternalcenter-now.github.io/sftp-log/" style="border-radius:0px">SFTP 日志的开启</a></div>
+</div>
+
+
+
+<h2 id="介绍">介绍：</h2>
+
+
+
+<p>作者：朱明宇<br>名称：监控普通登录记录 （排除 SFTP 登录记录只监控普通登录记录）<br>作用：监控普通登录记录 （排除 SFTP 登录记录只监控普通登录记录）</p>
+
+
+
+<p>使用方法：<br>1. 在此脚本的分割线内写入相应的内容<br>2. 给此脚本添加执行权限<br>3. 执行此脚本<br>4. 普通登录记录会同时记录在系统日志和 $logfile 里</p>
+
+
+
+<p>脚本分割线里的变量：<br>1. logfile=logfile.txt #用户保存记录的文件<br>2. prompt=&#8221;and no sftp info&#8221; #记录里普通登录记录的文件</p>
+
+
+
+<h2 id="脚本">脚本：</h2>
+
+
+
+<pre class="wp-block-code"><code>#!/bin/bash
+
+####################### Separator ########################
+
+logfile=logfile.txt
+prompt="and no sftp info"
+
+####################### Separator ########################
+
+checktime=`date +%Y-%m-%dT%H -d "-1 day"`
+
+for i in `cat -n /var/log/messages | grep $check_time | grep 'Started Session' | grep -v 'root' | awk '{print $1}'`
+
+do
+   line=`sed -n $&#91;i]p /var/log/messages`
+   time=`echo $line | awk '{print $1}'`
+   session=`echo $line | awk '{print $6}'`
+   user=`echo $line | awk '{print $9}'`
+   user=${user%.}
+
+   message="ACCESS CHECK LOG: Time:$time Session:$session $user has accessed `hostname`, $prompt"
+
+   let sftpline=i+3
+
+   sed -n $&#91;sftpline]p /var/log/messages | grep sftp-server &amp;&gt; /dev/null
+   if &#91; $? -ne 0 ];then
+           echo $message
+           echo $message &gt;&gt; $logfile.txt
+           logger $message
+   fi
+   echo
+done</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 目标网站 SSL 证书的显示 （OpenSSL 版）</title>
+		<link>https://eternalcenter-now.github.io/ssl-display-openssl/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Tue, 15 Feb 2022 13:39:10 +0000</pubDate>
+				<category><![CDATA[Apache]]></category>
+		<category><![CDATA[Basic Guidelines for Website building (网站建设基础指南)]]></category>
+		<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Django Service (服务)]]></category>
+		<category><![CDATA[Nginx]]></category>
+		<category><![CDATA[Nginx Security (安全)]]></category>
+		<category><![CDATA[Personal Website Building (个人网站建设)]]></category>
+		<category><![CDATA[Project (项目)]]></category>
+		<category><![CDATA[Services (服务)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Port Security (系统端口安全)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[Tomcat]]></category>
+		<category><![CDATA[Web Application Firewall (WAF)]]></category>
+		<category><![CDATA[Website Services (网站服务)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=21971</guid>
+
+					<description><![CDATA[内容一：查看完整信息 （补充：这里以显示 eternalcenter.com 的 443 端口的 SSL 证书为例） 内容二：查看主要信息 （补充：这里以显示 eternalcenter.com 的 443 端口的 SSL 证书为例）]]></description>
+										<content:encoded><![CDATA[
+<h4>内容一：查看完整信息</h4>
+
+
+
+<pre class="wp-block-code"><code># openssl s_client -connect eternalcenter.com:443
+CONNECTED(00000003)
+depth=2 C = US, O = Internet Security Research Group, CN = ISRG Root X1
+verify return:1
+depth=1 C = US, O = Let's Encrypt, CN = R3
+verify return:1
+depth=0 CN = eternalcenter.com
+verify return:1
+---
+Certificate chain
+ 0 s:CN = eternalcenter.com
+   i:C = US, O = Let's Encrypt, CN = R3
+ 1 s:C = US, O = Let's Encrypt, CN = R3
+   i:C = US, O = Internet Security Research Group, CN = ISRG Root X1
+ 2 s:C = US, O = Internet Security Research Group, CN = ISRG Root X1
+   i:O = Digital Signature Trust Co., CN = DST Root CA X3
+---
+Server certificate
+-----BEGIN CERTIFICATE-----
+MIIFKjCCBBKgAwIBAgISAxDxly99eBiarmHggFEmDJoMMA0GCSqGSIb3DQEBCwUA
+MDIxCzAJBgNVBAYTAlVTMRYwFAYDVQQKEw1MZXQncyBFbmNyeXB0MQswCQYDVQQD
+EwJSMzAeFw0yMTEyMTkxMzA4MzJaFw0yMjAzMTkxMzA4MzFaMBwxGjAYBgNVBAMT
+EWV0ZXJuYWxjZW50ZXIuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKC
+AQEAtCcCuOqBrWP4eo//VBEXh668EjwrE1eXz2CS4GIN4ddn0rS8LHGFOrB92R8E
+OnaYeTKpZjzNM3NA/AG/Gq5mTRZGTpyTasHEb/phwXdhrtJWdbMtQjGFSg8rXSB8
+cap5NGP/NxAy8FV0MbXftg5t9VgBoCMGUzioSHZTEjefq+/OZwlP7RzxZN3bwj1D
+61gWSw6q1X3bsi8ttwbkkiJfvjXo2KIeGOAnY10X+FPJmVa7jonhOuljrX4CYgnd
+SCxmsfgwGMUzRu27VB1rEbKqvSr6tb9KfwFiqsZd5tTi7RW6WMqA0VbDV7BbDqLP
+OzcturwRtXfzHjJxssy9zhnrQQIDAQABo4ICTjCCAkowDgYDVR0PAQH/BAQDAgWg
+MB0GA1UdJQQWMBQGCCsGAQUFBwMBBggrBgEFBQcDAjAMBgNVHRMBAf8EAjAAMB0G
+A1UdDgQWBBQMGBCfBuZxTAS8VcBI/13ugqc2RDAfBgNVHSMEGDAWgBQULrMXt1hW
+y65QCUDmH6+dixTCxjBVBggrBgEFBQcBAQRJMEcwIQYIKwYBBQUHMAGGFWh0dHA6
+Ly9yMy5vLmxlbmNyLm9yZzAiBggrBgEFBQcwAoYWaHR0cDovL3IzLmkubGVuY3Iu
+b3JnLzAcBgNVHREEFTATghFldGVybmFsY2VudGVyLmNvbTBMBgNVHSAERTBDMAgG
+BmeBDAECATA3BgsrBgEEAYLfEwEBATAoMCYGCCsGAQUFBwIBFhpodHRwOi8vY3Bz
+LmxldHNlbmNyeXB0Lm9yZzCCAQYGCisGAQQB1nkCBAIEgfcEgfQA8gB3AN+lXqto
+gk8fbK3uuF9OPlrqzaISpGpejjsSwCBEXCpzAAABfdMFzUsAAAQDAEgwRgIhAMFF
+1orPZPnpCyhzwX2xZAZjJnOmDGmBjAl0tHnX4nEWAiEAqZTUwjrdwZAL+kDAgpzG
+Me2RnGMseDBY8Oy2sefUgsAAdwBGpVXrdfqRIDC1oolp9PN9ESxBdL79SbiFq/L8
+cP5tRwAAAX3TBc1zAAAEAwBIMEYCIQDLhR0nbVHEIL1uw9hRuv/ZbFjf91W/M4Jp
+od7NTMQZbAIhAKEAAfmdu0nVHklyS2At1VValwQ6vNbqd0NQ85giG606MA0GCSqG
+SIb3DQEBCwUAA4IBAQB/s+rZEaNrlUyBVnbxv5X9NTBd8buBOkR1qVswlS1R2i8B
+pRjeJmgbiMzM2z5Mvx0yTIiCyXXUc3YaqoyxvddaQam9nlLGr0nKX9T5DkE7y0Fh
+Qg0/ievRQF86XnDqQBxDR32jj5A1nKEiJrNCqugCWTAABndW3tvzK5DOsF2BfjJC
+mcjwiKaSCjFVpf+KzLWS3UEW+DRTKOLBucXpenS7QEcQu4K6ShNSL7+K6UOZEbFu
+uCRjOawCJFF7EH5vzRBy696Fu4EmzCV+c4rV8K8EcuCCQQeOTWJ/93Jv6U6kGrmE
+P6wlcHFy1tZhTAmXf/qcpE3sGeH58OlNNiVmNJdH
+-----END CERTIFICATE-----
+subject=CN = eternalcenter.com
+
+issuer=C = US, O = Let's Encrypt, CN = R3
+
+---
+No client certificate CA names sent
+Peer signing digest: SHA256
+Peer signature type: RSA-PSS
+Server Temp Key: X25519, 253 bits
+---
+SSL handshake has read 4695 bytes and written 412 bytes
+Verification: OK
+---
+New, TLSv1.2, Cipher is ECDHE-RSA-AES256-GCM-SHA384
+Server public key is 2048 bit
+Secure Renegotiation IS supported
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+SSL-Session:
+    Protocol  : TLSv1.2
+    Cipher    : ECDHE-RSA-AES256-GCM-SHA384
+    Session-ID: D63BC88824810A4D43ACE901AD4FF2D82073BC6F0D8B2DE71F6310CA1C87707F
+    Session-ID-ctx: 
+    Master-Key: A6836430C394B96DDD5552867D49802F94AAC8BF5E882100F0D27185CF5CFD6A946B94D87652E44A6684FC9781D16D90
+    PSK identity: None
+    PSK identity hint: None
+    SRP username: None
+    TLS session ticket lifetime hint: 300 (seconds)
+    TLS session ticket:
+    0000 - bb be 55 e0 4b 6d c3 08-cd bc 45 6e 79 67 fc eb   ..U.Km....Enyg..
+    0010 - 30 d5 4c 8a 5a c8 f7 13-42 4b 1d 02 ce 94 c0 b8   0.L.Z...BK......
+    0020 - d7 cf f6 f0 ee 9d 49 5b-0a c8 a4 1a 8b dd 8a e0   ......I&#91;........
+    0030 - 66 83 52 9b 31 4d da 9e-d5 05 1a 70 ca e9 86 5e   f.R.1M.....p...^
+    0040 - f5 09 a1 1c 92 6b 64 90-b7 e1 0e ec 30 e2 26 68   .....kd.....0.&amp;h
+    0050 - 49 13 10 9e 3e a5 e0 13-a2 f1 7a 7c c5 ad 99 6c   I...&gt;.....z|...l
+    0060 - e9 f6 1d 46 5f cc f6 f9-c5 f6 05 49 53 78 7e ea   ...F_......ISx~.
+    0070 - 8c 17 eb 8d 96 c3 3f 92-fe e0 f0 f6 86 59 05 c8   ......?......Y..
+    0080 - d2 8c 27 6b 9d 65 38 20-84 d4 23 54 35 70 19 4d   ..'k.e8 ..#T5p.M
+    0090 - db 35 6d f4 44 50 d7 6e-a5 87 2b 32 e5 f8 42 88   .5m.DP.n..+2..B.
+    00a0 - 28 e2 ab 35 e1 2c 06 71-e5 b2 82 cb 3a 75 cc 72   (..5.,.q....:u.r
+    00b0 - ed ae e1 12 ff 82 6c 3a-3a 38 7a 8c 3c 9c f1 10   ......l::8z.&lt;...
+    00c0 - 78 b8 37 87 c3 a2 00 76-01 72 8c ef 3b 20 48 28   x.7....v.r..; H(
+
+    Start Time: 1644931899
+    Timeout   : 7200 (sec)
+    Verify return code: 0 (ok)
+    Extended master secret: yes
+---
+closed</code></pre>
+
+
+
+<p>（补充：这里以显示 eternalcenter.com 的 443 端口的 SSL 证书为例）</p>
+
+
+
+<h4>内容二：查看主要信息</h4>
+
+
+
+<pre class="wp-block-code"><code># echo | openssl s_client -connect scc.suse.com:443 | head -n 16
+CONNECTED(00000003)
+depth=2 C = US, O = Internet Security Research Group, CN = ISRG Root X1
+verify return:1
+depth=1 C = US, O = Let's Encrypt, CN = R3
+verify return:1
+depth=0 CN = eternalcenter.com
+verify return:1
+---
+Certificate chain
+ 0 s:CN = eternalcenter.com
+   i:C = US, O = Let's Encrypt, CN = R3
+ 1 s:C = US, O = Let's Encrypt, CN = R3
+   i:C = US, O = Internet Security Research Group, CN = ISRG Root X1
+ 2 s:C = US, O = Internet Security Research Group, CN = ISRG Root X1
+   i:O = Digital Signature Trust Co., CN = DST Root CA X3
+---</code></pre>
+
+
+
+<p>（补充：这里以显示 eternalcenter.com 的 443 端口的 SSL 证书为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 logger （手动向系统日志写入信息）</title>
+		<link>https://eternalcenter-now.github.io/logger/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Tue, 15 Feb 2022 13:15:26 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System General Log (系统普通日志)]]></category>
+		<category><![CDATA[System Log (系统日志)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=21966</guid>
+
+					<description><![CDATA[内容一：手动向系统日志写入信息 （补充：这里以往系统日志里写入一条包含 This is test message 内容的信息为例） 内容二：显示手动向系统日志写入信息 （补充：这里在系统里查找一条包含 This is test message 内容的信息为例）]]></description>
+										<content:encoded><![CDATA[
+<h4 id="内容一-手动向系统日志写入信息">内容一：手动向系统日志写入信息</h4>
+
+
+
+<pre class="wp-block-code"><code># logger &#91;This is test message]</code></pre>
+
+
+
+<p>（补充：这里以往系统日志里写入一条包含 This is test message 内容的信息为例）</p>
+
+
+
+<h4 id="内容二-显示手动向系统日志写入信息">内容二：显示手动向系统日志写入信息</h4>
+
+
+
+<pre class="wp-block-code"><code># grep "This is test message" /var/log/messages</code></pre>
+
+
+
+<p>（补充：这里在系统里查找一条包含 This is test message 内容的信息为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Linux Kdump 内核奔溃信息的分析 （Rocky Linux &#038; RHEL 版）</title>
+		<link>https://eternalcenter-now.github.io/kdump-analysis/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Tue, 15 Feb 2022 07:49:50 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System General Log (系统普通日志)]]></category>
+		<category><![CDATA[System Log (系统日志)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=21941</guid>
+
+					<description><![CDATA[注意： 在分析 Kdump 内核奔溃信息之前要先开启 Kdump： 正文： 步骤一：确保 crash 和 kernel-debuginfo 两个软件包已安装 （注意：如果 crash 和 kernel-debuginfo 两个软件包已安装的话，这里会有 crash 和 kernel-debuginfo 信息的显示） 步骤二：进入存放 KDUMP 内核奔溃信息的目录 步骤三：解析 KDUMP 生成内核崩溃信息 （补充：这里以使用 2.6.32.12-0.7-default 版本的 kernel-debuginfo 解析为例） 步骤四：确认生成了 vmlinux-2.6.32.12-0.7-default.gz 压缩包 （注意：如果这里生成了 vmlinux-2.6.32.12-0.7-default.gz 压缩包的话，这里会有 vmlinux-2.6.32.12-0.7-default.gz 信息的显示） （补充：这里以确认 2.6.32.12-0.7-default 版本的 kernel-debuginfo 生成的压缩包为例） 步骤五：解压 vmlinux-2.6.32.12-0.7-default.gz 压缩包 （补充：这里以解压 2.6.32.12-0.7-default 版本的 kernel-debuginfo 生成的压缩包为例） 步骤六：分析 KDUMP 生成的内核奔溃信息 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/kdump-analysis/" class="more-link">Continue reading<span class="screen-reader-text"> "[步骤] Linux Kdump 内核奔溃信息的分析 （Rocky Linux &#038; RHEL 版）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2 id="注意">注意：</h2>
+
+
+
+<p>在分析 Kdump 内核奔溃信息之前要先开启 Kdump：</p>
+
+
+
+<div class="wp-container-5 wp-block-buttons">
+<div class="wp-block-button aligncenter is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/kdump/">Linux Kdump 的开启 <br>（用于收集内核崩溃时的信息）</a></div>
+</div>
+
+
+
+<h2 id="正文">正文：</h2>
+
+
+
+<h4 id="步骤一-确保-crash-和-kernel-debuginfo-两个软件包已安装">步骤一：确保 crash 和 kernel-debuginfo 两个软件包已安装</h4>
+
+
+
+<pre class="wp-block-code"><code># rpm -qa | grep "crash|kernel-debug"</code></pre>
+
+
+
+<p>（注意：如果 crash 和 kernel-debuginfo 两个软件包已安装的话，这里会有 crash 和 kernel-debuginfo 信息的显示）</p>
+
+
+
+<h4 id="步骤二-进入存放-kdump-内核奔溃信息的目录">步骤二：进入存放 KDUMP 内核奔溃信息的目录</h4>
+
+
+
+<pre class="wp-block-code"><code># cd /var/crash/&lt;date&gt;/</code></pre>
+
+
+
+<h4 id="步骤三-解析-kdump-生成内核崩溃信息">步骤三：解析 KDUMP 生成内核崩溃信息</h4>
+
+
+
+<pre class="wp-block-code"><code># crash vmlinux-2.6.32.12-0.7-default vmcore</code></pre>
+
+
+
+<p>（补充：这里以使用 2.6.32.12-0.7-default 版本的 kernel-debuginfo 解析为例）</p>
+
+
+
+<h4 id="步骤四-确认生成了-vmlinux-2-6-32-12-0-7-default-gz-压缩包">步骤四：确认生成了 vmlinux-2.6.32.12-0.7-default.gz 压缩包</h4>
+
+
+
+<pre class="wp-block-code"><code># ls vmlinux-2.6.32.12-0.7-default.gz</code></pre>
+
+
+
+<p>（注意：如果这里生成了 vmlinux-2.6.32.12-0.7-default.gz 压缩包的话，这里会有 vmlinux-2.6.32.12-0.7-default.gz 信息的显示）</p>
+
+
+
+<p>（补充：这里以确认 2.6.32.12-0.7-default 版本的 kernel-debuginfo 生成的压缩包为例）</p>
+
+
+
+<h4 id="步骤五-解压-vmlinux-2-6-32-12-0-7-default-gz-压缩包">步骤五：解压 vmlinux-2.6.32.12-0.7-default.gz 压缩包</h4>
+
+
+
+<pre class="wp-block-code"><code># gzip -d vmlinux-2.6.32.12-0.7-default.gz</code></pre>
+
+
+
+<p>（补充：这里以解压 2.6.32.12-0.7-default 版本的 kernel-debuginfo 生成的压缩包为例）</p>
+
+
+
+<h4 id="步骤六-分析-kdump-生成的内核奔溃信息">步骤六：分析 KDUMP 生成的内核奔溃信息</h4>
+
+
+
+<p>（步骤略）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

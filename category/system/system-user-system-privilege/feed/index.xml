@@ -1,0 +1,2469 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>System User &amp; System Privilege (系统用户 &amp; 系统权限) &#8211; Eternal Center</title>
+	<atom:link href="https://eternalcenter-now.github.io/category/system/system-user-system-privilege/feed/" rel="self" type="application/rss+xml" />
+	<link>https://eternalcenter-now.github.io/</link>
+	<description></description>
+	<lastBuildDate>Fri, 29 Apr 2022 14:29:38 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	
+	<item>
+		<title>[排错] 解决 Linux 运行 authselect 命令时报错 “[error] [/etc/authselect/system-auth] has unexpected content!” 或者 “[error] [/etc/authselect/password-auth] has unexpected content!”</title>
+		<link>https://eternalcenter-now.github.io/debug-error-etc-authselect-system-auth-has-unexpected-content-or-error-etc-authselect-passwor/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 11 Apr 2022 15:40:00 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<category><![CDATA[System User (系统用户)]]></category>
+		<category><![CDATA[System User & System Privilege (系统用户 & 系统权限)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23013</guid>
+
+					<description><![CDATA[报错代码： 或者： 或者： 分析： /etc/authselect/system-auth 文件或 /etc/authselect/password-auth 文件是不应该被手动修改的，如果被手动修改了，再使用 authselect select sssd 命令或者 authselect apply-changes 命令时则会有此类报错 解决方法： （注意：此方法会刷新 /etc/authselect/system-auth 文件和 /etc/authselect/password-auth 文件里的所有内容）]]></description>
+										<content:encoded><![CDATA[
+<h2>报错代码：</h2>
+
+
+
+<pre class="wp-block-code"><code>&#91;error] &#91;/etc/authselect/system-auth] has unexpected content!
+&#91;error] &#91;/etc/authselect/password-auth] has unexpected content!
+&#91;error] Unexpected changes to the configuration were detected.
+&#91;error] Refusing to activate profile unless those changes are removed or overwrite is requested.</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code>&#91;error] &#91;/etc/authselect/system-auth] has unexpected content!
+&#91;error] Unexpected changes to the configuration were detected.
+&#91;error] Refusing to activate profile unless those changes are removed or overwrite is requested.</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code>&#91;error] &#91;/etc/authselect/password-auth] has unexpected content!
+&#91;error] Unexpected changes to the configuration were detected.
+&#91;error] Refusing to activate profile unless those changes are removed or overwrite is requested.</code></pre>
+
+
+
+<h2>分析：</h2>
+
+
+
+<p>/etc/authselect/system-auth 文件或 /etc/authselect/password-auth 文件是不应该被手动修改的，如果被手动修改了，再使用 authselect select sssd 命令或者 authselect apply-changes 命令时则会有此类报错</p>
+
+
+
+<h2>解决方法：</h2>
+
+
+
+<pre class="wp-block-code"><code># authselect apply-changes</code></pre>
+
+
+
+<p>（注意：此方法会刷新 /etc/authselect/system-auth 文件和 /etc/authselect/password-auth 文件里的所有内容）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] sudo 提权的实现 （sudo 提权的同时可以使用代理） （openSUSE &#038; SLE）</title>
+		<link>https://eternalcenter-now.github.io/sudo-self-proxy-opensuse-sle/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sat, 15 Jan 2022 14:47:45 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Privilege (系统权限)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<category><![CDATA[System User & System Privilege (系统用户 & 系统权限)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=21217</guid>
+
+					<description><![CDATA[步骤一：给用户添加相应的 sudo 权限 添加以下内容： （补充：这里以给用户 zhumingyu 添加 /usr/bin/mysql 命令为例） 步骤二：设置用户使用自己的密码实现 sudo 提权 在 这一行下面添加： （补充：这里以允许用户在进行 sudo 提权的同时也能使用 http_proxy、https_proxy 为例）]]></description>
+										<content:encoded><![CDATA[
+<h4>步骤一：给用户添加相应的 sudo 权限</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/sudoers</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>……
+zhumingyu ALL=(ALL) /usr/bin/mysql</code></pre>
+
+
+
+<p>（补充：这里以给用户 zhumingyu 添加 /usr/bin/mysql 命令为例）</p>
+
+
+
+<h4>步骤二：设置用户使用自己的密码实现 sudo 提权</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/sudoers</code></pre>
+
+
+
+<p>在</p>
+
+
+
+<pre class="wp-block-code"><code>......
+env_reset
+......</code></pre>
+
+
+
+<p>这一行下面添加：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+Defaults env_keep += "http_proxy https_proxy"
+......</code></pre>
+
+
+
+<p>（补充：这里以允许用户在进行 sudo 提权的同时也能使用 http_proxy、https_proxy 为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Linux 本地和 SSH 输错密码次数的限制 （pam_faillock 版） （authselect 版） （CentOS Linux 8 &#038; RHEL 8 版）</title>
+		<link>https://eternalcenter-now.github.io/ssh-attempt-pam_faillock-authselect-centos-linux-8-rhel-8/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sat, 01 Jan 2022 14:04:37 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<category><![CDATA[System User (系统用户)]]></category>
+		<category><![CDATA[System User & System Privilege (系统用户 & 系统权限)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=20768</guid>
+
+					<description><![CDATA[步骤目录： 步骤一：了解背景 步骤二：设置 SSH 的登录限制2.1 在 sshd 中开启 UsePAM2.1.1 修改 sshd 的配置文件2.1.2 让修改的 sshd 配置文件生效2.2 确保 /etc/pam.d/sshd 包含 password-auth 步骤三：检查是否选择了 authselect 自定义认证 步骤四：配置认证4.1 如果 authselect 自定义认证存在4.1.1 修改 system-auth 文件4.1.2 修改 password-auth 文件4.2 如果 authselect 自定义认证不存在4.2.1 生成新的自定义认证4.2.1.1 备份当前的自定义认证4.2.1.2 创建新的自定义认证4.2.1.3 选择自定义认证4.2.1.4 显示当前选择的自定义认证4.2 修改自定义认证4.2.1 修改 system-auth 文件4.2.2 修改 password-auth 文件 步骤五：让配置的认证生效 步骤六：管理远程登录密码输错次数的用户6.1 显示某个用户近期输错了几次密码6.2 重制所有远程登录密码输错次数 具体的操作步骤： 步骤一：了解背景 从 CentOS &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/ssh-attempt-pam_faillock-authselect-centos-linux-8-rhel-8/" class="more-link">Continue reading<span class="screen-reader-text"> "[步骤] Linux 本地和 SSH 输错密码次数的限制 （pam_faillock 版） （authselect 版） （CentOS Linux 8 &#038; RHEL 8 版）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2 id="步骤目录">步骤目录：</h2>
+
+
+
+<h4 id="步骤一-背景了解">步骤一：了解背景</h4>
+
+
+
+<h4 id="步骤二-设置-ssh-的登录限制-2-1-在-sshd-中开启-usepam-2-1-1-修改-sshd-配置文件-2-1-2-让-sshd-的配置生效-2-2-确保-etc-pam-d-sshd-包含-password-auth">步骤二：设置 SSH 的登录限制<br>2.1 在 sshd 中开启 UsePAM<br>2.1.1 修改 sshd 的配置文件<br>2.1.2 让修改的 sshd 配置文件生效<br>2.2 确保 /etc/pam.d/sshd 包含 password-auth</h4>
+
+
+
+<h4 id="步骤三-检查是否选择了-authselect-自定义认证">步骤三：检查是否选择了  authselect  自定义认证</h4>
+
+
+
+<h4>步骤四：配置认证<br>4.1 如果 authselect 自定义认证存在<br>4.1.1 修改 system-auth 文件<br>4.1.2 修改 password-auth 文件<br>4.2 如果 authselect 自定义认证不存在<br>4.2.1 生成新的自定义认证<br>4.2.1.1 备份当前的自定义认证<br>4.2.1.2 创建新的自定义认证<br>4.2.1.3 选择自定义认证<br>4.2.1.4 显示当前选择的自定义认证<br>4.2 修改自定义认证<br>4.2.1 修改 system-auth 文件<br>4.2.2 修改 password-auth 文件</h4>
+
+
+
+<h4 id="步骤五-让配置的认证生效">步骤五：让配置的认证生效</h4>
+
+
+
+<h4 id="步骤六-远程登录密码输错次数的用户管理-6-1-显示某个用户近期输错了几次密码-6-2-重制所有远程登录密码输错次数">步骤六：管理远程登录密码输错次数的用户<br>6.1 显示某个用户近期输错了几次密码<br>6.2 重制所有远程登录密码输错次数</h4>
+
+
+
+<h2 id="具体的操作步骤">具体的操作步骤：</h2>
+
+
+
+<h4 id="步骤一-背景了解">步骤一：了解背景</h4>
+
+
+
+<p>从 CentOS Linux 8 &amp; RHEL 8 开始，系统的身份验证模块从 CentOS Linux 7 &amp; RHEL 7 的 pam_tally2 换成了 pam_faillock</p>
+
+
+
+<h4 id="步骤二-设置-ssh-的登录限制-2-1-在-sshd-中开启-usepam-2-1-1-修改-sshd-配置文件">步骤二：设置 SSHd 的登录限制<br>2.1 在 sshd 中开启 UsePAM<br>2.1.1 修改 sshd 的配置文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/ssh/sshd_config</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+#UsePAM no
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+UsePAM yes
+......</code></pre>
+
+
+
+<h4 id="2-1-2-让-sshd-的配置生效">2.1.2 让修改 sshd 配置文件生效</h4>
+
+
+
+<pre class="wp-block-code"><code># systemctl restart sshd</code></pre>
+
+
+
+<h4 id="2-2-确保-etc-pam-d-sshd-包含-password-auth">2.2 确保 /etc/pam.d/sshd 包含 password-auth</h4>
+
+
+
+<pre class="wp-block-code"><code># cat /etc/pam.d/sshd | grep password-auth
+auth       substack     password-auth
+account    include      password-auth
+password   include      password-auth
+session    include      password-auth</code></pre>
+
+
+
+<p>（注意：如果输出结果中不包含这 4 条内容则需要手动添加）</p>
+
+
+
+<h4 id="步骤三-检查是否选择了-authselect-自定义认证">步骤三：检查是否选择了  authselect  自定义认证</h4>
+
+
+
+<pre class="wp-block-code"><code># authselect current | awk 'NR == 1 {print $3}' | grep custom/
+custom/password-policy</code></pre>
+
+
+
+<p>（<br>补充：<br>（1）如果这条命令里没有输出则代表没有选择自定义认证<br>（2）从这里的输出结果可以看出这里选择的自定义认证是 custom/password-policy<br>）</p>
+
+
+
+<h4 id="步骤四-配置认证-4-1-如果-authselect-自定义认证存在-4-1-1-修改-system-auth-文件">步骤四：配置认证<br>4.1 如果  authselect  自定义认证存在<br>4.1.1 修改 system-auth 文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/authselect/custom/password-policy/system-auth</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+auth        required                                     pam_faillock.so preauth silent                               {include if "with-faillock"}
+......
+auth        required                                     pam_faillock.so authfail                               {include if "with-faillock"}
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+auth        required                                     pam_faillock.so preauth silent audit even_deny_root deny=6 unlock_time=180                               {include if "with-faillock"}
+......
+auth        required                                     pam_faillock.so authfail audit even_deny_root deny=6 unlock_time=180                               {include if "with-faillock"}
+......</code></pre>
+
+
+
+<p>（补充：这里以包括 root 用户每使用密码 ssh 远程登录失败 6 次则被锁定 180 秒为例）</p>
+
+
+
+<h4 id="4-1-2-修改-password-auth-文件"> 4.1.2 修改 password-auth 文件 </h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/authselect/custom/password-policy/password-auth</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+auth        required                                     pam_faillock.so preauth silent                               {include if "with-faillock"}
+......
+auth        required                                     pam_faillock.so authfail                               {include if "with-faillock"}
+......
+
+修改为：
+......
+auth        required                                     pam_faillock.so preauth silent audit even_deny_root deny=6 unlock_time=180                               {include if "with-faillock"}
+......
+auth        required                                     pam_faillock.so authfail audit even_deny_root deny=6 unlock_time=180                               {include if "with-faillock"}
+......</code></pre>
+
+
+
+<p>（补充：这里以包括 root 用户每使用密码 ssh 远程登录失败 6 次则被锁定 180 秒为例）</p>
+
+
+
+<h4>4.2 如果 authselect 自定义认证不存在<br>4.2.1 生成新的自定义认证<br>4.2.1.1 备份当前的自定义认证</h4>
+
+
+
+<pre class="wp-block-code"><code># authselect apply-changes -b --backup=sssd.backup</code></pre>
+
+
+
+<p>（补充：这里以创建 sssd.backup 备份文件为例）</p>
+
+
+
+<h4>4.2.1.2 创建新的自定义认证</h4>
+
+
+
+<pre class="wp-block-code"><code># authselect create-profile password-policy -b sssd --symlink-meta --symlink-pam</code></pre>
+
+
+
+<p>（补充：这里以生成名为 password-policy 的自定义认证为例）</p>
+
+
+
+<h4>4.2.1.3 选择自定义认证</h4>
+
+
+
+<pre class="wp-block-code"><code># authselect select custom/password-policy with-sudo with-faillock without-nullok with-mkhomedir</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里以选择名为 password-policy 的自定义认证为例<br>2) 这里设置了 with-sudo、with-faillock、without-nullok 和 with-mkhomedir 参数<br>）</p>
+
+
+
+<h4>4.2.1.4 显示当前选择的自定义认证</h4>
+
+
+
+<pre class="wp-block-code"><code># authselect current</code></pre>
+
+
+
+<p>（补充：这里以生成并选择名为 password-policy 的自定义认证为例）</p>
+
+
+
+<h4 id="4-2-如果-authselect-自定义认证不存在-4-2-1-修改-system-auth-文件">4.2 修改自定义认证<br>4.2.1 修改 system-auth 文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/authselect/custom/password-policy/password-auth</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+auth        required                                     pam_faillock.so preauth silent                               {include if "with-faillock"}
+......
+auth        required                                     pam_faillock.so authfail                               {include if "with-faillock"}
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+auth        required                                     pam_faillock.so preauth silent audit even_deny_root deny=6 unlock_time=180                               {include if "with-faillock"}
+......
+auth        required                                     pam_faillock.so authfail audit even_deny_root deny=6 unlock_time=180                               {include if "with-faillock"}
+......</code></pre>
+
+
+
+<p>（补充：这里以包括 root 用户每使用密码 ssh 远程登录失败 6 次则被锁定 180 秒为例）</p>
+
+
+
+<h4 id="4-2-2-修改-password-auth-文件">4.2.2 修改 password-auth 文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/authselect/custom/password-policy/password-auth</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+auth        required                                     pam_faillock.so preauth silent                               {include if "with-faillock"}
+......
+auth        required                                     pam_faillock.so authfail                               {include if "with-faillock"}
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+auth        required                                     pam_faillock.so preauth silent audit even_deny_root deny=6 unlock_time=180                               {include if "with-faillock"}
+......
+auth        required                                     pam_faillock.so authfail audit even_deny_root deny=6 unlock_time=180                               {include if "with-faillock"}
+......</code></pre>
+
+
+
+<p>（补充：这里以包括 root 用户每使用密码 ssh 远程登录失败 6 次则被锁定 180 秒为例）</p>
+
+
+
+<h4 id="步骤五-让配置的认证生效">步骤五：让配置的认证生效</h4>
+
+
+
+<pre class="wp-block-code"><code># authselect apply-changes</code></pre>
+
+
+
+<p>（注意：此步骤会刷新 /etc/authselect/system-auth 文件和 /etc/authselect/password-auth 文件）</p>
+
+
+
+<h4 id="步骤六-远程登录密码输错次数的用户管理-6-1-显示某个用户近期输错了几次密码">步骤六：管理远程登录密码输错次数的用户<br>6.1 显示某个用户近期输错了几次密码</h4>
+
+
+
+<pre class="wp-block-code"><code># faillock --user root</code></pre>
+
+
+
+<p>（补充：这里以显示 root 用户近期输错了几次密码为例）</p>
+
+
+
+<h4 id="6-2-重制所有远程登录密码输错次数">6.2 重制所有远程登录密码输错次数</h4>
+
+
+
+<pre class="wp-block-code"><code># faillock --reset</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[工具] Shell 批量修改多个远程服务器某一个用户的密码 （精致版）</title>
+		<link>https://eternalcenter-now.github.io/shell-password-change-refined-version/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sun, 10 Oct 2021 13:08:50 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Languages (语言)]]></category>
+		<category><![CDATA[Shell]]></category>
+		<category><![CDATA[Shell Deployment (部署)]]></category>
+		<category><![CDATA[Shell Others (其他)]]></category>
+		<category><![CDATA[Shell Tool (工具)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System User (系统用户)]]></category>
+		<category><![CDATA[System User & System Privilege (系统用户 & 系统权限)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=18100</guid>
+
+					<description><![CDATA[介绍： 作者：朱明宇名称：批量修改多个远程服务器某一个用户的密码作用：批量修改多个远程服务器某一个用户的密码 使用方法：1. 将此脚本和清单 $list 文件放在同一目录下2. 清单 $list 里每服务器名占用一行3. 给脚本分割线里的变量赋值4. 给此脚本添加执行权限5. 执行此脚本 脚本分割线里的变量：1. list=”list.txt” #指定清单的目录和名称2. user=eternalcenter #指定要修改密码的用户3. password=eternalcenter #指定要修改的密码 注意：此脚本执行前必须要先保证执行本脚本的用户能无密码 ssh 远程这些远程服务器，并且可以通过 sudo 获得 su 的 root 权限 脚本：]]></description>
+										<content:encoded><![CDATA[
+<h2>介绍：</h2>
+
+
+
+<p>作者：朱明宇<br>名称：批量修改多个远程服务器某一个用户的密码<br>作用：批量修改多个远程服务器某一个用户的密码</p>
+
+
+
+<p>使用方法：<br>1. 将此脚本和清单 $list 文件放在同一目录下<br>2. 清单 $list 里每服务器名占用一行<br>3. 给脚本分割线里的变量赋值<br>4. 给此脚本添加执行权限<br>5. 执行此脚本</p>
+
+
+
+<p>脚本分割线里的变量：<br>1. list=”list.txt” #指定清单的目录和名称<br>2. user=eternalcenter #指定要修改密码的用户<br>3. password=eternalcenter #指定要修改的密码</p>
+
+
+
+<p>注意：<br>此脚本执行前必须要先保证执行本脚本的用户能无密码 ssh 远程这些远程服务器，并且可以通过 sudo 获得 su 的 root 权限</p>
+
+
+
+<h2>脚本：</h2>
+
+
+
+<pre class="wp-block-code"><code>#!/bin/bash
+
+####################### Separator ########################
+
+list="list.txt"
+user=eternalcenter
+password=eternalcenter
+
+####################### Separator ########################
+
+num=1
+
+cat $list
+for i in `cat $list`
+do
+        echo $num
+        echo $i
+
+	ssh -t $i "type lsb_release" &amp;> /dev/null
+        if &#91; $? -ne 0 ]; then
+              distribution=`ssh -t $i "cat /etc/*release | grep '^NAME'"`
+	      if &#91; $? -ne 0 ];then
+		      distribution=`ssh -t $i "cat /etc/*release"`
+	      fi
+        else
+              distribution=`ssh -t $i "lsb_release -i | grep 'ID' | grep -v 'n/a'"`
+        fi;
+
+        echo $distribution
+
+	case $distribution in
+		*"RedHat"* | *"Red Hat"*)
+		ssh -t $i "sudo -u root su - root -c \"echo $password | passwd --stdin $user\""
+		if &#91; $? -eq 0 ];then
+			echo -e "\033&#91;32m$i is success\033&#91;0m"
+		else
+			echo -e "\033&#91;31m$i is fail\033&#91;0m"
+		fi
+		;;
+
+		*"CentOS"*)
+		ssh -t $i "sudo -u root su - root -c \"echo $password | passwd --stdin $user\""
+		if &#91; $? -eq 0 ];then
+			echo -e "\033&#91;32m$i is success\033&#91;0m"
+		else
+			echo -e "\033&#91;31m$i is fail\033&#91;0m"
+		fi
+		;;
+
+		*"SUSE"* | *"SLES"*)
+		ssh -t $i "sudo -u root su - root -c \"echo $user:$password | chpasswd\""
+		if &#91; $? -eq 0 ];then
+			echo -e "\033&#91;32m$i is success\033&#91;0m"
+		else
+			echo -e "\033&#91;31m$i is fail\033&#91;0m"
+		fi
+		;;
+               
+		*"openSUSE"*)
+		ssh -t $i "sudo -u root su - root -c \"echo $user:$password | chpasswd\""
+		if &#91; $? -eq 0 ];then
+			echo -e "\033&#91;32m$i is success\033&#91;0m"
+		else
+			echo -e "\033&#91;31m$i is fail\033&#91;0m"
+		fi
+		;;
+
+		*)
+                echo -e "\033&#91;31m$i is fail \033&#91;0m" 
+		;;
+        esac
+
+        let num++
+
+        echo
+done</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[工具] Shell 批量修改多个远程服务器某一个用户的密码 （简单版）</title>
+		<link>https://eternalcenter-now.github.io/shell-password-change-simple-version/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Wed, 09 Jun 2021 10:37:59 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Languages (语言)]]></category>
+		<category><![CDATA[Shell]]></category>
+		<category><![CDATA[Shell Deployment (部署)]]></category>
+		<category><![CDATA[Shell Others (其他)]]></category>
+		<category><![CDATA[Shell Tool (工具)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System User (系统用户)]]></category>
+		<category><![CDATA[System User & System Privilege (系统用户 & 系统权限)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=14638</guid>
+
+					<description><![CDATA[介绍： 作者：朱明宇名称：批量修改多个远程服务器某一个用户的密码作用：批量修改多个远程服务器某一个用户的密码，并显示密码更新时间 使用方法：1. 将此脚本和清单 $list 文件放在同一目录下2. 清单 $list 里每服务器名占用一行3. 给脚本分割线里的变量赋值4. 给此脚本添加执行权限5. 执行此脚本 脚本分割线里的变量：1. list=&#8221;list.txt&#8221; #指定清单的目录和名称2. user=eternalcenter #指定要修改密码的用户3. password=eternalcenter #指定要修改的密码 注意：此脚本执行前必须要先保证执行本脚本的用户能无密码 ssh 远程这些远程服务器，并且可以通过 sudo 获得 su 的 root 权限 脚本：]]></description>
+										<content:encoded><![CDATA[
+<h2 id="介绍">介绍：</h2>
+
+
+
+<p>作者：朱明宇<br>名称：批量修改多个远程服务器某一个用户的密码<br>作用：批量修改多个远程服务器某一个用户的密码，并显示密码更新时间</p>
+
+
+
+<p>使用方法：<br>1. 将此脚本和清单 $list 文件放在同一目录下<br>2. 清单 $list 里每服务器名占用一行<br>3. 给脚本分割线里的变量赋值<br>4. 给此脚本添加执行权限<br>5. 执行此脚本</p>
+
+
+
+<p>脚本分割线里的变量：<br>1. list=&#8221;list.txt&#8221; #指定清单的目录和名称<br>2. user=eternalcenter #指定要修改密码的用户<br>3. password=eternalcenter #指定要修改的密码</p>
+
+
+
+<p>注意：<br>此脚本执行前必须要先保证执行本脚本的用户能无密码 ssh 远程这些远程服务器，并且可以通过 sudo 获得 su 的 root 权限</p>
+
+
+
+<h2 id="脚本">脚本：</h2>
+
+
+
+<pre class="wp-block-code"><code>#!/bin/bash
+
+####################### Separator ########################
+
+list="list.txt"
+user=eternalcenter
+password=eternalcenter
+
+####################### Separator ########################
+
+num=1
+
+cat $list
+for i in `cat $list`
+do
+        echo $num
+        echo $i
+        ssh -t $i "sudo -u root su - root -c \"echo $password | passwd --stdin $user\""
+        ssh -t $i "sudo -u root su - root -c \"echo $user:$password | chpasswd\""
+        ssh -t $i sudo -u root su - root -c \"chage -l $user\"
+        let num++
+
+        echo
+done</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 sshpass （密码非交互式 ssh） （转载）</title>
+		<link>https://eternalcenter-now.github.io/sshpass/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 15 Jan 2021 06:55:05 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System User (系统用户)]]></category>
+		<category><![CDATA[System User & System Privilege (系统用户 & 系统权限)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=13214</guid>
+
+					<description><![CDATA[注明：所有转载内容皆直接从被转载文章网页的标题和内容的文本中复制而来]]></description>
+										<content:encoded><![CDATA[
+<pre class="wp-block-code"><code>sshpass的安装使用
+ 
+1：sshpass下载与安装
+     yum安装：
+
+    yum install sshpass
+
+     若yum安装不上，则用下面方法
+
+        https:&#47;&#47;sourceforge.net/projects/sshpass/files/
+          or
+        https://pan.baidu.com/s/1pLNxeLd
+         or
+        wget http://sourceforge.net/projects/sshpass/files/latest/download -O sshpass.tar.gz
+
+
+
+ 
+2：下载后，解压，安装
+
+      
+
+        tar -zxvf sshpass-1.06.tar.gz
+        cd sshpass-1.06
+        ./configure
+        make
+        make install
+
+
+3：使用命令
+
+         
+
+    sshpass -p 123456 scp /home/file.txt root@10.0.0.37:/home/copy
+
+
+
+      后面这个是 “Are you sure you want to continue connecting (yes/no)”使得这个自动接受，若不加，则成功不了
+ 
+4：脚本
+
+    复制代码
+
+          #!/bin/bash
+            password=123456
+            user=root
+            ip=10.0.0.37
+            file=/home/file.txt
+           sshpass -p $password scp file $user@$ip:/home/copy/
+
+
+————————————————
+版权声明：本文为CSDN博主「totoroKing」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/qq_30553235/article/details/78711491</code></pre>
+
+
+
+<p>注明：所有转载内容皆直接从被转载文章网页的标题和内容的文本中复制而来</p>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter size-large"><img width="1012" height="209" src="https://eternalcenter-now.github.io/wp-content/uploads/2021/01/版权申明证明-sshpass.png" alt="" class="wp-image-13216" srcset="https://eternalcenter-now.github.io/wp-content/uploads/2021/01/版权申明证明-sshpass.png 1012w, https://eternalcenter-now.github.io/wp-content/uploads/2021/01/版权申明证明-sshpass-300x62.png 300w, https://eternalcenter-now.github.io/wp-content/uploads/2021/01/版权申明证明-sshpass-768x159.png 768w" sizes="(max-width: 767px) 89vw, (max-width: 1000px) 54vw, (max-width: 1071px) 543px, 580px" /><figcaption><em>CC 4.0 BY-SA 版权协议网址：https://creativecommons.org/licenses/by-sa/4.0/deed.z</em></figcaption></figure></div>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Linux 文件或目录的查找 （特殊权限）</title>
+		<link>https://eternalcenter-now.github.io/special-privilege-find/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 07 Aug 2020 03:02:56 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Directory (系统目录)]]></category>
+		<category><![CDATA[System File (系统文件)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Privilege (系统权限)]]></category>
+		<category><![CDATA[System Privilege Security (系统权限安全)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<category><![CDATA[System User & System Privilege (系统用户 & 系统权限)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=10429</guid>
+
+					<description><![CDATA[]]></description>
+										<content:encoded><![CDATA[
+<pre class="wp-block-code"><code># find / -type f \( -perm -1000 -o -perm -2000 -o -perm -4000 \) -print</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[工具] Shell 批量修改多个远程服务器某一个用户的过期密码</title>
+		<link>https://eternalcenter-now.github.io/shell-expired-password-change/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Thu, 06 Aug 2020 08:42:43 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Languages (语言)]]></category>
+		<category><![CDATA[Shell]]></category>
+		<category><![CDATA[Shell Deployment (部署)]]></category>
+		<category><![CDATA[Shell Others (其他)]]></category>
+		<category><![CDATA[Shell Tool (工具)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System User (系统用户)]]></category>
+		<category><![CDATA[System User & System Privilege (系统用户 & 系统权限)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=10423</guid>
+
+					<description><![CDATA[介绍： 作者：朱明宇名称：批量修改多个远程服务器某一个用户的过期密码作用：批量修改多个远程服务器某一个用户的过期密码 #使用方法：1. 将此脚本和清单 $list 文件放在同一目录下2. 清单 $list 里每一个远程服务器名或 IP 地址占用一行3. 在此脚本的分割线内写入相应的内容4. 在执行此脚本的系统上安装 expect5. 给此脚本添加执行权限6. 执行此脚本 脚本分割线里的变量：1. oldpassword=123 #原密码2. newpassword=abc #新密码3. user=root #要修改密码的用户4. list=servers.txt #指定服务器清单 脚本：]]></description>
+										<content:encoded><![CDATA[
+<h2>介绍：</h2>
+
+
+
+<p>作者：朱明宇<br>名称：批量修改多个远程服务器某一个用户的过期密码<br>作用：批量修改多个远程服务器某一个用户的过期密码</p>
+
+
+
+<p>#使用方法：<br>1. 将此脚本和清单 $list 文件放在同一目录下<br>2. 清单 $list 里每一个远程服务器名或 IP 地址占用一行<br>3. 在此脚本的分割线内写入相应的内容<br>4. 在执行此脚本的系统上安装 expect<br>5. 给此脚本添加执行权限<br>6. 执行此脚本</p>
+
+
+
+<p>脚本分割线里的变量：<br>1. oldpassword=123 #原密码<br>2. newpassword=abc #新密码<br>3. user=root #要修改密码的用户<br>4. list=servers.txt #指定服务器清单</p>
+
+
+
+<h2>脚本：</h2>
+
+
+
+<pre class="wp-block-code"><code>#!/bin/bash
+
+####################### Separator ########################
+
+oldpassword=123
+newpassword=abc
+user=root
+list=servers.txt
+
+####################### Separator ########################
+
+set timeout 5
+
+for i in `cat $list`
+do
+        echo $i
+        ssh $i "whoami"
+
+        if &#91; $? -eq 0 ];then
+                continue
+        fi
+
+        expect &lt;&lt; EOF
+        spawn ssh $user@$i
+        expect "Current password:"    {send "$oldpassword\r"}
+        expect "New password:"        {send "$newpassword\r"}
+        expect "Retype new password:" {send "$newpassword\r"}
+        expect "&gt;"                    {send "\r"}
+        EOF
+
+       echo
+
+done</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Linux umask 的设置</title>
+		<link>https://eternalcenter-now.github.io/umask/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sat, 01 Aug 2020 08:54:22 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Privilege (系统权限)]]></category>
+		<category><![CDATA[System Privilege Security (系统权限安全)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System User & System Privilege (系统用户 & 系统权限)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=10411</guid>
+
+					<description><![CDATA[内容目录： 内容一：默认权限值的含义 内容二：临时默认权限的设置2.1 默认权限值的方法2.2 默认权限值的方法2.2.1 方法一：使用权限数字设置默认权限值2.2.2 方法二：使用权限标志设置默认权限值 内容三：永久默认权限的设置3.1 给某个用户单独设置 umask3.1.1 给某个用户单独添加 umask 参数3.1.2 让 umask 设置生效3.2 全局设置 umask 的方法3.2.1 通过修改 /etc/profile 文件实现3.2.1.1 通过修改 /etc/profile 文件实现案例一3.2.1.1.1 在 /etc/profile 文件里设置全局 umask 参数3.2.1.1.2 让 umask 设置生效3.2.1.2 通过修改 /etc/profile 文件实现案例二3.2.1.2.1 在 /etc/profile 文件里设置全局 umask 参数3.2.1.2.2 让 umask 设置生效3.2.2 通过修改 /etc/bashrc 文件实现3.2.2.1 通过修改 /etc/bashrc 文件实现案例一3.2.2.1.1 在 /etc/bashrc 文件里设置全局 umask 参数3.2.2.1.2 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/umask/" class="more-link">Continue reading<span class="screen-reader-text"> "[内容] Linux umask 的设置"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2>内容目录：</h2>
+
+
+
+<h4>内容一：默认权限值的含义</h4>
+
+
+
+<h4>内容二：临时默认权限的设置<br>2.1 默认权限值的方法<br>2.2 默认权限值的方法<br>2.2.1 方法一：使用权限数字设置默认权限值<br>2.2.2 方法二：使用权限标志设置默认权限值</h4>
+
+
+
+<h4>内容三：永久默认权限的设置<br>3.1 给某个用户单独设置 umask<br>3.1.1 给某个用户单独添加 umask 参数<br>3.1.2 让 umask 设置生效<br>3.2 全局设置 umask 的方法<br>3.2.1 通过修改 /etc/profile 文件实现<br>3.2.1.1 通过修改 /etc/profile 文件实现案例一<br>3.2.1.1.1 在 /etc/profile 文件里设置全局 umask 参数<br>3.2.1.1.2 让 umask 设置生效<br>3.2.1.2 通过修改 /etc/profile 文件实现案例二<br>3.2.1.2.1 在 /etc/profile 文件里设置全局 umask 参数<br>3.2.1.2.2 让 umask 设置生效<br>3.2.2 通过修改 /etc/bashrc 文件实现<br>3.2.2.1 通过修改 /etc/bashrc 文件实现案例一<br>3.2.2.1.1 在 /etc/bashrc 文件里设置全局 umask 参数<br>3.2.2.1.2 让 umask 设置生效<br>3.2.2.2 通过修改 /etc/bashrc 文件实现案例二<br>3.2.2.2.1 在 /etc/bashrc 文件里设置全局 umask 参数<br>3.2.2.2.2 让 umask 设置生效</h4>
+
+
+
+<h2>具体的内容：</h2>
+
+
+
+<h4>内容一：默认权限值的含义</h4>
+
+
+
+<p>如果 umask 的值是 0022：<br>创建的新目录的默认权限是：777 &#8211; 022 = 755<br>创建的新文件的默认权限是：666 &#8211; 022 = 644</p>
+
+
+
+<h4>内容二：临时默认权限的设置<br>2.1 默认权限值的方法</h4>
+
+
+
+<pre class="wp-block-code"><code># umask
+0022</code></pre>
+
+
+
+<h4>2.2 默认权限值的方法<br>2.2.1 方法一：使用权限数字设置默认权限值</h4>
+
+
+
+<pre class="wp-block-code"><code># umask 0002</code></pre>
+
+
+
+<h4>2.2.2 方法二：使用权限标志设置默认权限值</h4>
+
+
+
+<pre class="wp-block-code"><code># umask -S u=rwx,g=rwx,o=rw</code></pre>
+
+
+
+<h4>内容三：永久默认权限的设置<br>3.1 给某个用户单独设置 umask<br>3.1.1 给某个用户单独添加 umask 参数</h4>
+
+
+
+<pre class="wp-block-code"><code># vim ~/.bashrc </code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+umask 022</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里以将 umask 设置为 022 为例<br>2) 补充 /etc/bashrc 文件会比 /etc/profile 文件更有优先级<br>）</p>
+
+
+
+<h4>3.1.2 让 umask 设置生效</h4>
+
+
+
+<pre class="wp-block-code"><code># source ~/.bashrc</code></pre>
+
+
+
+<h4>3.2 全局设置 umask 的方法<br>3.2.1 通过修改 /etc/profile 文件实现<br>3.2.1.1 通过修改 /etc/profile 文件实现案例一<br>3.2.1.1.1 在 /etc/profile 文件里设置全局 umask 参数</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/profile</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+if &#91; $UID -gt 199 ] &amp;&amp; 
+    &#91; "`/usr/bin/id -gn`" = "`/usr/bin/id un`" ]; then
+    umask 002 
+else
+    umask 022
+fi
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+if &#91; $UID -gt 199 ] &amp;&amp; 
+    &#91; "`/usr/bin/id -gn`" = "`/usr/bin/id un`" ]; then
+    umask 002 
+else
+    umask 022
+fi
+......</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里以将 umask 设置为 022 为例<br>2) 补充 /etc/bashrc 文件会比 /etc/profile 文件更有优先级<br>）</p>
+
+
+
+<h4>3.2.1.1.2 让 umask 设置生效</h4>
+
+
+
+<pre class="wp-block-code"><code># source /etc/profile</code></pre>
+
+
+
+<h4>3.2.1.2 通过修改 /etc/profile 文件实现案例二<br>3.2.1.2.1 在 /etc/profile 文件里设置全局 umask 参数</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/profile</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+umask 022</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里以将 umask 设置为 022 为例<br>2) 补充 /etc/bashrc 文件会比 /etc/profile 文件更有优先级<br>）</p>
+
+
+
+<h4>3.2.1.2.2 让 umask 设置生效</h4>
+
+
+
+<pre class="wp-block-code"><code># source /etc/profile</code></pre>
+
+
+
+<h4>3.2.2 通过修改 /etc/bashrc 文件实现<br>3.2.2.1 通过修改 /etc/bashrc 文件实现案例一<br>3.2.2.1.1 在 /etc/bashrc 文件里设置全局 umask 参数</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/bashrc</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+if &#91; $UID -gt 199 ] &amp;&amp; 
+    &#91; "`/usr/bin/id -gn`" = "`/usr/bin/id un`" ]; then
+    umask 002 
+else
+    umask 022
+fi
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+if &#91; $UID -gt 199 ] &amp;&amp; 
+    &#91; "`/usr/bin/id -gn`" = "`/usr/bin/id un`" ]; then
+    umask 002 
+else
+    umask 022
+fi
+......</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里以将 umask 设置为 022 为例<br>2) 补充 /etc/bashrc 文件会比 /etc/profile 文件更有优先级<br>）</p>
+
+
+
+<h4>3.2.2.1.2 让 umask 设置生效</h4>
+
+
+
+<pre class="wp-block-code"><code># source /etc/bashrc</code></pre>
+
+
+
+<h4>3.2.2.2 通过修改 /etc/bashrc 文件实现案例二<br>3.2.2.2.1 在 /etc/bashrc 文件里设置全局 umask 参数</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/bashrc</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+umask 022</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里以将 umask 设置为 022 为例<br>2) 补充 /etc/bashrc 文件会比 /etc/profile 文件更有优先级<br>）</p>
+
+
+
+<h4>3.2.2.2.2 让 umask 设置生效</h4>
+
+
+
+<pre class="wp-block-code"><code># source /etc/bashrc</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Linux acl 权限</title>
+		<link>https://eternalcenter-now.github.io/acl/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 27 Jul 2020 14:13:44 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Directory (系统目录)]]></category>
+		<category><![CDATA[System File (系统文件)]]></category>
+		<category><![CDATA[System File Security (系统文件安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Privilege (系统权限)]]></category>
+		<category><![CDATA[System Privilege Security (系统权限安全)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<category><![CDATA[System User & System Privilege (系统用户 & 系统权限)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=10342</guid>
+
+					<description><![CDATA[案例目录： 案例一：给某一个文件或目录添加 acl1.1 给某一个文件或目录添加一个用户的 acl1.2 给某一个文件或目录添加一个组的 acl1.3 递归给某一个目录和目录里的所有内容添加一个 acl 案例二：删除某一个文件或目录的 acl2.1 删除某一个文件或目录一个用户的 acl2.2 删除某一个文件或目录一个组的 acl2.3 删除某一个文件或目录的所有 acl2.4 递归删除某一个文件或目录的 acl2.5 递归删除某一个文件或目录的所有 acl 案例三：显示某一个文件或目录的 acl 案例四：备份和还原某一个文件或目录的 acl4.1 备份某一个文件或目录的 acl4.2 还原某一给文件或目录的 acl 具体的案例： 案例一：给某一个文件或目录添加 acl1.1 给某一个文件或目录添加一个用户的 acl （补充：这里以在 /var 目录上给 zhumingyu 用户设置读和执行的 acl 权限为例） 1.2 给某一个文件或目录添加一个组的 acl （补充：这里以在 /var 目录上给 zhumingyu 组设置读和执行的 acl 权限为例） 1.3 递归给某一个目录和目录里的所有内容添加一个 acl （补充：这里以在 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/acl/" class="more-link">Continue reading<span class="screen-reader-text"> "[内容] Linux acl 权限"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2 id="案例目录">案例目录：</h2>
+
+
+
+<h4 id="案例一-给某一个文件或目录添加-acl1-1-给某一个文件或目录添加一个用户的-acl1-2-给某一个文件或目录添加一个组的-acl1-3-递归给某一个目录和目录里的所有内容添加一个-acl">案例一：给某一个文件或目录添加 acl<br>1.1 给某一个文件或目录添加一个用户的 acl<br>1.2 给某一个文件或目录添加一个组的 acl<br>1.3 递归给某一个目录和目录里的所有内容添加一个 acl</h4>
+
+
+
+<h4 id="案例二-删除某一个文件或目录的-acl2-1-删除某一个文件或目录一个用户的-acl2-2-删除某一个文件或目录一个组的-acl2-3-删除某一个文件或目录的所有-acl2-4-递归删除某一个文件或目录的-acl2-5-递归删除某一个文件或目录的所有-acl">案例二：删除某一个文件或目录的 acl<br>2.1 删除某一个文件或目录一个用户的 acl<br>2.2 删除某一个文件或目录一个组的 acl<br>2.3 删除某一个文件或目录的所有 acl<br>2.4 递归删除某一个文件或目录的 acl<br>2.5 递归删除某一个文件或目录的所有 acl</h4>
+
+
+
+<h4 id="案例三-查看某一个文件或目录的-acl">案例三：显示某一个文件或目录的 acl</h4>
+
+
+
+<h4 id="案例四-备份和还原某一个文件或目录的-acl4-1-备份某一个文件或目录的-acl4-2-还原某一给文件或目录的-acl">案例四：备份和还原某一个文件或目录的 acl<br>4.1 备份某一个文件或目录的 acl<br>4.2 还原某一给文件或目录的 acl</h4>
+
+
+
+<h2 id="具体的案例">具体的案例：</h2>
+
+
+
+<h4 id="案例一-给某一个文件或目录添加-acl1-1-给某一个文件或目录添加一个用户的-acl">案例一：给某一个文件或目录添加 acl<br>1.1 给某一个文件或目录添加一个用户的 acl</h4>
+
+
+
+<pre class="wp-block-code"><code># setfacl -m u:zhumingyu:r-x /var</code></pre>
+
+
+
+<p>（补充：这里以在 /var 目录上给 zhumingyu 用户设置读和执行的 acl 权限为例）</p>
+
+
+
+<h4 id="1-2-给某一个文件或目录添加一个组的-acl">1.2 给某一个文件或目录添加一个组的 acl</h4>
+
+
+
+<pre class="wp-block-code"><code># setfacl -m g:zhumingyu:r-x /var</code></pre>
+
+
+
+<p>（补充：这里以在 /var 目录上给 zhumingyu 组设置读和执行的 acl 权限为例）</p>
+
+
+
+<h4 id="1-3-递归给某一个目录和目录里的所有内容添加一个-acl">1.3 递归给某一个目录和目录里的所有内容添加一个 acl</h4>
+
+
+
+<pre class="wp-block-code"><code># setfacl -Rm u:zhumingyu:r-x /var</code></pre>
+
+
+
+<p>（补充：这里以在 /var 目录上递归给 zhumingyu 组设置读和执行的 acl 权限为例）</p>
+
+
+
+<h4 id="案例二-删除某一个文件或目录的-acl2-1-删除某一个文件或目录一个用户的-acl">案例二：删除某一个文件或目录的 acl<br>2.1 删除某一个文件或目录一个用户的 acl</h4>
+
+
+
+<pre class="wp-block-code"><code># setfacl -x u:zhumingyu /var</code></pre>
+
+
+
+<p>（补充：这里以在 /var 目录上删除 zhumingyu 用户的 acl 权限为例）</p>
+
+
+
+<h4 id="2-2-删除某一个文件或目录一个组的-acl">2.2 删除某一个文件或目录一个组的 acl</h4>
+
+
+
+<pre class="wp-block-code"><code># setfacl -x g:zhumingyu /var</code></pre>
+
+
+
+<p>（补充：这里以在 /var 目录上删除 zhumingyu 组的 acl 权限为例）</p>
+
+
+
+<h4 id="2-3-删除某一个文件或目录的所有-acl">2.3 删除某一个文件或目录的所有 acl</h4>
+
+
+
+<pre class="wp-block-code"><code># setfacl -b /var</code></pre>
+
+
+
+<p>（补充：这里以在 /var 目录上删除所有 acl 权限为例）</p>
+
+
+
+<h4 id="2-4-递归删除某一个文件或目录的-acl">2.4 递归删除某一个文件或目录的 acl</h4>
+
+
+
+<pre class="wp-block-code"><code># setfacl -Rx u:zhumingyu:r-x /var</code></pre>
+
+
+
+<p>（补充：这里以在 /var 目录上递归删除 zhumingyu 用户的 acl 权限为例）</p>
+
+
+
+<h4 id="2-5-递归删除某一个文件或目录的所有-acl">2.5 递归删除某一个文件或目录的所有 acl</h4>
+
+
+
+<pre class="wp-block-code"><code># setfacl -Rb /var</code></pre>
+
+
+
+<p>（补充：这里以在 /var 目录上递归删除所有 acl 权限为例）</p>
+
+
+
+<h4 id="案例三-查看某一个文件或目录的-acl">案例三：显示某一个文件或目录的 acl</h4>
+
+
+
+<pre class="wp-block-code"><code># getfacl /var</code></pre>
+
+
+
+<p>（补充：这里以显示 /var 目录的 acl 权限为例）</p>
+
+
+
+<h4 id="案例四-备份和还原某一个文件或目录的-acl4-1-备份某一个文件或目录的-acl">案例四：备份和还原某一个文件或目录的 acl<br>4.1 备份某一个文件或目录的 acl</h4>
+
+
+
+<pre class="wp-block-code"><code># getfacl -R /var &gt; /acl.backup</code></pre>
+
+
+
+<p>（补充：这里以备份 /var 目录的 acl 权限为例）</p>
+
+
+
+<h4 id="4-2-还原某一给文件或目录的-acl">4.2 还原某一给文件或目录的 acl</h4>
+
+
+
+<pre class="wp-block-code"><code># setfacl --restore /acl.backup</code></pre>
+
+
+
+<p>（补充：这里以还原 /var 目录的 acl 权限为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] sudo 提权的实现 （通过用户自己的密码实现 sudo 提权） （openSUSE &#038; SLE）</title>
+		<link>https://eternalcenter-now.github.io/sudo-self-password-opensuse-sle/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 20 Jul 2020 08:47:26 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Privilege (系统权限)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System User & System Privilege (系统用户 & 系统权限)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=10150</guid>
+
+					<description><![CDATA[步骤一：给用户添加相应的 sudo 权限 添加以下内容： &#8230;&#8230;zhumingyu ALL=(ALL) /usr/bin/mysql （补充：这里以给用户 zhumingyu 添加 /usr/bin/mysql 命令为例） 步骤二：设置用户使用自己的密码实现 sudo 提权 将以下内容： 修改为：]]></description>
+										<content:encoded><![CDATA[
+<h4>步骤一：给用户添加相应的 sudo 权限</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/sudoers</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<p>&#8230;&#8230;<br>zhumingyu ALL=(ALL) /usr/bin/mysql</p>
+
+
+
+<p>（补充：这里以给用户 zhumingyu 添加 /usr/bin/mysql 命令为例）</p>
+
+
+
+<h4>步骤二：设置用户使用自己的密码实现 sudo 提权</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/sudoers</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+#Defaults targetpw   # ask for the password of the target user i.e. root
+#ALL    ALL=(ALL) ALL   # WARNING! Only use this together with 'Defaults targetpw'!
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+Defaults targetpw   # ask for the password of the target user i.e. root
+ALL    ALL=(ALL) ALL   # WARNING! Only use this together with 'Defaults targetpw'!
+......</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] CentOS Linux &#038; RHEL 网页图形化管理工具 cockpit</title>
+		<link>https://eternalcenter-now.github.io/cockpit/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sat, 06 Jun 2020 09:07:39 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Firewall (系统防火墙)]]></category>
+		<category><![CDATA[System General Log (系统普通日志)]]></category>
+		<category><![CDATA[System Log (系统日志)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network (系统网络)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Performance (系统性能)]]></category>
+		<category><![CDATA[System Port Security (系统端口安全)]]></category>
+		<category><![CDATA[System Process (系统进程)]]></category>
+		<category><![CDATA[System Process & System Performance (系统进程 & 系统性能)]]></category>
+		<category><![CDATA[System Process Security (系统进程安全)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Security Log (系统安全日志)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<category><![CDATA[System Software (系统软件)]]></category>
+		<category><![CDATA[System Statistic Log (系统统计日志)]]></category>
+		<category><![CDATA[System User (系统用户)]]></category>
+		<category><![CDATA[System User & System Privilege (系统用户 & 系统权限)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=9718</guid>
+
+					<description><![CDATA[步骤一：系统环境要求 服务器系统配置好可用的软件源 步骤二：安装 cockpit （补充：cockpit 是管理单台主机的程序，cockpit-dashaboard 是管理多台主机的程序） 步骤三：启动 cockpit 步骤四：登录 cockpit 使用浏览器登录：https://&/#60;服务器的 IP 地址&#62;:9090]]></description>
+										<content:encoded><![CDATA[
+<h4>步骤一：系统环境要求</h4>
+
+
+
+<p>服务器系统配置好可用的软件源</p>
+
+
+
+<h4>步骤二：安装 cockpit</h4>
+
+
+
+<pre class="wp-block-code"><code># yum -y install cockpit cockpit-dashaboard</code></pre>
+
+
+
+<p>（补充：cockpit 是管理单台主机的程序，cockpit-dashaboard 是管理多台主机的程序）</p>
+
+
+
+<h4>步骤三：启动 cockpit</h4>
+
+
+
+<pre class="wp-block-code"><code># systemctl start cockpit</code></pre>
+
+
+
+<h4>步骤四：登录 cockpit</h4>
+
+
+
+<p>使用浏览器登录：https://&lt;服务器的/ IP 地址&gt;:9090</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 usermod （修改用户）</title>
+		<link>https://eternalcenter-now.github.io/usermod/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 05 Jun 2020 06:30:51 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System User (系统用户)]]></category>
+		<category><![CDATA[System User & System Privilege (系统用户 & 系统权限)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=9677</guid>
+
+					<description><![CDATA[案例一：修改用户的 uid （补充：这里以将 zhumingyu 用户的 uid 修改为 1005 为例） 案例二：修改用户的备注 （补充：这里以将 zhumingyu 用户的备注修改为 admin zhumingyu 为例） 案例三：修改用户的运行环境 （补充：这里以将 zhumingyu 用户的执行环境修改为 /sbin/nologin 为例） 案例四：修改用户的家目录 （补充：这里以将 zhumingyu 用户的家目录修改为 /home/zhumingyu 为例） 案例五：修改用户的主要所属组，以名称的方式 （补充：这里以将 zhumingyu 用户的主要组修改为 root 组为例） 案例六：修改用户的主要所属组，以 gid 的方式 （补充：这里以将 zhumingyu 用户的 gid 修改为 1200 为例） 案例七：修改用户的附属所属组 （补充：这里以将 zhumingyu 用户的附属所属组修改为 root 组为例） （注意：此用户的从库会同时包含 root 组和 zhumingyu 组） &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/usermod/" class="more-link">Continue reading<span class="screen-reader-text"> "[命令] Linux 命令 usermod （修改用户）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h4>案例一：修改用户的 uid</h4>
+
+
+
+<pre class="wp-block-code"><code># usermod -u 1005 zhumingyu</code></pre>
+
+
+
+<p>（补充：这里以将 zhumingyu 用户的 uid 修改为 1005 为例）</p>
+
+
+
+<h4>案例二：修改用户的备注</h4>
+
+
+
+<pre class="wp-block-code"><code># usermod -c "admin zhumingyu" zhumingyu</code></pre>
+
+
+
+<p>（补充：这里以将 zhumingyu 用户的备注修改为 admin zhumingyu 为例）</p>
+
+
+
+<h4>案例三：修改用户的运行环境</h4>
+
+
+
+<pre class="wp-block-code"><code># usermod -s /sbin/nologin zhumingyu</code></pre>
+
+
+
+<p>（补充：这里以将 zhumingyu 用户的执行环境修改为 /sbin/nologin 为例）</p>
+
+
+
+<h4>案例四：修改用户的家目录</h4>
+
+
+
+<pre class="wp-block-code"><code># useradd -d /home/zhumingyu zhumingyu</code></pre>
+
+
+
+<p>（补充：这里以将 zhumingyu 用户的家目录修改为 /home/zhumingyu 为例）</p>
+
+
+
+<h4>案例五：修改用户的主要所属组，以名称的方式</h4>
+
+
+
+<pre class="wp-block-code"><code># usermod -g root zhumingyu</code></pre>
+
+
+
+<p>（补充：这里以将 zhumingyu 用户的主要组修改为 root 组为例）</p>
+
+
+
+<h4>案例六：修改用户的主要所属组，以 gid 的方式</h4>
+
+
+
+<pre class="wp-block-code"><code># usermod -g 1200 zhumingyu</code></pre>
+
+
+
+<p>（补充：这里以将 zhumingyu 用户的 gid 修改为 1200 为例）</p>
+
+
+
+<h4>案例七：修改用户的附属所属组</h4>
+
+
+
+<pre class="wp-block-code"><code># usermod -G root zhumingyu</code></pre>
+
+
+
+<p>（补充：这里以将 zhumingyu 用户的附属所属组修改为 root 组为例）</p>
+
+
+
+<p>（注意：此用户的从库会同时包含 root 组和 zhumingyu 组）</p>
+
+
+
+<h4>案例八：给用户添加一个附属所属组</h4>
+
+
+
+<pre class="wp-block-code"><code># usermod -a -G root zhumingyu</code></pre>
+
+
+
+<p>（补充：这里以给 zhumingyu 用户再添加一个 root 附属组为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 userdel （删除用户）</title>
+		<link>https://eternalcenter-now.github.io/userdel/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 05 Jun 2020 06:29:56 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System User (系统用户)]]></category>
+		<category><![CDATA[System User & System Privilege (系统用户 & 系统权限)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=9675</guid>
+
+					<description><![CDATA[内容一：只是删除用户 内容二：删除用户的同时还要删除家目录]]></description>
+										<content:encoded><![CDATA[
+<h4>内容一：只是删除用户</h4>
+
+
+
+<pre class="wp-block-code"><code># userdel &lt;user></code></pre>
+
+
+
+<h4>内容二：删除用户的同时还要删除家目录</h4>
+
+
+
+<pre class="wp-block-code"><code># userdel -r &lt;user></code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 useradd （添加用户）</title>
+		<link>https://eternalcenter-now.github.io/useradd/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 05 Jun 2020 06:28:33 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System User (系统用户)]]></category>
+		<category><![CDATA[System User & System Privilege (系统用户 & 系统权限)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=9673</guid>
+
+					<description><![CDATA[内容一：用户种类的介绍 1) uid 从 200 到 999 的是系统用户2) uid 大于 1000 的是普通用户 （注意：如果创建用户时没有特意说明，则 uid 是会随即产生的） 内容二： 用户添加命令 useradd 的使用案例2.1 案例一 （补充：这里以添加 zhumingyu 用户，并将它 uid 设置为 1005 为例） 2.2 案例二 （补充：这里以添加 zhumingyu 用户，并将它的备注设置为 admin zhumingyu 为例） 2.3 案例三 （补充：这里以添加 zhumingyu 用户，并将它的执行环境设置为 /sbin/nologin 为例） 2.4 案例四 （补充：这里以添加 zhumingyu 用户，并将它的主要组设置为 root 组 为例） 2.5 案例五 （补充：这里以添加 zhumingyu 用户，并将它的从组设置为 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/useradd/" class="more-link">Continue reading<span class="screen-reader-text"> "[命令] Linux 命令 useradd （添加用户）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h4>内容一：用户种类的介绍</h4>
+
+
+
+<p>1) uid 从 200 到 999 的是系统用户<br>2) uid 大于 1000 的是普通用户</p>
+
+
+
+<p>（注意：如果创建用户时没有特意说明，则 uid 是会随即产生的）</p>
+
+
+
+<h4>内容二： 用户添加命令 useradd 的使用案例<br>2.1 案例一</h4>
+
+
+
+<pre class="wp-block-code"><code># useradd -u 1005 zhumingyu</code></pre>
+
+
+
+<p>（补充：这里以添加 zhumingyu 用户，并将它 uid 设置为 1005 为例）</p>
+
+
+
+<h4>2.2 案例二</h4>
+
+
+
+<pre class="wp-block-code"><code># useradd -c "admin zhumingyu" zhumingyu</code></pre>
+
+
+
+<p>（补充：这里以添加 zhumingyu 用户，并将它的备注设置为 admin zhumingyu 为例）</p>
+
+
+
+<h4>2.3 案例三</h4>
+
+
+
+<pre class="wp-block-code"><code># useradd -s /sbin/nologin zhumingyu</code></pre>
+
+
+
+<p>（补充：这里以添加 zhumingyu 用户，并将它的执行环境设置为 /sbin/nologin 为例）</p>
+
+
+
+<h4>2.4 案例四</h4>
+
+
+
+<pre class="wp-block-code"><code># useradd -g root zhumingyu</code></pre>
+
+
+
+<p>（补充：这里以添加 zhumingyu 用户，并将它的主要组设置为 root 组 为例）</p>
+
+
+
+<h4>2.5 案例五</h4>
+
+
+
+<pre class="wp-block-code"><code># useradd -G root zhumingyu</code></pre>
+
+
+
+<p>（补充：这里以添加 zhumingyu 用户，并将它的从组设置为 root 组 为例）</p>
+
+
+
+<p>（注意：此用户的从库会同时包含 root 组和 zhumingyu 组）</p>
+
+
+
+<h4>2.6 案例六</h4>
+
+
+
+<pre class="wp-block-code"><code># useradd -g 1200 zhumingyu</code></pre>
+
+
+
+<p>（补充：这里以添加 zhumingyu 用户，并将它的 gid 设置为 1200 为例）</p>
+
+
+
+<h4>2.7 案例七</h4>
+
+
+
+<pre class="wp-block-code"><code># useradd -d /home/zhumingyu zhumingyu</code></pre>
+
+
+
+<p>（补充：这里以添加 zhumingyu 用户，并指定它的家目录为 /home/zhumingyu 为例）</p>
+
+
+
+<h4>2.8 案例八</h4>
+
+
+
+<pre class="wp-block-code"><code># useradd -m zhumingyu zhumingyu</code></pre>
+
+
+
+<p> （补充：这里以添加 zhumingyu 用户，但是不设置家目录为为例） </p>
+
+
+
+<h4>2.8 案例九</h4>
+
+
+
+<pre class="wp-block-code"><code># useradd -p 123 zhumingyu</code></pre>
+
+
+
+<p>（补充：这里以添加 zhumingyu 用户，并设置密码 123 为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 chown （归属文件或目录）</title>
+		<link>https://eternalcenter-now.github.io/chown/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 05 Jun 2020 02:53:58 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Privilege (系统权限)]]></category>
+		<category><![CDATA[System Privilege Security (系统权限安全)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System User & System Privilege (系统用户 & 系统权限)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=9657</guid>
+
+					<description><![CDATA[案例一：将 test.txt 的所属主设置为 root 或者： 案例二：将 test.txt 的所属组设置为 root 案例三：将 test.txt 的所数主设置为 root，所属组设置为 root]]></description>
+										<content:encoded><![CDATA[
+<h4>案例一：将 test.txt 的所属主设置为 root</h4>
+
+
+
+<pre class="wp-block-code"><code># chown root test.txt</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># chown root: test.txt</code></pre>
+
+
+
+<h4>案例二：将 test.txt 的所属组设置为 root</h4>
+
+
+
+<pre class="wp-block-code"><code># chown :root test.txt</code></pre>
+
+
+
+<h4>案例三：将 test.txt 的所数主设置为 root，所属组设置为 root</h4>
+
+
+
+<pre class="wp-block-code"><code># chown root:root test.txt</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Linux 密码存储文件 /etc/shadow</title>
+		<link>https://eternalcenter-now.github.io/shadow/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sun, 31 May 2020 15:06:45 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System File (系统文件)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<category><![CDATA[System User (系统用户)]]></category>
+		<category><![CDATA[System User & System Privilege (系统用户 & 系统权限)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=9640</guid>
+
+					<description><![CDATA[内容一：显示 /etc/shadow 文件信息的案例 内容二：/etc/shadow 文件信息字段的含义 1) 字段 1：用户2) 字段 2：加密了的密码字符串3) 字段 3：最后一次修改密码的时间，从 1970.01.01 到修改时的天数4) 字段 4：密码的最短使用时间，默认值为 0，单位为天5) 字段 5：密码的最长使用时间，默认值为 99999，单位为天6) 字段 6：密码快要到期的警告天数，默认值为 7，单位为天7) 字段 7：密码过期之后用户还可以有效使用的天数8) 字段 8：用户失效了多时间，默认值为空，从 1970.01.01 到现在的天数9) 字段 9：保留字段 （注意：1) 如果加密了的密码字符串为：!!，则代表是没有密码2) 如果加密了的密码字符串为：*，则代表密码被锁定了）]]></description>
+										<content:encoded><![CDATA[
+<h4 id="内容一-显示-etc-shadow-文件信息的案例">内容一：显示 /etc/shadow 文件信息的案例</h4>
+
+
+
+<pre class="wp-block-code"><code># head -1 /etc/shadow
+root:$6$qnQA3KzPOeJP$Kb0zwnZsuEcHXkEXwzYJPKbhbbstdtDuU7mrn3FdKULpMkG5x6WR963olxLAX/E75knAlgwfj/bFHi9R0IMS1.:18331::::::</code></pre>
+
+
+
+<h4 id="内容二-etc-shadow-文件信息字段的含义">内容二：/etc/shadow 文件信息字段的含义</h4>
+
+
+
+<p>1) 字段 1：用户<br>2) 字段 2：加密了的密码字符串<br>3) 字段 3：最后一次修改密码的时间，从 1970.01.01 到修改时的天数<br>4) 字段 4：密码的最短使用时间，默认值为 0，单位为天<br>5) 字段 5：密码的最长使用时间，默认值为 99999，单位为天<br>6) 字段 6：密码快要到期的警告天数，默认值为 7，单位为天<br>7) 字段 7：密码过期之后用户还可以有效使用的天数<br>8) 字段 8：用户失效了多时间，默认值为空，从 1970.01.01 到现在的天数<br>9) 字段 9：保留字段</p>
+
+
+
+<p>（<br>注意：<br>1) 如果加密了的密码字符串为：!!，则代表是没有密码<br>2) 如果加密了的密码字符串为：*，则代表密码被锁定了<br>）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 passwd （管理密码）</title>
+		<link>https://eternalcenter-now.github.io/passwd/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Thu, 14 May 2020 13:31:30 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System User (系统用户)]]></category>
+		<category><![CDATA[System User & System Privilege (系统用户 & 系统权限)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=9274</guid>
+
+					<description><![CDATA[案例一：修改本用户的密码 案例二：修改指定用户的密码 （补充：这里以修改 zhumingyu 用户的密码为例） 案例三：清空密码 （补充：这里以清空 zhumingyu 用户的密码为例） 案例四：锁定用户密码 （补充：这里以锁定 zhumingyu 用户的密码为例） 案例五：解锁用户密码 （补充：这里以解锁 zhumingyu 用户的密码为例） 案例六：显示用户密码的锁定状态 （补充：这里以显示 zhumingyu 用户的锁定状态为例）]]></description>
+										<content:encoded><![CDATA[
+<h4>案例一：修改本用户的密码</h4>
+
+
+
+<pre class="wp-block-code"><code># passwd</code></pre>
+
+
+
+<h4>案例二：修改指定用户的密码</h4>
+
+
+
+<pre class="wp-block-code"><code># passwd zhumingyu</code></pre>
+
+
+
+<p>（补充：这里以修改 zhumingyu 用户的密码为例）</p>
+
+
+
+<h4>案例三：清空密码</h4>
+
+
+
+<pre class="wp-block-code"><code># passwd -d zhumingyu</code></pre>
+
+
+
+<p>（补充：这里以清空 zhumingyu 用户的密码为例）</p>
+
+
+
+<h4 id="案例一-锁定并显示用户密码状态1-1-锁定用户密码">案例四：锁定用户密码</h4>
+
+
+
+<pre class="wp-block-code"><code># passwd -l zhumingyu </code></pre>
+
+
+
+<p>（补充：这里以锁定 zhumingyu 用户的密码为例）</p>
+
+
+
+<h4 id="案例二-解锁并和显示用户密码状态2-1-解锁用户密码">案例五：解锁用户密码</h4>
+
+
+
+<pre class="wp-block-code"><code># passwd -u zhumingyu</code></pre>
+
+
+
+<p>（补充：这里以解锁 zhumingyu 用户的密码为例）</p>
+
+
+
+<h4 id="2-2-显示用户密码的锁定状态">案例六：显示用户密码的锁定状态</h4>
+
+
+
+<pre class="wp-block-code"><code># passwd -S zhumingyu</code></pre>
+
+
+
+<p>（补充：这里以显示 zhumingyu 用户的锁定状态为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 chmod （管理权限）</title>
+		<link>https://eternalcenter-now.github.io/chmod/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sun, 08 Dec 2019 10:52:26 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Privilege (系统权限)]]></category>
+		<category><![CDATA[System Privilege Security (系统权限安全)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System User & System Privilege (系统用户 & 系统权限)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=7445</guid>
+
+					<description><![CDATA[内容目录： 内容一：普通权限的管理1.1 普通权限的介绍1.1.1 对于文件而言1.1.2 对于目录而言1.1.3 用数字代替权限的方法1.2 管理权限案例1.2.1 给一个文件或目录添加权限的案例1.2.1.1 案例一1.2.1.2 案例二1.2.1.3 案例三1.2.1.4 案例四1.2.2 给一个文件或目录撤销权限的案例1.2.2.1 案例一1.2.2.2 案例二1.2.2.3 案例三1.2.2.4 案例四1.2.3 设定某一个文件或目录的权限的案例1.2.3.1 案例一1.2.3.2 案例二1.2.3.3 案例三1.2.3.4 案例四1.2.3.5 案例五1.2.3.6 案例六1.2.3.7 案例七 内容二：特殊权限的管理2.1 特殊权限 SUID2.1.1 SUID 介绍2.1.2 SUID 权限的添加的案例2.1.2.1 添加 SUID 权限的案例2.1.2.2 显示 SUID 权限的添加情况的案例2.1.2.2.1 显示有 SUID 权限，但是所属主没有执行权限的文件的案例2.1.2.2.2 显示有 SUID 权限，并且所属主有执行权限的文件的案例2.2 特殊权限 SGID2.2.1 SGID 介绍2.2.2 SGID 权限的添加的案例2.2.2.1 添加 SGID 权限的案例2.2.2.2 显示 SGID &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/chmod/" class="more-link">Continue reading<span class="screen-reader-text"> "[命令] Linux 命令 chmod （管理权限）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2 id="内容目录">内容目录：</h2>
+
+
+
+<h4 id="内容一-普通权限的管理1-1-普通权限的介绍1-1-1-对于文件而言1-1-2-对于目录而言1-1-3-用数字代替权限的方法1-2-管理权限案例1-2-1-给一个文件或目录添加权限的案例1-2-1-1-案例一1-2-1-2-案例二1-2-1-3-案例三1-2-1-4-案例四1-2-2-给一个文件或目录撤销权限的案例1-2-2-1-案例一1-2-2-2-案例二1-2-2-3-案例三1-2-2-4-案例四1-2-3-设定某一个文件或目录的权限的案例1-2-3-1-案例一1-2-3-2-案例二1-2-3-3-案例三1-2-3-4-案例四1-2-3-5-案例五1-2-3-6-案例六1-2-3-7-案例七">内容一：普通权限的管理<br>1.1 普通权限的介绍<br>1.1.1 对于文件而言<br>1.1.2 对于目录而言<br>1.1.3 用数字代替权限的方法<br>1.2 管理权限案例<br>1.2.1 给一个文件或目录添加权限的案例<br>1.2.1.1 案例一<br>1.2.1.2 案例二<br>1.2.1.3 案例三<br>1.2.1.4 案例四<br>1.2.2 给一个文件或目录撤销权限的案例<br>1.2.2.1 案例一<br>1.2.2.2 案例二<br>1.2.2.3 案例三<br>1.2.2.4 案例四<br>1.2.3 设定某一个文件或目录的权限的案例<br>1.2.3.1 案例一<br>1.2.3.2 案例二<br>1.2.3.3 案例三<br>1.2.3.4 案例四<br>1.2.3.5 案例五<br>1.2.3.6 案例六<br>1.2.3.7 案例七</h4>
+
+
+
+<h4 id="内容二-特殊权限的管理2-1-特殊权限-suid2-1-1-suid-介绍2-1-2-suid-权限的添加的案例2-1-2-1-添加-suid-权限的案例2-1-2-2-显示-suid-权限的添加情况的案例2-1-2-2-1-显示有-suid-权限-但是所属主没有执行权限的文件的案例2-1-2-2-2-显示有-suid-权限-并且所属主有执行权限的文件的案例2-2-特殊权限-sgid2-2-1-sgid-介绍2-2-2-sgid-权限的添加的案例2-2-2-1-添加-sgid-权限的案例2-2-2-2-显示-sgid-权限的添加情况的案例2-2-2-2-1-显示有-sgid-权限-但是所属组没有执行权限的目录的案例2-2-2-2-2-显示有-sgid-权限-并且所属组有执行权限的目录的案例2-3-特殊权限-sbit2-3-1-sbit-介绍2-3-2-sbit-权限的添加的案例2-3-2-1-添加-sbit-权限的案例2-3-2-2-显示-sbit-权限的添加情况的案例2-3-2-2-1-显示有-sbit-权限-但是所属主没有执行权限的目录的案例2-3-2-2-2-显示有-sbit-权限-并且所属主有执行权限的目录的案例">内容二：特殊权限的管理<br>2.1 特殊权限 SUID<br>2.1.1 SUID 介绍<br>2.1.2 SUID 权限的添加的案例<br>2.1.2.1 添加 SUID 权限的案例<br>2.1.2.2 显示 SUID 权限的添加情况的案例<br>2.1.2.2.1 显示有 SUID 权限，但是所属主没有执行权限的文件的案例<br>2.1.2.2.2 显示有 SUID 权限，并且所属主有执行权限的文件的案例<br>2.2 特殊权限 SGID<br>2.2.1 SGID 介绍<br>2.2.2 SGID 权限的添加的案例<br>2.2.2.1 添加 SGID 权限的案例<br>2.2.2.2 显示 SGID 权限的添加情况的案例<br>2.2.2.2.1 显示有 SGID 权限，但是所属组没有执行权限的目录的案例<br>2.2.2.2.2 显示有 SGID 权限，并且所属组有执行权限的目录的案例<br>2.3 特殊权限 SBIT<br>2.3.1 SBIT 介绍<br>2.3.2 SBIT 权限的添加的案例<br>2.3.2.1 添加 SBIT 权限的案例<br>2.3.2.2 显示 SBIT 权限的添加情况的案例<br>2.3.2.2.1 显示有 SBIT 权限，但是所属主没有执行权限的目录的案例<br>2.3.2.2.2 显示有 SBIT 权限，并且所属主有执行权限的目录的案例</h4>
+
+
+
+<h2 id="具体的内容">具体的内容：</h2>
+
+
+
+<h4 id="内容一-普通权限的管理1-1-普通权限的介绍1-1-1-对于文件而言">内容一：普通权限的管理<br>1.1 普通权限的介绍<br>1.1.1 对于文件而言</h4>
+
+
+
+<p>1) r 代表读权限<br>2) w 代表写权限<br>3) x 代表执行权限</p>
+
+
+
+<h4 id="1-1-2-对于目录而言">1.1.2 对于目录而言</h4>
+
+
+
+<p>1) r 代表可以看到目录<br>2) w 代表可以对目录进行增、删、改、查和在里面创建文件和目录<br>3) x 代表可以进入目录</p>
+
+
+
+<h4 id="1-1-3-用数字代替权限的方法">1.1.3 用数字代替权限的方法</h4>
+
+
+
+<p>1) 0 代表 &#8212;<br>2) 1 代表 &#8211;x<br>3) 2 代表 -w-<br>4) 3 代表 -wx<br>5) 4 代表 r&#8211;<br>6) 5 代表 r-x<br>7) 6 代表 rw-<br>8) 7 代表 rwx</p>
+
+
+
+<h4 id="1-2-管理权限案例1-2-1-给一个文件或目录添加权限的案例1-2-1-1-案例一">1.2 管理权限案例<br>1.2.1 给一个文件或目录添加权限的案例<br>1.2.1.1 案例一</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod u+x test.txt</code></pre>
+
+
+
+<p>（补充：这里以给 test.txt 文件的所属主添加执行权限为例）</p>
+
+
+
+<h4 id="1-2-1-2-案例二">1.2.1.2 案例二</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod u+r,g+w test.txt</code></pre>
+
+
+
+<p>（补充：这里以给 test.txt 文件的所属主添加执行权限，给文件的所属组添加写权限）</p>
+
+
+
+<h4 id="1-2-1-3-案例三">1.2.1.3 案例三</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod +x test.txt</code></pre>
+
+
+
+<p>（补充：这里以给 test.txt 文件的所属主、所属组和其他用户添加执行权限）</p>
+
+
+
+<h4 id="1-2-1-4-案例四">1.2.1.4 案例四</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod a+x test.txt</code></pre>
+
+
+
+<p>（补充：这里以给 test.txt 文件的所属主、所属组和其他用户添加执行权限）</p>
+
+
+
+<h4 id="1-2-2-给一个文件或目录撤销权限的案例1-2-2-1-案例一">1.2.2 给一个文件或目录撤销权限的案例<br>1.2.2.1 案例一</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod u-x test.txt</code></pre>
+
+
+
+<p>（补充：这里以给 test.txt 文件的所属主撤销执行权限）</p>
+
+
+
+<h4 id="1-2-2-2-案例二">1.2.2.2 案例二</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod u-r,g-w test.txt</code></pre>
+
+
+
+<p>（补充：这里以给 test.txt 文件的所属主撤销执行权限，给文件的所属组撤销写权限）</p>
+
+
+
+<h4 id="1-2-2-3-案例三">1.2.2.3 案例三</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod -x test.txt</code></pre>
+
+
+
+<p>（补充：这里以给 test.txt 文件的所属主、所属组和其他用户撤销执行权限）</p>
+
+
+
+<h4 id="1-2-2-4-案例四">1.2.2.4 案例四</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod a-x test.txt</code></pre>
+
+
+
+<p>（补充：这里以给 test.txt 文件的所属主、所属组和其他用户撤销执行权限）</p>
+
+
+
+<h4 id="1-2-3-设定某一个文件或目录的权限的案例1-2-3-1-案例一">1.2.3 设定某一个文件或目录的权限的案例<br>1.2.3.1 案例一</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod u=rwx test.txt </code></pre>
+
+
+
+<p>（补充：这里以设置 test.txt 文件的所属主拥有读、写和执行的权限）</p>
+
+
+
+<h4 id="1-2-3-2-案例二">1.2.3.2 案例二</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod u=rw- test.txt</code></pre>
+
+
+
+<p>（补充：这里以设置 test.txt 文件的所属主拥有读和写的权限，但是没有执行的权限）</p>
+
+
+
+<h4 id="1-2-3-3-案例三">1.2.3.3 案例三</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod u=--- test.txt</code></pre>
+
+
+
+<p>（补充：这里以设置 test.txt 文件的所属主没有任何权限）</p>
+
+
+
+<h4 id="1-2-3-4-案例四">1.2.3.4 案例四</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod u=</code></pre>
+
+
+
+<p>（补充：这里以设置 test.txt 文件的所属主没有任何权限）</p>
+
+
+
+<h4 id="1-2-3-5-案例五">1.2.3.5 案例五</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod u=rw,g=, test.txt</code></pre>
+
+
+
+<p>（补充：这里以设置 test.txt 文件的所属主拥有读和写的权限，但是没有执行的权限。设置文件的所属组没有任何权限）</p>
+
+
+
+<h4 id="1-2-3-6-案例六">1.2.3.6 案例六</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod u=rw,g=---,0= test.txt</code></pre>
+
+
+
+<p>（补充：这里以设置 test.txt 文件的所属主拥有读和写的权限，但是没有执行的权限。设置文件的所属组没有任何权限。设置文件的其他用户没有任何权限）</p>
+
+
+
+<h4 id="1-2-3-7-案例七">1.2.3.7 案例七</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod 755 test.txt</code></pre>
+
+
+
+<p>（补充：这里以设置 test.txt 文件的所属主拥有读、写和执行的权限。设置文件的所属组有读和执行的权限。设置文件的其他用户有读和执行的权限）</p>
+
+
+
+<h4 id="内容二-特殊权限的管理2-1-特殊权限-suid2-1-1-suid-介绍">内容二：特殊权限的管理<br>2.1 特殊权限 SUID<br>2.1.1 SUID 介绍</h4>
+
+
+
+<p>1) SUID：全名 Set UID<br>2) SUID 的作用：让没有此文件执行权限的用户，可以执行这个文件<br>3) SUID 的权限数字 4000</p>
+
+
+
+<h4 id="2-1-2-suid-权限的添加的案例2-1-2-1-添加-suid-权限的案例">2.1.2 SUID 权限的添加的案例<br>2.1.2.1 添加 SUID 权限的案例</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod u+s test.txt</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># chmod 4644 test.txt</code></pre>
+
+
+
+<p>（补充：这里以对 test.txt 文件进行操作为例）</p>
+
+
+
+<h4 id="2-1-2-2-显示-suid-权限的添加情况的案例2-1-2-2-1-显示有-suid-权限-但是所属主没有执行权限的文件的案例">2.1.2.2 显示 SUID 权限的添加情况的案例<br>2.1.2.2.1 显示有 SUID 权限，但是所属主没有执行权限的文件的案例</h4>
+
+
+
+<pre class="wp-block-code"><code># ls -l test.txt 
+-rwSr--r-- 1 root root 0 12月  8 05:27 test.txt</code></pre>
+
+
+
+<p>（补充：这里以对 test.txt 文件进行操作为例）</p>
+
+
+
+<h4 id="2-1-2-2-2-显示有-suid-权限-并且所属主有执行权限的文件的案例">2.1.2.2.2 显示有 SUID 权限，并且所属主有执行权限的文件的案例</h4>
+
+
+
+<pre class="wp-block-code"><code># ls -l test.txt 
+-rwsr--r-- 1 root root 0 12月  8 05:27 test.txt</code></pre>
+
+
+
+<p>（补充：这里以对 test.txt 文件进行操作为例）</p>
+
+
+
+<h4 id="2-2-特殊权限-sgid2-2-1-sgid-介绍">2.2 特殊权限 SGID<br>2.2.1 SGID 介绍</h4>
+
+
+
+<p>1) SGID：全名 Set GID<br>2) SGID 的作用：在此目录下创建的文件，将都和此目录的所属组一样<br>3) SGID 的权限数字 2000</p>
+
+
+
+<h4 id="2-2-2-sgid-权限的添加的案例2-2-2-1-添加-sgid-权限的案例">2.2.2 SGID 权限的添加的案例<br>2.2.2.1 添加 SGID 权限的案例</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod g+s test</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># chmod 2644 test</code></pre>
+
+
+
+<p>（补充：这里以对 test.txt 文件进行操作为例）</p>
+
+
+
+<h4 id="2-2-2-2-显示-sgid-权限的添加情况的案例2-2-2-2-1-显示有-sgid-权限-但是所属组没有执行权限的目录的案例">2.2.2.2 显示 SGID 权限的添加情况的案例<br>2.2.2.2.1 显示有 SGID 权限，但是所属组没有执行权限的目录的案例</h4>
+
+
+
+<pre class="wp-block-code"><code># ls -l test
+-rw-r-Sr-- 1 root root 0 12月  8 05:27 test</code></pre>
+
+
+
+<p>（补充：这里以对 test.txt 文件进行操作为例）</p>
+
+
+
+<h4 id="2-2-2-2-2-显示有-sgid-权限-并且所属组有执行权限的目录的案例">2.2.2.2.2 显示有 SGID 权限，并且所属组有执行权限的目录的案例</h4>
+
+
+
+<pre class="wp-block-code"><code># ls -l test
+-rw-r-sr-- 1 root root 0 12月  8 05:27 test</code></pre>
+
+
+
+<p>（补充：这里以对 test.txt 文件进行操作为例）</p>
+
+
+
+<h4 id="2-3-特殊权限-sbit2-3-1-sbit-介绍">2.3 特殊权限 SBIT<br>2.3.1 SBIT 介绍</h4>
+
+
+
+<p>1) SBIT：全名 Sticky Bit<br>2) SBIT 的作用：在此目录下创建的文件，只有创建此文件的用户和 root 用户可以删除<br>3) SBIT 的权限数字 1000</p>
+
+
+
+<h4 id="2-3-2-sbit-权限的添加的案例2-3-2-1-添加-sbit-权限的案例">2.3.2 SBIT 权限的添加的案例<br>2.3.2.1 添加 SBIT 权限的案例</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod o+t test</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># chmod 1644 test</code></pre>
+
+
+
+<p>（补充：这里以对 test.txt 文件进行操作为例）</p>
+
+
+
+<h4 id="2-3-2-2-显示-sbit-权限的添加情况的案例2-3-2-2-1-显示有-sbit-权限-但是所属主没有执行权限的目录的案例">2.3.2.2 显示 SBIT 权限的添加情况的案例<br>2.3.2.2.1 显示有 SBIT 权限，但是所属主没有执行权限的目录的案例</h4>
+
+
+
+<pre class="wp-block-code"><code># ls -l test
+-rw-r--r-T 1 root root 0 12月  8 05:27 test</code></pre>
+
+
+
+<p>（补充：这里以对 test.txt 文件进行操作为例）</p>
+
+
+
+<h4 id="2-3-2-2-2-显示有-sbit-权限-并且所属主有执行权限的目录的案例">2.3.2.2.2 显示有 SBIT 权限，并且所属主有执行权限的目录的案例</h4>
+
+
+
+<pre class="wp-block-code"><code># ls -l test
+-rw-r--r-t 1 root root 0 12月  8 05:27 test</code></pre>
+
+
+
+<p>（补充：这里以对 test.txt 文件进行操作为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 last （审计）</title>
+		<link>https://eternalcenter-now.github.io/last/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sat, 26 Oct 2019 14:37:05 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Log (系统日志)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Security Log (系统安全日志)]]></category>
+		<category><![CDATA[System User (系统用户)]]></category>
+		<category><![CDATA[System User & System Privilege (系统用户 & 系统权限)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=6358</guid>
+
+					<description><![CDATA[案例一：只显示最近的 10 条记录 或者： 案例二：指定 btmp 为查询文件 案例三：将 IP 地址转换为主机 案例四：显示 2019 年 10 月 10 日之前的 10 条记录 案例五：显示最后一次重启的时间 或者： 案例六：显示最后一次关机的时间 案例七：显示系统运行等级的变化 （补充：这里 -x 的作用是把系统运行等级的显示也显示出来，同时显示全系统 kernel 的变换） 案例八：显示系统 kernel （内核）的变化 （补充：1) 这里 -x 的作用是把系统运行等级的显示也显示出来，同时显示全系统 kernel 的变换）2) 这里 -F 的作用是加大显示结果）]]></description>
+										<content:encoded><![CDATA[
+<h4>案例一：只显示最近的 10 条记录</h4>
+
+
+
+<pre class="wp-block-code"><code># last -n 10</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># last -10</code></pre>
+
+
+
+<h4>案例二：指定 btmp 为查询文件</h4>
+
+
+
+<pre class="wp-block-code"><code># last -10 -f /var/log/btmp</code></pre>
+
+
+
+<h4>案例三：将 IP 地址转换为主机</h4>
+
+
+
+<pre class="wp-block-code"><code># last -10 -d</code></pre>
+
+
+
+<h4>案例四：显示 2019 年 10 月 10 日之前的 10 条记录</h4>
+
+
+
+<pre class="wp-block-code"><code># last -10 -t 201910100000</code></pre>
+
+
+
+<h4>案例五：显示最后一次重启的时间</h4>
+
+
+
+<pre class="wp-block-code"><code># last | grep reboot | head -1</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># last reboot | head -1</code></pre>
+
+
+
+<h4>案例六：显示最后一次关机的时间</h4>
+
+
+
+<pre class="wp-block-code"><code># last | grep -i shutdown | head -1</code></pre>
+
+
+
+<h4>案例七：显示系统运行等级的变化</h4>
+
+
+
+<pre class="wp-block-code"><code># last -x | grep runlevel</code></pre>
+
+
+
+<p>（补充：这里 -x 的作用是把系统运行等级的显示也显示出来，同时显示全系统 kernel 的变换）</p>
+
+
+
+<h4>案例八：显示系统 kernel （内核）的变化</h4>
+
+
+
+<pre class="wp-block-code"><code># last -xF | egrep "reboot|shutdown|runlevel|system"</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里 -x 的作用是把系统运行等级的显示也显示出来，同时显示全系统 kernel 的变换）<br>2) 这里 -F 的作用是加大显示结果<br>）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

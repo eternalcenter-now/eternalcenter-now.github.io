@@ -1,0 +1,1311 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>System Privilege (系统权限) &#8211; Eternal Center</title>
+	<atom:link href="https://eternalcenter-now.github.io/category/system/system-user-system-privilege/system-privilege/feed/" rel="self" type="application/rss+xml" />
+	<link>https://eternalcenter-now.github.io/</link>
+	<description></description>
+	<lastBuildDate>Tue, 12 Apr 2022 14:01:58 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	
+	<item>
+		<title>[步骤] sudo 提权的实现 （sudo 提权的同时可以使用代理） （openSUSE &#038; SLE）</title>
+		<link>https://eternalcenter-now.github.io/sudo-self-proxy-opensuse-sle/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sat, 15 Jan 2022 14:47:45 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Privilege (系统权限)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<category><![CDATA[System User & System Privilege (系统用户 & 系统权限)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=21217</guid>
+
+					<description><![CDATA[步骤一：给用户添加相应的 sudo 权限 添加以下内容： （补充：这里以给用户 zhumingyu 添加 /usr/bin/mysql 命令为例） 步骤二：设置用户使用自己的密码实现 sudo 提权 在 这一行下面添加： （补充：这里以允许用户在进行 sudo 提权的同时也能使用 http_proxy、https_proxy 为例）]]></description>
+										<content:encoded><![CDATA[
+<h4>步骤一：给用户添加相应的 sudo 权限</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/sudoers</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>……
+zhumingyu ALL=(ALL) /usr/bin/mysql</code></pre>
+
+
+
+<p>（补充：这里以给用户 zhumingyu 添加 /usr/bin/mysql 命令为例）</p>
+
+
+
+<h4>步骤二：设置用户使用自己的密码实现 sudo 提权</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/sudoers</code></pre>
+
+
+
+<p>在</p>
+
+
+
+<pre class="wp-block-code"><code>......
+env_reset
+......</code></pre>
+
+
+
+<p>这一行下面添加：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+Defaults env_keep += "http_proxy https_proxy"
+......</code></pre>
+
+
+
+<p>（补充：这里以允许用户在进行 sudo 提权的同时也能使用 http_proxy、https_proxy 为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Linux 文件或目录的查找 （特殊权限）</title>
+		<link>https://eternalcenter-now.github.io/special-privilege-find/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 07 Aug 2020 03:02:56 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Directory (系统目录)]]></category>
+		<category><![CDATA[System File (系统文件)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Privilege (系统权限)]]></category>
+		<category><![CDATA[System Privilege Security (系统权限安全)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<category><![CDATA[System User & System Privilege (系统用户 & 系统权限)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=10429</guid>
+
+					<description><![CDATA[]]></description>
+										<content:encoded><![CDATA[
+<pre class="wp-block-code"><code># find / -type f \( -perm -1000 -o -perm -2000 -o -perm -4000 \) -print</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Linux umask 的设置</title>
+		<link>https://eternalcenter-now.github.io/umask/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sat, 01 Aug 2020 08:54:22 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Privilege (系统权限)]]></category>
+		<category><![CDATA[System Privilege Security (系统权限安全)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System User & System Privilege (系统用户 & 系统权限)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=10411</guid>
+
+					<description><![CDATA[内容目录： 内容一：默认权限值的含义 内容二：临时默认权限的设置2.1 默认权限值的方法2.2 默认权限值的方法2.2.1 方法一：使用权限数字设置默认权限值2.2.2 方法二：使用权限标志设置默认权限值 内容三：永久默认权限的设置3.1 给某个用户单独设置 umask3.1.1 给某个用户单独添加 umask 参数3.1.2 让 umask 设置生效3.2 全局设置 umask 的方法3.2.1 通过修改 /etc/profile 文件实现3.2.1.1 通过修改 /etc/profile 文件实现案例一3.2.1.1.1 在 /etc/profile 文件里设置全局 umask 参数3.2.1.1.2 让 umask 设置生效3.2.1.2 通过修改 /etc/profile 文件实现案例二3.2.1.2.1 在 /etc/profile 文件里设置全局 umask 参数3.2.1.2.2 让 umask 设置生效3.2.2 通过修改 /etc/bashrc 文件实现3.2.2.1 通过修改 /etc/bashrc 文件实现案例一3.2.2.1.1 在 /etc/bashrc 文件里设置全局 umask 参数3.2.2.1.2 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/umask/" class="more-link">Continue reading<span class="screen-reader-text"> "[内容] Linux umask 的设置"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2>内容目录：</h2>
+
+
+
+<h4>内容一：默认权限值的含义</h4>
+
+
+
+<h4>内容二：临时默认权限的设置<br>2.1 默认权限值的方法<br>2.2 默认权限值的方法<br>2.2.1 方法一：使用权限数字设置默认权限值<br>2.2.2 方法二：使用权限标志设置默认权限值</h4>
+
+
+
+<h4>内容三：永久默认权限的设置<br>3.1 给某个用户单独设置 umask<br>3.1.1 给某个用户单独添加 umask 参数<br>3.1.2 让 umask 设置生效<br>3.2 全局设置 umask 的方法<br>3.2.1 通过修改 /etc/profile 文件实现<br>3.2.1.1 通过修改 /etc/profile 文件实现案例一<br>3.2.1.1.1 在 /etc/profile 文件里设置全局 umask 参数<br>3.2.1.1.2 让 umask 设置生效<br>3.2.1.2 通过修改 /etc/profile 文件实现案例二<br>3.2.1.2.1 在 /etc/profile 文件里设置全局 umask 参数<br>3.2.1.2.2 让 umask 设置生效<br>3.2.2 通过修改 /etc/bashrc 文件实现<br>3.2.2.1 通过修改 /etc/bashrc 文件实现案例一<br>3.2.2.1.1 在 /etc/bashrc 文件里设置全局 umask 参数<br>3.2.2.1.2 让 umask 设置生效<br>3.2.2.2 通过修改 /etc/bashrc 文件实现案例二<br>3.2.2.2.1 在 /etc/bashrc 文件里设置全局 umask 参数<br>3.2.2.2.2 让 umask 设置生效</h4>
+
+
+
+<h2>具体的内容：</h2>
+
+
+
+<h4>内容一：默认权限值的含义</h4>
+
+
+
+<p>如果 umask 的值是 0022：<br>创建的新目录的默认权限是：777 &#8211; 022 = 755<br>创建的新文件的默认权限是：666 &#8211; 022 = 644</p>
+
+
+
+<h4>内容二：临时默认权限的设置<br>2.1 默认权限值的方法</h4>
+
+
+
+<pre class="wp-block-code"><code># umask
+0022</code></pre>
+
+
+
+<h4>2.2 默认权限值的方法<br>2.2.1 方法一：使用权限数字设置默认权限值</h4>
+
+
+
+<pre class="wp-block-code"><code># umask 0002</code></pre>
+
+
+
+<h4>2.2.2 方法二：使用权限标志设置默认权限值</h4>
+
+
+
+<pre class="wp-block-code"><code># umask -S u=rwx,g=rwx,o=rw</code></pre>
+
+
+
+<h4>内容三：永久默认权限的设置<br>3.1 给某个用户单独设置 umask<br>3.1.1 给某个用户单独添加 umask 参数</h4>
+
+
+
+<pre class="wp-block-code"><code># vim ~/.bashrc </code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+umask 022</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里以将 umask 设置为 022 为例<br>2) 补充 /etc/bashrc 文件会比 /etc/profile 文件更有优先级<br>）</p>
+
+
+
+<h4>3.1.2 让 umask 设置生效</h4>
+
+
+
+<pre class="wp-block-code"><code># source ~/.bashrc</code></pre>
+
+
+
+<h4>3.2 全局设置 umask 的方法<br>3.2.1 通过修改 /etc/profile 文件实现<br>3.2.1.1 通过修改 /etc/profile 文件实现案例一<br>3.2.1.1.1 在 /etc/profile 文件里设置全局 umask 参数</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/profile</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+if &#91; $UID -gt 199 ] &amp;&amp; 
+    &#91; "`/usr/bin/id -gn`" = "`/usr/bin/id un`" ]; then
+    umask 002 
+else
+    umask 022
+fi
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+if &#91; $UID -gt 199 ] &amp;&amp; 
+    &#91; "`/usr/bin/id -gn`" = "`/usr/bin/id un`" ]; then
+    umask 002 
+else
+    umask 022
+fi
+......</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里以将 umask 设置为 022 为例<br>2) 补充 /etc/bashrc 文件会比 /etc/profile 文件更有优先级<br>）</p>
+
+
+
+<h4>3.2.1.1.2 让 umask 设置生效</h4>
+
+
+
+<pre class="wp-block-code"><code># source /etc/profile</code></pre>
+
+
+
+<h4>3.2.1.2 通过修改 /etc/profile 文件实现案例二<br>3.2.1.2.1 在 /etc/profile 文件里设置全局 umask 参数</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/profile</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+umask 022</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里以将 umask 设置为 022 为例<br>2) 补充 /etc/bashrc 文件会比 /etc/profile 文件更有优先级<br>）</p>
+
+
+
+<h4>3.2.1.2.2 让 umask 设置生效</h4>
+
+
+
+<pre class="wp-block-code"><code># source /etc/profile</code></pre>
+
+
+
+<h4>3.2.2 通过修改 /etc/bashrc 文件实现<br>3.2.2.1 通过修改 /etc/bashrc 文件实现案例一<br>3.2.2.1.1 在 /etc/bashrc 文件里设置全局 umask 参数</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/bashrc</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+if &#91; $UID -gt 199 ] &amp;&amp; 
+    &#91; "`/usr/bin/id -gn`" = "`/usr/bin/id un`" ]; then
+    umask 002 
+else
+    umask 022
+fi
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+if &#91; $UID -gt 199 ] &amp;&amp; 
+    &#91; "`/usr/bin/id -gn`" = "`/usr/bin/id un`" ]; then
+    umask 002 
+else
+    umask 022
+fi
+......</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里以将 umask 设置为 022 为例<br>2) 补充 /etc/bashrc 文件会比 /etc/profile 文件更有优先级<br>）</p>
+
+
+
+<h4>3.2.2.1.2 让 umask 设置生效</h4>
+
+
+
+<pre class="wp-block-code"><code># source /etc/bashrc</code></pre>
+
+
+
+<h4>3.2.2.2 通过修改 /etc/bashrc 文件实现案例二<br>3.2.2.2.1 在 /etc/bashrc 文件里设置全局 umask 参数</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/bashrc</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+umask 022</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里以将 umask 设置为 022 为例<br>2) 补充 /etc/bashrc 文件会比 /etc/profile 文件更有优先级<br>）</p>
+
+
+
+<h4>3.2.2.2.2 让 umask 设置生效</h4>
+
+
+
+<pre class="wp-block-code"><code># source /etc/bashrc</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Linux acl 权限</title>
+		<link>https://eternalcenter-now.github.io/acl/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 27 Jul 2020 14:13:44 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Directory (系统目录)]]></category>
+		<category><![CDATA[System File (系统文件)]]></category>
+		<category><![CDATA[System File Security (系统文件安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Privilege (系统权限)]]></category>
+		<category><![CDATA[System Privilege Security (系统权限安全)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<category><![CDATA[System User & System Privilege (系统用户 & 系统权限)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=10342</guid>
+
+					<description><![CDATA[案例目录： 案例一：给某一个文件或目录添加 acl1.1 给某一个文件或目录添加一个用户的 acl1.2 给某一个文件或目录添加一个组的 acl1.3 递归给某一个目录和目录里的所有内容添加一个 acl 案例二：删除某一个文件或目录的 acl2.1 删除某一个文件或目录一个用户的 acl2.2 删除某一个文件或目录一个组的 acl2.3 删除某一个文件或目录的所有 acl2.4 递归删除某一个文件或目录的 acl2.5 递归删除某一个文件或目录的所有 acl 案例三：显示某一个文件或目录的 acl 案例四：备份和还原某一个文件或目录的 acl4.1 备份某一个文件或目录的 acl4.2 还原某一给文件或目录的 acl 具体的案例： 案例一：给某一个文件或目录添加 acl1.1 给某一个文件或目录添加一个用户的 acl （补充：这里以在 /var 目录上给 zhumingyu 用户设置读和执行的 acl 权限为例） 1.2 给某一个文件或目录添加一个组的 acl （补充：这里以在 /var 目录上给 zhumingyu 组设置读和执行的 acl 权限为例） 1.3 递归给某一个目录和目录里的所有内容添加一个 acl （补充：这里以在 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/acl/" class="more-link">Continue reading<span class="screen-reader-text"> "[内容] Linux acl 权限"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2 id="案例目录">案例目录：</h2>
+
+
+
+<h4 id="案例一-给某一个文件或目录添加-acl1-1-给某一个文件或目录添加一个用户的-acl1-2-给某一个文件或目录添加一个组的-acl1-3-递归给某一个目录和目录里的所有内容添加一个-acl">案例一：给某一个文件或目录添加 acl<br>1.1 给某一个文件或目录添加一个用户的 acl<br>1.2 给某一个文件或目录添加一个组的 acl<br>1.3 递归给某一个目录和目录里的所有内容添加一个 acl</h4>
+
+
+
+<h4 id="案例二-删除某一个文件或目录的-acl2-1-删除某一个文件或目录一个用户的-acl2-2-删除某一个文件或目录一个组的-acl2-3-删除某一个文件或目录的所有-acl2-4-递归删除某一个文件或目录的-acl2-5-递归删除某一个文件或目录的所有-acl">案例二：删除某一个文件或目录的 acl<br>2.1 删除某一个文件或目录一个用户的 acl<br>2.2 删除某一个文件或目录一个组的 acl<br>2.3 删除某一个文件或目录的所有 acl<br>2.4 递归删除某一个文件或目录的 acl<br>2.5 递归删除某一个文件或目录的所有 acl</h4>
+
+
+
+<h4 id="案例三-查看某一个文件或目录的-acl">案例三：显示某一个文件或目录的 acl</h4>
+
+
+
+<h4 id="案例四-备份和还原某一个文件或目录的-acl4-1-备份某一个文件或目录的-acl4-2-还原某一给文件或目录的-acl">案例四：备份和还原某一个文件或目录的 acl<br>4.1 备份某一个文件或目录的 acl<br>4.2 还原某一给文件或目录的 acl</h4>
+
+
+
+<h2 id="具体的案例">具体的案例：</h2>
+
+
+
+<h4 id="案例一-给某一个文件或目录添加-acl1-1-给某一个文件或目录添加一个用户的-acl">案例一：给某一个文件或目录添加 acl<br>1.1 给某一个文件或目录添加一个用户的 acl</h4>
+
+
+
+<pre class="wp-block-code"><code># setfacl -m u:zhumingyu:r-x /var</code></pre>
+
+
+
+<p>（补充：这里以在 /var 目录上给 zhumingyu 用户设置读和执行的 acl 权限为例）</p>
+
+
+
+<h4 id="1-2-给某一个文件或目录添加一个组的-acl">1.2 给某一个文件或目录添加一个组的 acl</h4>
+
+
+
+<pre class="wp-block-code"><code># setfacl -m g:zhumingyu:r-x /var</code></pre>
+
+
+
+<p>（补充：这里以在 /var 目录上给 zhumingyu 组设置读和执行的 acl 权限为例）</p>
+
+
+
+<h4 id="1-3-递归给某一个目录和目录里的所有内容添加一个-acl">1.3 递归给某一个目录和目录里的所有内容添加一个 acl</h4>
+
+
+
+<pre class="wp-block-code"><code># setfacl -Rm u:zhumingyu:r-x /var</code></pre>
+
+
+
+<p>（补充：这里以在 /var 目录上递归给 zhumingyu 组设置读和执行的 acl 权限为例）</p>
+
+
+
+<h4 id="案例二-删除某一个文件或目录的-acl2-1-删除某一个文件或目录一个用户的-acl">案例二：删除某一个文件或目录的 acl<br>2.1 删除某一个文件或目录一个用户的 acl</h4>
+
+
+
+<pre class="wp-block-code"><code># setfacl -x u:zhumingyu /var</code></pre>
+
+
+
+<p>（补充：这里以在 /var 目录上删除 zhumingyu 用户的 acl 权限为例）</p>
+
+
+
+<h4 id="2-2-删除某一个文件或目录一个组的-acl">2.2 删除某一个文件或目录一个组的 acl</h4>
+
+
+
+<pre class="wp-block-code"><code># setfacl -x g:zhumingyu /var</code></pre>
+
+
+
+<p>（补充：这里以在 /var 目录上删除 zhumingyu 组的 acl 权限为例）</p>
+
+
+
+<h4 id="2-3-删除某一个文件或目录的所有-acl">2.3 删除某一个文件或目录的所有 acl</h4>
+
+
+
+<pre class="wp-block-code"><code># setfacl -b /var</code></pre>
+
+
+
+<p>（补充：这里以在 /var 目录上删除所有 acl 权限为例）</p>
+
+
+
+<h4 id="2-4-递归删除某一个文件或目录的-acl">2.4 递归删除某一个文件或目录的 acl</h4>
+
+
+
+<pre class="wp-block-code"><code># setfacl -Rx u:zhumingyu:r-x /var</code></pre>
+
+
+
+<p>（补充：这里以在 /var 目录上递归删除 zhumingyu 用户的 acl 权限为例）</p>
+
+
+
+<h4 id="2-5-递归删除某一个文件或目录的所有-acl">2.5 递归删除某一个文件或目录的所有 acl</h4>
+
+
+
+<pre class="wp-block-code"><code># setfacl -Rb /var</code></pre>
+
+
+
+<p>（补充：这里以在 /var 目录上递归删除所有 acl 权限为例）</p>
+
+
+
+<h4 id="案例三-查看某一个文件或目录的-acl">案例三：显示某一个文件或目录的 acl</h4>
+
+
+
+<pre class="wp-block-code"><code># getfacl /var</code></pre>
+
+
+
+<p>（补充：这里以显示 /var 目录的 acl 权限为例）</p>
+
+
+
+<h4 id="案例四-备份和还原某一个文件或目录的-acl4-1-备份某一个文件或目录的-acl">案例四：备份和还原某一个文件或目录的 acl<br>4.1 备份某一个文件或目录的 acl</h4>
+
+
+
+<pre class="wp-block-code"><code># getfacl -R /var &gt; /acl.backup</code></pre>
+
+
+
+<p>（补充：这里以备份 /var 目录的 acl 权限为例）</p>
+
+
+
+<h4 id="4-2-还原某一给文件或目录的-acl">4.2 还原某一给文件或目录的 acl</h4>
+
+
+
+<pre class="wp-block-code"><code># setfacl --restore /acl.backup</code></pre>
+
+
+
+<p>（补充：这里以还原 /var 目录的 acl 权限为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] sudo 提权的实现 （通过用户自己的密码实现 sudo 提权） （openSUSE &#038; SLE）</title>
+		<link>https://eternalcenter-now.github.io/sudo-self-password-opensuse-sle/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 20 Jul 2020 08:47:26 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Privilege (系统权限)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System User & System Privilege (系统用户 & 系统权限)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=10150</guid>
+
+					<description><![CDATA[步骤一：给用户添加相应的 sudo 权限 添加以下内容： &#8230;&#8230;zhumingyu ALL=(ALL) /usr/bin/mysql （补充：这里以给用户 zhumingyu 添加 /usr/bin/mysql 命令为例） 步骤二：设置用户使用自己的密码实现 sudo 提权 将以下内容： 修改为：]]></description>
+										<content:encoded><![CDATA[
+<h4>步骤一：给用户添加相应的 sudo 权限</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/sudoers</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<p>&#8230;&#8230;<br>zhumingyu ALL=(ALL) /usr/bin/mysql</p>
+
+
+
+<p>（补充：这里以给用户 zhumingyu 添加 /usr/bin/mysql 命令为例）</p>
+
+
+
+<h4>步骤二：设置用户使用自己的密码实现 sudo 提权</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/sudoers</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+#Defaults targetpw   # ask for the password of the target user i.e. root
+#ALL    ALL=(ALL) ALL   # WARNING! Only use this together with 'Defaults targetpw'!
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+Defaults targetpw   # ask for the password of the target user i.e. root
+ALL    ALL=(ALL) ALL   # WARNING! Only use this together with 'Defaults targetpw'!
+......</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 chown （归属文件或目录）</title>
+		<link>https://eternalcenter-now.github.io/chown/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 05 Jun 2020 02:53:58 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Privilege (系统权限)]]></category>
+		<category><![CDATA[System Privilege Security (系统权限安全)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System User & System Privilege (系统用户 & 系统权限)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=9657</guid>
+
+					<description><![CDATA[案例一：将 test.txt 的所属主设置为 root 或者： 案例二：将 test.txt 的所属组设置为 root 案例三：将 test.txt 的所数主设置为 root，所属组设置为 root]]></description>
+										<content:encoded><![CDATA[
+<h4>案例一：将 test.txt 的所属主设置为 root</h4>
+
+
+
+<pre class="wp-block-code"><code># chown root test.txt</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># chown root: test.txt</code></pre>
+
+
+
+<h4>案例二：将 test.txt 的所属组设置为 root</h4>
+
+
+
+<pre class="wp-block-code"><code># chown :root test.txt</code></pre>
+
+
+
+<h4>案例三：将 test.txt 的所数主设置为 root，所属组设置为 root</h4>
+
+
+
+<pre class="wp-block-code"><code># chown root:root test.txt</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 chmod （管理权限）</title>
+		<link>https://eternalcenter-now.github.io/chmod/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sun, 08 Dec 2019 10:52:26 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Privilege (系统权限)]]></category>
+		<category><![CDATA[System Privilege Security (系统权限安全)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System User & System Privilege (系统用户 & 系统权限)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=7445</guid>
+
+					<description><![CDATA[内容目录： 内容一：普通权限的管理1.1 普通权限的介绍1.1.1 对于文件而言1.1.2 对于目录而言1.1.3 用数字代替权限的方法1.2 管理权限案例1.2.1 给一个文件或目录添加权限的案例1.2.1.1 案例一1.2.1.2 案例二1.2.1.3 案例三1.2.1.4 案例四1.2.2 给一个文件或目录撤销权限的案例1.2.2.1 案例一1.2.2.2 案例二1.2.2.3 案例三1.2.2.4 案例四1.2.3 设定某一个文件或目录的权限的案例1.2.3.1 案例一1.2.3.2 案例二1.2.3.3 案例三1.2.3.4 案例四1.2.3.5 案例五1.2.3.6 案例六1.2.3.7 案例七 内容二：特殊权限的管理2.1 特殊权限 SUID2.1.1 SUID 介绍2.1.2 SUID 权限的添加的案例2.1.2.1 添加 SUID 权限的案例2.1.2.2 显示 SUID 权限的添加情况的案例2.1.2.2.1 显示有 SUID 权限，但是所属主没有执行权限的文件的案例2.1.2.2.2 显示有 SUID 权限，并且所属主有执行权限的文件的案例2.2 特殊权限 SGID2.2.1 SGID 介绍2.2.2 SGID 权限的添加的案例2.2.2.1 添加 SGID 权限的案例2.2.2.2 显示 SGID &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/chmod/" class="more-link">Continue reading<span class="screen-reader-text"> "[命令] Linux 命令 chmod （管理权限）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2 id="内容目录">内容目录：</h2>
+
+
+
+<h4 id="内容一-普通权限的管理1-1-普通权限的介绍1-1-1-对于文件而言1-1-2-对于目录而言1-1-3-用数字代替权限的方法1-2-管理权限案例1-2-1-给一个文件或目录添加权限的案例1-2-1-1-案例一1-2-1-2-案例二1-2-1-3-案例三1-2-1-4-案例四1-2-2-给一个文件或目录撤销权限的案例1-2-2-1-案例一1-2-2-2-案例二1-2-2-3-案例三1-2-2-4-案例四1-2-3-设定某一个文件或目录的权限的案例1-2-3-1-案例一1-2-3-2-案例二1-2-3-3-案例三1-2-3-4-案例四1-2-3-5-案例五1-2-3-6-案例六1-2-3-7-案例七">内容一：普通权限的管理<br>1.1 普通权限的介绍<br>1.1.1 对于文件而言<br>1.1.2 对于目录而言<br>1.1.3 用数字代替权限的方法<br>1.2 管理权限案例<br>1.2.1 给一个文件或目录添加权限的案例<br>1.2.1.1 案例一<br>1.2.1.2 案例二<br>1.2.1.3 案例三<br>1.2.1.4 案例四<br>1.2.2 给一个文件或目录撤销权限的案例<br>1.2.2.1 案例一<br>1.2.2.2 案例二<br>1.2.2.3 案例三<br>1.2.2.4 案例四<br>1.2.3 设定某一个文件或目录的权限的案例<br>1.2.3.1 案例一<br>1.2.3.2 案例二<br>1.2.3.3 案例三<br>1.2.3.4 案例四<br>1.2.3.5 案例五<br>1.2.3.6 案例六<br>1.2.3.7 案例七</h4>
+
+
+
+<h4 id="内容二-特殊权限的管理2-1-特殊权限-suid2-1-1-suid-介绍2-1-2-suid-权限的添加的案例2-1-2-1-添加-suid-权限的案例2-1-2-2-显示-suid-权限的添加情况的案例2-1-2-2-1-显示有-suid-权限-但是所属主没有执行权限的文件的案例2-1-2-2-2-显示有-suid-权限-并且所属主有执行权限的文件的案例2-2-特殊权限-sgid2-2-1-sgid-介绍2-2-2-sgid-权限的添加的案例2-2-2-1-添加-sgid-权限的案例2-2-2-2-显示-sgid-权限的添加情况的案例2-2-2-2-1-显示有-sgid-权限-但是所属组没有执行权限的目录的案例2-2-2-2-2-显示有-sgid-权限-并且所属组有执行权限的目录的案例2-3-特殊权限-sbit2-3-1-sbit-介绍2-3-2-sbit-权限的添加的案例2-3-2-1-添加-sbit-权限的案例2-3-2-2-显示-sbit-权限的添加情况的案例2-3-2-2-1-显示有-sbit-权限-但是所属主没有执行权限的目录的案例2-3-2-2-2-显示有-sbit-权限-并且所属主有执行权限的目录的案例">内容二：特殊权限的管理<br>2.1 特殊权限 SUID<br>2.1.1 SUID 介绍<br>2.1.2 SUID 权限的添加的案例<br>2.1.2.1 添加 SUID 权限的案例<br>2.1.2.2 显示 SUID 权限的添加情况的案例<br>2.1.2.2.1 显示有 SUID 权限，但是所属主没有执行权限的文件的案例<br>2.1.2.2.2 显示有 SUID 权限，并且所属主有执行权限的文件的案例<br>2.2 特殊权限 SGID<br>2.2.1 SGID 介绍<br>2.2.2 SGID 权限的添加的案例<br>2.2.2.1 添加 SGID 权限的案例<br>2.2.2.2 显示 SGID 权限的添加情况的案例<br>2.2.2.2.1 显示有 SGID 权限，但是所属组没有执行权限的目录的案例<br>2.2.2.2.2 显示有 SGID 权限，并且所属组有执行权限的目录的案例<br>2.3 特殊权限 SBIT<br>2.3.1 SBIT 介绍<br>2.3.2 SBIT 权限的添加的案例<br>2.3.2.1 添加 SBIT 权限的案例<br>2.3.2.2 显示 SBIT 权限的添加情况的案例<br>2.3.2.2.1 显示有 SBIT 权限，但是所属主没有执行权限的目录的案例<br>2.3.2.2.2 显示有 SBIT 权限，并且所属主有执行权限的目录的案例</h4>
+
+
+
+<h2 id="具体的内容">具体的内容：</h2>
+
+
+
+<h4 id="内容一-普通权限的管理1-1-普通权限的介绍1-1-1-对于文件而言">内容一：普通权限的管理<br>1.1 普通权限的介绍<br>1.1.1 对于文件而言</h4>
+
+
+
+<p>1) r 代表读权限<br>2) w 代表写权限<br>3) x 代表执行权限</p>
+
+
+
+<h4 id="1-1-2-对于目录而言">1.1.2 对于目录而言</h4>
+
+
+
+<p>1) r 代表可以看到目录<br>2) w 代表可以对目录进行增、删、改、查和在里面创建文件和目录<br>3) x 代表可以进入目录</p>
+
+
+
+<h4 id="1-1-3-用数字代替权限的方法">1.1.3 用数字代替权限的方法</h4>
+
+
+
+<p>1) 0 代表 &#8212;<br>2) 1 代表 &#8211;x<br>3) 2 代表 -w-<br>4) 3 代表 -wx<br>5) 4 代表 r&#8211;<br>6) 5 代表 r-x<br>7) 6 代表 rw-<br>8) 7 代表 rwx</p>
+
+
+
+<h4 id="1-2-管理权限案例1-2-1-给一个文件或目录添加权限的案例1-2-1-1-案例一">1.2 管理权限案例<br>1.2.1 给一个文件或目录添加权限的案例<br>1.2.1.1 案例一</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod u+x test.txt</code></pre>
+
+
+
+<p>（补充：这里以给 test.txt 文件的所属主添加执行权限为例）</p>
+
+
+
+<h4 id="1-2-1-2-案例二">1.2.1.2 案例二</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod u+r,g+w test.txt</code></pre>
+
+
+
+<p>（补充：这里以给 test.txt 文件的所属主添加执行权限，给文件的所属组添加写权限）</p>
+
+
+
+<h4 id="1-2-1-3-案例三">1.2.1.3 案例三</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod +x test.txt</code></pre>
+
+
+
+<p>（补充：这里以给 test.txt 文件的所属主、所属组和其他用户添加执行权限）</p>
+
+
+
+<h4 id="1-2-1-4-案例四">1.2.1.4 案例四</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod a+x test.txt</code></pre>
+
+
+
+<p>（补充：这里以给 test.txt 文件的所属主、所属组和其他用户添加执行权限）</p>
+
+
+
+<h4 id="1-2-2-给一个文件或目录撤销权限的案例1-2-2-1-案例一">1.2.2 给一个文件或目录撤销权限的案例<br>1.2.2.1 案例一</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod u-x test.txt</code></pre>
+
+
+
+<p>（补充：这里以给 test.txt 文件的所属主撤销执行权限）</p>
+
+
+
+<h4 id="1-2-2-2-案例二">1.2.2.2 案例二</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod u-r,g-w test.txt</code></pre>
+
+
+
+<p>（补充：这里以给 test.txt 文件的所属主撤销执行权限，给文件的所属组撤销写权限）</p>
+
+
+
+<h4 id="1-2-2-3-案例三">1.2.2.3 案例三</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod -x test.txt</code></pre>
+
+
+
+<p>（补充：这里以给 test.txt 文件的所属主、所属组和其他用户撤销执行权限）</p>
+
+
+
+<h4 id="1-2-2-4-案例四">1.2.2.4 案例四</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod a-x test.txt</code></pre>
+
+
+
+<p>（补充：这里以给 test.txt 文件的所属主、所属组和其他用户撤销执行权限）</p>
+
+
+
+<h4 id="1-2-3-设定某一个文件或目录的权限的案例1-2-3-1-案例一">1.2.3 设定某一个文件或目录的权限的案例<br>1.2.3.1 案例一</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod u=rwx test.txt </code></pre>
+
+
+
+<p>（补充：这里以设置 test.txt 文件的所属主拥有读、写和执行的权限）</p>
+
+
+
+<h4 id="1-2-3-2-案例二">1.2.3.2 案例二</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod u=rw- test.txt</code></pre>
+
+
+
+<p>（补充：这里以设置 test.txt 文件的所属主拥有读和写的权限，但是没有执行的权限）</p>
+
+
+
+<h4 id="1-2-3-3-案例三">1.2.3.3 案例三</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod u=--- test.txt</code></pre>
+
+
+
+<p>（补充：这里以设置 test.txt 文件的所属主没有任何权限）</p>
+
+
+
+<h4 id="1-2-3-4-案例四">1.2.3.4 案例四</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod u=</code></pre>
+
+
+
+<p>（补充：这里以设置 test.txt 文件的所属主没有任何权限）</p>
+
+
+
+<h4 id="1-2-3-5-案例五">1.2.3.5 案例五</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod u=rw,g=, test.txt</code></pre>
+
+
+
+<p>（补充：这里以设置 test.txt 文件的所属主拥有读和写的权限，但是没有执行的权限。设置文件的所属组没有任何权限）</p>
+
+
+
+<h4 id="1-2-3-6-案例六">1.2.3.6 案例六</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod u=rw,g=---,0= test.txt</code></pre>
+
+
+
+<p>（补充：这里以设置 test.txt 文件的所属主拥有读和写的权限，但是没有执行的权限。设置文件的所属组没有任何权限。设置文件的其他用户没有任何权限）</p>
+
+
+
+<h4 id="1-2-3-7-案例七">1.2.3.7 案例七</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod 755 test.txt</code></pre>
+
+
+
+<p>（补充：这里以设置 test.txt 文件的所属主拥有读、写和执行的权限。设置文件的所属组有读和执行的权限。设置文件的其他用户有读和执行的权限）</p>
+
+
+
+<h4 id="内容二-特殊权限的管理2-1-特殊权限-suid2-1-1-suid-介绍">内容二：特殊权限的管理<br>2.1 特殊权限 SUID<br>2.1.1 SUID 介绍</h4>
+
+
+
+<p>1) SUID：全名 Set UID<br>2) SUID 的作用：让没有此文件执行权限的用户，可以执行这个文件<br>3) SUID 的权限数字 4000</p>
+
+
+
+<h4 id="2-1-2-suid-权限的添加的案例2-1-2-1-添加-suid-权限的案例">2.1.2 SUID 权限的添加的案例<br>2.1.2.1 添加 SUID 权限的案例</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod u+s test.txt</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># chmod 4644 test.txt</code></pre>
+
+
+
+<p>（补充：这里以对 test.txt 文件进行操作为例）</p>
+
+
+
+<h4 id="2-1-2-2-显示-suid-权限的添加情况的案例2-1-2-2-1-显示有-suid-权限-但是所属主没有执行权限的文件的案例">2.1.2.2 显示 SUID 权限的添加情况的案例<br>2.1.2.2.1 显示有 SUID 权限，但是所属主没有执行权限的文件的案例</h4>
+
+
+
+<pre class="wp-block-code"><code># ls -l test.txt 
+-rwSr--r-- 1 root root 0 12月  8 05:27 test.txt</code></pre>
+
+
+
+<p>（补充：这里以对 test.txt 文件进行操作为例）</p>
+
+
+
+<h4 id="2-1-2-2-2-显示有-suid-权限-并且所属主有执行权限的文件的案例">2.1.2.2.2 显示有 SUID 权限，并且所属主有执行权限的文件的案例</h4>
+
+
+
+<pre class="wp-block-code"><code># ls -l test.txt 
+-rwsr--r-- 1 root root 0 12月  8 05:27 test.txt</code></pre>
+
+
+
+<p>（补充：这里以对 test.txt 文件进行操作为例）</p>
+
+
+
+<h4 id="2-2-特殊权限-sgid2-2-1-sgid-介绍">2.2 特殊权限 SGID<br>2.2.1 SGID 介绍</h4>
+
+
+
+<p>1) SGID：全名 Set GID<br>2) SGID 的作用：在此目录下创建的文件，将都和此目录的所属组一样<br>3) SGID 的权限数字 2000</p>
+
+
+
+<h4 id="2-2-2-sgid-权限的添加的案例2-2-2-1-添加-sgid-权限的案例">2.2.2 SGID 权限的添加的案例<br>2.2.2.1 添加 SGID 权限的案例</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod g+s test</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># chmod 2644 test</code></pre>
+
+
+
+<p>（补充：这里以对 test.txt 文件进行操作为例）</p>
+
+
+
+<h4 id="2-2-2-2-显示-sgid-权限的添加情况的案例2-2-2-2-1-显示有-sgid-权限-但是所属组没有执行权限的目录的案例">2.2.2.2 显示 SGID 权限的添加情况的案例<br>2.2.2.2.1 显示有 SGID 权限，但是所属组没有执行权限的目录的案例</h4>
+
+
+
+<pre class="wp-block-code"><code># ls -l test
+-rw-r-Sr-- 1 root root 0 12月  8 05:27 test</code></pre>
+
+
+
+<p>（补充：这里以对 test.txt 文件进行操作为例）</p>
+
+
+
+<h4 id="2-2-2-2-2-显示有-sgid-权限-并且所属组有执行权限的目录的案例">2.2.2.2.2 显示有 SGID 权限，并且所属组有执行权限的目录的案例</h4>
+
+
+
+<pre class="wp-block-code"><code># ls -l test
+-rw-r-sr-- 1 root root 0 12月  8 05:27 test</code></pre>
+
+
+
+<p>（补充：这里以对 test.txt 文件进行操作为例）</p>
+
+
+
+<h4 id="2-3-特殊权限-sbit2-3-1-sbit-介绍">2.3 特殊权限 SBIT<br>2.3.1 SBIT 介绍</h4>
+
+
+
+<p>1) SBIT：全名 Sticky Bit<br>2) SBIT 的作用：在此目录下创建的文件，只有创建此文件的用户和 root 用户可以删除<br>3) SBIT 的权限数字 1000</p>
+
+
+
+<h4 id="2-3-2-sbit-权限的添加的案例2-3-2-1-添加-sbit-权限的案例">2.3.2 SBIT 权限的添加的案例<br>2.3.2.1 添加 SBIT 权限的案例</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod o+t test</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># chmod 1644 test</code></pre>
+
+
+
+<p>（补充：这里以对 test.txt 文件进行操作为例）</p>
+
+
+
+<h4 id="2-3-2-2-显示-sbit-权限的添加情况的案例2-3-2-2-1-显示有-sbit-权限-但是所属主没有执行权限的目录的案例">2.3.2.2 显示 SBIT 权限的添加情况的案例<br>2.3.2.2.1 显示有 SBIT 权限，但是所属主没有执行权限的目录的案例</h4>
+
+
+
+<pre class="wp-block-code"><code># ls -l test
+-rw-r--r-T 1 root root 0 12月  8 05:27 test</code></pre>
+
+
+
+<p>（补充：这里以对 test.txt 文件进行操作为例）</p>
+
+
+
+<h4 id="2-3-2-2-2-显示有-sbit-权限-并且所属主有执行权限的目录的案例">2.3.2.2.2 显示有 SBIT 权限，并且所属主有执行权限的目录的案例</h4>
+
+
+
+<pre class="wp-block-code"><code># ls -l test
+-rw-r--r-t 1 root root 0 12月  8 05:27 test</code></pre>
+
+
+
+<p>（补充：这里以对 test.txt 文件进行操作为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 sudo （用户提权）</title>
+		<link>https://eternalcenter-now.github.io/sudo/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sun, 25 Aug 2019 16:17:40 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Privilege (系统权限)]]></category>
+		<category><![CDATA[System Privilege Security (系统权限安全)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System User & System Privilege (系统用户 & 系统权限)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=5575</guid>
+
+					<description><![CDATA[内容目录： 内容一：sudo 简介 内容二：修改 sudo 配置文件的方法2.1 第一种修改 sudo 配置文件的方法2.2 第二种修改 sudo 配置文件的方法 内容三：修改 sudo 配置文件的案例3.1 案例一：让 zhumingyu 用户可以通过 sudo 获取所有 root 权限3.2 案例二：让 zhumingyu 用户可以通过 sudo 获取所有 root 权限，并且免密码3.3 案例三：让 zhumingyu 用户可以通过 sudo 获取 firewalld 命令的 root 权限，并且免密码3.4 案例四：让 zhumingyu 用户可以通过 sudo 获取 firewalld 和 chmod 命令的 root 权限，并且免密码3.5 案例五：让 zhumingyu 用户可以通过 sudo 获取 passwd &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/sudo/" class="more-link">Continue reading<span class="screen-reader-text"> "[命令] Linux 命令 sudo （用户提权）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2>内容目录：</h2>
+
+
+
+<h4>内容一：sudo 简介</h4>
+
+
+
+<h4>内容二：修改 sudo 配置文件的方法<br>2.1 第一种修改 sudo 配置文件的方法<br>2.2 第二种修改 sudo 配置文件的方法</h4>
+
+
+
+<h4>内容三：修改 sudo 配置文件的案例<br>3.1 案例一：让 zhumingyu 用户可以通过 sudo 获取所有 root 权限<br>3.2 案例二：让 zhumingyu 用户可以通过 sudo 获取所有 root 权限，并且免密码<br>3.3 案例三：让 zhumingyu 用户可以通过 sudo 获取 firewalld 命令的 root 权限，并且免密码<br>3.4 案例四：让 zhumingyu 用户可以通过 sudo 获取 firewalld 和 chmod 命令的 root 权限，并且免密码<br>3.5 案例五：让 zhumingyu 用户可以通过 sudo 获取 passwd 命令的 root 权限，并且免密码，但是不能修改 root 的密码<br>3.6 案例六：让 zhumingyu 用户可以通过 sudo 获取 passwd 命令的 root 权限，并且免密码，但是不能修改以 a 开头命名用户的密码<br>3.7 案例七：让 zhumingyu 组里的所有用户通过 sudo 获取 passwd 命令的 root 权限，并且免密码<br>3.7.1 让 zhumingyu 组里的所有用户通过 sudo 获取 passwd 命令的 root 权限，并且免密码<br>3.7.2 将相关用户添加到 zhumingyu 组里</h4>
+
+
+
+<h2>具体的内容：</h2>
+
+
+
+<h4>内容一：sudo 简介</h4>
+
+
+
+<p>sudo 命令可以让非 root 用户，在不知道 root 的密码的情况之下以 root 的身份执行某一些命令<br>但是要实现这一目标需要提前修改 sodu 的配置文件</p>
+
+
+
+<h4>内容二：修改 sudo 配置文件的方法<br>2.1 第一种修改 sudo 配置文件的方法</h4>
+
+
+
+<pre class="wp-block-code"><code># visudo</code></pre>
+
+
+
+<h4>2.2 第二种修改 sudo 配置文件的方法</h4>
+
+
+
+<pre class="wp-block-code"><code># vi /etc/sudoers</code></pre>
+
+
+
+<h4>内容三：修改 sudo 配置文件的案例<br>3.1 案例一：让 zhumingyu 用户可以通过 sudo 获取所有 root 权限</h4>
+
+
+
+<pre class="wp-block-code"><code># vi /etc/sudoers</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+zhumingyu ALL=(ALL) 　　ALL  
+......</code></pre>
+
+
+
+<p>（说明：在 “root ALL=(ALL) 　　ALL” 这一行后面仿照着加入一行就行了）</p>
+
+
+
+<h4>3.2 案例二：让 zhumingyu 用户可以通过 sudo 获取所有 root 权限，并且免密码</h4>
+
+
+
+<pre class="wp-block-code"><code># vi /etc/sudoers</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+zhumingyu ALL=(ALL) 　　NOPASSWD: ALL  
+......</code></pre>
+
+
+
+<p>（说明：在 “root ALL=(ALL) 　　ALL” 这一行后面仿照着加入一行就行了）</p>
+
+
+
+<h4>3.3 案例三：让 zhumingyu 用户可以通过 sudo 获取 firewalld 命令的 root 权限，并且免密码</h4>
+
+
+
+<pre class="wp-block-code"><code># vi /etc/sudoers</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+zhumingyu ALL=(ALL) 　　NOPASSWD: firewalld
+......</code></pre>
+
+
+
+<p>（说明：在 “root ALL=(ALL) 　　ALL” 这一行后面仿照着加入一行就行了）</p>
+
+
+
+<h4>3.4 案例四：让 zhumingyu 用户可以通过 sudo 获取 firewalld 和 chmod 命令的 root 权限，并且免密码</h4>
+
+
+
+<pre class="wp-block-code"><code># vi /etc/sudoers</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+zhumingyu ALL=(ALL) 　　NOPASSWD: firewalld,chmod
+......</code></pre>
+
+
+
+<p>（说明：在 “root ALL=(ALL) 　　ALL” 这一行后面仿照着加入一行就行了）</p>
+
+
+
+<h4>3.5 案例五：让 zhumingyu 用户可以通过 sudo 获取 passwd 命令的 root 权限，并且免密码，但是不能修改 root 的密码</h4>
+
+
+
+<pre class="wp-block-code"><code># vi /etc/sudoers</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+zhumingyu ALL=(ALL) 　　NOPASSWD: !/usr/bin/passwd root
+......</code></pre>
+
+
+
+<p>（说明：在 “root ALL=(ALL) 　　ALL” 这一行后面仿照着加入一行就行了）</p>
+
+
+
+<h4>3.6 案例六：让 zhumingyu 用户可以通过 sudo 获取 passwd 命令的 root 权限，并且免密码，但是不能修改以 a 开头命名用户的密码</h4>
+
+
+
+<pre class="wp-block-code"><code># vi /etc/sudoers</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+zhumingyu ALL=(ALL) 　　NOPASSWD: !/usr/bin/passwd a.*
+......</code></pre>
+
+
+
+<p>（说明：在 “root ALL=(ALL) 　　ALL” 这一行后面仿照着加入一行就行了）</p>
+
+
+
+<h4>3.7 案例七：让 zhumingyu 组里的所有用户通过 sudo 获取 passwd 命令的 root 权限，并且免密码<br>3.7.1 让 zhumingyu 组里的所有用户通过 sudo 获取 passwd 命令的 root 权限，并且免密码</h4>
+
+
+
+<pre class="wp-block-code"><code># vi /etc/sudoers</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+%zhumingyu ALL=(ALL) 　　 NOPASSWD: /usr/bin/passwd 
+......</code></pre>
+
+
+
+<p>（补充：% 代表这是一个组而不是一个用户）</p>
+
+
+
+<p>（说明：在 “%wheel 　　 ALL=(ALL) 　　 NOPASSWD: ALL” 这一行后面仿照着加入一行就行了）</p>
+
+
+
+<h4>3.7.2 将相关用户添加到 zhumingyu 组里</h4>
+
+
+
+<pre class="wp-block-code"><code># usermod -a -G zhumingyu &lt;user></code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

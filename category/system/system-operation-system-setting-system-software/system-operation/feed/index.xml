@@ -1,0 +1,2298 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>System Operation (系统操作) &#8211; Eternal Center</title>
+	<atom:link href="https://eternalcenter-now.github.io/category/system/system-operation-system-setting-system-software/system-operation/feed/" rel="self" type="application/rss+xml" />
+	<link>https://eternalcenter-now.github.io/</link>
+	<description></description>
+	<lastBuildDate>Fri, 29 Apr 2022 14:51:15 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	
+	<item>
+		<title>[步骤] Linux 救援模式软件的安装</title>
+		<link>https://eternalcenter-now.github.io/resuce-rpm/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 29 Apr 2022 12:29:07 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Software (系统软件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23378</guid>
+
+					<description><![CDATA[步骤目录： 步骤一：挂载官方镜像 步骤二：登录拯救模式2.1 进入拯救模式2.2 登录拯救模式 步骤三：在救援模式确定系统的根目录分区 步骤四：在救援模式将系统的分区挂载到救援模式的 /mnt 目录4.1 在救援模式将系统的根分区挂载到救援模式的 /mnt 目录4.2 在救援模式将救援模式的 /dev 目录关联到救援模式的 /mnt/dev 目录4.3 在救援模式将救援模式的 /proc 目录关联到救援模式的 /mnt/proc 目录4.4 在救援模式将救援模式的 /sys 目录关联到救援模式的 /mnt/sys 目录4.5 在救援模式将救援模式的 /run 目录关联到救援模式的 /mnt/run 目录 步骤五：将当前的根目录从救援模式的根目录切换到系统的根目录5.1 将当前的根目录从救援模式的根目录切换到系统的根目录5.2 在系统模式下确认当前的挂载状态5.3 在系统模式下确认当前根目录下的目录 步骤六：在系统模式安装软件6.1 在系统模式挂载官方镜像6.1.1 在系统模式创建用于挂载镜像的 /media 目录6.1.2 在系统模式挂将官方镜像挂载到 /media 目录6.2 在系统模式安装 rpm 软件6.2.1 在系统模式安装拷贝 rpm 软件包到当前目录6.2.2 在系统模式创建用于安装 rpm 软件的 pkg 目录6.2.3 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/resuce-rpm/" class="more-link">Continue reading<span class="screen-reader-text"> "[步骤] Linux 救援模式软件的安装"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2>步骤目录：</h2>
+
+
+
+<h4>步骤一：挂载官方镜像</h4>
+
+
+
+<h4>步骤二：登录拯救模式<br>2.1 进入拯救模式<br>2.2 登录拯救模式</h4>
+
+
+
+<h4>步骤三：在救援模式确定系统的根目录分区</h4>
+
+
+
+<h4>步骤四：在救援模式将系统的分区挂载到救援模式的 /mnt 目录<br>4.1 在救援模式将系统的根分区挂载到救援模式的 /mnt 目录<br>4.2 在救援模式将救援模式的 /dev 目录关联到救援模式的 /mnt/dev 目录<br>4.3 在救援模式将救援模式的 /proc 目录关联到救援模式的 /mnt/proc 目录<br>4.4 在救援模式将救援模式的 /sys 目录关联到救援模式的 /mnt/sys 目录<br>4.5 在救援模式将救援模式的 /run 目录关联到救援模式的 /mnt/run 目录</h4>
+
+
+
+<h4>步骤五：将当前的根目录从救援模式的根目录切换到系统的根目录<br>5.1 将当前的根目录从救援模式的根目录切换到系统的根目录<br>5.2 在系统模式下确认当前的挂载状态<br>5.3 在系统模式下确认当前根目录下的目录</h4>
+
+
+
+<h4>步骤六：在系统模式安装软件<br>6.1 在系统模式挂载官方镜像<br>6.1.1 在系统模式创建用于挂载镜像的 /media 目录<br>6.1.2 在系统模式挂将官方镜像挂载到 /media 目录<br>6.2 在系统模式安装 rpm 软件<br>6.2.1 在系统模式安装拷贝 rpm 软件包到当前目录<br>6.2.2 在系统模式创建用于安装 rpm 软件的 pkg 目录<br>6.2.3 在系统模式进入 pkg 目录<br>6.2.4 在系统模式安装 rpm 软件<br>6.2.5 在系统模式将 bin/rpm 目录拷贝到 /bin 目录</h4>
+
+
+
+<h2>具体的操作步骤：</h2>
+
+
+
+<h4>步骤一：挂载官方镜像</h4>
+
+
+
+<p>（步骤略）</p>
+
+
+
+<h4>步骤二：登录拯救模式<br>2.1 进入拯救模式</h4>
+
+
+
+<p>（步骤略）</p>
+
+
+
+<h4>2.2 登录拯救模式</h4>
+
+
+
+<pre class="wp-block-code"><code>rescue login:root</code></pre>
+
+
+
+<h4>步骤三：在救援模式确定系统的根目录分区</h4>
+
+
+
+<p>（步骤略）</p>
+
+
+
+<p>（<br>补充：<br>1) 物理分区可以使用 lsblk 命令和 fdisk -l 命令辅助确定<br>2) 逻辑分区还可以可以使用 pvs 命令和 lvs 命令辅助确定<br>）</p>
+
+
+
+<h4>步骤四：在救援模式将系统的分区挂载到救援模式的 /mnt 目录<br>4.1 在救援模式将系统的根分区挂载到救援模式的 /mnt 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount &lt;root spartition&gt; /mnt</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 如果是物理分区，系统的根分区就在救援模式的 /dev/ 目录里，例如救援模式的 /dev/sda1<br>2) 如果是逻辑分区，Rocky Linux &amp; RHEL 的系统根分区就是救援模式里的 /dev/&lt;volume group>/&lt;logical volume> 例如救援模式里的 /dev/vg/lv，openSUSE &amp; SUSE 的系统根分区就是救援模式里的 /dev/mapper/&lt;volume group>-&lt;logical volume> 例如救援模式里的 /dev/mapper/vg-lv<br>）</p>
+
+
+
+<h4>4.2 在救援模式将救援模式的 /dev 目录关联到救援模式的 /mnt/dev 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount --bind /dev /mnt/dev</code></pre>
+
+
+
+<p>（补充：此时所有对救援模式的 /mnt/dev 目录的访问都会变成对救援模式的 /dev 目录的访问）</p>
+
+
+
+<h4>4.3 在救援模式将救援模式的 /proc 目录关联到救援模式的 /mnt/proc 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount --bind /proc /mnt/proc</code></pre>
+
+
+
+<p>（补充：此时所有对救援模式的 /mnt/proc 目录的访问都会变成对救援模式的 /proc 目录的访问）</p>
+
+
+
+<h4>4.4 在救援模式将救援模式的 /sys 目录关联到救援模式的 /mnt/sys 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount --bind /sys /mnt/sys</code></pre>
+
+
+
+<p>（补充：此时所有对救援模式的 /mnt/sys 目录的访问都会变成对救援模式的 /sys 目录的访问）</p>
+
+
+
+<h4>4.5 在救援模式将救援模式的 /run 目录关联到救援模式的 /mnt/run 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount --bind /run /mnt/run</code></pre>
+
+
+
+<p>（补充：此时所有对救援模式的 /mnt/run 目录的访问都会变成对救援模式的 /run 目录的访问）</p>
+
+
+
+<h4>步骤五：将当前的根目录从救援模式的根目录切换到系统的根目录<br>5.1 将当前的根目录从救援模式的根目录切换到系统的根目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ /bash # chroot /mnt</code></pre>
+
+
+
+<p>（补充：这里以 /mnt 作为系统根目录为例）</p>
+
+
+
+<h4>5.2 在系统模式下确认当前的挂载状态</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# mount -a</code></pre>
+
+
+
+<h4>5.3 在系统模式下确认当前根目录下的目录</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# ls
+bin boot dev home lib lib64 mnt opt proc root run sbin selinux srv sys tmp usr var</code></pre>
+
+
+
+<h4>步骤六：在系统模式安装软件<br>6.1 在系统模式挂载官方镜像<br>6.1.1 在系统模式创建用于挂载镜像的 /media 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# mkdir /media</code></pre>
+
+
+
+<h4>6.1.2 在系统模式挂将官方镜像挂载到 /media 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# mount /dev/dvd /media</code></pre>
+
+
+
+<h4>6.2 在系统模式安装 rpm 软件<br>6.2.1 在系统模式安装拷贝 rpm 软件包到当前目录</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# cp /media/suse/x86_64/rpm-4.11.2-16.21.1.x86_64.rpm .</code></pre>
+
+
+
+<p>（补充：这里以安装 rpm-4.11.2-16.21.1.x86_64.rpm 软件为例）</p>
+
+
+
+<h4>6.2.2 在系统模式创建用于安装 rpm 软件的 pkg 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# mkdir pkg</code></pre>
+
+
+
+<h4>6.2.3 在系统模式进入 pkg 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# cd pkg</code></pre>
+
+
+
+<h4>6.2.4 在系统模式安装 rpm 软件</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# rpm2cpio ../rpm-4.11.2-16.21.1.x86_64.rpm | cpio -ivd</code></pre>
+
+
+
+<p>（补充：这里以安装 rpm-4.11.2-16.21.1.x86_64.rpm 软件为例）</p>
+
+
+
+<h4>6.2.5 在系统模式将 bin/rpm 目录拷贝到 /bin 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# cp bin/rpm /bin/</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Linux 系统被删根 （rm -rf /*） 后锁定删根 （rm -rf /*） 用户的尝试 （系统层面）</title>
+		<link>https://eternalcenter-now.github.io/rm-rf-user/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Thu, 28 Apr 2022 15:03:04 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23353</guid>
+
+					<description><![CDATA[步骤目录： 步骤一：系统被删根 （rm -rf /*） 后的现象 步骤二：挂载官方镜像 步骤三：登录拯救模式3.1 进入拯救模式3.2 登录拯救模式 步骤四：在救援模式确定系统的根目录分区 步骤五：在救援模式将系统的分区挂载到救援模式的 /mnt 目录5.1 在救援模式将系统的根分区挂载到救援模式的 /mnt 目录5.2 在救援模式将救援模式的 /dev 目录关联到救援模式的 /mnt/dev 目录5.3 在救援模式将救援模式的 /proc 目录关联到救援模式的 /mnt/proc 目录5.4 在救援模式将救援模式的 /sys 目录关联到救援模式的 /mnt/sys 目录5.5 在救援模式将救援模式的 /run 目录关联到救援模式的 /mnt/run 目录 步骤六：显示系统被删根 （rm -rf /*） 后的现象6.1 尝试将当前根目录从救援模式的根目录切换到系统的根目录时会报错 “chroot: failed to run command #/bin/bash#: No such file or directory”6.2 在救援模式显示 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/rm-rf-user/" class="more-link">Continue reading<span class="screen-reader-text"> "[步骤] Linux 系统被删根 （rm -rf /*） 后锁定删根 （rm -rf /*） 用户的尝试 （系统层面）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2>步骤目录：</h2>
+
+
+
+<h4>步骤一：系统被删根 （rm -rf /*） 后的现象</h4>
+
+
+
+<h4>步骤二：挂载官方镜像</h4>
+
+
+
+<h4>步骤三：登录拯救模式<br>3.1 进入拯救模式<br>3.2 登录拯救模式</h4>
+
+
+
+<h4>步骤四：在救援模式确定系统的根目录分区</h4>
+
+
+
+<h4>步骤五：在救援模式将系统的分区挂载到救援模式的 /mnt 目录<br>5.1 在救援模式将系统的根分区挂载到救援模式的 /mnt 目录<br>5.2 在救援模式将救援模式的 /dev 目录关联到救援模式的 /mnt/dev 目录<br>5.3 在救援模式将救援模式的 /proc 目录关联到救援模式的 /mnt/proc 目录<br>5.4 在救援模式将救援模式的 /sys 目录关联到救援模式的 /mnt/sys 目录<br>5.5 在救援模式将救援模式的 /run 目录关联到救援模式的 /mnt/run 目录</h4>
+
+
+
+<h4>步骤六：显示系统被删根 （rm -rf /*） 后的现象<br>6.1 尝试将当前根目录从救援模式的根目录切换到系统的根目录时会报错 “chroot: failed to run command #/bin/bash#: No such file or directory”<br>6.2 在救援模式显示 /boot 目录里的文件时，会发现此目录下只有 grub2 目录，而此 grub2 目录里也是空的<br>6.3 在救援模式显示 /bin 目录时，会显示并无此目录<br>6.4 在救援模式显示 /etc 目录里的文件时，会发现此目录下只有 lvm 文件</h4>
+
+
+
+<h4>步骤七：在救援模式修复系统的 /bin 目录和里面的文件<br>7.1 在救援模式创建 /mnt/bin 目录<br>7.2 在救援模式挂载官方镜像<br>7.2.1 在救援模式创建用于挂载镜像的 /media 目录<br>7.2.2 在救援模式挂将官方镜像挂载到 /media 目录<br>7.3 在救援模式安装 bash 软件<br>7.3.1 在救援模式安装拷贝 bash 软件包到当前目录<br>7.3.2 在救援模式创建用于安装 bash 软件的 bash 目录<br>7.3.3 在救援模式进入 bash 目录<br>7.3.4 在救援模式安装 bash 软件<br>7.3.5 在救援模式显示安装 bash 软件后生成的目录<br>7.4 在救援模式将 bin 目录拷贝到 /mnt/bin 目录</h4>
+
+
+
+<h4>步骤八：将当前的根目录从救援模式的根目录切换到系统的根目录<br>8.1 将当前的根目录从救援模式的根目录切换到系统的根目录<br>8.2 在系统模式下确认当前的挂载状态<br>8.3 在系统模式下确认当前根目录下的目录</h4>
+
+
+
+<h4>步骤九：锁定有删根 （rm -rf /*<em>） 操作的用户</em><br><em>9.1 在系统模式显示历史命令以确认有没有用户输入过 rm -rf /* 命令</em><br><em>9.2 在系统模式显示用户登录记录</em><br><em>9.3 根据步骤 9.1 和步骤 9.2 推测是哪个用户进行过删根 （rm -rf /</em>*） 操作</h4>
+
+
+
+<h2>具体的操作步骤：</h2>
+
+
+
+<h4>步骤一：系统被删根 （rm -rf /*） 后的现象总结</h4>
+
+
+
+<p>1) 系统无法被 ssh<br>2) 通过 console 口登录系统在输入密码时会卡住<br>3) 尝试将当前根目录从救援模式的根目录切换到系统的根目录时会报错 “chroot: failed to run command #/bin/bash#: No such file or directory”<br>4) 重启系统后无法进入系统，并提示：/grub2/i386-pc/normoal.mod not found gpt<br>5）在救援模式显示 /boot 目录里的文件时，会发现此目录下只有 grub2 目录，而此 grub2 目录里也是空的<br>6) 在救援模式显示 /bin 目录时，会显示并无此目录<br>7) 在救援模式显示 /etc 目录里的文件时，会发现此目录下只有 lvm 文件</p>
+
+
+
+<h4>步骤二：挂载官方镜像</h4>
+
+
+
+<p>（步骤略）</p>
+
+
+
+<h4>步骤三：登录拯救模式<br>3.1 进入拯救模式</h4>
+
+
+
+<p>（步骤略）</p>
+
+
+
+<h4>3.2 登录拯救模式</h4>
+
+
+
+<pre class="wp-block-code"><code>rescue login:root</code></pre>
+
+
+
+<h4>步骤四：在救援模式确定系统的根目录分区</h4>
+
+
+
+<p>（步骤略）</p>
+
+
+
+<p>（<br>补充：<br>1) 物理分区可以使用 lsblk 命令和 fdisk -l 命令辅助确定<br>2) 逻辑分区还可以可以使用 pvs 命令和 lvs 命令辅助确定<br>）</p>
+
+
+
+<h4>步骤五：在救援模式将系统的分区挂载到救援模式的 /mnt 目录<br>5.1 在救援模式将系统的根分区挂载到救援模式的 /mnt 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount &lt;root spartition&gt; /mnt</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 如果是物理分区，系统的根分区就在救援模式的 /dev/ 目录里，例如救援模式的 /dev/sda1<br>2) 如果是逻辑分区，Rocky Linux &amp; RHEL 的系统根分区就是救援模式里的 /dev/&lt;volume group>/&lt;logical volume> 例如救援模式里的 /dev/vg/lv，openSUSE &amp; SUSE 的系统根分区就是救援模式里的 /dev/mapper/&lt;volume group>-&lt;logical volume> 例如救援模式里的 /dev/mapper/vg-lv<br>）</p>
+
+
+
+<h4>5.2 在救援模式将救援模式的 /dev 目录关联到救援模式的 /mnt/dev 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount --bind /dev /mnt/dev</code></pre>
+
+
+
+<p>（补充：此时所有对救援模式的 /mnt/dev 目录的访问都会变成对救援模式的 /dev 目录的访问）</p>
+
+
+
+<h4>5.3 在救援模式将救援模式的 /proc 目录关联到救援模式的 /mnt/proc 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount --bind /proc /mnt/proc</code></pre>
+
+
+
+<p>（补充：此时所有对救援模式的 /mnt/proc 目录的访问都会变成对救援模式的 /proc 目录的访问）</p>
+
+
+
+<h4>5.4 在救援模式将救援模式的 /sys 目录关联到救援模式的 /mnt/sys 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount --bind /sys /mnt/sys</code></pre>
+
+
+
+<p>（补充：此时所有对救援模式的 /mnt/sys 目录的访问都会变成对救援模式的 /sys 目录的访问）</p>
+
+
+
+<h4>5.5 在救援模式将救援模式的 /run 目录关联到救援模式的 /mnt/run 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount --bind /run /mnt/run</code></pre>
+
+
+
+<p>（补充：此时所有对救援模式的 /mnt/run 目录的访问都会变成对救援模式的 /run 目录的访问）</p>
+
+
+
+<h4>步骤六：显示系统被删根 （rm -rf /*） 后的现象<br>6.1 尝试将当前根目录从救援模式的根目录切换到系统的根目录时会报错 “chroot: failed to run command #/bin/bash#: No such file or directory”</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # chroot /mnt
+chroot: failed to run command #/bin/bash#: No such file or directory</code></pre>
+
+
+
+<p>（补充：这里以 /mnt 作为系统根目录为例）</p>
+
+
+
+<p>（注意：因为在使用 rm -rf /* 命令删过根以后，/bin/bash 已经被删除，所以会报错：chroot: failed to run command #/bin/bash#: No such file or directory）</p>
+
+
+
+<h4>6.2 在救援模式显示 /boot 目录里的文件时，会发现此目录下只有 grub2 目录，而此 grub2 目录里也是空的</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # ls /boot 
+grub2</code></pre>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # ls /boot</code></pre>
+
+
+
+<p>此步骤也可以通过以下方法实现：</p>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # ls -l /mounts/mp_0001/boot
+total 0
+......grub2</code></pre>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # ls -l /mounts/mp_0001/boot/grub2
+total 0</code></pre>
+
+
+
+<h4>6.3 在救援模式显示 /bin 目录时，会显示并无此目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # ls /mnt/bin
+ls: cannot access '/mnt/bin' : No such file or directory</code></pre>
+
+
+
+<h4>6.4 在救援模式显示 /etc 目录里的文件时，会发现此目录下只有 lvm 文件</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # ls /etc/
+lvm</code></pre>
+
+
+
+<h4>步骤七：在救援模式修复系统的 /bin 目录和里面的文件<br>7.1 在救援模式创建 /mnt/bin 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mkdir /mnt/bin</code></pre>
+
+
+
+<h4>7.2 在救援模式挂载官方镜像<br>7.2.1 在救援模式创建用于挂载镜像的 /media 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # /media</code></pre>
+
+
+
+<h4>7.2.2 在救援模式挂将官方镜像挂载到 /media 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount /dev/dvd /media</code></pre>
+
+
+
+<h4>7.3 在救援模式安装 bash 软件<br>7.3.1 在救援模式安装拷贝 bash 软件包到当前目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # cp /media/suse/x86_64/bash-4.3-83.23.1.x86_64.rpm .</code></pre>
+
+
+
+<p>（补充：这里以拷贝 /media/suse/x86_64/bash-4.3-83.23.1.x86_64.rpm）</p>
+
+
+
+<h4>7.3.2 在救援模式创建用于安装 bash 软件的 bash 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mkdir bash</code></pre>
+
+
+
+<h4>7.3.3 在救援模式进入 bash 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # cd bash</code></pre>
+
+
+
+<h4>7.3.4 在救援模式安装 bash 软件</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ /bash # rpm2cpio ../bash-4.3-83.23.1.x86_64.rpm | cpio -ivd</code></pre>
+
+
+
+<p>（补充：这里以安装 bash-4.3-83.23.1.x86_64.rpm 软件为例）</p>
+
+
+
+<h4>7.3.5 在救援模式显示安装 bash 软件后生成的目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ /bash # ls
+bin etc usr</code></pre>
+
+
+
+<h4>7.4 在救援模式将 bin 目录拷贝到 /bin/mnt 目录下</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ /bash # cp -rpv bin /mnt/bin
+'bin/bash' -&gt; '/mnt/bin/bash'
+'bin/sh' -&gt; '/mnt/bin/sh'</code></pre>
+
+
+
+<h4>步骤八：将当前的根目录从救援模式的根目录切换到系统的根目录<br>8.1 将当前的根目录从救援模式的根目录切换到系统的根目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ /bash # chroot /mnt</code></pre>
+
+
+
+<p>（补充：这里以 /mnt 作为系统根目录为例）</p>
+
+
+
+<h4>8.2 在系统模式下确认当前的挂载状态</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# mount -a</code></pre>
+
+
+
+<h4>8.3 在系统模式下确认当前根目录下的目录</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# ls
+bin boot dev home lib lib64 mnt opt proc root run sbin selinux srv sys tmp usr var</code></pre>
+
+
+
+<h4>步骤九：锁定有删根 （rm -rf /*<em>） 操作的用户 </em><br><em>9.1 在系统模式显示历史命令以确认有没有用户输入过 rm -rf /</em> 命令</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# history | less</code></pre>
+
+
+
+<h4>9.2 在系统模式显示用户登录记录</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# last | less</code></pre>
+
+
+
+<p>（补充：此时会显示最后登录系统的用户、登陆时间、且可能最后 1 个登录系统的用户无退出时间）</p>
+
+
+
+<h4>9.3 根据步骤 9.1 和步骤 9.2 推测是哪个用户进行过删根 （rm -rf /*） 操作</h4>
+
+
+
+<p>（步骤略）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] GNOME 命令 gnome-terminal （打开新的命令行终端）</title>
+		<link>https://eternalcenter-now.github.io/gnome-terminal-2/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Wed, 27 Apr 2022 14:56:15 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23338</guid>
+
+					<description><![CDATA[案例一：打开新的命令行终端，在 1 个新的窗口上运行 案例二：打开新的命令行终端，并自定义窗口的大小和位置，在 1 个新的窗口上运行 （补充：这里以打开新的命令行终端，并将终端窗口设置为宽 120，高 80，左偏移量 20，上偏移量 80 为例） 案例三：最大化打开新的命令行终端，在 1 个新的窗口上运行 案例四：全屏话化打开新的命令行终端，在 1 个新的窗口上运行 案例五：打开新的命令行终端，并设置标题，在 1 个新的窗口上运行 （补充：这里以打开新的命令行终端，并将终端窗口名命名为 Eternal Center 为例） 案例六：同时打开多个新的命令行终端，在 1 个新的窗口上运行6.1 同时打开 2 个新的命令行终端，在新的窗口上运行 （每 1 个窗口 1 个新的命令行终端） 6.2 同时打开 4 个新的命令行终端，在新的窗口上运行 （每 1 个窗口 2 个新的命令行终端）]]></description>
+										<content:encoded><![CDATA[
+<h4>案例一：打开新的命令行终端，在 1 个新的窗口上运行</h4>
+
+
+
+<pre class="wp-block-code"><code># gnome-terminal</code></pre>
+
+
+
+<h4>案例二：打开新的命令行终端，并自定义窗口的大小和位置，在 1 个新的窗口上运行</h4>
+
+
+
+<pre class="wp-block-code"><code># gnome-terminal --geometry=120*80+20+10</code></pre>
+
+
+
+<p>（补充：这里以打开新的命令行终端，并将终端窗口设置为宽 120，高 80，左偏移量 20，上偏移量 80 为例）</p>
+
+
+
+<h4>案例三：最大化打开新的命令行终端，在 1 个新的窗口上运行</h4>
+
+
+
+<pre class="wp-block-code"><code># gnome-terminal --maximize</code></pre>
+
+
+
+<h4>案例四：全屏话化打开新的命令行终端，在 1 个新的窗口上运行</h4>
+
+
+
+<pre class="wp-block-code"><code># gnome-terminal --full-screen</code></pre>
+
+
+
+<h4>案例五：打开新的命令行终端，并设置标题，在 1 个新的窗口上运行</h4>
+
+
+
+<pre class="wp-block-code"><code># gnome-terminal --title="Eternal Center"</code></pre>
+
+
+
+<p>（补充：这里以打开新的命令行终端，并将终端窗口名命名为 Eternal Center 为例）</p>
+
+
+
+<h4>案例六：同时打开多个新的命令行终端，在 1 个新的窗口上运行<br>6.1 同时打开 2 个新的命令行终端，在新的窗口上运行 （每 1 个窗口 1 个新的命令行终端）</h4>
+
+
+
+<pre class="wp-block-code"><code># gnome-terminal --window --window</code></pre>
+
+
+
+<h4>6.2 同时打开 4 个新的命令行终端，在新的窗口上运行 （每 1 个窗口 2 个新的命令行终端）</h4>
+
+
+
+<pre class="wp-block-code"><code># gnome-terminal --window --tab --window --tab</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[工具] Shell 显示系统常用信息</title>
+		<link>https://eternalcenter-now.github.io/shell-display-system-common-information/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Tue, 26 Apr 2022 16:14:48 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Languages (语言)]]></category>
+		<category><![CDATA[Shell]]></category>
+		<category><![CDATA[Shell Monitor (监控)]]></category>
+		<category><![CDATA[Shell Tool (工具)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Computer & System Hardware & System Installation & System Upgradation (系统电脑 & 系统硬件 & 系统安装 & 系统升级)]]></category>
+		<category><![CDATA[System Directory (系统目录)]]></category>
+		<category><![CDATA[System Hardware (系统硬件)]]></category>
+		<category><![CDATA[System Network (系统网络)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Performance (系统性能)]]></category>
+		<category><![CDATA[System Port Security (系统端口安全)]]></category>
+		<category><![CDATA[System Process & System Performance (系统进程 & 系统性能)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Software (系统软件)]]></category>
+		<category><![CDATA[System Storage (系统存储)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23311</guid>
+
+					<description><![CDATA[介绍： 作者：朱明宇名称：显示系统常用信息作用：显示系统常用信息 使用方法：1. 在此脚本的分割线内写入相应的内容2. 给此脚本添加执行权限3. 执行此脚本 脚本分割线里的变量：1) times=2 #显示系统常用信息的次数2) sleeptime=0.1 #大部分行与行之间显示的间隔时间 注意：部分功能需要安装了 sysstat 软件或搭建了 KVM 虚拟化平台后执行此脚本的用户能够使用 sudo virsh list 命令后才能实现 脚本：]]></description>
+										<content:encoded><![CDATA[
+<h2>介绍：</h2>
+
+
+
+<p>作者：朱明宇<br>名称：显示系统常用信息<br>作用：显示系统常用信息</p>
+
+
+
+<p>使用方法：<br>1. 在此脚本的分割线内写入相应的内容<br>2. 给此脚本添加执行权限<br>3. 执行此脚本</p>
+
+
+
+<p>脚本分割线里的变量：<br>1) times=2 #显示系统常用信息的次数<br>2) sleeptime=0.1 #大部分行与行之间显示的间隔时间</p>
+
+
+
+<p>注意：部分功能需要安装了 sysstat 软件或搭建了 KVM 虚拟化平台后执行此脚本的用户能够使用 sudo virsh list 命令后才能实现</p>
+
+
+
+<h2>脚本：</h2>
+
+
+
+<pre class="wp-block-code"><code>#!/bin/bash
+
+####################### Separator ########################
+times=2
+sleeptime=0.1
+####################### Separator ########################
+
+nowtime=1
+
+while (( nowtime &lt;= times))
+do
+        echo -e "Start Monitoring: \c"
+	for i in {1..100}
+	do
+	        echo -e "#\c"
+		sleep 0.01
+        done
+	echo
+
+	sleep $sleeptime
+        host=`hostname`
+        echo -e "Name:\t\t\t\t\t\t \033&#91;1m$host\033&#91;0m"
+
+        ip=`ip a s | awk '/&#91;1-2]?&#91;0-9]{0,2}\.&#91;1-2]?&#91;0-9]{0,2}/&amp;&amp;!/127.0.0.1/{print $2}' | awk -F/ '{print $1}'`
+        for iip in `echo $ip`
+        do
+		sleep $sleeptime
+                echo -e "IP Address:\t\t\t\t\t \033&#91;1m$iip\033&#91;0m"
+        done
+
+        sleep $sleeptime
+
+        cpu=`top -bn 1 | awk -F',' '/^%Cpu/{print $4 }' | awk '{print $1}' | awk '{print 100-$1}'`
+        echo -e "CPU Usage (Total):\t\t\t\t \033&#91;1m$cpu%\033&#91;0m"
+
+        sleep $sleeptime
+
+        mem=`free | grep Mem | awk '{print $3/$2 * 100.0}' | egrep -o "&#91;1]?&#91;0-9]{0,2}\.&#91;0-9]"`
+        echo -e "Memory Usage (Total):\t\t\t\t \033&#91;1m$mem%\033&#91;0m"
+
+	directory=`df -h | grep -v run | grep -v boot | awk '$1~/\/dev/{print $6}'`
+        for idirectory in `echo $directory`
+        do
+                sleep $sleeptime
+                directoryusage=`df -h | grep -v run | grep -v boot | awk '$1~/\/dev/{print}' | grep $idirectory$ | awk '{print $5}'`
+		if &#91; $idirectory == / -o $idirectory == /ec  ];then
+                        echo -e "Directory Usage ($idirectory):\t\t\t\t \033&#91;1m$directoryusage\033&#91;0m"
+	        else
+                        echo -e "Directory Usage ($idirectory):\t\t\t \033&#91;1m$directoryusage\033&#91;0m"
+		fi
+        done
+
+	sudo -l | grep 'virsh list' &amp;&gt; /dev/null
+        if &#91; $? -eq 0 ];then
+	        sleep $sleeptime
+	        virtual=`sudo virsh list | egrep &#91;0-9] | wc -l`
+	        echo -e "Number of Virtual Machines (Total):\t\t \033&#91;1m$virtual\033&#91;0m"
+        fi
+
+        sleep $sleeptime
+
+        user=`who | wc -l`
+        echo -e "Number of User Logins (Total):\t\t\t \033&#91;1m$user\033&#91;0m"
+
+        soft=`rpm -qa | wc -l`
+        echo -e "Number of Softwares (Total):\t\t\t \033&#91;1m$soft\033&#91;0m"
+
+        sleep $sleeptime
+
+        port=`ss -ntulap | wc -l`
+        echo -e "Number of Open Ports (Total):\t\t\t \033&#91;1m$port\033&#91;0m"
+
+        which sar &amp;&gt; /dev/null
+        if &#91; $? -eq 0 ];then
+                networkcard=`ifconfig | awk -F: '/flags/&amp;&amp;!/lo/{print $1}'`
+                for inetworkcard in `echo $networkcard`
+                do
+                        networkread="`sar -n DEV 1 1 | grep $inetworkcard | awk '/&#91;0-9]&#91;0-9]:&#91;0-9]&#91;0-9]/{print $3/1000}'` m/s"
+                        networkwrite="`sar -n DEV 1 1 | grep $inetworkcard | awk '/&#91;0-9]&#91;0-9]:&#91;0-9]&#91;0-9]/{print $4/1000}'` m/s"
+			echo $inetworkcard | grep eth &amp;&gt; /dev/null
+			if &#91; $?  -ne 0 ];then
+	                echo -e "Network Card IO ($inetworkcard):\t\t\t \033&#91;1m$networkread\033&#91;0m (Read)\t\033&#91;1m$networkwrite\033&#91;0m (Write)"
+		        else
+	                echo -e "Network Card IO ($inetworkcard):\t\t\t\t \033&#91;1m$networkread\033&#91;0m (Read)\t\033&#91;1m$networkwrite\033&#91;0m (Write)"
+			fi
+                done
+        fi
+
+        which iostat &amp;&gt; /dev/null
+        if &#91; $? -eq 0 ];then
+	        disk=`iostat -d -k 1 1 | awk '!/^$/&amp;&amp;!/Device/&amp;&amp;!/Linux/{print $1}'`
+                for idisk in `echo $disk`
+	        do
+			sleep $sleeptime
+		        diskread="`iostat -d -k 1 1 | grep $idisk |  awk '{print $3/1000}'` m/s"
+		        diskwrite="`iostat -d -k 1 1 | grep $idisk |  awk '{print $4/1000}'` m/s"
+			echo $idisk | grep 'nvme' &amp;&gt; /dev/null
+			if &#91; $? -eq 0 ];then
+		                echo -e "Disk IO (/dev/$idisk):\t\t\t\t \033&#91;1m$diskread\033&#91;0m (Read)\t\033&#91;1m$diskwrite\033&#91;0m (Write)"
+		        else
+		                echo -e "Disk IO (/dev/$idisk):\t\t\t\t \033&#91;1m$diskread\033&#91;0m (Read)\t\033&#91;1m$diskwrite\033&#91;0m (Write)"
+			fi
+	        done
+
+        fi
+
+        echo -e "Complete Monitoring: \c"
+        for i in {1..97}
+        do
+                echo -e "#\c"
+                sleep 0.01
+        done
+        echo
+        sleep $sleeptime
+
+        let nowtime++
+done
+
+        echo -e "Terminal Monitoring: \c"
+        for i in {1..97}
+        do
+                echo -e "#\c"
+                sleep 0.01
+        done
+
+exit</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Linux 自动退出时间的设置</title>
+		<link>https://eternalcenter-now.github.io/automatic-exit-time/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 25 Apr 2022 12:14:46 +0000</pubDate>
+				<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23284</guid>
+
+					<description><![CDATA[步骤一：确认目前正在使用的解释器是 /bin/bash 步骤二：设置多久以后会自动退出 （补充：这里以设置 30 秒后会自动退出为例）]]></description>
+										<content:encoded><![CDATA[
+<h4>步骤一：确认目前正在使用的解释器是 /bin/bash</h4>
+
+
+
+<pre class="wp-block-code"><code># echo $SHELL
+/bin/bash</code></pre>
+
+
+
+<h4>步骤二：设置多久以后会自动退出</h4>
+
+
+
+<pre class="wp-block-code"><code># export TMOUT=30</code></pre>
+
+
+
+<p>（补充：这里以设置 30 秒后会自动退出为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Linux SNMPv3 客户端自查 （检查 SNMPv3 客户端是否能正常传输数据）</title>
+		<link>https://eternalcenter-now.github.io/snmpv3-client-check/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 25 Apr 2022 07:04:26 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System General Log (系统普通日志)]]></category>
+		<category><![CDATA[System Log (系统日志)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23261</guid>
+
+					<description><![CDATA[]]></description>
+										<content:encoded><![CDATA[
+<pre class="wp-block-code"><code># snmpwalk -v3 -u siemens -l authNoPriv -a MD5 -x DES -A '&lt;user&gt;' -X '&lt;password&gt;' localhost</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 tcpdump （网络抓包）</title>
+		<link>https://eternalcenter-now.github.io/tcpdump/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Tue, 19 Apr 2022 04:09:50 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Network (系统网络)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23246</guid>
+
+					<description><![CDATA[将所有抓到的网络数据包 （注意：此时会抓取所有的网络数据包，并保存到文件 /tmp/telnet.cap，想要退出则同时按下 “ctrl” 键和 “c” 键） （补充：这里以将所有抓到的信息导出到 /tmp/telnet.cap 文件为例）]]></description>
+										<content:encoded><![CDATA[
+<p>将所有抓到的网络数据包</p>
+
+
+
+<pre class="wp-block-code"><code># tcpdump -i any -w /tmp/telnet.cap</code></pre>
+
+
+
+<p>（注意：此时会抓取所有的网络数据包，并保存到文件 /tmp/telnet.cap，想要退出则同时按下 “ctrl” 键和 “c” 键）</p>
+
+
+
+<p>（补充：这里以将所有抓到的信息导出到 /tmp/telnet.cap 文件为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 lsscsi （查看硬盘类型，例：SSD、HD、SATA、FC &#8230;&#8230;）</title>
+		<link>https://eternalcenter-now.github.io/lsscsi/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sun, 17 Apr 2022 07:52:04 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Computer & System Hardware & System Installation & System Upgradation (系统电脑 & 系统硬件 & 系统安装 & 系统升级)]]></category>
+		<category><![CDATA[System Hardware (系统硬件)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23173</guid>
+
+					<description><![CDATA[内容一：lsscsi 命令的格式 内容二：lsscsi 命令的选项 1) -c 以硬盘全称的形式显示硬盘默认信息2) -d 显示硬盘主设备号和次设备号3) -g 显示硬盘对应的 sg 设备4) -H 显示硬盘的控制器列表5) -i 显示硬盘的 udev 信息6) -l 显示硬盘状态7) -ll 显示硬盘状态，比 -l 选项能显示更多信息8) -lll 或者 -L 显示硬盘状态，比 -ll 选项能显示更多信息9) -p 显示硬盘的 DIF DIX 保护类型10) -P 显示硬盘有效的保护类型11) -s 显示硬盘容量12) -v 显示硬盘设备所在目录13) -w 显示硬盘的 WWN 信息14) -x 以 16 进制显示硬盘的 lun 号]]></description>
+										<content:encoded><![CDATA[
+<h4>内容一：lsscsi 命令的格式</h4>
+
+
+
+<pre class="wp-block-code"><code># lsscsi &lt;option&gt;</code></pre>
+
+
+
+<h4>内容二：lsscsi 命令的选项</h4>
+
+
+
+<p>1) -c 以硬盘全称的形式显示硬盘默认信息<br>2) -d 显示硬盘主设备号和次设备号<br>3) -g 显示硬盘对应的 sg 设备<br>4) -H 显示硬盘的控制器列表<br>5) -i 显示硬盘的 udev 信息<br>6) -l 显示硬盘状态<br>7) -ll 显示硬盘状态，比 -l 选项能显示更多信息<br>8) -lll 或者 -L 显示硬盘状态，比 -ll 选项能显示更多信息<br>9) -p 显示硬盘的 DIF DIX 保护类型<br>10) -P 显示硬盘有效的保护类型<br>11) -s 显示硬盘容量<br>12) -v 显示硬盘设备所在目录<br>13) -w 显示硬盘的 WWN 信息<br>14) -x 以 16 进制显示硬盘的 lun 号</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 eval （执行变量里的命令或实现指针）</title>
+		<link>https://eternalcenter-now.github.io/eval/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Wed, 13 Apr 2022 14:19:09 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Languages (语言)]]></category>
+		<category><![CDATA[Shell]]></category>
+		<category><![CDATA[Shell Basic (基础)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23101</guid>
+
+					<description><![CDATA[内容目录： 内容一：eval 命令的作用 内容二：eval 直接执行命令的案例2.1 设置变量2.2 显示变量里内容 内容三：eval 将变量转换成命令后执行的案例3.1 将命令设置成变量3.2 显示变量里的命令3.3 执行变量里的命令 内容四：eval 显示脚本里最后 1 个位置变量的内容4.1 创建显示最后 1 个位置变量的脚本4.2 带位置变量执行脚本 内容五：eval 实现指针5.1 设置变量5.2 设置指针5.3 显示指针指向的变量5.4 显示指针最终指向的内容 具体的内容： 内容一：eval 命令的作用 对将要执行的命令进行 2 次扫描，第 1 次扫描时把扫描的内容替换成命令，第 2 次扫描时执行扫描到的命令 内容二：eval 直接执行命令的案例2.1 设置变量 （补充：这里以将内容 eternalcenter.com 赋值给变量 url 为例） 2.2 显示变量里内容 或者： （补充：这里以显示变量 url 里的内容 eternalcenter.com 为例） 内容三：eval 将变量转换成命令后执行的案例3.1 将命令设置成变量 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/eval/" class="more-link">Continue reading<span class="screen-reader-text"> "[命令] Linux 命令 eval （执行变量里的命令或实现指针）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2>内容目录：</h2>
+
+
+
+<h4>内容一：eval 命令的作用</h4>
+
+
+
+<h4>内容二：eval 直接执行命令的案例<br>2.1 设置变量<br>2.2 显示变量里内容</h4>
+
+
+
+<h4>内容三：eval 将变量转换成命令后执行的案例<br>3.1 将命令设置成变量<br>3.2 显示变量里的命令<br>3.3 执行变量里的命令</h4>
+
+
+
+<h4>内容四：eval 显示脚本里最后 1 个位置变量的内容<br>4.1 创建显示最后 1 个位置变量的脚本<br>4.2 带位置变量执行脚本</h4>
+
+
+
+<h4>内容五：eval 实现指针<br>5.1 设置变量<br>5.2 设置指针<br>5.3 显示指针指向的变量<br>5.4 显示指针最终指向的内容</h4>
+
+
+
+<h2>具体的内容：</h2>
+
+
+
+<h4>内容一：eval 命令的作用</h4>
+
+
+
+<p>对将要执行的命令进行 2 次扫描，第 1 次扫描时把扫描的内容替换成命令，第 2 次扫描时执行扫描到的命令</p>
+
+
+
+<h4>内容二：eval 直接执行命令的案例<br>2.1 设置变量</h4>
+
+
+
+<pre class="wp-block-code"><code># url=eternalcenter.com</code></pre>
+
+
+
+<p>（补充：这里以将内容 eternalcenter.com 赋值给变量 url 为例）</p>
+
+
+
+<h4>2.2 显示变量里内容</h4>
+
+
+
+<pre class="wp-block-code"><code># echo $url
+eternalcenter.com</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># eval echo $url
+eternalcenter.com</code></pre>
+
+
+
+<p>（补充：这里以显示变量 url 里的内容 eternalcenter.com 为例）</p>
+
+
+
+<h4>内容三：eval 将变量转换成命令后执行的案例<br>3.1 将命令设置成变量</h4>
+
+
+
+<pre class="wp-block-code"><code># command=pwd</code></pre>
+
+
+
+<p>（补充：这里以将命令 pwd 赋值给变量 command 为例）</p>
+
+
+
+<h4>3.2 显示变量里的命令</h4>
+
+
+
+<pre class="wp-block-code"><code># echo $command
+pwd</code></pre>
+
+
+
+<p>（补充：这里以显示变量 command 里的 pwd 命令为例）</p>
+
+
+
+<h4>3.3 执行变量里的命令</h4>
+
+
+
+<pre class="wp-block-code"><code># eval $command
+/root</code></pre>
+
+
+
+<p>（补充：这里以执行变量 command 里的 pwd 命令为例）</p>
+
+
+
+<h4>内容四：eval 显示脚本里最后 1 个位置变量的内容<br>4.1 创建显示最后 1 个位置变量的脚本</h4>
+
+
+
+<pre class="wp-block-code"><code># vim test.sh</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>#!/bin/bash
+eval echo \$$#</code></pre>
+
+
+
+<p>（补充：这里创建名为 test.sh 的脚本为例）</p>
+
+
+
+<h4>4.2 带位置变量执行脚本</h4>
+
+
+
+<pre class="wp-block-code"><code># . test.txt a b c d e
+e</code></pre>
+
+
+
+<p>（补充：这里执行名为 test.sh 的脚本并附带 a b c d e 5 个位置变量为例）</p>
+
+
+
+<h4>内容五：eval 实现指针<br>5.1 设置变量</h4>
+
+
+
+<pre class="wp-block-code"><code># url=eternalcenter.com</code></pre>
+
+
+
+<p>（补充：这里以将内容 eternalcenter.com 赋值给变量 url 为例）</p>
+
+
+
+<h4>5.2 设置指针</h4>
+
+
+
+<pre class="wp-block-code"><code># pointer=url</code></pre>
+
+
+
+<p>（补充：这里以让指针 pointer 指向 url 变量为例）</p>
+
+
+
+<h4>5.3 显示指针指向的变量</h4>
+
+
+
+<pre class="wp-block-code"><code># echo $pointer
+url</code></pre>
+
+
+
+<p>（补充：这里以显示指针 pointer 指向的变量 url 为例）</p>
+
+
+
+<h4>5.4 显示指针最终指向的内容</h4>
+
+
+
+<pre class="wp-block-code"><code># eval echo \$$pointer
+eternalcenter.com</code></pre>
+
+
+
+<p>（补充：这里以显示指针 pointer 指向的最终内容 eternalcenter.com 为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[排错] 解决 Linux 日志报错：“hash:/etc/aliases is unavailable.open database /etc/aliases.db” 或者 “error: open database /etc/aliases.db: No such file or directory”</title>
+		<link>https://eternalcenter-now.github.io/debug-hash-etc-aliases-is-unavailable-open-database-etc-aliases-db-or-error-open-database-etc-aliases-db-no-such-file-or-directory/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 04 Apr 2022 09:54:35 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Mail]]></category>
+		<category><![CDATA[Other Services (其他服务)]]></category>
+		<category><![CDATA[Services (服务)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=22729</guid>
+
+					<description><![CDATA[报错代码： 或者： 解决方法：]]></description>
+										<content:encoded><![CDATA[
+<h2>报错代码：</h2>
+
+
+
+<pre class="wp-block-code"><code>hash:/etc/aliases is unavailable.open database /etc/aliases.db</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code>error: open database /etc/aliases.db: No such file or directory</code></pre>
+
+
+
+<h2>解决方法：</h2>
+
+
+
+<pre class="wp-block-code"><code># newaliases</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 mtr （检测网络联通性）</title>
+		<link>https://eternalcenter-now.github.io/mtr/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 04 Apr 2022 08:45:34 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Network (系统网络)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=22681</guid>
+
+					<description><![CDATA[案例一：一直测试某 1 个 IP 地址的联通性并边测试边显示状况 或者： （补充：1) 这里以测试 8.8.8.8 IP 地址为例2) -n 和 &#8211;no-dns 参数代表不使用 DNS 解析主机名） 案例二：测试某 1 个 IP 地址 100 次的联通性并边测试边显示状况 或者： （补充：1) 这里以测试 8.8.8.8 IP 地址为例2) -n 和 &#8211;no-dns 参数代表不使用 DNS 解析主机名3) -c 和 &#8211;report-cycles 参数代表指定次数） 案例三：测试某 1 个域名 100 次的联通性并显示最终报告 或者： （补充：1) 这里以测试 eternalcenter.com 域名为例2) -n 和 &#8211;no-dns 参数代表不使用 DNS &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/mtr/" class="more-link">Continue reading<span class="screen-reader-text"> "[命令] Linux 命令 mtr （检测网络联通性）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h4>案例一：一直测试某 1 个 IP 地址的联通性并边测试边显示状况</h4>
+
+
+
+<pre class="wp-block-code"><code># mtr -n 8.8.8.8</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># mtr --no-dns 8.8.8.8</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里以测试 8.8.8.8 IP 地址为例<br>2) -n 和 &#8211;no-dns 参数代表不使用 DNS 解析主机名<br>）</p>
+
+
+
+<h4>案例二：测试某 1 个 IP 地址 100 次的联通性并边测试边显示状况</h4>
+
+
+
+<pre class="wp-block-code"><code># mtr -nc 100 8.8.8.8</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># mtr --no-dns --report-cycles 100 8.8.8.8</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里以测试 8.8.8.8 IP 地址为例<br>2) -n 和 &#8211;no-dns 参数代表不使用 DNS 解析主机名<br>3) -c 和 &#8211;report-cycles 参数代表指定次数<br>）</p>
+
+
+
+<h4>案例三：测试某 1 个域名 100 次的联通性并显示最终报告</h4>
+
+
+
+<pre class="wp-block-code"><code># mtr -nrc 100 eternalcenter.com</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># mtr --no-dns --report --report-cycles 100 eternalcenter.com</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里以测试 eternalcenter.com 域名为例<br>2) -n 和 &#8211;no-dns 参数代表不使用 DNS 解析主机名<br>3) -r 和 &#8211;report 参数代表生成最终报告<br>4) -c 和 &#8211;report-cycles 参数代表指定次数<br>）</p>
+
+
+
+<h4>案例四：测试某 1 个域名 TCP 443 端口 100 次的联通性并显示最终报告</h4>
+
+
+
+<pre class="wp-block-code"><code># mtr -TP 443 -nrc 100 eternalcenter.com</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># mtr --tcp --port 443 --no-dns --report --report-cycles 100 eternalcenter.com</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里以测试 eternalcenter.com 域名的 443 端口为例<br>2) -n 和 &#8211;no-dns 参数代表不使用 DNS 解析主机名<br>3) -r 和 &#8211;report 参数代表生成最终报告<br>4) -c 和 &#8211;report-cycles 参数代表指定次数<br>5) -T 和 &#8211;tcp 参数代表指定 TCP<br>6) -P 和 &#8211;port 参数代表指定端口号<br>）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 nc （检查网络端口的联通性）</title>
+		<link>https://eternalcenter-now.github.io/nc/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sun, 03 Apr 2022 13:46:48 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Network (系统网络)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=22565</guid>
+
+					<description><![CDATA[案例一：检查某 1 个域名某 1 个 TCP 端口的联通性 （补充：这里以检测 eternalcenter.com 域名的 TCP 443 端口为例） 案例二：检查某 1 个 IP 地址某 1 个 TCP 端口的联通性 （补充：这里以检测 8.8.8.8 IP 地址的 TCP 443 端口为例） 案例三：检查某 1 个域名某 1 个 UDP 端口的联通性 （补充：这里以检测 eternalcenter.com 域名的 UDP 69 端口为例） 案例四：检查某 1 个 IP 地址某 1 个 UDP 端口的联通性 （补充：这里以检测 8.8.8.8 IP 地址的 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/nc/" class="more-link">Continue reading<span class="screen-reader-text"> "[命令] Linux 命令 nc （检查网络端口的联通性）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h4>案例一：检查某 1 个域名某 1 个 TCP 端口的联通性</h4>
+
+
+
+<pre class="wp-block-code"><code># nc -v -z eternalcenter.com 443</code></pre>
+
+
+
+<p>（补充：这里以检测 eternalcenter.com 域名的 TCP 443 端口为例）</p>
+
+
+
+<h4>案例二：检查某 1 个 IP 地址某 1 个 TCP 端口的联通性</h4>
+
+
+
+<pre class="wp-block-code"><code># nc -v -z 8.8.8.8 443</code></pre>
+
+
+
+<p>（补充：这里以检测 8.8.8.8 IP 地址的 TCP 443 端口为例）</p>
+
+
+
+<h4>案例三：检查某 1 个域名某 1 个 UDP 端口的联通性</h4>
+
+
+
+<pre class="wp-block-code"><code># nc -v -z -u eternalcenter.com 69</code></pre>
+
+
+
+<p>（补充：这里以检测 eternalcenter.com 域名的 UDP 69 端口为例）</p>
+
+
+
+<h4>案例四：检查某 1 个 IP 地址某 1 个 UDP 端口的联通性</h4>
+
+
+
+<pre class="wp-block-code"><code># nc -v -z -u 8.8.8.8 69</code></pre>
+
+
+
+<p>（补充：这里以检测 8.8.8.8 IP 地址的 UDP 69 端口为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 paster (将多个文件里内容合并，后 1 个文件里的每 1 行内容添加到前 1 个文件里对应每 1 行内容的后面)</title>
+		<link>https://eternalcenter-now.github.io/paster/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sat, 26 Mar 2022 14:24:27 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System File (系统文件)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=22444</guid>
+
+					<description><![CDATA[]]></description>
+										<content:encoded><![CDATA[
+<pre class="wp-block-code"><code># paste &lt;first file> &lt;second file> ......</code></pre>
+
+
+
+<p></p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Linux Kdump 的触发 （魔术键版）</title>
+		<link>https://eternalcenter-now.github.io/kdump-trigger-magic-key/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Thu, 17 Feb 2022 09:25:43 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System General Log (系统普通日志)]]></category>
+		<category><![CDATA[System Log (系统日志)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=22041</guid>
+
+					<description><![CDATA[注意： 在触发 Kdump 之前要先开启 Kdump： 正文： 步骤一：在本地登陆系统 （步骤略） 步骤二：强制同步屏幕 同时按下 “Left” 键和 “Alt” 键和 “Print Screen” 键和 “s” 键 步骤三：触发 Kdump 同时按下 “Left” 键和 “Alt” 键和 “Print Screen” 键和 “c” 键]]></description>
+										<content:encoded><![CDATA[
+<h2 id="注意">注意：</h2>
+
+
+
+<p>在触发 Kdump 之前要先开启 Kdump：</p>
+
+
+
+<div class="wp-container-1 wp-block-buttons">
+<div class="wp-block-button aligncenter is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/kdump/">Linux Kdump 的开启 <br>（用于收集内核崩溃时的信息）</a></div>
+</div>
+
+
+
+<h2 id="正文">正文：</h2>
+
+
+
+<h4 id="步骤一-在本地登陆系统">步骤一：在本地登陆系统</h4>
+
+
+
+<p>（步骤略）</p>
+
+
+
+<h4 id="步骤二-强制同步屏幕">步骤二：强制同步屏幕</h4>
+
+
+
+<p>同时按下 “Left” 键和 “Alt” 键和 “Print Screen” 键和 “s” 键</p>
+
+
+
+<h4 id="步骤三-触发-kdump">步骤三：触发 Kdump</h4>
+
+
+
+<p>同时按下 “Left” 键和 “Alt” 键和 “Print Screen” 键和 “c” 键</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 目标网站 SSL 证书的显示 （OpenSSL 版）</title>
+		<link>https://eternalcenter-now.github.io/ssl-display-openssl/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Tue, 15 Feb 2022 13:39:10 +0000</pubDate>
+				<category><![CDATA[Apache]]></category>
+		<category><![CDATA[Basic Guidelines for Website building (网站建设基础指南)]]></category>
+		<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Django Service (服务)]]></category>
+		<category><![CDATA[Nginx]]></category>
+		<category><![CDATA[Nginx Security (安全)]]></category>
+		<category><![CDATA[Personal Website Building (个人网站建设)]]></category>
+		<category><![CDATA[Project (项目)]]></category>
+		<category><![CDATA[Services (服务)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Port Security (系统端口安全)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[Tomcat]]></category>
+		<category><![CDATA[Web Application Firewall (WAF)]]></category>
+		<category><![CDATA[Website Services (网站服务)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=21971</guid>
+
+					<description><![CDATA[内容一：查看完整信息 （补充：这里以显示 eternalcenter.com 的 443 端口的 SSL 证书为例） 内容二：查看主要信息 （补充：这里以显示 eternalcenter.com 的 443 端口的 SSL 证书为例）]]></description>
+										<content:encoded><![CDATA[
+<h4>内容一：查看完整信息</h4>
+
+
+
+<pre class="wp-block-code"><code># openssl s_client -connect eternalcenter.com:443
+CONNECTED(00000003)
+depth=2 C = US, O = Internet Security Research Group, CN = ISRG Root X1
+verify return:1
+depth=1 C = US, O = Let's Encrypt, CN = R3
+verify return:1
+depth=0 CN = eternalcenter.com
+verify return:1
+---
+Certificate chain
+ 0 s:CN = eternalcenter.com
+   i:C = US, O = Let's Encrypt, CN = R3
+ 1 s:C = US, O = Let's Encrypt, CN = R3
+   i:C = US, O = Internet Security Research Group, CN = ISRG Root X1
+ 2 s:C = US, O = Internet Security Research Group, CN = ISRG Root X1
+   i:O = Digital Signature Trust Co., CN = DST Root CA X3
+---
+Server certificate
+-----BEGIN CERTIFICATE-----
+MIIFKjCCBBKgAwIBAgISAxDxly99eBiarmHggFEmDJoMMA0GCSqGSIb3DQEBCwUA
+MDIxCzAJBgNVBAYTAlVTMRYwFAYDVQQKEw1MZXQncyBFbmNyeXB0MQswCQYDVQQD
+EwJSMzAeFw0yMTEyMTkxMzA4MzJaFw0yMjAzMTkxMzA4MzFaMBwxGjAYBgNVBAMT
+EWV0ZXJuYWxjZW50ZXIuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKC
+AQEAtCcCuOqBrWP4eo//VBEXh668EjwrE1eXz2CS4GIN4ddn0rS8LHGFOrB92R8E
+OnaYeTKpZjzNM3NA/AG/Gq5mTRZGTpyTasHEb/phwXdhrtJWdbMtQjGFSg8rXSB8
+cap5NGP/NxAy8FV0MbXftg5t9VgBoCMGUzioSHZTEjefq+/OZwlP7RzxZN3bwj1D
+61gWSw6q1X3bsi8ttwbkkiJfvjXo2KIeGOAnY10X+FPJmVa7jonhOuljrX4CYgnd
+SCxmsfgwGMUzRu27VB1rEbKqvSr6tb9KfwFiqsZd5tTi7RW6WMqA0VbDV7BbDqLP
+OzcturwRtXfzHjJxssy9zhnrQQIDAQABo4ICTjCCAkowDgYDVR0PAQH/BAQDAgWg
+MB0GA1UdJQQWMBQGCCsGAQUFBwMBBggrBgEFBQcDAjAMBgNVHRMBAf8EAjAAMB0G
+A1UdDgQWBBQMGBCfBuZxTAS8VcBI/13ugqc2RDAfBgNVHSMEGDAWgBQULrMXt1hW
+y65QCUDmH6+dixTCxjBVBggrBgEFBQcBAQRJMEcwIQYIKwYBBQUHMAGGFWh0dHA6
+Ly9yMy5vLmxlbmNyLm9yZzAiBggrBgEFBQcwAoYWaHR0cDovL3IzLmkubGVuY3Iu
+b3JnLzAcBgNVHREEFTATghFldGVybmFsY2VudGVyLmNvbTBMBgNVHSAERTBDMAgG
+BmeBDAECATA3BgsrBgEEAYLfEwEBATAoMCYGCCsGAQUFBwIBFhpodHRwOi8vY3Bz
+LmxldHNlbmNyeXB0Lm9yZzCCAQYGCisGAQQB1nkCBAIEgfcEgfQA8gB3AN+lXqto
+gk8fbK3uuF9OPlrqzaISpGpejjsSwCBEXCpzAAABfdMFzUsAAAQDAEgwRgIhAMFF
+1orPZPnpCyhzwX2xZAZjJnOmDGmBjAl0tHnX4nEWAiEAqZTUwjrdwZAL+kDAgpzG
+Me2RnGMseDBY8Oy2sefUgsAAdwBGpVXrdfqRIDC1oolp9PN9ESxBdL79SbiFq/L8
+cP5tRwAAAX3TBc1zAAAEAwBIMEYCIQDLhR0nbVHEIL1uw9hRuv/ZbFjf91W/M4Jp
+od7NTMQZbAIhAKEAAfmdu0nVHklyS2At1VValwQ6vNbqd0NQ85giG606MA0GCSqG
+SIb3DQEBCwUAA4IBAQB/s+rZEaNrlUyBVnbxv5X9NTBd8buBOkR1qVswlS1R2i8B
+pRjeJmgbiMzM2z5Mvx0yTIiCyXXUc3YaqoyxvddaQam9nlLGr0nKX9T5DkE7y0Fh
+Qg0/ievRQF86XnDqQBxDR32jj5A1nKEiJrNCqugCWTAABndW3tvzK5DOsF2BfjJC
+mcjwiKaSCjFVpf+KzLWS3UEW+DRTKOLBucXpenS7QEcQu4K6ShNSL7+K6UOZEbFu
+uCRjOawCJFF7EH5vzRBy696Fu4EmzCV+c4rV8K8EcuCCQQeOTWJ/93Jv6U6kGrmE
+P6wlcHFy1tZhTAmXf/qcpE3sGeH58OlNNiVmNJdH
+-----END CERTIFICATE-----
+subject=CN = eternalcenter.com
+
+issuer=C = US, O = Let's Encrypt, CN = R3
+
+---
+No client certificate CA names sent
+Peer signing digest: SHA256
+Peer signature type: RSA-PSS
+Server Temp Key: X25519, 253 bits
+---
+SSL handshake has read 4695 bytes and written 412 bytes
+Verification: OK
+---
+New, TLSv1.2, Cipher is ECDHE-RSA-AES256-GCM-SHA384
+Server public key is 2048 bit
+Secure Renegotiation IS supported
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+SSL-Session:
+    Protocol  : TLSv1.2
+    Cipher    : ECDHE-RSA-AES256-GCM-SHA384
+    Session-ID: D63BC88824810A4D43ACE901AD4FF2D82073BC6F0D8B2DE71F6310CA1C87707F
+    Session-ID-ctx: 
+    Master-Key: A6836430C394B96DDD5552867D49802F94AAC8BF5E882100F0D27185CF5CFD6A946B94D87652E44A6684FC9781D16D90
+    PSK identity: None
+    PSK identity hint: None
+    SRP username: None
+    TLS session ticket lifetime hint: 300 (seconds)
+    TLS session ticket:
+    0000 - bb be 55 e0 4b 6d c3 08-cd bc 45 6e 79 67 fc eb   ..U.Km....Enyg..
+    0010 - 30 d5 4c 8a 5a c8 f7 13-42 4b 1d 02 ce 94 c0 b8   0.L.Z...BK......
+    0020 - d7 cf f6 f0 ee 9d 49 5b-0a c8 a4 1a 8b dd 8a e0   ......I&#91;........
+    0030 - 66 83 52 9b 31 4d da 9e-d5 05 1a 70 ca e9 86 5e   f.R.1M.....p...^
+    0040 - f5 09 a1 1c 92 6b 64 90-b7 e1 0e ec 30 e2 26 68   .....kd.....0.&amp;h
+    0050 - 49 13 10 9e 3e a5 e0 13-a2 f1 7a 7c c5 ad 99 6c   I...&gt;.....z|...l
+    0060 - e9 f6 1d 46 5f cc f6 f9-c5 f6 05 49 53 78 7e ea   ...F_......ISx~.
+    0070 - 8c 17 eb 8d 96 c3 3f 92-fe e0 f0 f6 86 59 05 c8   ......?......Y..
+    0080 - d2 8c 27 6b 9d 65 38 20-84 d4 23 54 35 70 19 4d   ..'k.e8 ..#T5p.M
+    0090 - db 35 6d f4 44 50 d7 6e-a5 87 2b 32 e5 f8 42 88   .5m.DP.n..+2..B.
+    00a0 - 28 e2 ab 35 e1 2c 06 71-e5 b2 82 cb 3a 75 cc 72   (..5.,.q....:u.r
+    00b0 - ed ae e1 12 ff 82 6c 3a-3a 38 7a 8c 3c 9c f1 10   ......l::8z.&lt;...
+    00c0 - 78 b8 37 87 c3 a2 00 76-01 72 8c ef 3b 20 48 28   x.7....v.r..; H(
+
+    Start Time: 1644931899
+    Timeout   : 7200 (sec)
+    Verify return code: 0 (ok)
+    Extended master secret: yes
+---
+closed</code></pre>
+
+
+
+<p>（补充：这里以显示 eternalcenter.com 的 443 端口的 SSL 证书为例）</p>
+
+
+
+<h4>内容二：查看主要信息</h4>
+
+
+
+<pre class="wp-block-code"><code># echo | openssl s_client -connect scc.suse.com:443 | head -n 16
+CONNECTED(00000003)
+depth=2 C = US, O = Internet Security Research Group, CN = ISRG Root X1
+verify return:1
+depth=1 C = US, O = Let's Encrypt, CN = R3
+verify return:1
+depth=0 CN = eternalcenter.com
+verify return:1
+---
+Certificate chain
+ 0 s:CN = eternalcenter.com
+   i:C = US, O = Let's Encrypt, CN = R3
+ 1 s:C = US, O = Let's Encrypt, CN = R3
+   i:C = US, O = Internet Security Research Group, CN = ISRG Root X1
+ 2 s:C = US, O = Internet Security Research Group, CN = ISRG Root X1
+   i:O = Digital Signature Trust Co., CN = DST Root CA X3
+---</code></pre>
+
+
+
+<p>（补充：这里以显示 eternalcenter.com 的 443 端口的 SSL 证书为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 logger （手动向系统日志写入信息）</title>
+		<link>https://eternalcenter-now.github.io/logger/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Tue, 15 Feb 2022 13:15:26 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System General Log (系统普通日志)]]></category>
+		<category><![CDATA[System Log (系统日志)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=21966</guid>
+
+					<description><![CDATA[内容一：手动向系统日志写入信息 （补充：这里以往系统日志里写入一条包含 This is test message 内容的信息为例） 内容二：显示手动向系统日志写入信息 （补充：这里在系统里查找一条包含 This is test message 内容的信息为例）]]></description>
+										<content:encoded><![CDATA[
+<h4 id="内容一-手动向系统日志写入信息">内容一：手动向系统日志写入信息</h4>
+
+
+
+<pre class="wp-block-code"><code># logger &#91;This is test message]</code></pre>
+
+
+
+<p>（补充：这里以往系统日志里写入一条包含 This is test message 内容的信息为例）</p>
+
+
+
+<h4 id="内容二-显示手动向系统日志写入信息">内容二：显示手动向系统日志写入信息</h4>
+
+
+
+<pre class="wp-block-code"><code># grep "This is test message" /var/log/messages</code></pre>
+
+
+
+<p>（补充：这里在系统里查找一条包含 This is test message 内容的信息为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 iftop （显示系统联通状态）</title>
+		<link>https://eternalcenter-now.github.io/iftop/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sat, 15 Jan 2022 14:06:51 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Network (系统网络)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=21213</guid>
+
+					<description><![CDATA[（补充：此时会不停地显示系统联通状态，按下 “q” 键后退出）]]></description>
+										<content:encoded><![CDATA[
+<pre class="wp-block-code"><code># iftop</code></pre>
+
+
+
+<p>（补充：此时会不停地显示系统联通状态，按下 “q” 键后退出）</p>
+
+
+
+<pre class="wp-block-code"><code># iftop
+interface: eth0
+IP address is: 10.10.10.129
+IPv6 address is: fdb2:2c26:f4e4:0:5940:b748:da58:4f3
+MAC address is: 00:1c:42:c9:3c:81</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 变量替换</title>
+		<link>https://eternalcenter-now.github.io/variable-replacement/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sun, 09 Jan 2022 10:53:51 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Languages (语言)]]></category>
+		<category><![CDATA[Shell]]></category>
+		<category><![CDATA[Shell Basic (基础)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=21157</guid>
+
+					<description><![CDATA[内容目录： 案例一：当要替换的变量未定义或为空时则给予其一个默认值 案例二：当要替换的变量已定义且不为空时则给予其一个默认值 案例三：当要替换的变量已定义且不为空时则替换此变量的前一部分3.1 当要替换的变量已定义且不为空时则替换此变量的前一部分3.2 当要替换的变量已定义且不为空时则替换此变量的某一部分 案例四：当要替换的变量已定义且不为空时则替换此变量去除前一部分的值4.1 去除变量左数第一个某一个符号前面的所有值4.2 去除变量左数最后某一个符号前面的所有值4.3 去除前面一部分值 案例五：当要替换的变量已定义且不为空时则替换此变量去除后一部分的值5.1 去除变量右数第一个某一个符号前面的所有值5.2 去除变量右数最后某一个符号前面的所有值5.3 去除后面一部分值 案例六：当要替换的变量已定义且不为空时则替换此变量替换一部分后的值 具体的内容： 案例一：当要替换的变量未定义或为空时则给予其一个默认值 或者： （补充：这里以当变量 value 存在且为空时则变量 newvalue 的值为 eternalcenter 为例） 案例二：当要替换的变量已定义且不为空时则给予其一个默认值 （补充：这里以当变量 value 存在且不为空时则变量 newvalue 的值为 eternalcenter 为例） 案例三：当要替换的变量已定义且不为空时则替换此变量的前一部分3.1 当要替换的变量已定义且不为空时则替换此变量的前一部分 或者： （补充：这里以当变量 value 存在且不为空时则变量 newvalue 的值为变量 value 前 4 个字符为例） 3.2 当要替换的变量已定义且不为空时则替换此变量的某一部分 （补充：这里以当变量 value 存在且不为空时则变量 newvalue 的值为变量 value 从第 4 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/variable-replacement/" class="more-link">Continue reading<span class="screen-reader-text"> "[命令] Linux 变量替换"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2>内容目录：</h2>
+
+
+
+<h4>案例一：当要替换的变量未定义或为空时则给予其一个默认值</h4>
+
+
+
+<h4>案例二：当要替换的变量已定义且不为空时则给予其一个默认值</h4>
+
+
+
+<h4>案例三：当要替换的变量已定义且不为空时则替换此变量的前一部分<br>3.1 当要替换的变量已定义且不为空时则替换此变量的前一部分<br>3.2 当要替换的变量已定义且不为空时则替换此变量的某一部分</h4>
+
+
+
+<h4>案例四：当要替换的变量已定义且不为空时则替换此变量去除前一部分的值<br>4.1 去除变量左数第一个某一个符号前面的所有值<br>4.2 去除变量左数最后某一个符号前面的所有值<br>4.3 去除前面一部分值</h4>
+
+
+
+<h4>案例五：当要替换的变量已定义且不为空时则替换此变量去除后一部分的值<br>5.1 去除变量右数第一个某一个符号前面的所有值<br>5.2 去除变量右数最后某一个符号前面的所有值<br>5.3 去除后面一部分值</h4>
+
+
+
+<h4>案例六：当要替换的变量已定义且不为空时则替换此变量替换一部分后的值</h4>
+
+
+
+<h2>具体的内容：</h2>
+
+
+
+<h4>案例一：当要替换的变量未定义或为空时则给予其一个默认值</h4>
+
+
+
+<pre class="wp-block-code"><code># value=
+# newvalue=${value:-eternalcenter}
+# echo $newvalue
+eternalcenter</code></pre>
+
+
+
+<pre class="wp-block-code"><code># value=mingyuzhu
+# newvalue=${value:-eternalcenter}
+# echo $newvalue
+mingyuzhu</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># value=
+# newvalue=${value:=eternalcenter}
+# echo $newvalue
+eternalcenter</code></pre>
+
+
+
+<pre class="wp-block-code"><code># value=mingyuzhu
+# newvalue=${value:=eternalcenter}
+# echo $newvalue
+mingyuzhu</code></pre>
+
+
+
+<p>（补充：这里以当变量 value 存在且为空时则变量 newvalue 的值为 eternalcenter 为例）</p>
+
+
+
+<h4>案例二：当要替换的变量已定义且不为空时则给予其一个默认值</h4>
+
+
+
+<pre class="wp-block-code"><code># value=
+# newvalue=${value:+eternalcenter}
+# echo $newvalue</code></pre>
+
+
+
+<pre class="wp-block-code"><code># value=mingyuzhu
+# newvalue=${value:+eternalcenter}
+# echo $newvalue
+eternalcenter</code></pre>
+
+
+
+<p>（补充：这里以当变量 value 存在且不为空时则变量 newvalue 的值为 eternalcenter 为例）</p>
+
+
+
+<h4>案例三：当要替换的变量已定义且不为空时则替换此变量的前一部分<br>3.1 当要替换的变量已定义且不为空时则替换此变量的前一部分</h4>
+
+
+
+<pre class="wp-block-code"><code># value=mingyuzhu
+# newvalue=${value:offset:4}
+# echo $newvalue
+ming</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># value=mingyuzhu
+# newvalue=${value:0:4}
+# echo $newvalue
+ming</code></pre>
+
+
+
+<p>（补充：这里以当变量 value 存在且不为空时则变量 newvalue 的值为变量 value 前 4 个字符为例）</p>
+
+
+
+<h4>3.2 当要替换的变量已定义且不为空时则替换此变量的某一部分</h4>
+
+
+
+<pre class="wp-block-code"><code># value=mingyuzhu
+# newvalue=${value:4:2}
+# echo $newvalue
+yu</code></pre>
+
+
+
+<p>（补充：这里以当变量 value 存在且不为空时则变量 newvalue 的值为变量 value 从第 4 个字符开始的 2 个字符为例）</p>
+
+
+
+<h4>案例四：当要替换的变量已定义且不为空时则替换此变量去除前一部分的值<br>4.1 去除变量左数第一个某一个符号前面的所有值</h4>
+
+
+
+<pre class="wp-block-code"><code># value=ming:yu:zhu
+# newvalue=${value#*:}
+# echo $newvalue
+yu:zhu</code></pre>
+
+
+
+<p>（补充：这里以去除变量 value 左数第一个冒号 “:” 前面的所有值并赋予给变量 newvalue 为例）</p>
+
+
+
+<h4>4.2 去除变量左数最后某一个符号前面的所有值</h4>
+
+
+
+<pre class="wp-block-code"><code># value=ming:yu:zhu
+# newvalue=${value##*:}
+# echo $newvalue
+zhu</code></pre>
+
+
+
+<p>（补充：这里以去除变量 value 左数最后一个冒号 “:” 前面的所有值并赋予给变量 newvalue 为例）</p>
+
+
+
+<h4>4.3 去除前面一部分值</h4>
+
+
+
+<pre class="wp-block-code"><code># value=mingyuzhu
+# novalue=ming
+# newvalue=${value##$novalue}
+# echo $newvalue
+yuzhu</code></pre>
+
+
+
+<p>（补充：这里以去除变量 value 前面的 ming 值并赋予给变量 newvalue 为例）</p>
+
+
+
+<h4>案例五：当要替换的变量已定义且不为空时则替换此变量去除后一部分的值<br>5.1 去除变量右数第一个某一个符号前面的所有值</h4>
+
+
+
+<pre class="wp-block-code"><code># value=ming:yu:zhu
+# newvalue=${value%:*}
+# echo $newvalue
+ming:yu</code></pre>
+
+
+
+<p>（补充：这里以去除变量 value 右数第一个冒号 “:” 前面的所有值并赋予给变量 newvalue 为例）</p>
+
+
+
+<h4>5.2 去除变量右数最后某一个符号前面的所有值</h4>
+
+
+
+<pre class="wp-block-code"><code># value=ming:yu:zhu
+# newvalue=${value%%:*}
+# echo $newvalue
+ming</code></pre>
+
+
+
+<p>（补充：这里以去除变量 value 右数最后一个冒号 “:” 前面的所有并赋予给变量 newvalue 值为例）</p>
+
+
+
+<h4>5.3 去除后面一部分值</h4>
+
+
+
+<pre class="wp-block-code"><code># value=mingyuzhu
+# novalue=ming
+# newvalue=${value%%$novalue}
+# echo $newvalue
+mingyu</code></pre>
+
+
+
+<p>（补充：这里以去除变量 value 后面的 zhu 值并赋予给变量 newvalue 为例）</p>
+
+
+
+<h4>案例六：当要替换的变量已定义且不为空时则替换此变量替换一部分后的值</h4>
+
+
+
+<pre class="wp-block-code"><code># value=mingyuzhu
+# noneedvalue=yu
+# needvalue=zhu
+# newvalue=${value/$noneedvalue/$needvalue}
+# echo $newvalue
+mingzhuzhu</code></pre>
+
+
+
+<p>（补充：这里以将变量 value 中的 yu 替换成 zhu 并赋予给变量 newvalue 为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 (()) （比较数值文件和字符串）</title>
+		<link>https://eternalcenter-now.github.io/double-parenthese/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sat, 08 Jan 2022 12:26:42 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Languages (语言)]]></category>
+		<category><![CDATA[Shell]]></category>
+		<category><![CDATA[Shell Basic (基础)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=21153</guid>
+
+					<description><![CDATA[内容一：(()) 比较符号1.1 (()) 数值比较符号 1) ==，若两个数值存在且相等，则结果为真2) !=，若两个数值存在且不相等，则结果为真3) &#62;，若两个数值存在且前一个数值大于后一个数值，则结果为真4) &#60;，若两个数值存在且前一个数值小于后一个数值，则结果为真 5) &#62;=，若两个数值存在且前一个数值大于或等于后一个数值，则结果为真6) &#60;=，若两个数值存在且前一个数值小于或等于后一个数值，则结果为真 1.2 (()) 字符串比较符号 ==，若两个字符串存在且一样，则结果为真 内容二：(()) 的数值比较案例2.1 案例一：对整数进行比较 （补充：这里以测试数字 0 是否不等于数字 1 为例） 2.2 案例二：对字符串进行比较 （补充：这里以测试字符串 a 是否等于字符串 a 为例）]]></description>
+										<content:encoded><![CDATA[
+<h4>内容一：(()) 比较符号<br>1.1 (()) 数值比较符号</h4>
+
+
+
+<p>1) ==，若两个数值存在且相等，则结果为真<br>2) !=，若两个数值存在且不相等，则结果为真<br>3) &gt;，若两个数值存在且前一个数值大于后一个数值，则结果为真<br>4) &lt;，若两个数值存在且前一个数值小于后一个数值，则结果为真 5) &gt;=，若两个数值存在且前一个数值大于或等于后一个数值，则结果为真<br>6) &lt;=，若两个数值存在且前一个数值小于或等于后一个数值，则结果为真</p>
+
+
+
+<h4>1.2 (()) 字符串比较符号</h4>
+
+
+
+<p>==，若两个字符串存在且一样，则结果为真</p>
+
+
+
+<h4>内容二：(()) 的数值比较案例<br>2.1 案例一：对整数进行比较</h4>
+
+
+
+<pre class="wp-block-code"><code># (( 0 -ne 1 ))
+# echo $?
+0</code></pre>
+
+
+
+<p>（补充：这里以测试数字 0 是否不等于数字 1 为例）</p>
+
+
+
+<h4>2.2 案例二：对字符串进行比较</h4>
+
+
+
+<pre class="wp-block-code"><code># (( a == a ))
+# echo $?
+0</code></pre>
+
+
+
+<p>（补充：这里以测试字符串 a 是否等于字符串 a 为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 [[]] （比较数值、文件、目录、链接、块、特殊文件、字符串）</title>
+		<link>https://eternalcenter-now.github.io/double-square-bracket/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 03 Jan 2022 14:42:23 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Languages (语言)]]></category>
+		<category><![CDATA[Shell]]></category>
+		<category><![CDATA[Shell Basic (基础)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=21112</guid>
+
+					<description><![CDATA[内容一：[[]] 比较符号1.1 [[]] 数值比较符号 1) -eq 或者 ==，若两个数值存在且相等，则结果为真2) -ne 或者 !=，若两个数值存在且不相等，则结果为真3) -gt 或者 &#62;，若两个数值存在且前一个数值大于后一个数值，则结果为真4) -lt 或者 &#60;，若两个数值存在且前一个数值小于后一个数值，则结果为真5) -ge 或者 &#62;=，若两个数值存在且前一个数值大于或等于后一个数值，则结果为真6) -le 或者 &#60;=，若两个数值存在且前一个数值小于或等于后一个数值，则结果为真 1.2 [[]] 字符串比较符号 1) -z，如果字符串为空值，则结果为真2) -n，如果字符串不为空值，则结果为真3) == 或者 =，若两个字符串存在且一样，则结果为真4) !=，若两个字符串存在且不一样，则结果为真5) &#62;，若两个字符串存在且前一个字符串大于后一个字符串（按数字顺序或字母数顺序进行比较，越靠后的值越大），则结果为真6) &#60;，若两个字符串存在且前一个字符串小于后一个字符串（按数字顺序或字母数顺序进行比较，越靠后的值越大），则结果为真 1.3 [[]] 文件、目录、链接、块、特殊文件比较符号 1) -e，若文件或目录或链接存在，则结果为真2) -d，若目录存在，则结果为真3) -f，若文件存在，则结果为真4) -L，若链接存在，则结果为真5) -b，若块文件存在，则结果为真6) -c，若字符型特殊文件存在，则结果为真7) -s，若文件存在且里面有内容，则结果为真8) -r，若文件且可读，则结果为真9) -w，若文件且可写，则结果为真10) -x，若文件且可执行，则结果为真11) -nt，若两个文件存在且前一个文件比后一个文件新，则结果为真12) -ot，若两个文件存在且前一个文件比后一个文件新，则结果为真 1.4 [[]] 逻辑符号 1) &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/double-square-bracket/" class="more-link">Continue reading<span class="screen-reader-text"> "[命令] Linux 命令 [[]] （比较数值、文件、目录、链接、块、特殊文件、字符串）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h4>内容一：[[]] 比较符号<br>1.1 [[]] 数值比较符号</h4>
+
+
+
+<p>1) -eq 或者 ==，若两个数值存在且相等，则结果为真<br>2) -ne 或者 !=，若两个数值存在且不相等，则结果为真<br>3) -gt 或者 &gt;，若两个数值存在且前一个数值大于后一个数值，则结果为真<br>4) -lt 或者 &lt;，若两个数值存在且前一个数值小于后一个数值，则结果为真<br>5) -ge 或者 &gt;=，若两个数值存在且前一个数值大于或等于后一个数值，则结果为真<br>6) -le 或者 &lt;=，若两个数值存在且前一个数值小于或等于后一个数值，则结果为真</p>
+
+
+
+<h4>1.2 [[]] 字符串比较符号</h4>
+
+
+
+<p>1) -z，如果字符串为空值，则结果为真<br>2) -n，如果字符串不为空值，则结果为真<br>3) == 或者 =，若两个字符串存在且一样，则结果为真<br>4) !=，若两个字符串存在且不一样，则结果为真<br>5) &gt;，若两个字符串存在且前一个字符串大于后一个字符串（按数字顺序或字母数顺序进行比较，越靠后的值越大），则结果为真<br>6) &lt;，若两个字符串存在且前一个字符串小于后一个字符串（按数字顺序或字母数顺序进行比较，越靠后的值越大），则结果为真</p>
+
+
+
+<h4>1.3 [[]] 文件、目录、链接、块、特殊文件比较符号</h4>
+
+
+
+<p>1) -e，若文件或目录或链接存在，则结果为真<br>2) -d，若目录存在，则结果为真<br>3) -f，若文件存在，则结果为真<br>4) -L，若链接存在，则结果为真<br>5) -b，若块文件存在，则结果为真<br>6) -c，若字符型特殊文件存在，则结果为真<br>7) -s，若文件存在且里面有内容，则结果为真<br>8) -r，若文件且可读，则结果为真<br>9) -w，若文件且可写，则结果为真<br>10) -x，若文件且可执行，则结果为真<br>11) -nt，若两个文件存在且前一个文件比后一个文件新，则结果为真<br>12) -ot，若两个文件存在且前一个文件比后一个文件新，则结果为真</p>
+
+
+
+<h4>1.4 [[]] 逻辑符号</h4>
+
+
+
+<p>1) &amp;&amp;，和<br>2) ||，或<br>3) !，非</p>
+
+
+
+<h4>1.5 [[]] 运算符号</h4>
+
+
+
+<p>1) +，若两个数值存在，则相加<br>2) -，若两个数值存在，则相减<br>3) *，若两个数值存在，则相乘<br>4) /，若两个数值存在，则相除<br>5) %，若两个数值存在，则取余</p>
+
+
+
+<h4>1.6 [[]] 其他符号</h4>
+
+
+
+<p>1) =~，两个字符串或数值存在且后一个字符串或数值匹配正则表达式后一样，则结果为真<br>2) [0-9] 等所有 Linux 正则表达式<br>3) * 等所有 Linux 通配符</p>
+
+
+
+<h4>内容二：[[]] 的数值比较案例<br>2.1 案例一：对整数进行比较</h4>
+
+
+
+<pre class="wp-block-code"><code># &#91;&#91; 0 -ne 1 ]]
+# echo $?
+0</code></pre>
+
+
+
+<p>（补充：这里以测试数字 0 是否不等于数字 1 为例）</p>
+
+
+
+<h4>2.2 案例二：对字符串进行比较</h4>
+
+
+
+<pre class="wp-block-code"><code># &#91;&#91; a == a ]]
+# echo $?
+0</code></pre>
+
+
+
+<p>（补充：这里以测试字符串 a 是否等于字符串 a 为例）</p>
+
+
+
+<h4>2.3 案例三：对文件进行比较</h4>
+
+
+
+<pre class="wp-block-code"><code># &#91;&#91; -f test.txt ]]
+# echo $?
+0</code></pre>
+
+
+
+<p>（补充：这里以测试文件 test.txt 是否存在为例）</p>
+
+
+
+<h4>2.4 案例四：对变量进行比较</h4>
+
+
+
+<pre class="wp-block-code"><code># a=1
+# &#91;&#91; $a == 1 ]]
+# echo $?
+0</code></pre>
+
+
+
+<p>（补充：这里以测试变量 a 是否等于数字 1 为例）</p>
+
+
+
+<h4>2.5 案例五：对数值运算后进行比较</h4>
+
+
+
+<pre class="wp-block-code"><code># a=2
+# b=3
+# c=5
+# &#91;&#91; $a+$b -eq $c ]]
+# echo $?
+0</code></pre>
+
+
+
+<p>（补充：这里以测试变量 a 加变量 b 是否等于变量 c 为例）</p>
+
+
+
+<p>（注意： [[]] 数值运算后需要使用 -eq、-ne、-gt、-lt、-ge、-le 进行比较而不是使用 ==、!=、&gt;、&lt;、&gt;=、&lt;=）</p>
+
+
+
+<h4>2.6 案例六：使用逻辑符号对多个变量进行比较</h4>
+
+
+
+<pre class="wp-block-code"><code># a=eternalcenter
+# b=eternalcenter
+# c=eternalcentre
+# &#91;&#91; $a == $b &amp;&amp; $b != $c ]]
+# echo $?
+# 0</code></pre>
+
+
+
+<p>（补充：这里以测试变量 a 是否等于变量 b 且变量 b 是否不等于变量 c 为例）</p>
+
+
+
+<h4>2.7 案例七：使用通配符对字符串进行比较</h4>
+
+
+
+<pre class="wp-block-code"><code># &#91;&#91; eternalcenter = eternalcen??? ]]
+# echo $?
+# 0</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># &#91;&#91; eternalcenter = e*r ]]
+# echo $?
+# 0</code></pre>
+
+
+
+<p>（补充：这里以测试字符串 eternalcenter 是否等于字符串加通配符 eternalcen??? 或字符串加通配符 e*r 为例）</p>
+
+
+
+<h4>2.8 案例八：使用正则表达式对字符串进行比较</h4>
+
+
+
+<pre class="wp-block-code"><code># &#91;&#91; 10 =~ &#91;0-9]{2} ]]
+# echo $?
+# 0</code></pre>
+
+
+
+<p>（补充：这里以测试数字 10 是否是每位数是 0 到 9 的两位数为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

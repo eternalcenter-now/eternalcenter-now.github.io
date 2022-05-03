@@ -1,0 +1,2368 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Cluster Monitor Tools (集群监控工具) &#8211; Eternal Center</title>
+	<atom:link href="https://eternalcenter-now.github.io/category/clusters/cluster-monitor-tools/feed/" rel="self" type="application/rss+xml" />
+	<link>https://eternalcenter-now.github.io/</link>
+	<description></description>
+	<lastBuildDate>Sun, 03 Apr 2022 14:54:43 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	
+	<item>
+		<title>[内容] Ansible 数据的加密 （vault）</title>
+		<link>https://eternalcenter-now.github.io/ansible-vault/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sun, 27 Sep 2020 13:25:34 +0000</pubDate>
+				<category><![CDATA[Ansible]]></category>
+		<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Cluster Monitor Tools (集群监控工具)]]></category>
+		<category><![CDATA[Clusters (集群)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=10617</guid>
+
+					<description><![CDATA[注意： 在使用 Ansible 数据的加密之前，要先安装 Ansible、添加被 Ansible 管理的主机，并且需要 root 权限 正文： 内容目录： 内容一：加密机密文件1.1 通过密码加密机密文件1.2 通过文件加密机密文件 内容二：更换已加密的机密文件的密码2.1 更换通过密码加密的机密文件的密码2.2 更换通过文件加密的机密文件的密码 内容三：解密机密文件3.1 直接解密机密文件3.2 解密机密文件后再将其另存为 内容四：显示已加密的机密文件 内容五：显示已解密的机密文件 内容六：执行已加密的机密文件 具体的内容： 内容一：加密机密文件1.1 通过密码加密机密文件 1.2 通过文件加密机密文件 （补充：作为密码的文件可以是任意明文文本） 内容二：更换已加密的机密文件的密码2.1 更换通过密码加密的机密文件的密码 或者： 2.2 更换通过文件加密的机密文件的密码 （补充：作为密码的文件可以是任意明文文本） 内容三：解密机密文件3.1 直接解密机密文件 3.2 解密机密文件后再将其另存为 内容四：显示已加密的机密文件 内容五：显示已解密的机密文件 内容六：执行已加密的机密文件 或者：]]></description>
+										<content:encoded><![CDATA[
+<h2 id="注意">注意：</h2>
+
+
+
+<p>在使用 Ansible 数据的加密之前，要先安装 Ansible、添加被 Ansible 管理的主机，并且需要 root 权限</p>
+
+
+
+<div class="wp-container-1 wp-block-buttons">
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/ansible-install/">Ansible 的安装方法</a></div>
+
+
+
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/ansible-node/">Ansible 所管理的服务器的添加和分组</a></div>
+</div>
+
+
+
+<div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
+
+
+
+<h2 id="正文">正文：</h2>
+
+
+
+<h2 id="内容目录">内容目录：</h2>
+
+
+
+<h4 id="内容一-加密机密文件1-1-通过密码加密机密文件1-2-通过文件加密机密文件">内容一：加密机密文件<br>1.1 通过密码加密机密文件<br>1.2 通过文件加密机密文件</h4>
+
+
+
+<h4 id="内容二-更换已加密的机密文件的密码2-1-更换通过密码加密的机密文件的密码2-2-更换通过文件加密的机密文件的密码">内容二：更换已加密的机密文件的密码<br>2.1 更换通过密码加密的机密文件的密码<br>2.2 更换通过文件加密的机密文件的密码</h4>
+
+
+
+<h4 id="内容三-解密机密文件3-1-直接解密机密文件3-2-解密机密文件后再将其另存为">内容三：解密机密文件<br>3.1 直接解密机密文件<br>3.2 解密机密文件后再将其另存为</h4>
+
+
+
+<h4 id="内容四-查看已加密的机密文件">内容四：显示已加密的机密文件</h4>
+
+
+
+<h4 id="内容五-查看已解密的机密文件">内容五：显示已解密的机密文件</h4>
+
+
+
+<h4 id="内容六-执行已加密的机密文件">内容六：执行已加密的机密文件</h4>
+
+
+
+<h2 id="具体的内容">具体的内容：</h2>
+
+
+
+<h4 id="内容一-加密机密文件1-1-通过密码加密机密文件">内容一：加密机密文件<br>1.1 通过密码加密机密文件</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible-vault encrypt &lt;confidential files to encrypt&gt;</code></pre>
+
+
+
+<h4 id="1-2-通过文件加密机密文件">1.2 通过文件加密机密文件</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible-vault reky --vualt-password-file=&lt;file as password&gt; &lt;confidential file to encrypt&gt;</code></pre>
+
+
+
+<p>（补充：作为密码的文件可以是任意明文文本）</p>
+
+
+
+<h4 id="内容二-更换已加密的机密文件的密码2-1-更换通过密码加密的机密文件的密码">内容二：更换已加密的机密文件的密码<br>2.1 更换通过密码加密的机密文件的密码</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible-vault reky --vault-id &lt;encrypted confidential file&gt;</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># ansible-vault reky --ask-vault-pass &lt;encrypted confidential file&gt;</code></pre>
+
+
+
+<h4 id="2-2-更换通过文件加密的机密文件的密码">2.2 更换通过文件加密的机密文件的密码</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible-vault reky --new-vualt-password-file=&lt;file as password&gt; &lt;encrypted confidential file&gt;</code></pre>
+
+
+
+<p>（补充：作为密码的文件可以是任意明文文本）</p>
+
+
+
+<h4 id="内容三-解密机密文件3-1-直接解密机密文件">内容三：解密机密文件<br>3.1 直接解密机密文件</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible-vault decrypt &lt;confidential file to decrypt&gt;</code></pre>
+
+
+
+<h4 id="3-2-解密机密文件后再将其另存为">3.2 解密机密文件后再将其另存为</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible-vault decrypt &lt;confidential file to decrypt&gt; --output &lt;confidential file saved as a decrypted file&gt;</code></pre>
+
+
+
+<h4 id="内容四-查看已加密的机密文件">内容四：显示已加密的机密文件</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible-vault view &lt;encrypted confidential file&gt;</code></pre>
+
+
+
+<h4 id="内容五-查看已解密的机密文件">内容五：显示已解密的机密文件</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible-vault edit &lt;encrypted confidential file&gt;</code></pre>
+
+
+
+<h4 id="内容六-执行已加密的机密文件">内容六：执行已加密的机密文件</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible-playbook --vault-id &lt;encrypted confidential file&gt;</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># ansible-playbook --ask-vault-pass &lt;encrypted confidential file&gt;</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Ansible 执行脚本 Playbook 的循环</title>
+		<link>https://eternalcenter-now.github.io/playbook-loop/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Wed, 19 Aug 2020 14:35:10 +0000</pubDate>
+				<category><![CDATA[Ansible]]></category>
+		<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Cluster Monitor Tools (集群监控工具)]]></category>
+		<category><![CDATA[Clusters (集群)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=10498</guid>
+
+					<description><![CDATA[注意： 在使用 Playbook 之前，要先安装 Ansible、添加被 Ansible 管理的主机，并且需要 root 权限 正文： 内容目录： 内容一：在 playbook 里使用循环1.1 在 playbook 里使用简单的单循环1.2 在 playbook 里使用数组实现单组循环1.3 在 playbook 里使用变量实现单组循环1.4 在 playbook 里使用数组实现多组循环 内容二：在 json 文档上使用单组循环2.1 在 json 文档上使用单组循环2.2 使用 json 文档的 playbook 具体的内容： 内容一：在 playbook 里使用循环1.1 在 playbook 里使用简单的单循环 创建以下内容： （补充：这里以1) 在 test.yml 中2) 创建一个名为 test，3) 在所有服务器上执行，4) 安装 php、nginx 和 mariadb，的 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/playbook-loop/" class="more-link">Continue reading<span class="screen-reader-text"> "[内容] Ansible 执行脚本 Playbook 的循环"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2>注意：</h2>
+
+
+
+<p>在使用 Playbook 之前，要先安装 Ansible、添加被 Ansible 管理的主机，并且需要 root 权限</p>
+
+
+
+<div class="wp-container-2 wp-block-buttons is-content-justification-center">
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/ansible-install/">Ansible 的安装方法</a></div>
+
+
+
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/ansible-node/">Ansible 所管理的服务器的添加和分组</a></div>
+</div>
+
+
+
+<div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
+
+
+
+<h2>正文：</h2>
+
+
+
+<h2>内容目录：</h2>
+
+
+
+<h4>内容一：在 playbook 里使用循环<br>1.1 在 playbook 里使用简单的单循环<br>1.2 在 playbook 里使用数组实现单组循环<br>1.3 在 playbook 里使用变量实现单组循环<br>1.4 在 playbook 里使用数组实现多组循环</h4>
+
+
+
+<h4>内容二：在 json 文档上使用单组循环<br>2.1 在 json 文档上使用单组循环<br>2.2 使用 json 文档的 playbook</h4>
+
+
+
+<h2>具体的内容：</h2>
+
+
+
+<h4>内容一：在 playbook 里使用循环<br>1.1 在 playbook 里使用简单的单循环</h4>
+
+
+
+<pre class="wp-block-code"><code># vim test.yml</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>---
+- name: test
+  hosts: all
+  tasks:
+  - name: install rpms
+    yum:
+    - php
+    - nginx
+    - mariadb</code></pre>
+
+
+
+<p>（<br>补充：这里以<br>1) 在 test.yml 中<br>2) 创建一个名为 test，<br>3) 在所有服务器上执行，<br>4) 安装 php、nginx 和 mariadb，<br>的 playbook 为例<br>）</p>
+
+
+
+<h4>1.2 在 playbook 里使用数组实现单组循环</h4>
+
+
+
+<pre class="wp-block-code"><code># vim test.yml</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>---
+- name: test
+  hosts: all
+  tasks:
+  - user:
+      name: "{{item.name}}"
+      group: "{{item.group}}"
+      password: "{{'1' | password_hash('sha512',mysecretsalt)}}"
+    with_items:
+    - {name: "a1", group: "users"}
+    - {name: "a2", group: "mail"}
+    - {name: "a3", group: "wheel"}
+    - {name: "a4", group: "root"}</code></pre>
+
+
+
+<p>（<br>补充：这里以<br>1) 在 test.yml 中<br>2) 创建一个名为 test<br>3) 在所有服务器上执行<br>4) 创建一个循环组的用户<br>的 playbook 为例<br>）</p>
+
+
+
+<h4>1.3 在 playbook 里使用变量实现单组循环</h4>
+
+
+
+<pre class="wp-block-code"><code># vim test.yml</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>---
+- name: test
+  hosts: all
+  vars:
+    issue_all
+    - issue_name: a
+      issue_cont: 1
+    - issue_name: b
+      issue_cont: 2
+    - issue_name: c
+      issue_cont: 3
+    - issue_name: d
+      issue_cont: 4
+    - issue_name: e
+      issue_cont: 5
+  tasks:
+  - name: issue
+    shell: "echo {{ item.issue_name }}={{ item.issue_cont }}"
+    loop: "{{ issue_all }}"</code></pre>
+
+
+
+<p>（<br>补充：这里以<br>1) 在 test.yml 中<br>2) 创建一个名为 test<br>3) 在所有服务器上执行<br>4) 输出一个循环组的信息<br>的 playbook 为例<br>）</p>
+
+
+
+<h4>1.4 在 playbook 里使用数组实现多组循环</h4>
+
+
+
+<pre class="wp-block-code"><code># vim test.yml</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>---
+- name: test
+  hosts: all
+  remote_user: root
+  vars:
+    name: &#91;a, b, c]
+    id: &#91;1, 2, 3]
+  tasks:
+  - shell: echo {{item}}
+    with_nested:
+    - "{{name}}"
+    - "{{id}}"</code></pre>
+
+
+
+<p>（<br>补充：这里以<br>1) 在 test.yml 中<br>2) 创建一个名为 test<br>3) 在所有服务器上执行<br>4) 循环输出两个循环组的信息（本案例会输出信息：a1、a2、a3、b1、b2、b3、c1、c2、c3）<br>的 playbook 为例<br>）</p>
+
+
+
+<h4>内容二：在 json 文档上使用单组循环<br>2.1 在 json 文档上使用单组循环</h4>
+
+
+
+<pre class="wp-block-code"><code># vim hosts.j2</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>{% for host in groups&#91;'all'] %}
+{{ hostvars&#91;host]&#91;'ansible_facts']&#91;'hostname'] }} {{ hostvars&#91;host]&#91;'ansible_facts']&#91;'default_ipv4']&#91;'address'] }}
+{% endfor %}</code></pre>
+
+
+
+<p>（补充：这里以创建所有服务器名和 IP 地址对应的关系，名为 hosts.j2 的 json 文件为例）</p>
+
+
+
+<h4>2.2 使用 json 文档的 playbook</h4>
+
+
+
+<pre class="wp-block-code"><code># vim test.yml</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+  - name: template
+    template：
+      src: hosts.j2
+      dest: /root/hosts.txt
+......</code></pre>
+
+
+
+<p>（补充：这里以在 test.yml 中，使用 hosts.j2 创建 /root/hosts.txt 为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Ansible 事实变量 （Ansible 内部变量）</title>
+		<link>https://eternalcenter-now.github.io/ansible-fact-variable/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 07 Aug 2020 07:43:10 +0000</pubDate>
+				<category><![CDATA[Ansible]]></category>
+		<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Cluster Monitor Tools (集群监控工具)]]></category>
+		<category><![CDATA[Clusters (集群)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=10431</guid>
+
+					<description><![CDATA[注意： 在使用 Ansible 事实变量之前，要先安装 Ansible、添加被 Ansible 管理的主机，并且需要 root 权限 正文： 内容一： 在命令行使用事实变量1.1 显示所有事实变量 （补充：这里以显示所有服务器上的所有事实变量为例） 1.2 显示某一个事实变量 （补充：这里以显示所有服务器上的 hostname 事实变量为例） 内容二：在 playbook 使用事实变量的方法 创建以下内容： 或者： （补充：这里以在 test.yml 中：1) 创建一个名为 test，2) 在所有服务器上执行，3) 创建名为 IP_ADDRESS 的 IP 地址事实变量和名为 HOST_NAME 的服务器名称的事实变量，的 playbook 为例） 内容三：在 json 文档上使用事实变量 创建以下内容： 或者： （补充：这里以创建一个名称为 index.html.j2，包含服务器名称的事实变量和服务器 IP 地址的事实变量的 json 文件为例） 补充： Ansible 在 playbook 里关闭事实收集的方法 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/ansible-fact-variable/" class="more-link">Continue reading<span class="screen-reader-text"> "[内容] Ansible 事实变量 （Ansible 内部变量）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2 id="注意">注意：</h2>
+
+
+
+<p>在使用 Ansible 事实变量之前，要先安装 Ansible、添加被 Ansible 管理的主机，并且需要 root 权限</p>
+
+
+
+<div class="wp-container-3 wp-block-buttons">
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/ansible-install/">Ansible 的安装方法</a></div>
+
+
+
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/ansible-node/">Ansible 所管理的服务器的添加和分组</a></div>
+</div>
+
+
+
+<div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
+
+
+
+<h2 id="正文">正文：</h2>
+
+
+
+<h4 id="内容一-在命令行使用事实变量1-1-显示所有事实变量">内容一： 在命令行使用事实变量<br>1.1 显示所有事实变量</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible all -m setup</code></pre>
+
+
+
+<p>（补充：这里以显示所有服务器上的所有事实变量为例）</p>
+
+
+
+<h4 id="1-2-显示某一个事实变量">1.2 显示某一个事实变量</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible all -m setup -a filter=*hostname*</code></pre>
+
+
+
+<p>（补充：这里以显示所有服务器上的 hostname 事实变量为例）</p>
+
+
+
+<h4 id="内容二-在-playbook-使用事实变量的方法">内容二：在 playbook 使用事实变量的方法</h4>
+
+
+
+<pre class="wp-block-code"><code># vim test.yml</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>---
+- name: test
+  hosts: all
+  vars:
+  - server_name: IP_ADDRESS
+    server_cont: "{{ ansible_default_ipv4.address }}"
+  - server_name: HOST_NAME
+    server_cont: "{{ ansible_hostname }}"
+  tasks:
+......</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code>---
+- name: test
+  hosts: all
+  vars:
+  - server_name: IP_ADDRESS
+    server_cont: "{{ ansible_facts&#91;'default_ipv4']&#91;'address'] }}"
+  - server_name: HOST_NAME
+    server_cont: "{{ ansible_facts&#91;'hostname'] }}"
+  tasks:
+......</code></pre>
+
+
+
+<p>（<br>补充：<br>这里以在 test.yml 中：<br>1) 创建一个名为 test，<br>2) 在所有服务器上执行，<br>3) 创建名为 IP_ADDRESS 的 IP 地址事实变量和名为 HOST_NAME 的服务器名称的事实变量，<br>的 playbook 为例<br>）</p>
+
+
+
+<h4 id="内容三-在-json-文档上使用事实变量">内容三：在 json 文档上使用事实变量</h4>
+
+
+
+<pre class="wp-block-code"><code># vim index.html.j2</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>{{ ansible_hostname }} {{ ansible_default_ipv4.address }}</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code>{{ ansible_facts&#91;'hostname'] }} {{ ansible_facts&#91;'default_ipv4']&#91;'address'] }}</code></pre>
+
+
+
+<p>（补充：这里以创建一个名称为 index.html.j2，包含服务器名称的事实变量和服务器 IP 地址的事实变量的 json 文件为例）</p>
+
+
+
+<h4 id="补充-ansible-在-playbook-里关闭事实收集的方法">补充： Ansible 在 playbook 里关闭事实收集的方法</h4>
+
+
+
+<pre class="wp-block-code"><code># vim test.yml</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>---
+- name: test
+  hosts: all
+  gather_facts: false
+  tasks:
+......</code></pre>
+
+
+
+<p>（补充：这里以在 test.yml 中，创建一个名称为 test，在所有服务器上取消事实变量的 playbook 为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Ansible 变量的优先级</title>
+		<link>https://eternalcenter-now.github.io/ansible-variable-priority/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sun, 02 Aug 2020 15:24:30 +0000</pubDate>
+				<category><![CDATA[Ansible]]></category>
+		<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Cluster Monitor Tools (集群监控工具)]]></category>
+		<category><![CDATA[Clusters (集群)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=10413</guid>
+
+					<description><![CDATA[第一优先级：全局范围的变量（例如：执行临时命令时指定的变量）第二优先级：playbook 里的变量。第三优先级：主机范围里的变量（例如：清单中的服务器或服务器组） （补充：清单中的服务器优先级高于清单中的服务器组）]]></description>
+										<content:encoded><![CDATA[
+<p>第一优先级：全局范围的变量（例如：执行临时命令时指定的变量）<br>第二优先级：playbook 里的变量。<br>第三优先级：主机范围里的变量（例如：清单中的服务器或服务器组）</p>
+
+
+
+<p>（补充：清单中的服务器优先级高于清单中的服务器组）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Ansible 魔法变量</title>
+		<link>https://eternalcenter-now.github.io/ansible-magic-variable/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 29 Jun 2020 12:17:26 +0000</pubDate>
+				<category><![CDATA[Ansible]]></category>
+		<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Cluster Monitor Tools (集群监控工具)]]></category>
+		<category><![CDATA[Clusters (集群)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=9977</guid>
+
+					<description><![CDATA[注意： 在使用 Ansible 魔法变量之前，要先安装 Ansible、添加被 Ansible 管理的主机，并且需要 root 权限 正文： 内容一：Ansible 常用魔法变量 显示服务器名 显示服务器所在组 显示服务器所在组，以及组里的所有服务器 显示所有相关信息 内容二：Ansible 魔法变量的使用2.1 在命令行使用魔法变量2.1.1 魔法变量的使用格式 2.1.2 魔法变量的使用案例2.1.2.1 显示所有魔法变量 （补充：这里以显示所有服务器上的所有魔法变量为例） 2.1.2.2 显示某一个魔法变量 （补充：这里以显示所有服务器上的 inventory_hostname 魔法变量为例） 2.2 在 playbook 使用魔法变量2.2.1 在 playbook 的变量中使用魔法变量 （补充：这里以1) 在 test.yml 中，2) 创建一个名为 test，3) 在所有服务器上执行，4) 创建名为 server_all 的变量数组，5) 里面有名为 IP_ADDRESS 的 IP 地址事实变量和名为 HOST_NAME 的服务器名称版本事实变量，的 playbook 为例） &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/ansible-magic-variable/" class="more-link">Continue reading<span class="screen-reader-text"> "[内容] Ansible 魔法变量"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2 id="注意">注意：</h2>
+
+
+
+<p>在使用 Ansible 魔法变量之前，要先安装 Ansible、添加被 Ansible 管理的主机，并且需要 root 权限</p>
+
+
+
+<div class="wp-container-4 wp-block-buttons">
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/ansible-install/">Ansible 的安装方法</a></div>
+
+
+
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/ansible-node/">Ansible 所管理的服务器的添加和分组</a></div>
+</div>
+
+
+
+<div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
+
+
+
+<h2 id="正文">正文：</h2>
+
+
+
+<h4 id="内容一-ansible-常用魔法变量">内容一：Ansible 常用魔法变量</h4>
+
+
+
+<pre class="wp-block-code"><code>1) inventory_hostname</code></pre>
+
+
+
+<p>显示服务器名</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<pre class="wp-block-code"><code>2) group_names</code></pre>
+
+
+
+<p>显示服务器所在组</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<pre class="wp-block-code"><code>3) groups</code></pre>
+
+
+
+<p>显示服务器所在组，以及组里的所有服务器</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<pre class="wp-block-code"><code>4) hostvars</code></pre>
+
+
+
+<p>显示所有相关信息</p>
+
+
+
+<h4 id="内容二-ansible-魔法变量的使用2-1-在命令行使用魔法变量2-1-1-魔法变量的使用格式">内容二：Ansible 魔法变量的使用<br>2.1 在命令行使用魔法变量<br>2.1.1 魔法变量的使用格式</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible &lt;Ansible server name or Ansible group name&gt; -m debug -a var=&lt;Ansible magic variable name&gt;</code></pre>
+
+
+
+<h4 id="2-1-2-魔法变量的使用案例2-1-2-1-显示所有魔法变量">2.1.2 魔法变量的使用案例<br>2.1.2.1 显示所有魔法变量</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible -m debug -a var=hostvars all</code></pre>
+
+
+
+<p>（补充：这里以显示所有服务器上的所有魔法变量为例）</p>
+
+
+
+<h4 id="2-1-2-2-显示某一个魔法变量">2.1.2.2 显示某一个魔法变量</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible -m debug -a var=inventory_hostname all</code></pre>
+
+
+
+<p>（补充：这里以显示所有服务器上的 inventory_hostname 魔法变量为例）</p>
+
+
+
+<h4 id="2-2-在-playbook-使用魔法变量2-2-1-在-playbook-的变量中使用魔法变量">2.2 在 playbook 使用魔法变量<br>2.2.1 在 playbook 的变量中使用魔法变量</h4>
+
+
+
+<pre class="wp-block-code"><code># vim test.yml
+---
+- name: test
+  hosts: all
+  vars:
+    server_all:
+    - server_name: IP_ADDRESS
+      server_cont: "{{ ansible_default_ipv4.address }}"
+    - server_name: HOST_NAME
+      server_cont: "{{ inventory_hostname }}"
+  tasks:
+......</code></pre>
+
+
+
+<p>（<br>补充：这里以<br>1) 在 test.yml 中，<br>2) 创建一个名为 test，<br>3) 在所有服务器上执行，<br>4) 创建名为 server_all 的变量数组，<br>5) 里面有名为 IP_ADDRESS 的 IP 地址事实变量和名为 HOST_NAME 的服务器名称版本事实变量，<br>的 playbook 为例<br>）</p>
+
+
+
+<h4 id="2-2-2-在-playbook-的条件判断-when-中使用魔法变量2-2-2-1-案例一-使用一个魔法变量">2.2.2 在 playbook 的条件判断 when 中使用魔法变量<br>2.2.2.1 案例一：使用一个魔法变量</h4>
+
+
+
+<pre class="wp-block-code"><code># vim test.yml</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+when: "'test' in group_names"
+......</code></pre>
+
+
+
+<p>（补充：这里以在 test.yml 中， test 为服务器的所属组为条件判断为例）</p>
+
+
+
+<h4 id="2-2-2-2-案例二-使用两个魔法变量">2.2.2.2 案例二：使用两个魔法变量</h4>
+
+
+
+<pre class="wp-block-code"><code># vim test.yml</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+when: inventory_hostname in groups.test
+......</code></pre>
+
+
+
+<p>（补充：这里以在 test.yml 中，服务器名在 test 组中为条件判断为例）</p>
+
+
+
+<h4 id="2-3-在-json-文档上使用魔法变量2-3-1-在-json-文档上使用魔法变量">2.3 在 json 文档上使用魔法变量<br>2.3.1 在 json 文档上使用魔法变量</h4>
+
+
+
+<pre class="wp-block-code"><code># vim hosts.j2</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>{% for host in groups&#91;'all'] %}
+{{ hostvars&#91;host]&#91;'ansible_facts']&#91;'hostname'] }} {{ hostvars&#91;host]&#91;'ansible_facts']&#91;'default_ipv4']&#91;'address'] }}
+{% endfor %}</code></pre>
+
+
+
+<p>（补充：这里以创建所有服务器名和 IP 地址对应的关系，名为 hosts.j2 的 json 文件为例）</p>
+
+
+
+<h4 id="2-3-2-使用-json-文档的-playbook">2.3.2 使用 json 文档的 Playbook</h4>
+
+
+
+<pre class="wp-block-code"><code># vim test.yml</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+  - name: template
+    template：
+      src: hosts.j2
+      dest: /root/hosts.txt
+......</code></pre>
+
+
+
+<p>（补充：这里以在 test.yml 中，使用 hosts.j2 创建 /root/hosts.txt 为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Ansible 自定义变量</title>
+		<link>https://eternalcenter-now.github.io/ansible-custom-variable/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sat, 27 Jun 2020 13:38:32 +0000</pubDate>
+				<category><![CDATA[Ansible]]></category>
+		<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Cluster Monitor Tools (集群监控工具)]]></category>
+		<category><![CDATA[Clusters (集群)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=9974</guid>
+
+					<description><![CDATA[注意： 在使用 Ansible 自定义变量之前，要先安装 Ansible、添加被 Ansible 管理的主机，并且需要 root 权限 正文： 内容目录： 内容一：Ansible 全局变量的使用 内容二：Ansible 服务器列表变量的设置2.1 给某一台服务器设置变量的案例2.2 给某一个组设置变量的案例2.3 给所有服务器设置变量的案例 内容三：Ansible Playbook 变量的设置3.1 Ansible Playbook 直接设置变量的案例3.2 Ansible Playbook 直接设置数组变量的案例3.3 Ansible Playbook 设置变量文件的案例3.3.1 创建变量文件3.3.2 导入变量文件3.4 Ansible Playbook 设置数组变量文件的案例3.4.1 创建变量文件3.4.2 导入变量文件 具体的内容：内容一：Ansible 全局变量的使用 （补充：这里以 root 是管理被管理服务器所使用的用户，redhat 是这个用户的密码为例） 内容二：Ansible 服务器列表变量的设置2.1 给某一台服务器设置变量的案例 创建以下内容： （补充：这里以1) 在 host 文件里2) 设置 192.168.1.1 的 Ansible &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/ansible-custom-variable/" class="more-link">Continue reading<span class="screen-reader-text"> "[内容] Ansible 自定义变量"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2>注意：</h2>
+
+
+
+<p>在使用 Ansible 自定义变量之前，要先安装 Ansible、添加被 Ansible 管理的主机，并且需要 root 权限</p>
+
+
+
+<div class="wp-container-5 wp-block-buttons is-content-justification-center">
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/ansible-install/">Ansible 的安装方法</a></div>
+
+
+
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/ansible-node/">Ansible 所管理的服务器的添加和分组</a></div>
+</div>
+
+
+
+<div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
+
+
+
+<h2>正文：</h2>
+
+
+
+<h2>内容目录：</h2>
+
+
+
+<h4>内容一：Ansible 全局变量的使用</h4>
+
+
+
+<h4>内容二：Ansible 服务器列表变量的设置<br>2.1 给某一台服务器设置变量的案例<br>2.2 给某一个组设置变量的案例<br>2.3 给所有服务器设置变量的案例</h4>
+
+
+
+<h4>内容三：Ansible Playbook 变量的设置<br>3.1 Ansible Playbook 直接设置变量的案例<br>3.2 Ansible Playbook 直接设置数组变量的案例<br>3.3 Ansible Playbook 设置变量文件的案例<br>3.3.1 创建变量文件<br>3.3.2 导入变量文件<br>3.4 Ansible Playbook 设置数组变量文件的案例<br>3.4.1 创建变量文件<br>3.4.2 导入变量文件</h4>
+
+
+
+<h4>具体的内容：<br>内容一：Ansible 全局变量的使用</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible dev -m shell -a whoami -e ansible_user=root -e ansible_password=redhat</code></pre>
+
+
+
+<p>（补充：这里以 root 是管理被管理服务器所使用的用户，redhat 是这个用户的密码为例）</p>
+
+
+
+<h4>内容二：Ansible 服务器列表变量的设置<br>2.1 给某一台服务器设置变量的案例</h4>
+
+
+
+<pre class="wp-block-code"><code># vim host</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>&#91;web]
+192.168.1.1 ansible_password=root</code></pre>
+
+
+
+<p>（<br>补充：这里以<br>1) 在 host 文件里<br>2) 设置 192.168.1.1 的 Ansible 密码是 root（当它被 Ansible 操作时需要输入此密码）<br>为例<br>）</p>
+
+
+
+<h4>2.2 给某一个组设置变量的案例</h4>
+
+
+
+<pre class="wp-block-code"><code># vim host</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>&#91;web]
+192.168.1.1
+192.168.1.2 
+192.168.1.3 
+
+&#91;web:vars]
+ansible_user=root
+ansible_password=root
+......</code></pre>
+
+
+
+<p>（<br>补充：这里以<br>1) 在 host 文件里<br>2) 设置 web 组的 Ansible 用户是 root，密码是 root（当它们被 Ansible 操作时需要输入此密码）<br>为例<br>）</p>
+
+
+
+<h4>2.3 给所有服务器设置变量的案例</h4>
+
+
+
+<pre class="wp-block-code"><code># vim host</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>&#91;web]
+192.168.1.1
+192.168.1.2
+192.168.1.3
+
+&#91;db]
+192.168.1.4
+192.168.1.5
+192.168.1.6
+
+&#91;all:vars]
+ansible_user=root
+ansible_password=root
+......</code></pre>
+
+
+
+<p>（<br>补充：这里以<br>1) 在 host 文件里<br>2) 设置所有服务器的 Ansible 用户是 root，密码是 root（当它们被 Ansible 操作时需要输入此密码）<br>为例<br>）</p>
+
+
+
+<h4>内容三：Ansible Playbook 变量的设置<br>3.1 Ansible Playbook 直接设置变量的案例</h4>
+
+
+
+<pre class="wp-block-code"><code># vim test.yaml</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>---
+- name: test
+  hosts: all
+  vars:
+    user: tom
+    home: /home/joe
+  tasks:
+  - name: Add a user
+    user:
+      name: "{{ user }}"
+      comment: name is {{ user }}
+......</code></pre>
+
+
+
+<p>（<br>补充：这里以<br>1) 在 test.yml 中<br>2) 创建一个名为 test<br>3) 在所有服务器上执行<br>4) 设置 user 变量为 tom<br>5) home 变量为 /home/joe<br>6) 创建名为 user 注释内容为 user 的用户<br>的 playbook 为例<br>）</p>
+
+
+
+<h4>3.2 Ansible Playbook 直接设置数组变量的案例</h4>
+
+
+
+<pre class="wp-block-code"><code># vim test.yaml</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>---
+- name: test
+  hosts: all
+  vars:
+  - user1:
+      a_name: zhang
+      b_name: san
+  - user2:
+      a_name: li
+      b_name: si
+  tasks:
+  - name: Add a user
+    user:
+      name: "{{ users.user1.a_name }}{{ users.user1.b_name }}"
+......</code></pre>
+
+
+
+<p>（<br>补充：这里以<br>1) 在 test.yml 中<br>2) 创建一个名为 test<br>3) 在所有服务器上执行<br>4) 导入了变量文件 vars.yaml<br>5) 使用其中的变量 users.user1.a_name 和 users.user1.b_name<br>的 playbook 为例<br>）</p>
+
+
+
+<h4>3.3 Ansible Playbook 设置变量文件的案例<br>3.3.1 创建变量文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim vars.yaml</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>user: tom
+home: /home/joe</code></pre>
+
+
+
+<p>（补充：这里以在 vars.ymal 中添加变量 user 值为 tom，变量 home 值为 /home/joe 为例）</p>
+
+
+
+<h4>3.3.2 导入变量文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim test.yaml</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>---
+- name: test
+  hosts: all
+  vars_files:
+    - vars.yaml
+  tasks:
+  - name: Add a user
+    user:
+      name: "{{ user }}"
+      comment: name is {{ user }}
+......</code></pre>
+
+
+
+<p>（<br>补充：这里以<br>1) 在 test.yml 中<br>2) 创建一个名为 test<br>3) 在所有服务器上执行<br>4) 导入了变量文件 vars.yaml<br>5) 使用其中的变量 user 和 home<br>的 playbook 为例<br>）</p>
+
+
+
+<h4>3.4 Ansible Playbook 设置数组变量文件的案例<br>3.4.1 创建变量文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim vars.yaml</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>users:
+  user1:
+    a_name: san
+    b_name: zhang
+    c_name: /home/zhangsan
+  user2:
+    a_name: si
+    b_name: li
+    c_name: /home/lisi</code></pre>
+
+
+
+<p>（补充：这里以在 vars.ymal 中添加 user1 和 user2 两组数组变量为例）</p>
+
+
+
+<h4>3.4.2 导入变量文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim test.yaml</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>---
+- name:
+  hosts:
+  vars_files:
+  - vars.yaml
+  tasks:
+  - name: Add a user
+    user:
+      name: "{{ users.user1.a_name }}{{ users.user1.b_name }}"
+......</code></pre>
+
+
+
+<p>（<br>补充：这里以<br>1) 在 test.yml 中<br>2) 创建一个名为 test<br>3) 在所有服务器上执行<br>4) 导入了变量文件 vars.yaml<br>5) 使用其中的变量 users.user1.a_name 和 users.user1.b_name<br>的 playbook 为例<br>）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Ansible 命令 ansible-doc （显示 ansible 模块的使用方法）</title>
+		<link>https://eternalcenter-now.github.io/ansible-doc/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sun, 21 Jun 2020 15:45:13 +0000</pubDate>
+				<category><![CDATA[Ansible]]></category>
+		<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Cluster Monitor Tools (集群监控工具)]]></category>
+		<category><![CDATA[Clusters (集群)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=9900</guid>
+
+					<description><![CDATA[注意： 在使用 ansible-doc 之前，要先安装 Ansible、添加被 Ansible 管理的主机，并且需要 root 权限 正文： 步骤一：显示 Ansible 模块名单的方法1.1 显示所有 Ansible 模块名单 1.2 显示某一个 Ansible 模块名单 步骤二：显示某一个 Ansible 模块的使用方法2.1 进入 Ansible 模块教程文档 2.2 显示需要显示的部分 按下 “:” 键后再按下 “/” 键后再输入 &#60;keyword> （补充：根据站主的经验，最常用的要显示部分的关键字是：EXAMPLE）]]></description>
+										<content:encoded><![CDATA[
+<h2 id="注意">注意：</h2>
+
+
+
+<p>在使用 ansible-doc 之前，要先安装 Ansible、添加被 Ansible 管理的主机，并且需要 root 权限</p>
+
+
+
+<div class="wp-container-6 wp-block-buttons">
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/ansible-install/">Ansible 的安装方法</a></div>
+
+
+
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/ansible-node/">Ansible 所管理的服务器的添加和分组</a></div>
+</div>
+
+
+
+<div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
+
+
+
+<h2 id="正文">正文：</h2>
+
+
+
+<h4 id="步骤一-显示-ansible-模块名单的方法-1-1-显示所有-ansible-模块名单">步骤一：显示 Ansible 模块名单的方法<br>1.1 显示所有 Ansible 模块名单</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible-doc -l</code></pre>
+
+
+
+<h4 id="1-2-显示某一个-ansible-模块名单">1.2 显示某一个 Ansible 模块名单</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible-doc -l | grep &lt;keywords associated with the module name&gt;</code></pre>
+
+
+
+<h4 id="步骤二-显示某一个-ansible-模块的使用方法-2-1-进入-ansible-模块教程文档">步骤二：显示某一个 Ansible 模块的使用方法<br>2.1 进入 Ansible 模块教程文档</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible-doc &lt;module&gt;</code></pre>
+
+
+
+<h4 id="2-2-显示需要显示的部分">2.2 显示需要显示的部分</h4>
+
+
+
+<p>按下 “:” 键后再按下 “/” 键后再输入 &lt;keyword></p>
+
+
+
+<p>（补充：根据站主的经验，最常用的要显示部分的关键字是：EXAMPLE）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Ansible playbook 的排错技巧</title>
+		<link>https://eternalcenter-now.github.io/playbook-debug/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 03 Feb 2020 08:18:41 +0000</pubDate>
+				<category><![CDATA[Ansible]]></category>
+		<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Cluster Monitor Tools (集群监控工具)]]></category>
+		<category><![CDATA[Clusters (集群)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=8229</guid>
+
+					<description><![CDATA[注意： 在使用 Playbook 之前，要先安装 Ansible、添加被 Ansible 管理的主机，并且需要 root 权限 正文： 内容一：playbook 语法检查的方法 内容二：playbook 测试运行的方法 内容三：playbook 显示执行内容的方法]]></description>
+										<content:encoded><![CDATA[
+<h2>注意：</h2>
+
+
+
+<p>在使用 Playbook 之前，要先安装 Ansible、添加被 Ansible 管理的主机，并且需要 root 权限</p>
+
+
+
+<div class="wp-container-7 wp-block-buttons is-content-justification-center">
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/ansible-install/">Ansible 的安装方法</a></div>
+
+
+
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/ansible-node/">Ansible 所管理的服务器的添加和分组</a></div>
+</div>
+
+
+
+<div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
+
+
+
+<h2>正文：</h2>
+
+
+
+<h4>内容一：playbook 语法检查的方法</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible-playbook --syntax-check &lt;yaml&gt;</code></pre>
+
+
+
+<h4>内容二：playbook 测试运行的方法</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible-playbook -C &lt;yaml&gt;</code></pre>
+
+
+
+<h4>内容三：playbook 显示执行内容的方法</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible-playbook &lt;yaml&gt; --list-tasks</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Ansible 执行脚本 Playbook 的结构</title>
+		<link>https://eternalcenter-now.github.io/playbook-basics/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 03 Feb 2020 07:33:47 +0000</pubDate>
+				<category><![CDATA[Ansible]]></category>
+		<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Cluster Monitor Tools (集群监控工具)]]></category>
+		<category><![CDATA[Clusters (集群)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=8204</guid>
+
+					<description><![CDATA[注意： 在使用 Playbook 之前，要先安装 Ansible、添加被 Ansible 管理的主机，并且需要 root 权限 正文： 内容一：Playbook 的结构1.1 Playbook 的结构介绍 1) playbook 是 yaml 结构2) playbook 默认的执行顺序是从上往下一个层级接着一个层级地执行，若某个命令报错则不会再执行下面的命令 1.2 playbook 的常用目录层级种类 变量层 任务层 触发条件层 文件层 模板层 优先级最低层]]></description>
+										<content:encoded><![CDATA[
+<h2>注意：</h2>
+
+
+
+<p>在使用 Playbook 之前，要先安装 Ansible、添加被 Ansible 管理的主机，并且需要 root 权限</p>
+
+
+
+<div class="wp-container-8 wp-block-buttons is-content-justification-center">
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/ansible-install/">Ansible 的安装方法</a></div>
+
+
+
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/ansible-node/">Ansible 所管理的服务器的添加和分组</a></div>
+</div>
+
+
+
+<div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
+
+
+
+<h2>正文：</h2>
+
+
+
+<h4>内容一：Playbook 的结构<br>1.1 Playbook 的结构介绍</h4>
+
+
+
+<p>1) playbook 是 yaml 结构<br>2) playbook 默认的执行顺序是从上往下一个层级接着一个层级地执行，若某个命令报错则不会再执行下面的命令</p>
+
+
+
+<h4>1.2 playbook 的常用目录层级种类</h4>
+
+
+
+<pre class="wp-block-code"><code>1) vars</code></pre>
+
+
+
+<p>变量层</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<pre class="wp-block-code"><code>2) tasks</code></pre>
+
+
+
+<p>任务层</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<pre class="wp-block-code"><code>3) handlers</code></pre>
+
+
+
+<p>触发条件层</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<pre class="wp-block-code"><code>4) files</code></pre>
+
+
+
+<p>文件层</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<pre class="wp-block-code"><code>5) template</code></pre>
+
+
+
+<p>模板层</p>
+
+
+
+<hr class="wp-block-separator"/>
+
+
+
+<pre class="wp-block-code"><code>6) default</code></pre>
+
+
+
+<p>优先级最低层</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Ansible 所管理的服务器的添加和分组</title>
+		<link>https://eternalcenter-now.github.io/ansible-node/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sat, 01 Feb 2020 07:36:50 +0000</pubDate>
+				<category><![CDATA[Ansible]]></category>
+		<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Cluster Monitor Tools (集群监控工具)]]></category>
+		<category><![CDATA[Clusters (集群)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=8106</guid>
+
+					<description><![CDATA[注意： 在添加被 Ansible 管理的服务器前要先安装 Ansible 正文： 步骤目录： 步骤一：规划拓扑1.1 服务器列表1.2 服务器列表简介 步骤二：实现管理服务器登陆被管理的服务器2.1 在管理服务器上添加被管理服务器 IP 地址和服务器名的对应关系2.2 实现管理服务器登陆被管理的服务器2.2.1 让管理服务器无密钥登陆要被管理的服务器2.2.1.1 在管理服务器上生成 ssh 公钥和私钥2.2.1.2 将管理服务器生成的 ssh 公钥复制到要被管理的服务器里2.3 让管理服务器通过密钥登陆要被管理的服务器2.3.1 指定管理服务器的 Ansible 远程用户2.3.2 在管理服务器上 Ansible 的服务器列表里给指定的服务器添加登陆密码 步骤三：在管理服务器的 Ansible 上添加服务器列表，并将其分组（从列表优先级的角度来思考）3.1 Ansible 服务器列表分组的不同优先级（从列表优先级的角度来思考）3.2 通过设置 Ansible 服务器配置文件的全局变量的方法来添加服务器列表3.2.1 在管理服务器上修改系统环境变量文件3.2.2 在管理服务器上让系统环境变量生效3.2.3 在管理服务器上在环境变量指定的位置创建 Ansible 的配置文件3.2.4 在管理服务器上指定 Ansible 的服务器列表文件3.3 在管理服务器上添加 Ansible 的服务器列表，并将其分组3.4 通过在当前目录下创建 Ansible 配置文件和服务器列表文件的方法来添加服务器列表3.4.1 在管理服务器上进入到一个任意此用户有权限的目录3.4.2 在管理服务器上的当前位置创建 Ansible 的配置文件3.4.3 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/ansible-node/" class="more-link">Continue reading<span class="screen-reader-text"> "[步骤] Ansible 所管理的服务器的添加和分组"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2 id="注意">注意：</h2>
+
+
+
+<p>在添加被 Ansible 管理的服务器前要先安装 Ansible</p>
+
+
+
+<div class="wp-container-9 wp-block-buttons">
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/ansible-install/">Ansible 的安装方法</a></div>
+</div>
+
+
+
+<div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
+
+
+
+<h2 id="正文">正文：</h2>
+
+
+
+<h2 id="步骤目录">步骤目录：</h2>
+
+
+
+<h4 id="步骤一-规划拓扑1-1-服务器列表1-2-服务器列表简介">步骤一：规划拓扑<br>1.1 服务器列表<br>1.2 服务器列表简介</h4>
+
+
+
+<h4 id="步骤二-实现管理服务器登陆被管理的服务器2-1-在管理服务器上添加被管理服务器-ip-地址和服务器名的对应关系2-2-实现管理服务器登陆被管理的服务器2-2-1-让管理服务器无密钥登陆要被管理的服务器2-2-1-1-在管理服务器上生成-ssh-公钥和私钥2-2-1-2-将管理服务器生成的-ssh-公钥复制到要被管理的服务器里2-3-让管理服务器通过密钥登陆要被管理的服务器2-3-1-指定管理服务器的-ansible-远程用户2-3-2-在管理服务器上-ansible-的服务器列表里给指定的服务器添加登陆密码">步骤二：实现管理服务器登陆被管理的服务器<br>2.1 在管理服务器上添加被管理服务器 IP 地址和服务器名的对应关系<br>2.2 实现管理服务器登陆被管理的服务器<br>2.2.1 让管理服务器无密钥登陆要被管理的服务器<br>2.2.1.1 在管理服务器上生成 ssh 公钥和私钥<br>2.2.1.2 将管理服务器生成的 ssh 公钥复制到要被管理的服务器里<br>2.3 让管理服务器通过密钥登陆要被管理的服务器<br>2.3.1 指定管理服务器的 Ansible 远程用户<br>2.3.2 在管理服务器上 Ansible 的服务器列表里给指定的服务器添加登陆密码</h4>
+
+
+
+<h4 id="步骤三-在管理服务器的-ansible-上添加服务器列表-并将其分组-从列表优先级的角度来思考-3-1-ansible-服务器列表分组的不同优先级-从列表优先级的角度来思考-3-2-通过设置-ansible-服务器配置文件的全局变量的方法来添加服务器列表3-2-1-在管理服务器上修改系统环境变量文件3-2-2-在管理服务器上让系统环境变量生效3-2-3-在管理服务器上在环境变量指定的位置创建-ansible-的配置文件3-2-4-在管理服务器上指定-ansible-的服务器列表文件3-3-在管理服务器上添加-ansible-的服务器列表-并将其分组3-4-通过在当前目录下创建-ansible-配置文件和服务器列表文件的方法来添加服务器列表3-4-1-在管理服务器上进入到一个任意此用户有权限的目录3-4-2-在管理服务器上的当前位置创建-ansible-的配置文件3-4-3-在管理服务器上指定-ansible-的服务器列表文件3-4-4-在管理服务器上添加-ansible-的服务器列表-并将其分组3-5-通过在家目录下创建-ansible-配置文件和服务器列表文件的方法来添加服务器列表3-5-1-在管理服务器上进入到家目录3-5-2-在管理服务器上的家目录位置创建-ansible-的配置文件3-5-3-在管理服务器上指定-ansible-的服务器列表文件3-5-4-在管理服务器上添加-ansible-的服务器列表-并将其分组3-6-通过修改-ansible-默认配置文件和默认服务器列表文件的方法来添加服务器列表3-6-1-在管理服务器上指定-ansible-服务器列表文件3-6-2-在管理服务器上添加-ansible-的服务器列表-并将其分组">步骤三：在管理服务器的 Ansible 上添加服务器列表，并将其分组（从列表优先级的角度来思考）<br>3.1 Ansible 服务器列表分组的不同优先级（从列表优先级的角度来思考）<br>3.2 通过设置 Ansible 服务器配置文件的全局变量的方法来添加服务器列表<br>3.2.1 在管理服务器上修改系统环境变量文件<br>3.2.2 在管理服务器上让系统环境变量生效<br>3.2.3 在管理服务器上在环境变量指定的位置创建 Ansible 的配置文件<br>3.2.4 在管理服务器上指定 Ansible 的服务器列表文件<br>3.3 在管理服务器上添加 Ansible 的服务器列表，并将其分组<br>3.4 通过在当前目录下创建 Ansible 配置文件和服务器列表文件的方法来添加服务器列表<br>3.4.1 在管理服务器上进入到一个任意此用户有权限的目录<br>3.4.2 在管理服务器上的当前位置创建 Ansible 的配置文件<br>3.4.3 在管理服务器上指定 Ansible 的服务器列表文件<br>3.4.4 在管理服务器上添加 Ansible 的服务器列表，并将其分组<br>3.5 通过在家目录下创建 Ansible 配置文件和服务器列表文件的方法来添加服务器列表<br>3.5.1 在管理服务器上进入到家目录<br>3.5.2 在管理服务器上的家目录位置创建 Ansible 的配置文件<br>3.5.3 在管理服务器上指定 Ansible 的服务器列表文件<br>3.5.4 在管理服务器上添加 Ansible 的服务器列表，并将其分组<br>3.6 通过修改 Ansible 默认配置文件和默认服务器列表文件的方法来添加服务器列表<br>3.6.1 在管理服务器上指定 Ansible 服务器列表文件<br>3.6.2 在管理服务器上添加 Ansible 的服务器列表，并将其分组</h4>
+
+
+
+<h4 id="步骤四-在管理服务器的-ansible-上添加服务器列表-并将其分组-从列表种类的角度来思考-4-1-让管理服务器的-ansible-使用文本格式的服务器列表文件4-1-1-分组的方式4-1-1-1-单个服务器4-1-1-2-一组服务器4-1-1-3-一复合组服务器4-1-2-列表的描述方式介绍4-1-2-1-连续的数字4-1-2-2-连续的字母4-2-让管理服务器的-ansible-使用-json-格式的服务器列表文件4-2-1-在管理服务器上进入任意一个此用户有权限的目录4-2-2-在管理服务器上的家目录位置创建-ansible-的配置文件4-2-3-在管理服务器上指定-ansible-的服务器列表文件4-2-4-在管理服务器上使用-python3-编程语言生成-json-格式的服务器列表4-2-4-1-在管理服务器上编写生成-json-格式的-python-程序4-2-4-2-给刚刚编写的-python-程序相应的全权">步骤四：在管理服务器的 Ansible 上添加服务器列表，并将其分组（从列表种类的角度来思考）<br>4.1 让管理服务器的 Ansible 使用文本格式的服务器列表文件<br>4.1.1 分组的方式<br>4.1.1.1 单个服务器<br>4.1.1.2 一组服务器<br>4.1.1.3 一复合组服务器<br>4.1.2 列表的描述方式介绍<br>4.1.2.1 连续的数字<br>4.1.2.2 连续的字母<br>4.2 让管理服务器的 Ansible 使用 json 格式的服务器列表文件<br>4.2.1 在管理服务器上进入任意一个此用户有权限的目录<br>4.2.2 在管理服务器上的家目录位置创建 Ansible 的配置文件<br>4.2.3 在管理服务器上指定 Ansible 的服务器列表文件<br>4.2.4 在管理服务器上使用 Python3 编程语言生成 json 格式的服务器列表<br>4.2.4.1 在管理服务器上编写生成 json 格式的 Python 程序<br>4.2.4.2 给刚刚编写的 Python 程序相应的全权</h4>
+
+
+
+<h4 id="步骤五-在管理服务器的-ansible-上添加服务器列表-并将其分组-多个同优先级相同的列表-从管理的角度来思考-5-2-1-在管理服务器上进入任意一个此用户有权限的目录5-2-2-在管理服务器上的家目录位置创建-ansible-的配置文件5-2-3-在管理服务器上指定-ansible-的服务器列表文件目录5-2-4-创建-ansible-的服务器列表文件目录5-2-4-1-创建第一个-ansible-的服务器列表文件目录5-2-4-2-创建第一个-ansible-的服务器列表文件目录5-2-4-3-创建第三个-ansible-的服务器列表文件目录">步骤五：在管理服务器的 Ansible 上添加服务器列表，并将其分组（多个同优先级相同的列表，从管理的角度来思考）<br>5.2.1 在管理服务器上进入任意一个此用户有权限的目录<br>5.2.2 在管理服务器上的家目录位置创建 Ansible 的配置文件<br>5.2.3 在管理服务器上指定 Ansible 的服务器列表文件目录<br>5.2.4 创建 Ansible 的服务器列表文件目录<br>5.2.4.1 创建第一个 Ansible 的服务器列表文件目录<br>5.2.4.2 创建第一个 Ansible 的服务器列表文件目录<br>5.2.4.3 创建第三个 Ansible 的服务器列表文件目录</h4>
+
+
+
+<h4 id="步骤六-测试管理服务器-ansible-的服务器列表6-1-显示默认服务器列表里的服务器列表6-2-显示-web-组的服务器6-3-显示-db-组的服务器6-4-显示不属于任何组的服务器6-5-显示所有服务器">步骤六：测试管理服务器 Ansible 的服务器列表<br>6.1 显示默认服务器列表里的服务器列表<br>6.2 显示 web 组的服务器<br>6.3 显示 db 组的服务器<br>6.4 显示不属于任何组的服务器<br>6.5 显示所有服务器</h4>
+
+
+
+<h2 id="具体的操作步骤">具体的操作步骤：</h2>
+
+
+
+<h4 id="步骤一-规划拓扑1-1-服务器列表">步骤一：规划拓扑<br>1.1 服务器列表</h4>
+
+
+
+<p>管理服务器 IP 地址：192.168.100.100<br>被管理的服务器 1 IP 地址：192.168.100.101<br>被管理的服务器 2 IP 地址：192.168.100.102<br>被管理的服务器 3 IP 地址：192.168.100.103<br>被管理的服务器 4 IP 地址：192.168.100.104<br>被管理的服务器 3 IP 地址：192.168.100.105<br>被管理的服务器 4 IP 地址：192.168.100.106<br>被管理的服务器 4 IP 地址：192.168.100.107</p>
+
+
+
+<h4 id="1-2-服务器列表简介">1.2 服务器列表简介</h4>
+
+
+
+<p>1) 管理人员只用 ssh 到管理服务器就可以通过 Ansible 管理其他所有的被管理服务器<br>2) 将 192.168.100.101 至 192.168.100.110 视作 web1 至 web10 ，它们属于 web 组<br>3) 将 192.168.100.111 至 192.168.100.115 视作 db1 至 db5 ，它们属于 db 组<br>4) 将 192.168.100.107 视作新添加的要被管理的服务器 ，它不属于任何组</p>
+
+
+
+<h4 id="步骤二-实现管理服务器登陆被管理的服务器2-1-在管理服务器上添加被管理服务器-ip-地址和服务器名的对应关系">步骤二：实现管理服务器登陆被管理的服务器<br>2.1 在管理服务器上添加被管理服务器 IP 地址和服务器名的对应关系</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/hosts</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+192.168.100.100 ansible
+192.168.100.101 web1
+192.168.100.102 web2
+192.168.100.103 web3
+192.168.100.104 db1
+192.168.100.105 db2
+192.168.100.106 db3</code></pre>
+
+
+
+<h4 id="2-2-实现管理服务器登陆被管理的服务器2-2-1-让管理服务器无密钥登陆要被管理的服务器2-2-1-1-在管理服务器上生成-ssh-公钥和私钥">2.2 实现管理服务器登陆被管理的服务器<br>2.2.1 让管理服务器无密钥登陆要被管理的服务器<br>2.2.1.1 在管理服务器上生成 ssh 公钥和私钥</h4>
+
+
+
+<pre class="wp-block-code"><code># ssh-keygen
+Generating public/private rsa key pair.
+Enter file in which to save the key (/root/.ssh/id_rsa): 
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in /root/.ssh/id_rsa.
+Your public key has been saved in /root/.ssh/id_rsa.pub.
+The key fingerprint is:
+SHA256:GGqyQU4+u+eNTaWN4SILhm3QN08ZR3jPWC+quRlsP6c root@test1
+The key's randomart image is:
++---&#91;RSA 2048]----+
+|       ..        |
+|      ... .      |
+|  o   o..= .     |
+| *   . *. + .    |
+|. B = = S. .     |
+|.o O * *.        |
+|o.* . Xo.        |
+|.o +.Bo+. .      |
+|  ooo =.E+       |
++----&#91;SHA256]-----+</code></pre>
+
+
+
+<h4 id="2-2-1-2-将管理服务器生成的-ssh-公钥复制到要被管理的服务器里">2.2.1.2 将管理服务器生成的 ssh 公钥复制到要被管理的服务器里</h4>
+
+
+
+<pre class="wp-block-code"><code># for i in {100..107} ; do ssh-copy-id 192.168.100.$i ; done</code></pre>
+
+
+
+<h4 id="2-3-让管理服务器通过密钥登陆要被管理的服务器2-3-1-指定管理服务器的-ansible-远程用户">2.3 让管理服务器通过密钥登陆要被管理的服务器<br>2.3.1 指定管理服务器的 Ansible 远程用户</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/ansible/ansible.cfg</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+# remote_user = root
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+remote_user = root
+......</code></pre>
+
+
+
+<h4 id="2-3-2-在管理服务器上-ansible-的服务器列表里给指定的服务器添加登陆密码">2.3.2 在管理服务器上 Ansible 的服务器列表里给指定的服务器添加登陆密码</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/ansible/hosts</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>&#91;all:vars]
+ansible_password=redhat</code></pre>
+
+
+
+<h4 id="步骤三-在管理服务器的-ansible-上添加服务器列表-并将其分组-从列表优先级的角度来思考-3-1-ansible-服务器列表分组的不同优先级-从列表优先级的角度来思考">步骤三：在管理服务器的 Ansible 上添加服务器列表，并将其分组（从列表优先级的角度来思考）<br>3.1 Ansible 服务器列表分组的不同优先级（从列表优先级的角度来思考）</h4>
+
+
+
+<p>（最高优先级）设置 Ansible 服务器配置文件的全局变量，并在此变量指定的位置创建 Ansible 配置文件和服务器列表文件<br>（第二高优先级）在当前目录下创建 Ansible 配置文件和服务器列表文件<br>（第三高优先级）在当前下创建 Ansible 配置文件和服务器列表文件<br>（第四高优先级）修改 Ansible 在 /etc 目录下的默认配置文件和服务器列表文件</p>
+
+
+
+<p>（注意：Ansible 会严格按照优先级，当有更高优先级的服务器列表时，绝对不会执行低等级的服务器列表）</p>
+
+
+
+<h4 id="3-2-通过设置-ansible-服务器配置文件的全局变量的方法来添加服务器列表3-2-1-在管理服务器上修改系统环境变量文件">3.2 通过设置 Ansible 服务器配置文件的全局变量的方法来添加服务器列表<br>3.2.1 在管理服务器上修改系统环境变量文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/profile</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+export ANSIBLE_CONFIG=/opt/ansible.cfg</code></pre>
+
+
+
+<p>（补充：这里以 /opt 目录为例）</p>
+
+
+
+<h4 id="3-2-2-在管理服务器上让系统环境变量生效">3.2.2 在管理服务器上让系统环境变量生效</h4>
+
+
+
+<pre class="wp-block-code"><code># source /etc/profile</code></pre>
+
+
+
+<h4 id="3-2-3-在管理服务器上在环境变量指定的位置创建-ansible-的配置文件">3.2.3 在管理服务器上在环境变量指定的位置创建 Ansible 的配置文件</h4>
+
+
+
+<pre class="wp-block-code"><code># cp /etc/ansible/ansible.cfg /opt/</code></pre>
+
+
+
+<h4 id="3-2-4-在管理服务器上指定-ansible-的服务器列表文件">3.2.4 在管理服务器上指定 Ansible 的服务器列表文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /opt/ansible.cfg</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+#inventory      = /etc/ansible/hosts
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+inventory      = hosts
+......</code></pre>
+
+
+
+<h4 id="3-3-在管理服务器上添加-ansible-的服务器列表-并将其分组">3.3 在管理服务器上添加 Ansible 的服务器列表，并将其分组</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /opt/hosts</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>192.168.100.107
+
+&#91;web]
+web&#91;1:3]
+
+&#91;db]
+db1
+db2
+db3</code></pre>
+
+
+
+<p>（补充：这里以文本列表为例）</p>
+
+
+
+<h4 id="3-4-通过在当前目录下创建-ansible-配置文件和服务器列表文件的方法来添加服务器列表3-4-1-在管理服务器上进入到一个任意此用户有权限的目录">3.4 通过在当前目录下创建 Ansible 配置文件和服务器列表文件的方法来添加服务器列表<br>3.4.1 在管理服务器上进入到一个任意此用户有权限的目录</h4>
+
+
+
+<pre class="wp-block-code"><code># cd /opt</code></pre>
+
+
+
+<p>（补充：这里以 /opt 目录为例）</p>
+
+
+
+<h4 id="3-4-2-在管理服务器上的当前位置创建-ansible-的配置文件">3.4.2 在管理服务器上的当前位置创建 Ansible 的配置文件</h4>
+
+
+
+<pre class="wp-block-code"><code># cp /etc/ansible/ansible.cfg /opt/</code></pre>
+
+
+
+<h4 id="3-4-3-在管理服务器上指定-ansible-的服务器列表文件">3.4.3 在管理服务器上指定 Ansible 的服务器列表文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /opt/ansible.cfg</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+#inventory      = /etc/ansible/hosts
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+inventory      = hosts
+......</code></pre>
+
+
+
+<h4 id="3-4-4-在管理服务器上添加-ansible-的服务器列表-并将其分组">3.4.4 在管理服务器上添加 Ansible 的服务器列表，并将其分组</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /opt/hosts</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>192.168.100.107
+
+&#91;web]
+web&#91;1:3]
+
+&#91;db]
+db1
+db2
+db3</code></pre>
+
+
+
+<p>（补充：这里以文本列表为例）</p>
+
+
+
+<h4 id="3-5-通过在家目录下创建-ansible-配置文件和服务器列表文件的方法来添加服务器列表3-5-1-在管理服务器上进入到家目录">3.5 通过在家目录下创建 Ansible 配置文件和服务器列表文件的方法来添加服务器列表<br>3.5.1 在管理服务器上进入到家目录</h4>
+
+
+
+<pre class="wp-block-code"><code># cd</code></pre>
+
+
+
+<h4 id="3-5-2-在管理服务器上的家目录位置创建-ansible-的配置文件">3.5.2 在管理服务器上的家目录位置创建 Ansible 的配置文件</h4>
+
+
+
+<pre class="wp-block-code"><code># cp /etc/ansible/ansible.cfg ~/</code></pre>
+
+
+
+<h4 id="3-5-3-在管理服务器上指定-ansible-的服务器列表文件">3.5.3 在管理服务器上指定 Ansible 的服务器列表文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim ~/ansible.cfg</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+#inventory      = /etc/ansible/hosts
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+&#91;defaults]
+inventory      = hosts
+......</code></pre>
+
+
+
+<h4 id="3-5-4-在管理服务器上添加-ansible-的服务器列表-并将其分组">3.5.4 在管理服务器上添加 Ansible 的服务器列表，并将其分组</h4>
+
+
+
+<pre class="wp-block-code"><code># vim ~/hosts</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>192.168.100.107
+
+&#91;web]
+web&#91;1:3]
+
+&#91;db]
+db1
+db2
+db3</code></pre>
+
+
+
+<p>（补充：这里以文本列表为例）</p>
+
+
+
+<h4 id="3-6-通过修改-ansible-默认配置文件和默认服务器列表文件的方法来添加服务器列表3-6-1-在管理服务器上指定-ansible-服务器列表文件">3.6 通过修改 Ansible 默认配置文件和默认服务器列表文件的方法来添加服务器列表<br>3.6.1 在管理服务器上指定 Ansible 服务器列表文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/ansible/ansible.cfg</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+#inventory      = /etc/ansible/hosts
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+inventory      = /etc/ansible/hosts
+......</code></pre>
+
+
+
+<h4 id="3-6-2-在管理服务器上添加-ansible-的服务器列表-并将其分组">3.6.2 在管理服务器上添加 Ansible 的服务器列表，并将其分组</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/ansible/hosts</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>192.168.100.107
+
+&#91;web]
+web&#91;1:3]
+
+&#91;db]
+db1
+db2
+db3</code></pre>
+
+
+
+<p>（补充：这里以文本列表为例）</p>
+
+
+
+<h4 id="步骤四-在管理服务器的-ansible-上添加服务器列表-并将其分组-从列表种类的角度来思考-4-1-让管理服务器的-ansible-使用文本格式的服务器列表文件4-1-1-分组的方式4-1-1-1-单个服务器">步骤四：在管理服务器的 Ansible 上添加服务器列表，并将其分组（从列表种类的角度来思考）<br>4.1 让管理服务器的 Ansible 使用文本格式的服务器列表文件<br>4.1.1 分组的方式<br>4.1.1.1 单个服务器</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/ansible/hosts</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>192.168.100.107</code></pre>
+
+
+
+<h4 id="4-1-1-2-一组服务器">4.1.1.2 一组服务器</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/ansible/hosts</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>192.168.100.107
+
+&#91;web]
+web1
+web2
+web3</code></pre>
+
+
+
+<h4 id="4-1-1-3-一复合组服务器">4.1.1.3 一复合组服务器</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/ansible/hosts</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>192.168.100.107
+
+&#91;web]
+web1
+web2
+web3
+
+&#91;db]
+db1
+db2
+db3
+
+&#91;webdb:children]
+web
+db</code></pre>
+
+
+
+<p>（补充：在这里的 webdb 组会同时包含 web 和 db 里的服务器）</p>
+
+
+
+<h4 id="4-1-2-列表的描述方式介绍4-1-2-1-连续的数字">4.1.2 列表的描述方式介绍<br>4.1.2.1 连续的数字</h4>
+
+
+
+<pre class="wp-block-code"><code>192.168.&#91;0:10].&#91;0:255]</code></pre>
+
+
+
+<p>（补充：这里以从 192.168.0.0 到 192.168.10.255 为例）</p>
+
+
+
+<h4 id="4-1-2-2-连续的字母">4.1.2.2 连续的字母</h4>
+
+
+
+<pre class="wp-block-code"><code>web&#91;a:c]</code></pre>
+
+
+
+<p>（补充：这里以从 weba 到 webc 为例）</p>
+
+
+
+<h4 id="4-2-让管理服务器的-ansible-使用-json-格式的服务器列表文件4-2-1-在管理服务器上进入任意一个此用户有权限的目录">4.2 让管理服务器的 Ansible 使用 json 格式的服务器列表文件<br>4.2.1 在管理服务器上进入任意一个此用户有权限的目录</h4>
+
+
+
+<pre class="wp-block-code"><code># cd ~</code></pre>
+
+
+
+<p>（补充：这里以进入家目录为例）</p>
+
+
+
+<h4 id="4-2-2-在管理服务器上的家目录位置创建-ansible-的配置文件">4.2.2 在管理服务器上的家目录位置创建 Ansible 的配置文件</h4>
+
+
+
+<pre class="wp-block-code"><code># cp /etc/ansible/ansible.cfg ~/</code></pre>
+
+
+
+<h4 id="4-2-3-在管理服务器上指定-ansible-的服务器列表文件">4.2.3 在管理服务器上指定 Ansible 的服务器列表文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim ansible.cfg</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+#inventory      = /etc/ansible/hosts
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+inventory      = ./hosts.py
+......</code></pre>
+
+
+
+<h4 id="4-2-4-在管理服务器上使用-python3-编程语言生成-json-格式的服务器列表4-2-4-1-在管理服务器上编写生成-json-格式的-python-程序">4.2.4 在管理服务器上使用 Python3 编程语言生成 json 格式的服务器列表<br>4.2.4.1 在管理服务器上编写生成 json 格式的 Python 程序</h4>
+
+
+
+<pre class="wp-block-code"><code># vim hosts.py</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>#!/usr/libexec/platform-python
+import json
+hostlist = {}
+hostlist&#91;"web"] = &#91;"192.168.100.101", "192.168.100.103"]
+
+hostlist&#91;"db"] = {
+        "hosts" :&#91;"192.168.100.104", "192.168.100.106"],
+        "vars" :{"ansible_ssh_user":"root", "ansible_ssh_pass":"1"}
+        }
+
+hostlist&#91;"192.168.100.7"] = {
+        "ansible_ssh_user":"root", "ansible_ssh_pass":"pwd"
+        }
+
+print(json.dumps(hostlist))</code></pre>
+
+
+
+<h4 id="4-2-4-2-给刚刚编写的-python-程序相应的全权">4.2.4.2 给刚刚编写的 Python 程序相应的全权</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod 755 hosts.py</code></pre>
+
+
+
+<p>（<br>补充：<br>使用 Python3 出现报错的处理方法：<br>1) 显示 yum 的配置文件位置</p>
+
+
+
+<pre class="wp-block-code"><code># whereis yum
+yum: /usr/bin/yum /etc/yum /etc/yum.conf /usr/share/man/man8/yum.8.gz</code></pre>
+
+
+
+<p>2) 确认 yum 所使用的 Python</p>
+
+
+
+<pre class="wp-block-code"><code># head -1 /usr/bin/yum 
+#!/usr/libexec/platform-python</code></pre>
+
+
+
+<p>3) 将 hosts.py 第一行的 Python 位置修改成和 yum 所使用的一样</p>
+
+
+
+<pre class="wp-block-code"><code># vim hosts.py</code></pre>
+
+
+
+<p>将第一行修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>#!/usr/libexec/platform-python
+......</code></pre>
+
+
+
+<p>）</p>
+
+
+
+<h4 id="步骤五-在管理服务器的-ansible-上添加服务器列表-并将其分组-多个同优先级相同的列表-从管理的角度来思考-5-2-1-在管理服务器上进入任意一个此用户有权限的目录">步骤五：在管理服务器的 Ansible 上添加服务器列表，并将其分组（多个同优先级相同的列表，从管理的角度来思考）<br>5.2.1 在管理服务器上进入任意一个此用户有权限的目录</h4>
+
+
+
+<pre class="wp-block-code"><code># cd ~</code></pre>
+
+
+
+<p>（补充：这里以进入家目录为例）</p>
+
+
+
+<h4 id="5-2-2-在管理服务器上的家目录位置创建-ansible-的配置文件">5.2.2 在管理服务器上的家目录位置创建 Ansible 的配置文件</h4>
+
+
+
+<pre class="wp-block-code"><code># cp /etc/ansible/ansible.cfg ~/</code></pre>
+
+
+
+<h4 id="5-2-3-在管理服务器上指定-ansible-的服务器列表文件目录">5.2.3 在管理服务器上指定 Ansible 的服务器列表文件目录</h4>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+#inventory      = /etc/ansible/hosts
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+inventory      = ~/hosts/
+......</code></pre>
+
+
+
+<h4 id="5-2-4-创建-ansible-的服务器列表文件目录5-2-4-1-创建第一个-ansible-的服务器列表文件目录">5.2.4 创建 Ansible 的服务器列表文件目录<br>5.2.4.1 创建第一个 Ansible 的服务器列表文件目录</h4>
+
+
+
+<pre class="wp-block-code"><code># vim ~/hosts/hostsa</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>&#91;web]
+web1
+web2
+web3</code></pre>
+
+
+
+<h4 id="5-2-4-2-创建第一个-ansible-的服务器列表文件目录">5.2.4.2 创建第一个 Ansible 的服务器列表文件目录</h4>
+
+
+
+<pre class="wp-block-code"><code># vim ~/hosts/hostsb</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>&#91;db]
+db1
+db2
+db3</code></pre>
+
+
+
+<h4 id="5-2-4-3-创建第三个-ansible-的服务器列表文件目录">5.2.4.3 创建第三个 Ansible 的服务器列表文件目录</h4>
+
+
+
+<pre class="wp-block-code"><code># vim ~/hosts/others</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>192.168.100.7</code></pre>
+
+
+
+<h4 id="步骤六-测试管理服务器-ansible-的服务器列表6-1-显示默认服务器列表里的服务器列表">步骤六：测试管理服务器 Ansible 的服务器列表<br>6.1 显示默认服务器列表里的服务器列表</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible all -i /etc/ansible/hosts --list-host
+  hosts (20):
+    web1
+    web2
+    web3
+    db1
+    db2
+    db3
+    192.168.100.107</code></pre>
+
+
+
+<h4 id="6-2-显示-web-组的服务器">6.2 显示 web 组的服务器</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible web --list-host
+  hosts (10):
+    web1
+    web2
+    web3</code></pre>
+
+
+
+<h4 id="6-3-显示-db-组的服务器">6.3 显示 db 组的服务器</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible db --list-host
+  hosts (5):
+    db1
+    db2
+    db3</code></pre>
+
+
+
+<h4 id="6-4-显示不属于任何组的服务器">6.4 显示不属于任何组的服务器</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible ungrouped --list-host
+  hosts (1):
+  192.168.100.7</code></pre>
+
+
+
+<h4 id="6-5-显示所有服务器">6.5 显示所有服务器</h4>
+
+
+
+<pre class="wp-block-code"><code># ansible all --list-host
+  hosts (20):
+    web1
+    web2
+    web3
+    db1
+    db2
+    db3
+    192.168.100.107</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># ansible-inventory --graph</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Ansible 的安装</title>
+		<link>https://eternalcenter-now.github.io/ansible-install/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sat, 01 Feb 2020 03:51:30 +0000</pubDate>
+				<category><![CDATA[Ansible]]></category>
+		<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Cluster Monitor Tools (集群监控工具)]]></category>
+		<category><![CDATA[Clusters (集群)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=8102</guid>
+
+					<description><![CDATA[步骤一：服务器系统要求 1) 服务器的系统需要是 CentOS Linux 8 版本2) 需要 python3(3.5 或以上) 或 python2（2.7或以上）3) 服务器系统配置好可用的软件源 步骤二：安装 Ansible]]></description>
+										<content:encoded><![CDATA[
+<h4>步骤一：服务器系统要求</h4>
+
+
+
+<p>1) 服务器的系统需要是 CentOS Linux 8 版本<br>2) 需要 python3(3.5 或以上) 或 python2（2.7或以上）<br>3) 服务器系统配置好可用的软件源</p>
+
+
+
+<h4>步骤二：安装 Ansible</h4>
+
+
+
+<pre class="wp-block-code"><code># yum install epel-release
+# yum install ansible</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

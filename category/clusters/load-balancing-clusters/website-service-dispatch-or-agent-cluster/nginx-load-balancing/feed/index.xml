@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Nginx Load Balancing (负载均衡) &#8211; Eternal Center</title>
+	<atom:link href="https://eternalcenter-now.github.io/category/clusters/load-balancing-clusters/website-service-dispatch-or-agent-cluster/nginx-load-balancing/feed/" rel="self" type="application/rss+xml" />
+	<link>https://eternalcenter-now.github.io/</link>
+	<description></description>
+	<lastBuildDate>Sat, 01 Jan 2022 15:01:21 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	
+	<item>
+		<title>[内容] Nginx 代理的设置 （http 和 SSH）</title>
+		<link>https://eternalcenter-now.github.io/nginx-agent-install/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Thu, 05 Sep 2019 06:04:47 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Clusters (集群)]]></category>
+		<category><![CDATA[Load Balancing Clusters (负载均衡集群)]]></category>
+		<category><![CDATA[Nginx]]></category>
+		<category><![CDATA[Nginx Function (功能)]]></category>
+		<category><![CDATA[Nginx Load Balancing (负载均衡)]]></category>
+		<category><![CDATA[Services (服务)]]></category>
+		<category><![CDATA[Website Service Dispatch or Agent Clusters (网站服务代理或调度集群)]]></category>
+		<category><![CDATA[Website Services (网站服务)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=5698</guid>
+
+					<description><![CDATA[注意： 在设置 Nginx 代理之前要先安装 Nginx 正文： 内容一：设置 Nginx http 代理 将部分内容修改如下： 或者： 内容二：设置 Nginx SSH 代理 将部分内容修改如下：]]></description>
+										<content:encoded><![CDATA[
+<h2>注意：</h2>
+
+
+
+<p>在设置 Nginx 代理之前要先安装 Nginx</p>
+
+
+
+<div class="wp-container-1 wp-block-buttons is-content-justification-center">
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/nginx-install-source/">Nginx 源码软件包的安装</a></div>
+</div>
+
+
+
+<div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
+
+
+
+<h2>正文：</h2>
+
+
+
+<h4>内容一：设置 Nginx http 代理</h4>
+
+
+
+<pre class="wp-block-code"><code># vi /usr/local/nginx/conf/nginx.conf</code></pre>
+
+
+
+<p>将部分内容修改如下：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+http {
+.....
+upstream webserver {
+   server 192.168.1.100:80;
+   server 192.168.1.200:80;
+}
+.....
+server {
+listen 80;
+server_name www.eternalcenter.com;
+location / {
+proxy_pass http://webserver;/
+}
+......
+}
+......
+}</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+http {
+.....
+upstream webserver {
+Server    192.168.2.100    weight=1    max_fails=1  fail_timeout=30;
+Server    192.168.2.200    weight=2    max_fails=2  fail_timeout=30;
+Server    192.168.2.101    down;
+}
+.....
+server {
+listen 80;
+server_name www.eternalcenter.com;
+location / {
+proxy_pass http://webserver;/
+}
+......
+}
+......
+}</code></pre>
+
+
+
+<h4>内容二：设置 Nginx SSH 代理</h4>
+
+
+
+<p>将部分内容修改如下：</p>
+
+
+
+<pre class="wp-block-code"><code>stream {
+upstream backend {
+server 192.168.1.100:22;
+server 192.168.1.200:22;
+}
+server{
+listen 222;
+proxy_connect_timeout 1s;
+proxy_pass backend;
+}
+}
+
+http{
+......
+}</code></pre>
+
+
+
+<p></p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

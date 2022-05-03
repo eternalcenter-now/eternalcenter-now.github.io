@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>HTTP &#8211; Eternal Center</title>
+	<atom:link href="https://eternalcenter-now.github.io/category/services/storage-services/http/feed/" rel="self" type="application/rss+xml" />
+	<link>https://eternalcenter-now.github.io/</link>
+	<description></description>
+	<lastBuildDate>Sun, 26 Dec 2021 08:25:43 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	
+	<item>
+		<title>[内容] Linux 常见存储和存储类型介绍</title>
+		<link>https://eternalcenter-now.github.io/introduction-to-linux-common-storage-and-storage-types/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Thu, 19 Aug 2021 12:31:20 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[FTP]]></category>
+		<category><![CDATA[HTTP]]></category>
+		<category><![CDATA[Iscsi]]></category>
+		<category><![CDATA[NFS]]></category>
+		<category><![CDATA[Samba]]></category>
+		<category><![CDATA[Services (服务)]]></category>
+		<category><![CDATA[Storage Services (存储服务)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Computer & System Hardware & System Installation & System Upgradation (系统电脑 & 系统硬件 & 系统安装 & 系统升级)]]></category>
+		<category><![CDATA[System Hardware (系统硬件)]]></category>
+		<category><![CDATA[System Storage (系统存储)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=17522</guid>
+
+					<description><![CDATA[内容一：常见的存储 1. DAS（直连存储），就是接在主板上的硬盘2. NAS（网络附加存储），例如：NFS、Samba、FTP、HTTP，优点是管理简单，缺点是单点故障3. SAN（网络块存储），例如：Iscsi4. 分布时云存储，例如：Ceph、Swift 内容二：常见的存储类型 1. Block-based access（基于块存储的访问），对应的是块存储（block），例如：直接接在主板上的硬盘、Iscsi、Ceph2. File-based access（基于文件系统的访问），对应的是文件系统存储（filesystem），例如：NFS、Samba、FTP、HTTP、Ceph3. Object-based access（基于对象的访问），对应的是对象存储（object），例如：Ceph]]></description>
+										<content:encoded><![CDATA[
+<h4>内容一：常见的存储</h4>
+
+
+
+<p>1. DAS（直连存储），就是接在主板上的硬盘<br>2. NAS（网络附加存储），例如：NFS、Samba、FTP、HTTP，优点是管理简单，缺点是单点故障<br>3. SAN（网络块存储），例如：Iscsi<br>4. 分布时云存储，例如：Ceph、Swift</p>
+
+
+
+<h4>内容二：常见的存储类型</h4>
+
+
+
+<p>1. Block-based access（基于块存储的访问），对应的是块存储（block），例如：直接接在主板上的硬盘、Iscsi、Ceph<br>2. File-based access（基于文件系统的访问），对应的是文件系统存储（filesystem），例如：NFS、Samba、FTP、HTTP、Ceph<br>3. Object-based access（基于对象的访问），对应的是对象存储（object），例如：Ceph</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

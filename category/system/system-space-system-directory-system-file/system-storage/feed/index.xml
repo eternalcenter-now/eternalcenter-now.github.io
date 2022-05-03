@@ -1,0 +1,1755 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>System Storage (系统存储) &#8211; Eternal Center</title>
+	<atom:link href="https://eternalcenter-now.github.io/category/system/system-space-system-directory-system-file/system-storage/feed/" rel="self" type="application/rss+xml" />
+	<link>https://eternalcenter-now.github.io/</link>
+	<description></description>
+	<lastBuildDate>Fri, 29 Apr 2022 13:40:02 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	
+	<item>
+		<title>[排错] 解决 Linux 运行 gzip 命令时报错 gzip: wtmp-20220429.xz: unknown suffix &#8212; ignored</title>
+		<link>https://eternalcenter-now.github.io/debug-gzip-wtmp-20220429-xz-unknown-suffix-ignored/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 29 Apr 2022 13:37:57 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Directory (系统目录)]]></category>
+		<category><![CDATA[System File (系统文件)]]></category>
+		<category><![CDATA[System Storage (系统存储)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23417</guid>
+
+					<description><![CDATA[报错代码： 解决方法：]]></description>
+										<content:encoded><![CDATA[
+<h2>报错代码：</h2>
+
+
+
+<pre class="wp-block-code"><code>gzip: wtmp-20220429.xz: unknown suffix -- ignored</code></pre>
+
+
+
+<h2>解决方法：</h2>
+
+
+
+<pre class="wp-block-code"><code># xz -d &lt;file&gt;</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[工具] Shell 显示系统常用信息</title>
+		<link>https://eternalcenter-now.github.io/shell-display-system-common-information/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Tue, 26 Apr 2022 16:14:48 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Languages (语言)]]></category>
+		<category><![CDATA[Shell]]></category>
+		<category><![CDATA[Shell Monitor (监控)]]></category>
+		<category><![CDATA[Shell Tool (工具)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Computer & System Hardware & System Installation & System Upgradation (系统电脑 & 系统硬件 & 系统安装 & 系统升级)]]></category>
+		<category><![CDATA[System Directory (系统目录)]]></category>
+		<category><![CDATA[System Hardware (系统硬件)]]></category>
+		<category><![CDATA[System Network (系统网络)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Performance (系统性能)]]></category>
+		<category><![CDATA[System Port Security (系统端口安全)]]></category>
+		<category><![CDATA[System Process & System Performance (系统进程 & 系统性能)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Software (系统软件)]]></category>
+		<category><![CDATA[System Storage (系统存储)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23311</guid>
+
+					<description><![CDATA[介绍： 作者：朱明宇名称：显示系统常用信息作用：显示系统常用信息 使用方法：1. 在此脚本的分割线内写入相应的内容2. 给此脚本添加执行权限3. 执行此脚本 脚本分割线里的变量：1) times=2 #显示系统常用信息的次数2) sleeptime=0.1 #大部分行与行之间显示的间隔时间 注意：部分功能需要安装了 sysstat 软件或搭建了 KVM 虚拟化平台后执行此脚本的用户能够使用 sudo virsh list 命令后才能实现 脚本：]]></description>
+										<content:encoded><![CDATA[
+<h2>介绍：</h2>
+
+
+
+<p>作者：朱明宇<br>名称：显示系统常用信息<br>作用：显示系统常用信息</p>
+
+
+
+<p>使用方法：<br>1. 在此脚本的分割线内写入相应的内容<br>2. 给此脚本添加执行权限<br>3. 执行此脚本</p>
+
+
+
+<p>脚本分割线里的变量：<br>1) times=2 #显示系统常用信息的次数<br>2) sleeptime=0.1 #大部分行与行之间显示的间隔时间</p>
+
+
+
+<p>注意：部分功能需要安装了 sysstat 软件或搭建了 KVM 虚拟化平台后执行此脚本的用户能够使用 sudo virsh list 命令后才能实现</p>
+
+
+
+<h2>脚本：</h2>
+
+
+
+<pre class="wp-block-code"><code>#!/bin/bash
+
+####################### Separator ########################
+times=2
+sleeptime=0.1
+####################### Separator ########################
+
+nowtime=1
+
+while (( nowtime &lt;= times))
+do
+        echo -e "Start Monitoring: \c"
+	for i in {1..100}
+	do
+	        echo -e "#\c"
+		sleep 0.01
+        done
+	echo
+
+	sleep $sleeptime
+        host=`hostname`
+        echo -e "Name:\t\t\t\t\t\t \033&#91;1m$host\033&#91;0m"
+
+        ip=`ip a s | awk '/&#91;1-2]?&#91;0-9]{0,2}\.&#91;1-2]?&#91;0-9]{0,2}/&amp;&amp;!/127.0.0.1/{print $2}' | awk -F/ '{print $1}'`
+        for iip in `echo $ip`
+        do
+		sleep $sleeptime
+                echo -e "IP Address:\t\t\t\t\t \033&#91;1m$iip\033&#91;0m"
+        done
+
+        sleep $sleeptime
+
+        cpu=`top -bn 1 | awk -F',' '/^%Cpu/{print $4 }' | awk '{print $1}' | awk '{print 100-$1}'`
+        echo -e "CPU Usage (Total):\t\t\t\t \033&#91;1m$cpu%\033&#91;0m"
+
+        sleep $sleeptime
+
+        mem=`free | grep Mem | awk '{print $3/$2 * 100.0}' | egrep -o "&#91;1]?&#91;0-9]{0,2}\.&#91;0-9]"`
+        echo -e "Memory Usage (Total):\t\t\t\t \033&#91;1m$mem%\033&#91;0m"
+
+	directory=`df -h | grep -v run | grep -v boot | awk '$1~/\/dev/{print $6}'`
+        for idirectory in `echo $directory`
+        do
+                sleep $sleeptime
+                directoryusage=`df -h | grep -v run | grep -v boot | awk '$1~/\/dev/{print}' | grep $idirectory$ | awk '{print $5}'`
+		if &#91; $idirectory == / -o $idirectory == /ec  ];then
+                        echo -e "Directory Usage ($idirectory):\t\t\t\t \033&#91;1m$directoryusage\033&#91;0m"
+	        else
+                        echo -e "Directory Usage ($idirectory):\t\t\t \033&#91;1m$directoryusage\033&#91;0m"
+		fi
+        done
+
+	sudo -l | grep 'virsh list' &amp;&gt; /dev/null
+        if &#91; $? -eq 0 ];then
+	        sleep $sleeptime
+	        virtual=`sudo virsh list | egrep &#91;0-9] | wc -l`
+	        echo -e "Number of Virtual Machines (Total):\t\t \033&#91;1m$virtual\033&#91;0m"
+        fi
+
+        sleep $sleeptime
+
+        user=`who | wc -l`
+        echo -e "Number of User Logins (Total):\t\t\t \033&#91;1m$user\033&#91;0m"
+
+        soft=`rpm -qa | wc -l`
+        echo -e "Number of Softwares (Total):\t\t\t \033&#91;1m$soft\033&#91;0m"
+
+        sleep $sleeptime
+
+        port=`ss -ntulap | wc -l`
+        echo -e "Number of Open Ports (Total):\t\t\t \033&#91;1m$port\033&#91;0m"
+
+        which sar &amp;&gt; /dev/null
+        if &#91; $? -eq 0 ];then
+                networkcard=`ifconfig | awk -F: '/flags/&amp;&amp;!/lo/{print $1}'`
+                for inetworkcard in `echo $networkcard`
+                do
+                        networkread="`sar -n DEV 1 1 | grep $inetworkcard | awk '/&#91;0-9]&#91;0-9]:&#91;0-9]&#91;0-9]/{print $3/1000}'` m/s"
+                        networkwrite="`sar -n DEV 1 1 | grep $inetworkcard | awk '/&#91;0-9]&#91;0-9]:&#91;0-9]&#91;0-9]/{print $4/1000}'` m/s"
+			echo $inetworkcard | grep eth &amp;&gt; /dev/null
+			if &#91; $?  -ne 0 ];then
+	                echo -e "Network Card IO ($inetworkcard):\t\t\t \033&#91;1m$networkread\033&#91;0m (Read)\t\033&#91;1m$networkwrite\033&#91;0m (Write)"
+		        else
+	                echo -e "Network Card IO ($inetworkcard):\t\t\t\t \033&#91;1m$networkread\033&#91;0m (Read)\t\033&#91;1m$networkwrite\033&#91;0m (Write)"
+			fi
+                done
+        fi
+
+        which iostat &amp;&gt; /dev/null
+        if &#91; $? -eq 0 ];then
+	        disk=`iostat -d -k 1 1 | awk '!/^$/&amp;&amp;!/Device/&amp;&amp;!/Linux/{print $1}'`
+                for idisk in `echo $disk`
+	        do
+			sleep $sleeptime
+		        diskread="`iostat -d -k 1 1 | grep $idisk |  awk '{print $3/1000}'` m/s"
+		        diskwrite="`iostat -d -k 1 1 | grep $idisk |  awk '{print $4/1000}'` m/s"
+			echo $idisk | grep 'nvme' &amp;&gt; /dev/null
+			if &#91; $? -eq 0 ];then
+		                echo -e "Disk IO (/dev/$idisk):\t\t\t\t \033&#91;1m$diskread\033&#91;0m (Read)\t\033&#91;1m$diskwrite\033&#91;0m (Write)"
+		        else
+		                echo -e "Disk IO (/dev/$idisk):\t\t\t\t \033&#91;1m$diskread\033&#91;0m (Read)\t\033&#91;1m$diskwrite\033&#91;0m (Write)"
+			fi
+	        done
+
+        fi
+
+        echo -e "Complete Monitoring: \c"
+        for i in {1..97}
+        do
+                echo -e "#\c"
+                sleep 0.01
+        done
+        echo
+        sleep $sleeptime
+
+        let nowtime++
+done
+
+        echo -e "Terminal Monitoring: \c"
+        for i in {1..97}
+        do
+                echo -e "#\c"
+                sleep 0.01
+        done
+
+exit</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[排错] 解决 Linux 运行 tar 命令时报错 “tar: This does not look like a tar archive”</title>
+		<link>https://eternalcenter-now.github.io/debug-tar-this-does-not-look-like-a-tar-archive/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 11 Apr 2022 15:06:31 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Directory (系统目录)]]></category>
+		<category><![CDATA[System File (系统文件)]]></category>
+		<category><![CDATA[System Storage (系统存储)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23010</guid>
+
+					<description><![CDATA[报错代码： 解决方法： 或者：]]></description>
+										<content:encoded><![CDATA[
+<h2>报错代码：</h2>
+
+
+
+<pre class="wp-block-code"><code>tar: This does not look like a tar archive
+tar: Skipping to next header
+tar: Error exit delayed from previous errors</code></pre>
+
+
+
+<h2>解决方法：</h2>
+
+
+
+<pre class="wp-block-code"><code># gzip -d &lt;file&gt;</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># xz -d &lt;file&gt;</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Linux 加密压缩 （tar 版）</title>
+		<link>https://eternalcenter-now.github.io/encryption-compression-tar/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 15 Nov 2021 15:52:52 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Directory (系统目录)]]></category>
+		<category><![CDATA[System File (系统文件)]]></category>
+		<category><![CDATA[System File Security (系统文件安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Storage (系统存储)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=18392</guid>
+
+					<description><![CDATA[步骤一：创建测试文件 （补充：这里以创建 test.txt 文件为例） 步骤二：加密压缩文件或目录2.1 交互式加密压缩文件或目录 （补充：1) 这里以将 test.txt 文件加密压缩成 test1.tar.gz （压缩）包为例2) 如果要以 bzip2 的格式进行压缩，则将命令中的 -zcf 换成 -jcvf 将 test1.tar.gz 换成 test1.tar.bz23) 如果要以 xz 的格式进行压缩，则将命令中的 -zcf 换成 -Jcvf 将 test1.tar.gz 换成 test1.tar.xz） 2.2 非交互式加密压缩文件或目录 （补充：1) 这里以将 test.txt 文件加密压缩成 test1.tar.gz （压缩）包并且将密码设置为 eternalcenter 为例2) 如果要以 bzip2 的格式进行压缩，则将命令中的 -zcf 换成 -jcvf 将 test1.tar.gz 换成 test2.tar.bz23) 如果要以 xz 的格式进行压缩，则将命令中的 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/encryption-compression-tar/" class="more-link">Continue reading<span class="screen-reader-text"> "[步骤] Linux 加密压缩 （tar 版）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h4>步骤一：创建测试文件</h4>
+
+
+
+<pre class="wp-block-code"><code># touch test.txt</code></pre>
+
+
+
+<p>（补充：这里以创建 test.txt 文件为例）</p>
+
+
+
+<h4>步骤二：加密压缩文件或目录<br>2.1 交互式加密压缩文件或目录</h4>
+
+
+
+<pre class="wp-block-code"><code># tar -zcf - test.txt | openssl des3 -salt | dd of=test1.tar.gz
+enter des-ede3-cbc encryption password:
+Verifying - enter des-ede3-cbc encryption password:
+*** WARNING : deprecated key derivation used.
+Using -iter or -pbkdf2 would be better.
+0+1 records in
+0+1 records out
+224 bytes copied, 7.04902 s, 0.0 kB/s</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里以将 test.txt 文件加密压缩成 test1.tar.gz （压缩）包为例<br>2) 如果要以 bzip2 的格式进行压缩，则将命令中的 -zcf 换成 -jcvf 将 test1.tar.gz 换成 test1.tar.bz2<br>3) 如果要以 xz 的格式进行压缩，则将命令中的 -zcf 换成 -Jcvf 将 test1.tar.gz 换成 test1.tar.xz<br>）</p>
+
+
+
+<h4>2.2 非交互式加密压缩文件或目录</h4>
+
+
+
+<pre class="wp-block-code"><code># tar -zcf - test.txt | openssl des3 -salt -f eternalcenter | dd of=test2.tar.gz
+des3: Unrecognized flag f
+des3: Use -help for summary.
+0+0 records in
+0+0 records out
+0 bytes copied, 0.00376576 s, 0.0 kB/s</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里以将 test.txt 文件加密压缩成 test1.tar.gz （压缩）包并且将密码设置为 eternalcenter 为例<br>2) 如果要以 bzip2 的格式进行压缩，则将命令中的 -zcf 换成 -jcvf 将 test1.tar.gz 换成 test2.tar.bz2<br>3) 如果要以 xz 的格式进行压缩，则将命令中的 -zcf 换成 -Jcvf 将 test1.tar.gz 换成 test2.tar.xz<br>）</p>
+
+
+
+<h4>步骤三：解压加密文件或目录<br>3.1 交互式解压加密文件或目录<br>3.1.1 删除原测试目录和里面的文件</h4>
+
+
+
+<pre class="wp-block-code"><code># rm -rf test.txt</code></pre>
+
+
+
+<p>（补充：这里以删除 test.txt 文件为例）</p>
+
+
+
+<h4>3.1.2 交互式解压加密文件或目录</h4>
+
+
+
+<pre class="wp-block-code"><code># dd if=test2.tar.gz | openssl des3 -d | tar zxf -
+0+1 records in
+0+1 records out
+224 bytes copied, 0.000589721 s, 380 kB/s
+enter des-ede3-cbc decryption password:
+*** WARNING : deprecated key derivation used.
+Using -iter or -pbkdf2 would be better.</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里以解压 test2.tar.gz （压缩）包为例<br>2) 如果是 bzip2 格式的（压缩）包，则将命令中的 -zxf 换成 -jcvf 将 test1.tar.gz 换成 test1.tar.bz2<br>3) 如果是 xz 格式的（压缩）包，则将命令中的 -zxf 换成 -Jcvf 将 test1.tar.gz 换成 test1.tar.xz<br>）</p>
+
+
+
+<h4>3.2 非交互式解压加密文件或目录<br>3.2.1 删除原测试目录和里面的文件</h4>
+
+
+
+<pre class="wp-block-code"><code># rm -rf test.txt</code></pre>
+
+
+
+<p>（补充：这里以删除 test.txt 文件为例）</p>
+
+
+
+<h4>3.2.2 非交互式解压加密文件或目录</h4>
+
+
+
+<pre class="wp-block-code"><code># dd if=test1.tar.gz | openssl des3 -d -k eternalcenter | tar zxf -
+0+1 records in
+0+1 records out
+224 bytes copied, 0.000574539 s, 390 kB/s
+*** WARNING : deprecated key derivation used.
+Using -iter or -pbkdf2 would be better.</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里以解压 test1.tar.gz （压缩）包并且解压密码为 eternalcenter 为例<br>2) 如果是 bzip2 格式的（压缩）包，则将命令中的 -zxf 换成 -jcvf 将 test1.tar.gz 换成 test1.tar.bz2<br>3) 如果是 xz 格式的（压缩）包，则将命令中的 -zxf 换成 -Jcvf 将 test1.tar.gz 换成 test1.tar.xz<br>）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Linux 加密压缩 （zip 版）</title>
+		<link>https://eternalcenter-now.github.io/encryption-compression-zip/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 15 Nov 2021 15:48:09 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Directory (系统目录)]]></category>
+		<category><![CDATA[System File (系统文件)]]></category>
+		<category><![CDATA[System File Security (系统文件安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Storage (系统存储)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=18388</guid>
+
+					<description><![CDATA[步骤一：创建测试目录和测试文件 （补充：这里以创建 test 目录和里面的 test.txt 文件为例） 步骤二：加密压缩文件或目录2.1 交互式加密压缩文件或目录 （补充：这里以将 test 目录和里面的 test.txt 文件加密压缩成 test1.zip （压缩）包为例） 2.2 非交互式加密解压文件或目录 （补充：这里以将 test 目录和里面的 test.txt 文件加密压缩成 test2.zip （压缩）包并且将密码设置为 eternalcenter 为例） 步骤三：解压加密文件或目录3.1 交互式解压加密文件或目录3.1.1 删除原测试目录和里面的文件 （补充：这里以删除 test 目录和里面的文件为例） 3.1.2 交互式解压加密文件或目录 （补充：这里以解压 test2.zip （压缩）包为例） 3.2 非交互式解压加密文件或目录3.2.1 删除原测试目录和里面的文件 （补充：这里以删除 test 目录和里面的文件为例） 3.2.2 非交互式解压加密文件 （补充：这里以解压 test2.zip （压缩）包并且解压密码为 eternalcenter 为例）]]></description>
+										<content:encoded><![CDATA[
+<h4>步骤一：创建测试目录和测试文件</h4>
+
+
+
+<pre class="wp-block-code"><code># mkdir test
+# touch test/test.txt</code></pre>
+
+
+
+<p>（补充：这里以创建 test 目录和里面的 test.txt 文件为例）</p>
+
+
+
+<h4>步骤二：加密压缩文件或目录<br>2.1 交互式加密压缩文件或目录</h4>
+
+
+
+<pre class="wp-block-code"><code># zip -re test1.zip test
+Enter password: 
+Verify password: 
+  adding: test/ (stored 0%)
+  adding: test/test.txt (stored 0%)</code></pre>
+
+
+
+<p>（补充：这里以将 test 目录和里面的 test.txt 文件加密压缩成 test1.zip （压缩）包为例）</p>
+
+
+
+<h4>2.2 非交互式加密解压文件或目录</h4>
+
+
+
+<pre class="wp-block-code"><code># zip -rP eternalcenter test2.zip test
+  adding: test/ (stored 0%)
+  adding: test/test.txt (stored 0%)</code></pre>
+
+
+
+<p>（补充：这里以将 test 目录和里面的 test.txt 文件加密压缩成 test2.zip （压缩）包并且将密码设置为 eternalcenter 为例）</p>
+
+
+
+<h4>步骤三：解压加密文件或目录<br>3.1 交互式解压加密文件或目录<br>3.1.1 删除原测试目录和里面的文件</h4>
+
+
+
+<pre class="wp-block-code"><code># rm -rf test</code></pre>
+
+
+
+<p>（补充：这里以删除 test 目录和里面的文件为例）</p>
+
+
+
+<h4>3.1.2 交互式解压加密文件或目录</h4>
+
+
+
+<pre class="wp-block-code"><code># unzip test2.zip
+Archive:  test2.zip
+   creating: test/
+&#91;test2.zip] test/test.txt password: 
+ extracting: test/test.txt</code></pre>
+
+
+
+<p>（补充：这里以解压 test2.zip （压缩）包为例）</p>
+
+
+
+<h4>3.2 非交互式解压加密文件或目录<br>3.2.1 删除原测试目录和里面的文件</h4>
+
+
+
+<pre class="wp-block-code"><code># rm -rf test</code></pre>
+
+
+
+<p>（补充：这里以删除 test 目录和里面的文件为例）</p>
+
+
+
+<h4>3.2.2 非交互式解压加密文件</h4>
+
+
+
+<pre class="wp-block-code"><code># unzip -P eternalcenter test1.zip 
+Archive:  test1.zip
+   creating: test/
+ extracting: test/test.txt  </code></pre>
+
+
+
+<p>（补充：这里以解压 test2.zip （压缩）包并且解压密码为 eternalcenter 为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 df （显示存储信息）</title>
+		<link>https://eternalcenter-now.github.io/df/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 29 Oct 2021 07:56:47 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Storage (系统存储)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=18115</guid>
+
+					<description><![CDATA[案例一：显示所有存储信息 案例二：以方便人类阅读的方式显示存储信息 案例三：显示存储的 inode 信息 案例三：显示存储的格式]]></description>
+										<content:encoded><![CDATA[
+<h4 id="案例一-显示所有存储信息">案例一：显示所有存储信息</h4>
+
+
+
+<pre class="wp-block-code"><code># df -a</code></pre>
+
+
+
+<h4 id="案例二-以方便人类阅读的方式显示存储信息">案例二：以方便人类阅读的方式显示存储信息</h4>
+
+
+
+<pre class="wp-block-code"><code># df -h</code></pre>
+
+
+
+<h4 id="案例三-显示存储的-inode-信息"> 案例三：显示存储的 inode 信息</h4>
+
+
+
+<pre class="wp-block-code"><code># df -i</code></pre>
+
+
+
+<h4 id="案例三-显示存储的格式"> 案例三：显示存储的格式</h4>
+
+
+
+<pre class="wp-block-code"><code># df -T</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Linux 常见存储和存储类型介绍</title>
+		<link>https://eternalcenter-now.github.io/introduction-to-linux-common-storage-and-storage-types/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Thu, 19 Aug 2021 12:31:20 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[FTP]]></category>
+		<category><![CDATA[HTTP]]></category>
+		<category><![CDATA[Iscsi]]></category>
+		<category><![CDATA[NFS]]></category>
+		<category><![CDATA[Samba]]></category>
+		<category><![CDATA[Services (服务)]]></category>
+		<category><![CDATA[Storage Services (存储服务)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Computer & System Hardware & System Installation & System Upgradation (系统电脑 & 系统硬件 & 系统安装 & 系统升级)]]></category>
+		<category><![CDATA[System Hardware (系统硬件)]]></category>
+		<category><![CDATA[System Storage (系统存储)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=17522</guid>
+
+					<description><![CDATA[内容一：常见的存储 1. DAS（直连存储），就是接在主板上的硬盘2. NAS（网络附加存储），例如：NFS、Samba、FTP、HTTP，优点是管理简单，缺点是单点故障3. SAN（网络块存储），例如：Iscsi4. 分布时云存储，例如：Ceph、Swift 内容二：常见的存储类型 1. Block-based access（基于块存储的访问），对应的是块存储（block），例如：直接接在主板上的硬盘、Iscsi、Ceph2. File-based access（基于文件系统的访问），对应的是文件系统存储（filesystem），例如：NFS、Samba、FTP、HTTP、Ceph3. Object-based access（基于对象的访问），对应的是对象存储（object），例如：Ceph]]></description>
+										<content:encoded><![CDATA[
+<h4>内容一：常见的存储</h4>
+
+
+
+<p>1. DAS（直连存储），就是接在主板上的硬盘<br>2. NAS（网络附加存储），例如：NFS、Samba、FTP、HTTP，优点是管理简单，缺点是单点故障<br>3. SAN（网络块存储），例如：Iscsi<br>4. 分布时云存储，例如：Ceph、Swift</p>
+
+
+
+<h4>内容二：常见的存储类型</h4>
+
+
+
+<p>1. Block-based access（基于块存储的访问），对应的是块存储（block），例如：直接接在主板上的硬盘、Iscsi、Ceph<br>2. File-based access（基于文件系统的访问），对应的是文件系统存储（filesystem），例如：NFS、Samba、FTP、HTTP、Ceph<br>3. Object-based access（基于对象的访问），对应的是对象存储（object），例如：Ceph</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Linux 格式化特点</title>
+		<link>https://eternalcenter-now.github.io/linux-formatting-features/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Thu, 19 Aug 2021 12:02:18 +0000</pubDate>
+				<category><![CDATA[Ceph]]></category>
+		<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Clusters (集群)]]></category>
+		<category><![CDATA[Distributed Cloud Storage Clusters (分布式云存储集群)]]></category>
+		<category><![CDATA[Load Balancing and High Availability Clusters (负载均衡加高可用集群)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Computer & System Hardware & System Installation & System Upgradation (系统电脑 & 系统硬件 & 系统安装 & 系统升级)]]></category>
+		<category><![CDATA[System Hardware (系统硬件)]]></category>
+		<category><![CDATA[System Storage (系统存储)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=17520</guid>
+
+					<description><![CDATA[内容一：格式化后会产生的分区 格式化会格式出 inode 区和 block 区 内容二：inode 区和 block 区的作用 inode 区默认一格大小是 512 个字节，存储哪一份数据存在了哪些 block 里以及数据的所属者、权限创建时间等 metadata 元数据block 区默认一格大小是 4k，只存储数据本身 内容三：Linux 文件格式的特点 ext3 和 ext4 的 inode 区每一格较小，而 xfs 的 inode 区每一格更大，可以存储更多种类，例如快照等 metadata 元数据]]></description>
+										<content:encoded><![CDATA[
+<h4>内容一：格式化后会产生的分区</h4>
+
+
+
+<p>格式化会格式出 inode 区和 block 区</p>
+
+
+
+<h4>内容二：inode 区和 block 区的作用</h4>
+
+
+
+<p>inode 区默认一格大小是 512 个字节，存储哪一份数据存在了哪些 block 里以及数据的所属者、权限创建时间等 metadata 元数据<br>block 区默认一格大小是 4k，只存储数据本身</p>
+
+
+
+<h4>内容三：Linux 文件格式的特点</h4>
+
+
+
+<p>ext3 和 ext4 的 inode 区每一格较小，而 xfs 的 inode 区每一格更大，可以存储更多种类，例如快照等 metadata 元数据</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 fdisk （硬盘的分区和显示）</title>
+		<link>https://eternalcenter-now.github.io/fdisk/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Thu, 22 Jul 2021 08:06:28 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Storage (系统存储)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=16921</guid>
+
+					<description><![CDATA[内容一：给一个硬盘分区 （补充：这里以给 /dev/sda 硬盘分区为例，键入以上命令之后，可以根据提示进行分区操作） 内容二：显示已有分区情况]]></description>
+										<content:encoded><![CDATA[
+<h4 id="内容一-给一个硬盘分区">内容一：给一个硬盘分区</h4>
+
+
+
+<pre class="wp-block-code"><code># fdisk /dev/sda</code></pre>
+
+
+
+<p>（补充：这里以给 /dev/sda 硬盘分区为例，键入以上命令之后，可以根据提示进行分区操作）</p>
+
+
+
+<h4 id="内容二-显示已有分区情况">内容二：显示已有分区情况</h4>
+
+
+
+<pre class="wp-block-code"><code># fdisk -l</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Linux BIOS 和 EFI 的区分 （系统安装时启动分区种类的显示）</title>
+		<link>https://eternalcenter-now.github.io/bios-efi/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Thu, 04 Mar 2021 08:46:20 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Computer & System Hardware & System Installation & System Upgradation (系统电脑 & 系统硬件 & 系统安装 & 系统升级)]]></category>
+		<category><![CDATA[System Hardware (系统硬件)]]></category>
+		<category><![CDATA[System Installation (系统安装)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Storage (系统存储)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=13591</guid>
+
+					<description><![CDATA[内容一：判断 Linux 是 BIOS 还是 EFI 的方法 （补充：如果 /sys/firmware/efi 目录存在，则代表系统是 EFI，否则系统是 BIOS） 内容二：判断 Linux 是 BIOS 还是 EFI 的脚本]]></description>
+										<content:encoded><![CDATA[
+<h4 id="内容一-判断-linux-是-bios-还是-efi-的方法">内容一：判断 Linux 是 BIOS 还是 EFI 的方法</h4>
+
+
+
+<pre class="wp-block-code"><code># ls -ld /sys/firmware/efi</code></pre>
+
+
+
+<p>（补充：如果 /sys/firmware/efi 目录存在，则代表系统是 EFI，否则系统是 BIOS）</p>
+
+
+
+<h4 id="内容二-判断-linux-是-bios-还是-efi-的脚本">内容二：判断 Linux 是 BIOS 还是 EFI 的脚本</h4>
+
+
+
+<pre class="wp-block-code"><code># &#91; -d /sys/firmware/efi ] &amp;&amp; echo UEFI || echo BIOS</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 rm （删除目录或文件）</title>
+		<link>https://eternalcenter-now.github.io/rm/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Thu, 04 Mar 2021 08:31:42 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Directory (系统目录)]]></category>
+		<category><![CDATA[System File (系统文件)]]></category>
+		<category><![CDATA[System Storage (系统存储)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=13585</guid>
+
+					<description><![CDATA[案例一：删除某一个文件 案例二：删除某一个目录以及目录里的所有文件 案例三：非交互式删除某一个目录以及目录里的所有文件 案例四：非交互式删除当前目录下的所有隐藏文件 案例五：非交互式删除所有特定后缀名称的文件 （补充：这里以非交互式删除所有以 txt 作为后缀名称的文件为例）]]></description>
+										<content:encoded><![CDATA[
+<h4>案例一：删除某一个文件</h4>
+
+
+
+<pre class="wp-block-code"><code># rm &lt;file></code></pre>
+
+
+
+<h4>案例二：删除某一个目录以及目录里的所有文件</h4>
+
+
+
+<pre class="wp-block-code"><code># rm -r &lt;directory></code></pre>
+
+
+
+<h4>案例三：非交互式删除某一个目录以及目录里的所有文件</h4>
+
+
+
+<pre class="wp-block-code"><code># rm -rf &lt;directory></code></pre>
+
+
+
+<h4>案例四：非交互式删除当前目录下的所有隐藏文件</h4>
+
+
+
+<pre class="wp-block-code"><code># rm -rf .#*</code></pre>
+
+
+
+<h4>案例五：非交互式删除所有特定后缀名称的文件</h4>
+
+
+
+<pre class="wp-block-code"><code># rm -rf *txt</code></pre>
+
+
+
+<p>（补充：这里以非交互式删除所有以 txt 作为后缀名称的文件为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[CONTENT] Linux Partition Advice</title>
+		<link>https://eternalcenter-now.github.io/partition-advice-en/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 18 Dec 2020 07:34:14 +0000</pubDate>
+				<category><![CDATA[English (英文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Storage (系统存储)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=13101</guid>
+
+					<description><![CDATA[中文 Content One: BIOS Partition Advice1.1 Partition Planning 1.2 Standard Partition and Logical Partition 1.3 Format 1.4 Mount Parameter Content Two：EFI Partition Advice2.1 Partition Planning 2.2 Standard Partition and Logical Partition 2.3 Format 2.4 Mount Parameter]]></description>
+										<content:encoded><![CDATA[
+<p class="has-text-align-right has-vivid-red-color has-text-color has-medium-font-size"><a href="https://eternalcenter-now.github.io/?p=13097" data-type="URL">中文</a></p>
+
+
+
+<h4>Content One: BIOS Partition Advice<br>1.1 Partition Planning</h4>
+
+
+
+<pre class="wp-block-code"><code>/boot    >= 5G
+/var/tmp >= 10G
+/tmp     >= 10G
+swap     >= 2G
+/        all remaining space</code></pre>
+
+
+
+<h4>1.2 Standard Partition and Logical Partition</h4>
+
+
+
+<pre class="wp-block-code"><code>/boot    Use standard partition
+/var/tmp Use logical partition
+/tmp     Use logical partition
+swap     Use logical partition
+/        Use logical partition</code></pre>
+
+
+
+<h4>1.3 Format</h4>
+
+
+
+<pre class="wp-block-code"><code>/boot    xfs
+/var/tmp xfs
+/tmp     xfs
+swap     swap
+/        xfs</code></pre>
+
+
+
+<h4>1.4 Mount Parameter</h4>
+
+
+
+<pre class="wp-block-code"><code>/boot    defaults
+/var/tmp rw,nosuid,nodev,noexec,relatime,strictatime
+/tmp     rw,nosuid,nodev,noexec,relatime,strictatime
+swap     defaults
+/        defaults</code></pre>
+
+
+
+<h4>Content Two：EFI Partition Advice<br>2.1 Partition Planning</h4>
+
+
+
+<pre class="wp-block-code"><code>/boot/efi >= 5G
+/var/tmp  >= 10G
+/tmp      >= 10G
+swap      >= 2G
+/         all remaining space</code></pre>
+
+
+
+<h4>2.2 Standard Partition and Logical Partition</h4>
+
+
+
+<pre class="wp-block-code"><code>/boot/efi Use standard partition
+/var/tmp  Use logical partition
+/tmp      Use logical partition
+swap      Use logical partition
+/         Use logical partition</code></pre>
+
+
+
+<h4>2.3 Format</h4>
+
+
+
+<pre class="wp-block-code"><code>/boot/efi vfat
+/var/tmp  xfs
+/tmp      xfs
+swap      swap
+/         xfs</code></pre>
+
+
+
+<h4>2.4 Mount Parameter</h4>
+
+
+
+<pre class="wp-block-code"><code>/boot/efi defaults
+/var/tmp  rw,nosuid,nodev,noexec,relatime,strictatime
+/tmp      rw,nosuid,nodev,noexec,relatime,strictatime
+swap      defaults
+/         defaults</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Linux 分区建议</title>
+		<link>https://eternalcenter-now.github.io/partition-advice-zh_cn/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 18 Dec 2020 07:24:01 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Storage (系统存储)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=13097</guid>
+
+					<description><![CDATA[English 内容一：BIOS 分区建议1.1 分区规划 1.2 标准分区和逻辑分区 1.3 格式化 1.4 挂载参数 内容二：EFI 分区建议2.1 分区规划 2.2 标准分区和逻辑分区 2.3 格式化 2.4 挂载参数]]></description>
+										<content:encoded><![CDATA[
+<p class="has-text-align-right has-vivid-red-color has-text-color has-medium-font-size"><a href="https://eternalcenter-now.github.io/variable-default-value-en_us/" data-type="URL" data-id="https://eternalcenter-now.github.io/variable-default-value-en_us/">English</a></p>
+
+
+
+<h4>内容一：BIOS 分区建议<br>1.1 分区规划</h4>
+
+
+
+<pre class="wp-block-code"><code>/boot    &gt;= 5G
+/var/tmp &gt;= 10G
+/tmp     &gt;= 10G
+swap     &gt;= 2G
+/        all remaining space</code></pre>
+
+
+
+<h4>1.2 标准分区和逻辑分区</h4>
+
+
+
+<pre class="wp-block-code"><code>/boot    Use standard partition
+/var/tmp Use logical partition
+/tmp     Use logical partition
+swap     Use logical partition
+/        Use logical partition</code></pre>
+
+
+
+<h4>1.3 格式化</h4>
+
+
+
+<pre class="wp-block-code"><code>/boot    xfs
+/var/tmp xfs
+/tmp     xfs
+swap     swap
+/        xfs</code></pre>
+
+
+
+<h4>1.4 挂载参数</h4>
+
+
+
+<pre class="wp-block-code"><code>/boot    defaults
+/var/tmp rw,nosuid,nodev,noexec,relatime,strictatime
+/tmp     rw,nosuid,nodev,noexec,relatime,strictatime
+swap     defaults
+/        defaults</code></pre>
+
+
+
+<h4>内容二：EFI 分区建议<br>2.1 分区规划</h4>
+
+
+
+<pre class="wp-block-code"><code>/boot/efi &gt;= 5G
+/var/tmp  &gt;= 10G
+/tmp      &gt;= 10G
+swap      &gt;= 2G
+/         all remaining space</code></pre>
+
+
+
+<h4>2.2 标准分区和逻辑分区</h4>
+
+
+
+<pre class="wp-block-code"><code>/boot/efi Use standard partition
+/var/tmp  Use logical partition
+/tmp      Use logical partition
+swap      Use logical partition
+/         Use logical partition</code></pre>
+
+
+
+<h4>2.3 格式化</h4>
+
+
+
+<pre class="wp-block-code"><code>/boot/efi vfat
+/var/tmp  xfs
+/tmp      xfs
+swap      swap
+/         xfs</code></pre>
+
+
+
+<h4>2.4 挂载参数</h4>
+
+
+
+<pre class="wp-block-code"><code>/boot/efi defaults
+/var/tmp  rw,nosuid,nodev,noexec,relatime,strictatime
+/tmp      rw,nosuid,nodev,noexec,relatime,strictatime
+swap      defaults
+/         defaults</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 lsblk （显示硬盘信息）</title>
+		<link>https://eternalcenter-now.github.io/lsblk/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Tue, 28 Jul 2020 09:10:43 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Storage (系统存储)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=10358</guid>
+
+					<description><![CDATA[内容一：硬盘信息显示命令 lsblk 的选项 -a 或者 &#8211;all 显示所有设备-b 或者 &#8211;bytes 以字节为单位而非易读的格式来显示 SIZE-d 或者 &#8211;nodeps 不显示从属设备(slave)或占位设备(holder)-D 或者 &#8211;discard 显示时丢弃能力-z 或者 &#8211;zoned print zone model-e 或者 &#8211;exclude &#60;列表&#62; 根据主设备号排除设备(默认：内存盘)-f 或者 &#8211;fs 输出文件系统信息-i 或者 &#8211;ascii 只使用 ascii 字符-I 或者 &#8211;include &#60;列表&#62; 只显示有指定主设备号的设备-J 或者 &#8211;json 使用 JSON 输出格式-l 或者 &#8211;list 使用列表格式的输出-T 或者 &#8211;tree use tree format output-m 或者 &#8211;perms 输出权限信息-n &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/lsblk/" class="more-link">Continue reading<span class="screen-reader-text"> "[命令] Linux 命令 lsblk （显示硬盘信息）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h4 id="内容一-硬盘信息显示命令-lsblk-的选项">内容一：硬盘信息显示命令 lsblk 的选项</h4>
+
+
+
+<p>-a 或者 &#8211;all 显示所有设备<br>-b 或者 &#8211;bytes 以字节为单位而非易读的格式来显示 SIZE<br>-d 或者 &#8211;nodeps 不显示从属设备(slave)或占位设备(holder)<br>-D 或者 &#8211;discard 显示时丢弃能力<br>-z 或者 &#8211;zoned print zone model<br>-e 或者 &#8211;exclude &lt;列表&gt; 根据主设备号排除设备(默认：内存盘)<br>-f 或者 &#8211;fs 输出文件系统信息<br>-i 或者 &#8211;ascii 只使用 ascii 字符<br>-I 或者 &#8211;include &lt;列表&gt; 只显示有指定主设备号的设备<br>-J 或者 &#8211;json 使用 JSON 输出格式<br>-l 或者 &#8211;list 使用列表格式的输出<br>-T 或者 &#8211;tree use tree format output<br>-m 或者 &#8211;perms 输出权限信息<br>-n 或者 &#8211;noheadings 不显示标题<br>-o 或者 &#8211;output &lt;列表&gt; 输出列<br>-O 或者 &#8211;output-all 输出所有列<br>-p 或者 &#8211;paths 显示完整设备路径<br>-P 或者 &#8211;pairs 使用 key=“value” 输出格式<br>-r 或者 &#8211;raw 使用原生输出格式<br>-s 或者 &#8211;inverse 反向依赖<br>-S 或者 &#8211;scsi 输出有关 SCSI 设备的信息<br>-t 或者 &#8211;topology 输出拓扑信息<br>-x 或者 &#8211;sort &lt;列&gt; 按&lt;列&gt;对输出排序<br>&#8211;sysroot &lt;dir&gt; 使用指定目录当作根目录<br>-h 或者 &#8211;help 显示帮助<br>-V 或者 &#8211;version 显示版本</p>
+
+
+
+<h4 id="内容二-信息显示命令-lsblk-的使用-2-1-使用案例一-使用-lsblk-命令显示所有硬盘情况">内容二：信息显示命令 lsblk 的使用<br>2.1 使用案例一：使用 lsblk 命令显示所有硬盘情况</h4>
+
+
+
+<pre class="wp-block-code"><code># lsblk</code></pre>
+
+
+
+<h4 id="2-2-使用案例二-使用-lsblk-命令显示所有硬盘的格式化信息">2.2 使用案例二：使用 lsblk 命令显示所有硬盘的格式化信息</h4>
+
+
+
+<pre class="wp-block-code"><code># lsblk -f</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># lsblk --fs</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 mkfs （格式化）</title>
+		<link>https://eternalcenter-now.github.io/mkfs/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Tue, 28 Jul 2020 08:47:06 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Storage (系统存储)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=10356</guid>
+
+					<description><![CDATA[内容一：格式化命令 mkfs 可格式化的格式 内容二：格式化命令 mkfs 的使用案例 或者： （补充：这里以将 /dev/vdb 格式化为 xfs 格式为例）]]></description>
+										<content:encoded><![CDATA[
+<h4>内容一：格式化命令 mkfs 可格式化的格式</h4>
+
+
+
+<pre class="wp-block-code"><code>ext2
+ext3
+ext4
+xfs
+minix
+cramfs</code></pre>
+
+
+
+<h4>内容二：格式化命令 mkfs 的使用案例</h4>
+
+
+
+<pre class="wp-block-code"><code># mkfs.xfs /dev/vdb</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># mkfs -t xfs /dev/vdb</code></pre>
+
+
+
+<p>（补充：这里以将 /dev/vdb 格式化为 xfs 格式为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] 临时文件或目录的自动删除（CentOS Linux &#038; RHEL 版）</title>
+		<link>https://eternalcenter-now.github.io/clean-auto-centos-linux-rhel/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 24 Jul 2020 12:51:14 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Directory (系统目录)]]></category>
+		<category><![CDATA[System File (系统文件)]]></category>
+		<category><![CDATA[System Storage (系统存储)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=10248</guid>
+
+					<description><![CDATA[步骤一：创建自动清理临时文件或目录的配置文件 将以下内容： 修改为： （补充：这样设置后会将 /tmp 目录下，权限为 1777 超过 5 天的文件或目录删除） 步骤二：自动清理临时文件或目录]]></description>
+										<content:encoded><![CDATA[
+<h4>步骤一：创建自动清理临时文件或目录的配置文件</h4>
+
+
+
+<pre class="wp-block-code"><code># cp /usr/lib/tmpfiles.d/tmp.conf /etc/tmpfiles.d/
+# vim /etc/tmpfiles.d/tmp.conf</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+q /tmp 1777 root root 10d
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+q /tmp 1777 root root 5d
+......</code></pre>
+
+
+
+<p>（补充：这样设置后会将 /tmp 目录下，权限为 1777 超过 5 天的文件或目录删除）</p>
+
+
+
+<h4>步骤二：自动清理临时文件或目录</h4>
+
+
+
+<pre class="wp-block-code"><code># systemd-tmpfiles --clean /etc/tmpfiles.d/tmp.conf </code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[排错] 解决 Linux 硬盘盘头错误</title>
+		<link>https://eternalcenter-now.github.io/debug-harddisk-heard/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 20 Jul 2020 03:15:57 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Storage (系统存储)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=10098</guid>
+
+					<description><![CDATA[解决方法： 步骤一：显示硬盘盘头信息 （补充：这里以 sda 硬盘为例） 步骤二：恢复硬盘盘头信息2.1 创建盘现有头信息的备份文件 （补充：这里以将备份文件命名为 /etc/lvm/backup/MG-Log-VG 为例，1Rkkyh-jl2D-RC0v-Ag4f-rRkk-EPTc-aQUFPq 是此硬盘的 uuid 号） 2.2 恢复硬盘盘头信息 步骤三：显示盘头信息是否恢复成功]]></description>
+										<content:encoded><![CDATA[
+<h2 id="解决方法">解决方法：</h2>
+
+
+
+<h4 id="步骤一-显示硬盘盘头信息">步骤一：显示硬盘盘头信息</h4>
+
+
+
+<pre class="wp-block-code"><code># hexdump -C sda.header
+# hexdump -C sda.header  | less</code></pre>
+
+
+
+<p>（补充：这里以 sda 硬盘为例）</p>
+
+
+
+<h4 id="步骤二-恢复硬盘盘头信息2-1-创建盘现有头信息的备份文件">步骤二：恢复硬盘盘头信息<br>2.1 创建盘现有头信息的备份文件</h4>
+
+
+
+<pre class="wp-block-code"><code># pvcreate --restorefile /etc/lvm/backup/MG-Log-VG  --uuid 1Rkkyh-jl2D-RC0v-Ag4f-rRkk-EPTc-aQUFPq  /dev/sda</code></pre>
+
+
+
+<p>（补充：这里以将备份文件命名为 /etc/lvm/backup/MG-Log-VG 为例，1Rkkyh-jl2D-RC0v-Ag4f-rRkk-EPTc-aQUFPq 是此硬盘的 uuid 号）</p>
+
+
+
+<h4 id="2-2-恢复硬盘盘头信息">2.2 恢复硬盘盘头信息</h4>
+
+
+
+<pre class="wp-block-code"><code># vgcfgrestore --verbose  --file /etc/lvm/backup/MG-Log-VG MG-Log-VG</code></pre>
+
+
+
+<h4 id="步骤三-显示盘头信息是否恢复成功">步骤三：显示盘头信息是否恢复成功</h4>
+
+
+
+<pre class="wp-block-code"><code># pvdisplay /dev/sda
+# df -h</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 rsync （差异同步）</title>
+		<link>https://eternalcenter-now.github.io/rsync/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Thu, 16 Jul 2020 12:18:12 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Directory (系统目录)]]></category>
+		<category><![CDATA[System File (系统文件)]]></category>
+		<category><![CDATA[System Storage (系统存储)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=10070</guid>
+
+					<description><![CDATA[案例一：将一个地方里的所有差异数据同步到另一个地方 案例二：将一个地方里的所有差异数据同步到另一个地方，并且被同步的地方有的数据而原地方没有的数据都将被删除]]></description>
+										<content:encoded><![CDATA[
+<h4>案例一：将一个地方里的所有差异数据同步到另一个地方</h4>
+
+
+
+<pre class="wp-block-code"><code># rsync -avDogp &lt;source directory>/* &lt;target directory></code></pre>
+
+
+
+<h4>案例二：将一个地方里的所有差异数据同步到另一个地方，并且被同步的地方有的数据而原地方没有的数据都将被删除</h4>
+
+
+
+<pre class="wp-block-code"><code># rsync -avDogp --delete &lt;source directory>/* &lt;target directory></code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[实验] 自动挂载服务的搭建 （通过 Autofs 和 NFS 实现） （CentOS Linux 8 版）</title>
+		<link>https://eternalcenter-now.github.io/autofs-linux-centos8/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 26 Jun 2020 16:07:59 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[NFS]]></category>
+		<category><![CDATA[Services (服务)]]></category>
+		<category><![CDATA[Storage Services (存储服务)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Directory (系统目录)]]></category>
+		<category><![CDATA[System Storage (系统存储)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<category><![CDATA[纪念 Anniversary]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=9969</guid>
+
+					<description><![CDATA[纪念：站主于 2020 年 6 月完成了此开源实验，并将过程中的所有命令经过整理和注释以后，形成以下教程 步骤目录： 步骤一：规划拓扑1.1 服务器列表1.2 服务器列表简介 步骤二：系统环境要求 步骤三：所有服务器安装 NFS 服务3.1 所有服务器安装 NFS 服务3.2 设置所有服务器开机自启 NFS 服务3.3 所有服务器启动 NFS 服务 步骤四：配置 NFS 服务4.1 创建用于 NFS 服务的目录4.1.1 创建被 NFS 服务共享的目录4.1.2 创建用于自动挂载 NFS 服务分享目录的目录4.2 配置服务端的 NFS 服务配置文件4.2.1 在服务端上添加可被 NFS 服务挂载的选项4.2.2 让刚刚修改的 NFS 服务配置文件生效4.3 部署客户端的 Autofs 自动挂载服务4.3.1 安装 Autofs 服务4.3.2 设置客户端开机自启 Autofs 服务4.3.3 在客户端上设置 Autofs 自动挂载服务4.3.3.1 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/autofs-linux-centos8/" class="more-link">Continue reading<span class="screen-reader-text"> "[实验] 自动挂载服务的搭建 （通过 Autofs 和 NFS 实现） （CentOS Linux 8 版）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<p class="has-vivid-red-color has-text-color has-medium-font-size"><strong><strong>纪念：站主于 2020 年 6 月完成了此开源实验，并将过程中的所有命令经过整理和注释以后，形成以下教程</strong></strong></p>
+
+
+
+<h2 id="步骤目录">步骤目录：</h2>
+
+
+
+<h4 id="步骤一-规划拓扑1-1-服务器列表1-2-服务器列表简介">步骤一：规划拓扑<br>1.1 服务器列表<br>1.2 服务器列表简介</h4>
+
+
+
+<h4 id="步骤二-系统环境要求">步骤二：系统环境要求</h4>
+
+
+
+<h4 id="步骤三-所有服务器安装-nfs-服务3-1-所有服务器安装-nfs-服务3-2-设置所有服务器开机自启-nfs-服务3-3-所有服务器启动-nfs-服务">步骤三：所有服务器安装 NFS 服务<br>3.1 所有服务器安装 NFS 服务<br>3.2 设置所有服务器开机自启 NFS 服务<br>3.3 所有服务器启动 NFS 服务</h4>
+
+
+
+<h4 id="步骤四-配置-nfs-服务4-1-创建用于-nfs-服务的目录4-1-1-创建被-nfs-服务共享的目录4-1-2-创建用于自动挂载-nfs-服务分享目录的目录4-2-配置服务端的-nfs-服务配置文件4-2-1-在服务端上添加可被-nfs-服务挂载的选项4-2-2-让刚刚修改的-nfs-服务配置文件生效4-3-部署客户端的-autofs-自动挂载服务4-3-1-安装-autofs-服务4-3-2-设置客户端开机自启-autofs-服务4-3-3-在客户端上设置-autofs-自动挂载服务4-3-3-1-在客户端上设置-autofs-自动挂载的主配置文件4-3-3-2-在客户端上设置-autofs-的从配置文件4-3-4-让刚刚修改的-autofs-自动挂载服务配置文件生效">步骤四：配置 NFS 服务<br>4.1 创建用于 NFS 服务的目录<br>4.1.1 创建被 NFS 服务共享的目录<br>4.1.2 创建用于自动挂载 NFS 服务分享目录的目录<br>4.2 配置服务端的 NFS 服务配置文件<br>4.2.1 在服务端上添加可被 NFS 服务挂载的选项<br>4.2.2 让刚刚修改的 NFS 服务配置文件生效<br>4.3 部署客户端的 Autofs 自动挂载服务<br>4.3.1 安装 Autofs 服务<br>4.3.2 设置客户端开机自启 Autofs 服务<br>4.3.3 在客户端上设置 Autofs 自动挂载服务<br>4.3.3.1 在客户端上设置 Autofs 自动挂载的主配置文件<br>4.3.3.2 在客户端上设置 Autofs 的从配置文件<br>4.3.4 让刚刚修改的 Autofs 自动挂载服务配置文件生效</h4>
+
+
+
+<h4 id="步骤五-显示-autofs-自动挂载服务是否设置成功5-1-显示客户端当前的目录挂载情况5-2-进入到-autofs-自动挂载的目录5-3-再次显示客户端当前的目录挂载情况">步骤五：显示 Autofs 自动挂载服务是否设置成功<br>5.1 显示客户端当前的目录挂载情况<br>5.2 进入到 Autofs 自动挂载的目录<br>5.3 再次显示客户端当前的目录挂载情况</h4>
+
+
+
+<h2 id="具体的操作步骤">具体的操作步骤：</h2>
+
+
+
+<h4 id="步骤一-规划拓扑1-1-服务器列表">步骤一：规划拓扑<br>1.1 服务器列表</h4>
+
+
+
+<p>服务端 192.168.101.10<br>客户端 192.168.101.11</p>
+
+
+
+<h4 id="1-2-服务器列表简介">1.2 服务器列表简介</h4>
+
+
+
+<p>1) 服务器提供 NFS 服务将自己的目录分享<br>2) 客户端挂载和使用 NFS 服务将服务端分享的目录挂载在自己的目录上</p>
+
+
+
+<h4 id="步骤二-系统环境要求">步骤二：系统环境要求</h4>
+
+
+
+<p>1) 所有服务器的系统都需要是 CentOS 8 版本<br>2) 所有服务器都要关闭防火墙<br>3) 所有服务器系统都要配置好可用的软件源<br>4) 需要按照拓扑图给对应的服务器配置好 IP 地址和主机名<br>5) 所有服务器都要可以相互 ping 通自己和对方的 IP 地址和主机名</p>
+
+
+
+<h4 id="步骤三-所有服务器安装-nfs-服务3-1-所有服务器安装-nfs-服务">步骤三：所有服务器安装 NFS 服务<br>3.1 所有服务器安装 NFS 服务</h4>
+
+
+
+<p>（分别在服务端和客户端上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># yum -y install rpcbind nfs-utils</code></pre>
+
+
+
+<h4 id="3-2-设置所有服务器开机自启-nfs-服务">3.2 设置所有服务器开机自启 NFS 服务</h4>
+
+
+
+<p>（分别在服务端和客户端上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># systemctl enable nfs-server</code></pre>
+
+
+
+<h4 id="3-3-所有服务器启动-nfs-服务">3.3 所有服务器启动 NFS 服务</h4>
+
+
+
+<p>（分别在服务端和客户端上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># systemctl start nfs-server</code></pre>
+
+
+
+<h4 id="步骤四-配置-nfs-服务4-1-创建用于-nfs-服务的目录4-1-1-创建被-nfs-服务共享的目录">步骤四：配置 NFS 服务<br>4.1 创建用于 NFS 服务的目录<br>4.1.1 创建被 NFS 服务共享的目录</h4>
+
+
+
+<p>（只在服务端上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># mkdir /nfsshare</code></pre>
+
+
+
+<h4 id="4-1-2-创建用于自动挂载-nfs-服务分享目录的目录">4.1.2 创建用于自动挂载 NFS 服务分享目录的目录</h4>
+
+
+
+<p>（只在客户端上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># mkdir /autofs</code></pre>
+
+
+
+<h4 id="4-2-配置服务端的-nfs-服务配置文件4-2-1-在服务端上添加可被-nfs-服务挂载的选项">4.2 配置服务端的 NFS 服务配置文件<br>4.2.1 在服务端上添加可被 NFS 服务挂载的选项</h4>
+
+
+
+<p>（只在服务端上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/exports</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+/nfsshare 192.168.101.0/24(rw,sync,no_root_squash,no_subtree_check)</code></pre>
+
+
+
+<p>（补充：这里的 192.168.101.0.24 是客户端的 IP 地址所在的网段）</p>
+
+
+
+<h4 id="4-2-2-让刚刚修改的-nfs-服务配置文件生效">4.2.2 让刚刚修改的 NFS 服务配置文件生效</h4>
+
+
+
+<p>（只在服务端上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># exportfs -a</code></pre>
+
+
+
+<h4 id="4-3-部署客户端的-autofs-自动挂载服务4-3-1-安装-autofs-服务">4.3 部署客户端的 Autofs 自动挂载服务<br>4.3.1 安装 Autofs 服务</h4>
+
+
+
+<p>（只在客户端上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># yum -y install autofs</code></pre>
+
+
+
+<h4 id="4-3-2-设置客户端开机自启-autofs-服务">4.3.2 设置客户端开机自启 Autofs 服务</h4>
+
+
+
+<p>（只在客户端上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># systemctl enable autofs</code></pre>
+
+
+
+<h4 id="4-3-3-在客户端上设置-autofs-自动挂载服务4-3-3-1-在客户端上设置-autofs-自动挂载的主配置文件">4.3.3 在客户端上设置 Autofs 自动挂载服务<br>4.3.3.1 在客户端上设置 Autofs 自动挂载的主配置文件</h4>
+
+
+
+<p>（只在客户端上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/auto.master</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+#
+/misc   /etc/auto.misc
+#
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+/misc   /etc/auto.misc
+/autofs /etc/auto.autofs
+......</code></pre>
+
+
+
+<p>（补充：在这里指定了 /etc/auto.autofs 为 Autofs 的从配置文件，并且将 autofs 的主目录设置为 /autofs）</p>
+
+
+
+<h4 id="4-3-3-2-在客户端上设置-autofs-的从配置文件">4.3.3.2 在客户端上设置 Autofs 的从配置文件</h4>
+
+
+
+<p>（只在客户端上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># cp /etc/auto.misc /etc/auto.autofs
+# vim /etc/auto.autofs</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+cd              -fstype=iso9660,ro,nosuid,nodev :/dev/cdrom
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+cd              -fstype=iso9660,ro,nosuid,nodev :/dev/cdrom
+directory01             -fstype=nfs,rw 192.168.101.10:/nfsshare
+......</code></pre>
+
+
+
+<p>（补充：在这里指定了 Autofs 的次级目录为 directory01，即：/autofs/directory01）</p>
+
+
+
+<h4 id="4-3-4-让刚刚修改的-autofs-自动挂载服务配置文件生效">4.3.4 让刚刚修改的 Autofs 自动挂载服务配置文件生效</h4>
+
+
+
+<p>（只在客户端上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># systemctl restart autofs</code></pre>
+
+
+
+<h4 id="步骤五-显示-autofs-自动挂载服务是否设置成功5-1-显示客户端当前的目录挂载情况">步骤五：显示 Autofs 自动挂载服务是否设置成功<br>5.1 显示客户端当前的目录挂载情况</h4>
+
+
+
+<p>（只在客户端上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># df -h
+Filesystem      Size  Used Avail Use% Mounted on
+devtmpfs        957M     0  957M   0% /dev
+tmpfs           971M     0  971M   0% /dev/shm
+tmpfs           971M   17M  954M   2% /run
+tmpfs           971M     0  971M   0% /sys/fs/cgroup
+/dev/vda1        10G  1.6G  8.5G  16% /
+tmpfs           195M     0  195M   0% /run/user/0</code></pre>
+
+
+
+<h4 id="5-2-进入到-autofs-自动挂载的目录">5.2 进入到 Autofs 自动挂载的目录</h4>
+
+
+
+<p>（只在客户端上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># cd /autofs/directory01</code></pre>
+
+
+
+<h4 id="5-3-再次显示客户端当前的目录挂载情况">5.3 再次显示客户端当前的目录挂载情况</h4>
+
+
+
+<p>（只在客户端上执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># df -h
+Filesystem                Size  Used Avail Use% Mounted on
+devtmpfs                  957M     0  957M   0% /dev
+tmpfs                     971M     0  971M   0% /dev/shm
+tmpfs                     971M   17M  955M   2% /run
+tmpfs                     971M     0  971M   0% /sys/fs/cgroup
+/dev/vda1                  10G  1.6G  8.5G  16% /
+tmpfs                     195M     0  195M   0% /run/user/0
+192.168.101.10:/nfsshare   10G  1.6G  8.5G  16% /autofs/directory01</code></pre>
+
+
+
+<p>（补充：在进入到 Autofs 自动挂载的目录后，自动挂载就在系统中自动出现了）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 du （统计文件或目录大小）</title>
+		<link>https://eternalcenter-now.github.io/du/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 15 Jun 2020 03:00:08 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Directory (系统目录)]]></category>
+		<category><![CDATA[System File (系统文件)]]></category>
+		<category><![CDATA[System Storage (系统存储)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=9772</guid>
+
+					<description><![CDATA[内容一：du 命令的参数 1) h 以方便人类阅读的方式进行显示2) s 将所有文件的大小进行相加 内容二：du 命令的使用案例2.1 案例一：统计当前目录下所有文件的大小，将结果相加 或者： 2.2 案例二：统计当前目录下所有文件的大小，将结果相加，并以方便人类阅读的方式进行显示 或者： 2.3 案例三：统计某一个目录下所有文件的大小，并以方便人类阅读的方式进行显示 或者： 2.4 案例四：统计某个目录的大小，并以方便人类阅读的方式进行显示 2.5 案例五：统计当前目录的一级子目录的大小，并以方便人类阅读的方式进行显示 2.6 案例六：统计当前目录下所有文件的大小，将结果相加，并以 m 作为单位进行显示 或者： 2.7 案例七：统计当前目录下所有文件的大小，将结果相加，并以 g 作为单位进行显示 或者：]]></description>
+										<content:encoded><![CDATA[
+<h4 id="内容一-du-命令的参数">内容一：du 命令的参数</h4>
+
+
+
+<p>1) h 以方便人类阅读的方式进行显示<br>2) s 将所有文件的大小进行相加</p>
+
+
+
+<h4 id="内容二-du-命令的使用案例2-1-案例一-统计当前目录下所有文件的大小-将结果相加">内容二：du 命令的使用案例<br>2.1 案例一：统计当前目录下所有文件的大小，将结果相加</h4>
+
+
+
+<pre class="wp-block-code"><code># du -s</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># du -s</code></pre>
+
+
+
+<h4 id="2-2-案例二-统计当前目录下所有文件的大小-将结果相加-并以方便人类阅读的方式进行显示">2.2 案例二：统计当前目录下所有文件的大小，将结果相加，并以方便人类阅读的方式进行显示</h4>
+
+
+
+<pre class="wp-block-code"><code># du -sh</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># du -sh *</code></pre>
+
+
+
+<h4 id="2-3-案例三-统计某一个目录下所有文件的大小-并以方便人类阅读的方式进行显示">2.3 案例三：统计某一个目录下所有文件的大小，并以方便人类阅读的方式进行显示</h4>
+
+
+
+<pre class="wp-block-code"><code># du -h &lt;directory></code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># du -h &lt;directory>/*</code></pre>
+
+
+
+<h4 id="2-4-案例四-统计某个目录的大小-并以方便人类阅读的方式进行显示">2.4 案例四：统计某个目录的大小，并以方便人类阅读的方式进行显示</h4>
+
+
+
+<pre class="wp-block-code"><code># du -h &lt;file></code></pre>
+
+
+
+<h4 id="2-5-案例五-统计当前目录的一级子目录的大小-并以方便人类阅读的方式进行显示">2.5 案例五：统计当前目录的一级子目录的大小，并以方便人类阅读的方式进行显示</h4>
+
+
+
+<pre class="wp-block-code"><code># du -h --max-depth=1</code></pre>
+
+
+
+<h4 id="2-6-案例六-统计当前目录下所有文件的大小-将结果相加-并以-m-作为单位进行显示">2.6 案例六：统计当前目录下所有文件的大小，将结果相加，并以 m 作为单位进行显示</h4>
+
+
+
+<pre class="wp-block-code"><code># du -sm</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># du -sm *</code></pre>
+
+
+
+<h4 id="2-7-案例七-统计当前目录下所有文件的大小-将结果相加-并以-g-作为单位进行显示">2.7 案例七：统计当前目录下所有文件的大小，将结果相加，并以 g 作为单位进行显示</h4>
+
+
+
+<pre class="wp-block-code"><code># du -sg</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># du -sg *</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

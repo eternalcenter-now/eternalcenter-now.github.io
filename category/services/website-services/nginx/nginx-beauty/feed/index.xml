@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Nginx Beauty (美观) &#8211; Eternal Center</title>
+	<atom:link href="https://eternalcenter-now.github.io/category/services/website-services/nginx/nginx-beauty/feed/" rel="self" type="application/rss+xml" />
+	<link>https://eternalcenter-now.github.io/</link>
+	<description></description>
+	<lastBuildDate>Sun, 26 Dec 2021 09:12:07 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	
+	<item>
+		<title>[步骤] Nginx 网页的设置 （404 网页）</title>
+		<link>https://eternalcenter-now.github.io/nginx-404/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 06 Sep 2019 11:01:30 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Nginx]]></category>
+		<category><![CDATA[Nginx Beauty (美观)]]></category>
+		<category><![CDATA[Services (服务)]]></category>
+		<category><![CDATA[Website Services (网站服务)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=5728</guid>
+
+					<description><![CDATA[注意： 在设置 Nginx 404 报错页面之前要先安装 Nginx 正文： 步骤目录： 步骤一：修改 Nginx 的配置文件步骤二：自定义 404 报错网页 具体的操作步骤： 步骤一：修改 Nginx 的配置文件 将部分内容修改如下： 或者： 步骤二：自定义 404 报错网页]]></description>
+										<content:encoded><![CDATA[
+<h2>注意：</h2>
+
+
+
+<p>在设置 Nginx 404 报错页面之前要先安装 Nginx</p>
+
+
+
+<div class="wp-container-1 wp-block-buttons is-content-justification-center">
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/?p=5676">Nginx 源码软件包的安装</a></div>
+</div>
+
+
+
+<div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
+
+
+
+<h2>正文：</h2>
+
+
+
+<h2>步骤目录：</h2>
+
+
+
+<h4>步骤一：修改 Nginx 的配置文件<br>步骤二：自定义 404 报错网页</h4>
+
+
+
+<h2>具体的操作步骤：</h2>
+
+
+
+<h4>步骤一：修改 Nginx 的配置文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vi /usr/local/nginx/conf/nginx.conf</code></pre>
+
+
+
+<p>将部分内容修改如下：</p>
+
+
+
+<pre class="wp-block-code"><code>server {
+......
+error_page 404 /40x.html;
+......
+}</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code>server {
+......
+error_page 404 /40x.html;
+Error_page 404 /40.xhtml;
+......
+}</code></pre>
+
+
+
+<h4>步骤二：自定义 404 报错网页</h4>
+
+
+
+<pre class="wp-block-code"><code># vi /usr/local/nginx/html/40.xhtml</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

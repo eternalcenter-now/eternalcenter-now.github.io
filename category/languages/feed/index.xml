@@ -1,0 +1,2617 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Languages (语言) &#8211; Eternal Center</title>
+	<atom:link href="https://eternalcenter-now.github.io/category/languages/feed/" rel="self" type="application/rss+xml" />
+	<link>https://eternalcenter-now.github.io/</link>
+	<description></description>
+	<lastBuildDate>Wed, 27 Apr 2022 09:18:40 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	
+	<item>
+		<title>[工具] Shell 显示系统常用信息</title>
+		<link>https://eternalcenter-now.github.io/shell-display-system-common-information/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Tue, 26 Apr 2022 16:14:48 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Languages (语言)]]></category>
+		<category><![CDATA[Shell]]></category>
+		<category><![CDATA[Shell Monitor (监控)]]></category>
+		<category><![CDATA[Shell Tool (工具)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Computer & System Hardware & System Installation & System Upgradation (系统电脑 & 系统硬件 & 系统安装 & 系统升级)]]></category>
+		<category><![CDATA[System Directory (系统目录)]]></category>
+		<category><![CDATA[System Hardware (系统硬件)]]></category>
+		<category><![CDATA[System Network (系统网络)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Performance (系统性能)]]></category>
+		<category><![CDATA[System Port Security (系统端口安全)]]></category>
+		<category><![CDATA[System Process & System Performance (系统进程 & 系统性能)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Software (系统软件)]]></category>
+		<category><![CDATA[System Storage (系统存储)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23311</guid>
+
+					<description><![CDATA[介绍： 作者：朱明宇名称：显示系统常用信息作用：显示系统常用信息 使用方法：1. 在此脚本的分割线内写入相应的内容2. 给此脚本添加执行权限3. 执行此脚本 脚本分割线里的变量：1) times=2 #显示系统常用信息的次数2) sleeptime=0.1 #大部分行与行之间显示的间隔时间 注意：部分功能需要安装了 sysstat 软件或搭建了 KVM 虚拟化平台后执行此脚本的用户能够使用 sudo virsh list 命令后才能实现 脚本：]]></description>
+										<content:encoded><![CDATA[
+<h2>介绍：</h2>
+
+
+
+<p>作者：朱明宇<br>名称：显示系统常用信息<br>作用：显示系统常用信息</p>
+
+
+
+<p>使用方法：<br>1. 在此脚本的分割线内写入相应的内容<br>2. 给此脚本添加执行权限<br>3. 执行此脚本</p>
+
+
+
+<p>脚本分割线里的变量：<br>1) times=2 #显示系统常用信息的次数<br>2) sleeptime=0.1 #大部分行与行之间显示的间隔时间</p>
+
+
+
+<p>注意：部分功能需要安装了 sysstat 软件或搭建了 KVM 虚拟化平台后执行此脚本的用户能够使用 sudo virsh list 命令后才能实现</p>
+
+
+
+<h2>脚本：</h2>
+
+
+
+<pre class="wp-block-code"><code>#!/bin/bash
+
+####################### Separator ########################
+times=2
+sleeptime=0.1
+####################### Separator ########################
+
+nowtime=1
+
+while (( nowtime &lt;= times))
+do
+        echo -e "Start Monitoring: \c"
+	for i in {1..100}
+	do
+	        echo -e "#\c"
+		sleep 0.01
+        done
+	echo
+
+	sleep $sleeptime
+        host=`hostname`
+        echo -e "Name:\t\t\t\t\t\t \033&#91;1m$host\033&#91;0m"
+
+        ip=`ip a s | awk '/&#91;1-2]?&#91;0-9]{0,2}\.&#91;1-2]?&#91;0-9]{0,2}/&amp;&amp;!/127.0.0.1/{print $2}' | awk -F/ '{print $1}'`
+        for iip in `echo $ip`
+        do
+		sleep $sleeptime
+                echo -e "IP Address:\t\t\t\t\t \033&#91;1m$iip\033&#91;0m"
+        done
+
+        sleep $sleeptime
+
+        cpu=`top -bn 1 | awk -F',' '/^%Cpu/{print $4 }' | awk '{print $1}' | awk '{print 100-$1}'`
+        echo -e "CPU Usage (Total):\t\t\t\t \033&#91;1m$cpu%\033&#91;0m"
+
+        sleep $sleeptime
+
+        mem=`free | grep Mem | awk '{print $3/$2 * 100.0}' | egrep -o "&#91;1]?&#91;0-9]{0,2}\.&#91;0-9]"`
+        echo -e "Memory Usage (Total):\t\t\t\t \033&#91;1m$mem%\033&#91;0m"
+
+	directory=`df -h | grep -v run | grep -v boot | awk '$1~/\/dev/{print $6}'`
+        for idirectory in `echo $directory`
+        do
+                sleep $sleeptime
+                directoryusage=`df -h | grep -v run | grep -v boot | awk '$1~/\/dev/{print}' | grep $idirectory$ | awk '{print $5}'`
+		if &#91; $idirectory == / -o $idirectory == /ec  ];then
+                        echo -e "Directory Usage ($idirectory):\t\t\t\t \033&#91;1m$directoryusage\033&#91;0m"
+	        else
+                        echo -e "Directory Usage ($idirectory):\t\t\t \033&#91;1m$directoryusage\033&#91;0m"
+		fi
+        done
+
+	sudo -l | grep 'virsh list' &amp;&gt; /dev/null
+        if &#91; $? -eq 0 ];then
+	        sleep $sleeptime
+	        virtual=`sudo virsh list | egrep &#91;0-9] | wc -l`
+	        echo -e "Number of Virtual Machines (Total):\t\t \033&#91;1m$virtual\033&#91;0m"
+        fi
+
+        sleep $sleeptime
+
+        user=`who | wc -l`
+        echo -e "Number of User Logins (Total):\t\t\t \033&#91;1m$user\033&#91;0m"
+
+        soft=`rpm -qa | wc -l`
+        echo -e "Number of Softwares (Total):\t\t\t \033&#91;1m$soft\033&#91;0m"
+
+        sleep $sleeptime
+
+        port=`ss -ntulap | wc -l`
+        echo -e "Number of Open Ports (Total):\t\t\t \033&#91;1m$port\033&#91;0m"
+
+        which sar &amp;&gt; /dev/null
+        if &#91; $? -eq 0 ];then
+                networkcard=`ifconfig | awk -F: '/flags/&amp;&amp;!/lo/{print $1}'`
+                for inetworkcard in `echo $networkcard`
+                do
+                        networkread="`sar -n DEV 1 1 | grep $inetworkcard | awk '/&#91;0-9]&#91;0-9]:&#91;0-9]&#91;0-9]/{print $3/1000}'` m/s"
+                        networkwrite="`sar -n DEV 1 1 | grep $inetworkcard | awk '/&#91;0-9]&#91;0-9]:&#91;0-9]&#91;0-9]/{print $4/1000}'` m/s"
+			echo $inetworkcard | grep eth &amp;&gt; /dev/null
+			if &#91; $?  -ne 0 ];then
+	                echo -e "Network Card IO ($inetworkcard):\t\t\t \033&#91;1m$networkread\033&#91;0m (Read)\t\033&#91;1m$networkwrite\033&#91;0m (Write)"
+		        else
+	                echo -e "Network Card IO ($inetworkcard):\t\t\t\t \033&#91;1m$networkread\033&#91;0m (Read)\t\033&#91;1m$networkwrite\033&#91;0m (Write)"
+			fi
+                done
+        fi
+
+        which iostat &amp;&gt; /dev/null
+        if &#91; $? -eq 0 ];then
+	        disk=`iostat -d -k 1 1 | awk '!/^$/&amp;&amp;!/Device/&amp;&amp;!/Linux/{print $1}'`
+                for idisk in `echo $disk`
+	        do
+			sleep $sleeptime
+		        diskread="`iostat -d -k 1 1 | grep $idisk |  awk '{print $3/1000}'` m/s"
+		        diskwrite="`iostat -d -k 1 1 | grep $idisk |  awk '{print $4/1000}'` m/s"
+			echo $idisk | grep 'nvme' &amp;&gt; /dev/null
+			if &#91; $? -eq 0 ];then
+		                echo -e "Disk IO (/dev/$idisk):\t\t\t\t \033&#91;1m$diskread\033&#91;0m (Read)\t\033&#91;1m$diskwrite\033&#91;0m (Write)"
+		        else
+		                echo -e "Disk IO (/dev/$idisk):\t\t\t\t \033&#91;1m$diskread\033&#91;0m (Read)\t\033&#91;1m$diskwrite\033&#91;0m (Write)"
+			fi
+	        done
+
+        fi
+
+        echo -e "Complete Monitoring: \c"
+        for i in {1..97}
+        do
+                echo -e "#\c"
+                sleep 0.01
+        done
+        echo
+        sleep $sleeptime
+
+        let nowtime++
+done
+
+        echo -e "Terminal Monitoring: \c"
+        for i in {1..97}
+        do
+                echo -e "#\c"
+                sleep 0.01
+        done
+
+exit</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 eval （执行变量里的命令或实现指针）</title>
+		<link>https://eternalcenter-now.github.io/eval/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Wed, 13 Apr 2022 14:19:09 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Languages (语言)]]></category>
+		<category><![CDATA[Shell]]></category>
+		<category><![CDATA[Shell Basic (基础)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23101</guid>
+
+					<description><![CDATA[内容目录： 内容一：eval 命令的作用 内容二：eval 直接执行命令的案例2.1 设置变量2.2 显示变量里内容 内容三：eval 将变量转换成命令后执行的案例3.1 将命令设置成变量3.2 显示变量里的命令3.3 执行变量里的命令 内容四：eval 显示脚本里最后 1 个位置变量的内容4.1 创建显示最后 1 个位置变量的脚本4.2 带位置变量执行脚本 内容五：eval 实现指针5.1 设置变量5.2 设置指针5.3 显示指针指向的变量5.4 显示指针最终指向的内容 具体的内容： 内容一：eval 命令的作用 对将要执行的命令进行 2 次扫描，第 1 次扫描时把扫描的内容替换成命令，第 2 次扫描时执行扫描到的命令 内容二：eval 直接执行命令的案例2.1 设置变量 （补充：这里以将内容 eternalcenter.com 赋值给变量 url 为例） 2.2 显示变量里内容 或者： （补充：这里以显示变量 url 里的内容 eternalcenter.com 为例） 内容三：eval 将变量转换成命令后执行的案例3.1 将命令设置成变量 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/eval/" class="more-link">Continue reading<span class="screen-reader-text"> "[命令] Linux 命令 eval （执行变量里的命令或实现指针）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2>内容目录：</h2>
+
+
+
+<h4>内容一：eval 命令的作用</h4>
+
+
+
+<h4>内容二：eval 直接执行命令的案例<br>2.1 设置变量<br>2.2 显示变量里内容</h4>
+
+
+
+<h4>内容三：eval 将变量转换成命令后执行的案例<br>3.1 将命令设置成变量<br>3.2 显示变量里的命令<br>3.3 执行变量里的命令</h4>
+
+
+
+<h4>内容四：eval 显示脚本里最后 1 个位置变量的内容<br>4.1 创建显示最后 1 个位置变量的脚本<br>4.2 带位置变量执行脚本</h4>
+
+
+
+<h4>内容五：eval 实现指针<br>5.1 设置变量<br>5.2 设置指针<br>5.3 显示指针指向的变量<br>5.4 显示指针最终指向的内容</h4>
+
+
+
+<h2>具体的内容：</h2>
+
+
+
+<h4>内容一：eval 命令的作用</h4>
+
+
+
+<p>对将要执行的命令进行 2 次扫描，第 1 次扫描时把扫描的内容替换成命令，第 2 次扫描时执行扫描到的命令</p>
+
+
+
+<h4>内容二：eval 直接执行命令的案例<br>2.1 设置变量</h4>
+
+
+
+<pre class="wp-block-code"><code># url=eternalcenter.com</code></pre>
+
+
+
+<p>（补充：这里以将内容 eternalcenter.com 赋值给变量 url 为例）</p>
+
+
+
+<h4>2.2 显示变量里内容</h4>
+
+
+
+<pre class="wp-block-code"><code># echo $url
+eternalcenter.com</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># eval echo $url
+eternalcenter.com</code></pre>
+
+
+
+<p>（补充：这里以显示变量 url 里的内容 eternalcenter.com 为例）</p>
+
+
+
+<h4>内容三：eval 将变量转换成命令后执行的案例<br>3.1 将命令设置成变量</h4>
+
+
+
+<pre class="wp-block-code"><code># command=pwd</code></pre>
+
+
+
+<p>（补充：这里以将命令 pwd 赋值给变量 command 为例）</p>
+
+
+
+<h4>3.2 显示变量里的命令</h4>
+
+
+
+<pre class="wp-block-code"><code># echo $command
+pwd</code></pre>
+
+
+
+<p>（补充：这里以显示变量 command 里的 pwd 命令为例）</p>
+
+
+
+<h4>3.3 执行变量里的命令</h4>
+
+
+
+<pre class="wp-block-code"><code># eval $command
+/root</code></pre>
+
+
+
+<p>（补充：这里以执行变量 command 里的 pwd 命令为例）</p>
+
+
+
+<h4>内容四：eval 显示脚本里最后 1 个位置变量的内容<br>4.1 创建显示最后 1 个位置变量的脚本</h4>
+
+
+
+<pre class="wp-block-code"><code># vim test.sh</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>#!/bin/bash
+eval echo \$$#</code></pre>
+
+
+
+<p>（补充：这里创建名为 test.sh 的脚本为例）</p>
+
+
+
+<h4>4.2 带位置变量执行脚本</h4>
+
+
+
+<pre class="wp-block-code"><code># . test.txt a b c d e
+e</code></pre>
+
+
+
+<p>（补充：这里执行名为 test.sh 的脚本并附带 a b c d e 5 个位置变量为例）</p>
+
+
+
+<h4>内容五：eval 实现指针<br>5.1 设置变量</h4>
+
+
+
+<pre class="wp-block-code"><code># url=eternalcenter.com</code></pre>
+
+
+
+<p>（补充：这里以将内容 eternalcenter.com 赋值给变量 url 为例）</p>
+
+
+
+<h4>5.2 设置指针</h4>
+
+
+
+<pre class="wp-block-code"><code># pointer=url</code></pre>
+
+
+
+<p>（补充：这里以让指针 pointer 指向 url 变量为例）</p>
+
+
+
+<h4>5.3 显示指针指向的变量</h4>
+
+
+
+<pre class="wp-block-code"><code># echo $pointer
+url</code></pre>
+
+
+
+<p>（补充：这里以显示指针 pointer 指向的变量 url 为例）</p>
+
+
+
+<h4>5.4 显示指针最终指向的内容</h4>
+
+
+
+<pre class="wp-block-code"><code># eval echo \$$pointer
+eternalcenter.com</code></pre>
+
+
+
+<p>（补充：这里以显示指针 pointer 指向的最终内容 eternalcenter.com 为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[工具] Shell 监控普通登录记录 （排除 SFTP 登录记录只监控普通登录记录）</title>
+		<link>https://eternalcenter-now.github.io/shell-login-log-exclude-sftp/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Tue, 15 Feb 2022 14:52:50 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Languages (语言)]]></category>
+		<category><![CDATA[Other Services (其他服务)]]></category>
+		<category><![CDATA[Services (服务)]]></category>
+		<category><![CDATA[SFTP]]></category>
+		<category><![CDATA[Shell]]></category>
+		<category><![CDATA[Shell Monitor (监控)]]></category>
+		<category><![CDATA[Shell Tool (工具)]]></category>
+		<category><![CDATA[Storage Services (存储服务)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System General Log (系统普通日志)]]></category>
+		<category><![CDATA[System Log (系统日志)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=21977</guid>
+
+					<description><![CDATA[注意： 在排除 SFTP 登录记录只监控普通登录记录前要先开启 SFTP 日志： 介绍： 作者：朱明宇名称：监控普通登录记录 （排除 SFTP 登录记录只监控普通登录记录）作用：监控普通登录记录 （排除 SFTP 登录记录只监控普通登录记录） 使用方法：1. 在此脚本的分割线内写入相应的内容2. 给此脚本添加执行权限3. 执行此脚本4. 普通登录记录会同时记录在系统日志和 $logfile 里 脚本分割线里的变量：1. logfile=logfile.txt #用户保存记录的文件2. prompt=&#8221;and no sftp info&#8221; #记录里普通登录记录的文件 脚本：]]></description>
+										<content:encoded><![CDATA[
+<h2 id="注意">注意：</h2>
+
+
+
+<p>在排除 SFTP 登录记录只监控普通登录记录前要先开启 SFTP 日志：</p>
+
+
+
+<div class="wp-container-1 wp-block-buttons">
+<div class="wp-block-button aligncenter is-style-outline"><a class="wp-block-button__link" href="https://eternalcenter-now.github.io/sftp-log/" style="border-radius:0px">SFTP 日志的开启</a></div>
+</div>
+
+
+
+<h2 id="介绍">介绍：</h2>
+
+
+
+<p>作者：朱明宇<br>名称：监控普通登录记录 （排除 SFTP 登录记录只监控普通登录记录）<br>作用：监控普通登录记录 （排除 SFTP 登录记录只监控普通登录记录）</p>
+
+
+
+<p>使用方法：<br>1. 在此脚本的分割线内写入相应的内容<br>2. 给此脚本添加执行权限<br>3. 执行此脚本<br>4. 普通登录记录会同时记录在系统日志和 $logfile 里</p>
+
+
+
+<p>脚本分割线里的变量：<br>1. logfile=logfile.txt #用户保存记录的文件<br>2. prompt=&#8221;and no sftp info&#8221; #记录里普通登录记录的文件</p>
+
+
+
+<h2 id="脚本">脚本：</h2>
+
+
+
+<pre class="wp-block-code"><code>#!/bin/bash
+
+####################### Separator ########################
+
+logfile=logfile.txt
+prompt="and no sftp info"
+
+####################### Separator ########################
+
+checktime=`date +%Y-%m-%dT%H -d "-1 day"`
+
+for i in `cat -n /var/log/messages | grep $check_time | grep 'Started Session' | grep -v 'root' | awk '{print $1}'`
+
+do
+   line=`sed -n $&#91;i]p /var/log/messages`
+   time=`echo $line | awk '{print $1}'`
+   session=`echo $line | awk '{print $6}'`
+   user=`echo $line | awk '{print $9}'`
+   user=${user%.}
+
+   message="ACCESS CHECK LOG: Time:$time Session:$session $user has accessed `hostname`, $prompt"
+
+   let sftpline=i+3
+
+   sed -n $&#91;sftpline]p /var/log/messages | grep sftp-server &amp;&gt; /dev/null
+   if &#91; $? -ne 0 ];then
+           echo $message
+           echo $message &gt;&gt; $logfile.txt
+           logger $message
+   fi
+   echo
+done</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[工具] Shell 批量比较服务器所有正在运行进程的变化</title>
+		<link>https://eternalcenter-now.github.io/shell-process-compare/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Thu, 20 Jan 2022 13:38:56 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Languages (语言)]]></category>
+		<category><![CDATA[Shell]]></category>
+		<category><![CDATA[Shell Monitor (监控)]]></category>
+		<category><![CDATA[Shell Tool (工具)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Process (系统进程)]]></category>
+		<category><![CDATA[System Process & System Performance (系统进程 & 系统性能)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=21341</guid>
+
+					<description><![CDATA[介绍： 作者：朱明宇名称：批量比较服务器所有正在运行进程的变化作用：批量比较服务器所有正在运行进程的变化 使用方法：1. 服务器清单 $server_list 每一台服务器占用一行2. 在此脚本的分割线内写入相应的内容，并和此脚本放在同一目录下3. 给此脚本添加执行权限4. 执行此脚本5. 此脚本执行完成后，会将运行结果写入当前目录下的 $compare_file 里 脚本分割线里的变量：server_list=server_list.txt #服务器清单first_time=first_time #存储第一次检结果的目录second_time=second_time #存储第二次检查结果的目录compare_file=comparison_results.txt #存储比较结果的文件 注意：此脚本执行前必须要先保证执行本脚本的用户能无密码 ssh 远程这些远程服务器 脚本：]]></description>
+										<content:encoded><![CDATA[
+<h2 id="介绍">介绍：</h2>
+
+
+
+<p>作者：朱明宇<br>名称：批量比较服务器所有正在运行进程的变化<br>作用：批量比较服务器所有正在运行进程的变化</p>
+
+
+
+<p>使用方法：<br>1. 服务器清单 $server_list 每一台服务器占用一行<br>2. 在此脚本的分割线内写入相应的内容，并和此脚本放在同一目录下<br>3. 给此脚本添加执行权限<br>4. 执行此脚本<br>5. 此脚本执行完成后，会将运行结果写入当前目录下的 $compare_file 里</p>
+
+
+
+<p>脚本分割线里的变量：<br>server_list=server_list.txt #服务器清单<br>first_time=first_time #存储第一次检结果的目录<br>second_time=second_time #存储第二次检查结果的目录<br>compare_file=comparison_results.txt #存储比较结果的文件</p>
+
+
+
+<p>注意：<br>此脚本执行前必须要先保证执行本脚本的用户能无密码 ssh 远程这些远程服务器</p>
+
+
+
+<h2 id="脚本">脚本：</h2>
+
+
+
+<pre class="wp-block-code"><code>#!/bin/bash
+
+####################### Separator ########################
+
+server_list=server_list.txt
+first_time=first_time
+second_time=second_time
+compare_file=comparison_results.txt
+
+####################### Separator ########################
+
+mkdir $first_time &amp;&gt; /dev/null
+mkdir $second_time &amp;&gt; /dev/null
+echo &gt; $compare_file
+
+read -p "Please input first second or compare now: " choice
+
+check(){
+        for server_name in `cat $1`
+        do
+                ssh -t $server_name "ps -A" | awk '{print $4}' &gt; $2/$server_name
+        done
+}
+
+compare(){
+        for server_name in `cat $1`
+        do
+                echo $server_name &gt;&gt; $4
+                for process in `cat $2/$server_name`
+                        do
+                        grep $process $3/$server_name &amp;&gt; /dev/null
+                        if &#91; $? -ne 0 ];then
+                                echo $process &gt;&gt; $4
+                        fi
+                done
+                echo &gt;&gt; $4
+        done
+}
+
+if &#91; $choice == first ];then
+        check $server_list $first_time
+fi
+
+if &#91; $choice == second ];then
+        check $server_list $second_time
+fi
+
+if &#91; $choice == compare ];then
+        compare $server_list $first_time $second_time $compare_file
+fi</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 变量替换</title>
+		<link>https://eternalcenter-now.github.io/variable-replacement/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sun, 09 Jan 2022 10:53:51 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Languages (语言)]]></category>
+		<category><![CDATA[Shell]]></category>
+		<category><![CDATA[Shell Basic (基础)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=21157</guid>
+
+					<description><![CDATA[内容目录： 案例一：当要替换的变量未定义或为空时则给予其一个默认值 案例二：当要替换的变量已定义且不为空时则给予其一个默认值 案例三：当要替换的变量已定义且不为空时则替换此变量的前一部分3.1 当要替换的变量已定义且不为空时则替换此变量的前一部分3.2 当要替换的变量已定义且不为空时则替换此变量的某一部分 案例四：当要替换的变量已定义且不为空时则替换此变量去除前一部分的值4.1 去除变量左数第一个某一个符号前面的所有值4.2 去除变量左数最后某一个符号前面的所有值4.3 去除前面一部分值 案例五：当要替换的变量已定义且不为空时则替换此变量去除后一部分的值5.1 去除变量右数第一个某一个符号前面的所有值5.2 去除变量右数最后某一个符号前面的所有值5.3 去除后面一部分值 案例六：当要替换的变量已定义且不为空时则替换此变量替换一部分后的值 具体的内容： 案例一：当要替换的变量未定义或为空时则给予其一个默认值 或者： （补充：这里以当变量 value 存在且为空时则变量 newvalue 的值为 eternalcenter 为例） 案例二：当要替换的变量已定义且不为空时则给予其一个默认值 （补充：这里以当变量 value 存在且不为空时则变量 newvalue 的值为 eternalcenter 为例） 案例三：当要替换的变量已定义且不为空时则替换此变量的前一部分3.1 当要替换的变量已定义且不为空时则替换此变量的前一部分 或者： （补充：这里以当变量 value 存在且不为空时则变量 newvalue 的值为变量 value 前 4 个字符为例） 3.2 当要替换的变量已定义且不为空时则替换此变量的某一部分 （补充：这里以当变量 value 存在且不为空时则变量 newvalue 的值为变量 value 从第 4 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/variable-replacement/" class="more-link">Continue reading<span class="screen-reader-text"> "[命令] Linux 变量替换"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2>内容目录：</h2>
+
+
+
+<h4>案例一：当要替换的变量未定义或为空时则给予其一个默认值</h4>
+
+
+
+<h4>案例二：当要替换的变量已定义且不为空时则给予其一个默认值</h4>
+
+
+
+<h4>案例三：当要替换的变量已定义且不为空时则替换此变量的前一部分<br>3.1 当要替换的变量已定义且不为空时则替换此变量的前一部分<br>3.2 当要替换的变量已定义且不为空时则替换此变量的某一部分</h4>
+
+
+
+<h4>案例四：当要替换的变量已定义且不为空时则替换此变量去除前一部分的值<br>4.1 去除变量左数第一个某一个符号前面的所有值<br>4.2 去除变量左数最后某一个符号前面的所有值<br>4.3 去除前面一部分值</h4>
+
+
+
+<h4>案例五：当要替换的变量已定义且不为空时则替换此变量去除后一部分的值<br>5.1 去除变量右数第一个某一个符号前面的所有值<br>5.2 去除变量右数最后某一个符号前面的所有值<br>5.3 去除后面一部分值</h4>
+
+
+
+<h4>案例六：当要替换的变量已定义且不为空时则替换此变量替换一部分后的值</h4>
+
+
+
+<h2>具体的内容：</h2>
+
+
+
+<h4>案例一：当要替换的变量未定义或为空时则给予其一个默认值</h4>
+
+
+
+<pre class="wp-block-code"><code># value=
+# newvalue=${value:-eternalcenter}
+# echo $newvalue
+eternalcenter</code></pre>
+
+
+
+<pre class="wp-block-code"><code># value=mingyuzhu
+# newvalue=${value:-eternalcenter}
+# echo $newvalue
+mingyuzhu</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># value=
+# newvalue=${value:=eternalcenter}
+# echo $newvalue
+eternalcenter</code></pre>
+
+
+
+<pre class="wp-block-code"><code># value=mingyuzhu
+# newvalue=${value:=eternalcenter}
+# echo $newvalue
+mingyuzhu</code></pre>
+
+
+
+<p>（补充：这里以当变量 value 存在且为空时则变量 newvalue 的值为 eternalcenter 为例）</p>
+
+
+
+<h4>案例二：当要替换的变量已定义且不为空时则给予其一个默认值</h4>
+
+
+
+<pre class="wp-block-code"><code># value=
+# newvalue=${value:+eternalcenter}
+# echo $newvalue</code></pre>
+
+
+
+<pre class="wp-block-code"><code># value=mingyuzhu
+# newvalue=${value:+eternalcenter}
+# echo $newvalue
+eternalcenter</code></pre>
+
+
+
+<p>（补充：这里以当变量 value 存在且不为空时则变量 newvalue 的值为 eternalcenter 为例）</p>
+
+
+
+<h4>案例三：当要替换的变量已定义且不为空时则替换此变量的前一部分<br>3.1 当要替换的变量已定义且不为空时则替换此变量的前一部分</h4>
+
+
+
+<pre class="wp-block-code"><code># value=mingyuzhu
+# newvalue=${value:offset:4}
+# echo $newvalue
+ming</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># value=mingyuzhu
+# newvalue=${value:0:4}
+# echo $newvalue
+ming</code></pre>
+
+
+
+<p>（补充：这里以当变量 value 存在且不为空时则变量 newvalue 的值为变量 value 前 4 个字符为例）</p>
+
+
+
+<h4>3.2 当要替换的变量已定义且不为空时则替换此变量的某一部分</h4>
+
+
+
+<pre class="wp-block-code"><code># value=mingyuzhu
+# newvalue=${value:4:2}
+# echo $newvalue
+yu</code></pre>
+
+
+
+<p>（补充：这里以当变量 value 存在且不为空时则变量 newvalue 的值为变量 value 从第 4 个字符开始的 2 个字符为例）</p>
+
+
+
+<h4>案例四：当要替换的变量已定义且不为空时则替换此变量去除前一部分的值<br>4.1 去除变量左数第一个某一个符号前面的所有值</h4>
+
+
+
+<pre class="wp-block-code"><code># value=ming:yu:zhu
+# newvalue=${value#*:}
+# echo $newvalue
+yu:zhu</code></pre>
+
+
+
+<p>（补充：这里以去除变量 value 左数第一个冒号 “:” 前面的所有值并赋予给变量 newvalue 为例）</p>
+
+
+
+<h4>4.2 去除变量左数最后某一个符号前面的所有值</h4>
+
+
+
+<pre class="wp-block-code"><code># value=ming:yu:zhu
+# newvalue=${value##*:}
+# echo $newvalue
+zhu</code></pre>
+
+
+
+<p>（补充：这里以去除变量 value 左数最后一个冒号 “:” 前面的所有值并赋予给变量 newvalue 为例）</p>
+
+
+
+<h4>4.3 去除前面一部分值</h4>
+
+
+
+<pre class="wp-block-code"><code># value=mingyuzhu
+# novalue=ming
+# newvalue=${value##$novalue}
+# echo $newvalue
+yuzhu</code></pre>
+
+
+
+<p>（补充：这里以去除变量 value 前面的 ming 值并赋予给变量 newvalue 为例）</p>
+
+
+
+<h4>案例五：当要替换的变量已定义且不为空时则替换此变量去除后一部分的值<br>5.1 去除变量右数第一个某一个符号前面的所有值</h4>
+
+
+
+<pre class="wp-block-code"><code># value=ming:yu:zhu
+# newvalue=${value%:*}
+# echo $newvalue
+ming:yu</code></pre>
+
+
+
+<p>（补充：这里以去除变量 value 右数第一个冒号 “:” 前面的所有值并赋予给变量 newvalue 为例）</p>
+
+
+
+<h4>5.2 去除变量右数最后某一个符号前面的所有值</h4>
+
+
+
+<pre class="wp-block-code"><code># value=ming:yu:zhu
+# newvalue=${value%%:*}
+# echo $newvalue
+ming</code></pre>
+
+
+
+<p>（补充：这里以去除变量 value 右数最后一个冒号 “:” 前面的所有并赋予给变量 newvalue 值为例）</p>
+
+
+
+<h4>5.3 去除后面一部分值</h4>
+
+
+
+<pre class="wp-block-code"><code># value=mingyuzhu
+# novalue=ming
+# newvalue=${value%%$novalue}
+# echo $newvalue
+mingyu</code></pre>
+
+
+
+<p>（补充：这里以去除变量 value 后面的 zhu 值并赋予给变量 newvalue 为例）</p>
+
+
+
+<h4>案例六：当要替换的变量已定义且不为空时则替换此变量替换一部分后的值</h4>
+
+
+
+<pre class="wp-block-code"><code># value=mingyuzhu
+# noneedvalue=yu
+# needvalue=zhu
+# newvalue=${value/$noneedvalue/$needvalue}
+# echo $newvalue
+mingzhuzhu</code></pre>
+
+
+
+<p>（补充：这里以将变量 value 中的 yu 替换成 zhu 并赋予给变量 newvalue 为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 (()) （比较数值文件和字符串）</title>
+		<link>https://eternalcenter-now.github.io/double-parenthese/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sat, 08 Jan 2022 12:26:42 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Languages (语言)]]></category>
+		<category><![CDATA[Shell]]></category>
+		<category><![CDATA[Shell Basic (基础)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=21153</guid>
+
+					<description><![CDATA[内容一：(()) 比较符号1.1 (()) 数值比较符号 1) ==，若两个数值存在且相等，则结果为真2) !=，若两个数值存在且不相等，则结果为真3) &#62;，若两个数值存在且前一个数值大于后一个数值，则结果为真4) &#60;，若两个数值存在且前一个数值小于后一个数值，则结果为真 5) &#62;=，若两个数值存在且前一个数值大于或等于后一个数值，则结果为真6) &#60;=，若两个数值存在且前一个数值小于或等于后一个数值，则结果为真 1.2 (()) 字符串比较符号 ==，若两个字符串存在且一样，则结果为真 内容二：(()) 的数值比较案例2.1 案例一：对整数进行比较 （补充：这里以测试数字 0 是否不等于数字 1 为例） 2.2 案例二：对字符串进行比较 （补充：这里以测试字符串 a 是否等于字符串 a 为例）]]></description>
+										<content:encoded><![CDATA[
+<h4>内容一：(()) 比较符号<br>1.1 (()) 数值比较符号</h4>
+
+
+
+<p>1) ==，若两个数值存在且相等，则结果为真<br>2) !=，若两个数值存在且不相等，则结果为真<br>3) &gt;，若两个数值存在且前一个数值大于后一个数值，则结果为真<br>4) &lt;，若两个数值存在且前一个数值小于后一个数值，则结果为真 5) &gt;=，若两个数值存在且前一个数值大于或等于后一个数值，则结果为真<br>6) &lt;=，若两个数值存在且前一个数值小于或等于后一个数值，则结果为真</p>
+
+
+
+<h4>1.2 (()) 字符串比较符号</h4>
+
+
+
+<p>==，若两个字符串存在且一样，则结果为真</p>
+
+
+
+<h4>内容二：(()) 的数值比较案例<br>2.1 案例一：对整数进行比较</h4>
+
+
+
+<pre class="wp-block-code"><code># (( 0 -ne 1 ))
+# echo $?
+0</code></pre>
+
+
+
+<p>（补充：这里以测试数字 0 是否不等于数字 1 为例）</p>
+
+
+
+<h4>2.2 案例二：对字符串进行比较</h4>
+
+
+
+<pre class="wp-block-code"><code># (( a == a ))
+# echo $?
+0</code></pre>
+
+
+
+<p>（补充：这里以测试字符串 a 是否等于字符串 a 为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 [[]] （比较数值、文件、目录、链接、块、特殊文件、字符串）</title>
+		<link>https://eternalcenter-now.github.io/double-square-bracket/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 03 Jan 2022 14:42:23 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Languages (语言)]]></category>
+		<category><![CDATA[Shell]]></category>
+		<category><![CDATA[Shell Basic (基础)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=21112</guid>
+
+					<description><![CDATA[内容一：[[]] 比较符号1.1 [[]] 数值比较符号 1) -eq 或者 ==，若两个数值存在且相等，则结果为真2) -ne 或者 !=，若两个数值存在且不相等，则结果为真3) -gt 或者 &#62;，若两个数值存在且前一个数值大于后一个数值，则结果为真4) -lt 或者 &#60;，若两个数值存在且前一个数值小于后一个数值，则结果为真5) -ge 或者 &#62;=，若两个数值存在且前一个数值大于或等于后一个数值，则结果为真6) -le 或者 &#60;=，若两个数值存在且前一个数值小于或等于后一个数值，则结果为真 1.2 [[]] 字符串比较符号 1) -z，如果字符串为空值，则结果为真2) -n，如果字符串不为空值，则结果为真3) == 或者 =，若两个字符串存在且一样，则结果为真4) !=，若两个字符串存在且不一样，则结果为真5) &#62;，若两个字符串存在且前一个字符串大于后一个字符串（按数字顺序或字母数顺序进行比较，越靠后的值越大），则结果为真6) &#60;，若两个字符串存在且前一个字符串小于后一个字符串（按数字顺序或字母数顺序进行比较，越靠后的值越大），则结果为真 1.3 [[]] 文件、目录、链接、块、特殊文件比较符号 1) -e，若文件或目录或链接存在，则结果为真2) -d，若目录存在，则结果为真3) -f，若文件存在，则结果为真4) -L，若链接存在，则结果为真5) -b，若块文件存在，则结果为真6) -c，若字符型特殊文件存在，则结果为真7) -s，若文件存在且里面有内容，则结果为真8) -r，若文件且可读，则结果为真9) -w，若文件且可写，则结果为真10) -x，若文件且可执行，则结果为真11) -nt，若两个文件存在且前一个文件比后一个文件新，则结果为真12) -ot，若两个文件存在且前一个文件比后一个文件新，则结果为真 1.4 [[]] 逻辑符号 1) &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/double-square-bracket/" class="more-link">Continue reading<span class="screen-reader-text"> "[命令] Linux 命令 [[]] （比较数值、文件、目录、链接、块、特殊文件、字符串）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h4>内容一：[[]] 比较符号<br>1.1 [[]] 数值比较符号</h4>
+
+
+
+<p>1) -eq 或者 ==，若两个数值存在且相等，则结果为真<br>2) -ne 或者 !=，若两个数值存在且不相等，则结果为真<br>3) -gt 或者 &gt;，若两个数值存在且前一个数值大于后一个数值，则结果为真<br>4) -lt 或者 &lt;，若两个数值存在且前一个数值小于后一个数值，则结果为真<br>5) -ge 或者 &gt;=，若两个数值存在且前一个数值大于或等于后一个数值，则结果为真<br>6) -le 或者 &lt;=，若两个数值存在且前一个数值小于或等于后一个数值，则结果为真</p>
+
+
+
+<h4>1.2 [[]] 字符串比较符号</h4>
+
+
+
+<p>1) -z，如果字符串为空值，则结果为真<br>2) -n，如果字符串不为空值，则结果为真<br>3) == 或者 =，若两个字符串存在且一样，则结果为真<br>4) !=，若两个字符串存在且不一样，则结果为真<br>5) &gt;，若两个字符串存在且前一个字符串大于后一个字符串（按数字顺序或字母数顺序进行比较，越靠后的值越大），则结果为真<br>6) &lt;，若两个字符串存在且前一个字符串小于后一个字符串（按数字顺序或字母数顺序进行比较，越靠后的值越大），则结果为真</p>
+
+
+
+<h4>1.3 [[]] 文件、目录、链接、块、特殊文件比较符号</h4>
+
+
+
+<p>1) -e，若文件或目录或链接存在，则结果为真<br>2) -d，若目录存在，则结果为真<br>3) -f，若文件存在，则结果为真<br>4) -L，若链接存在，则结果为真<br>5) -b，若块文件存在，则结果为真<br>6) -c，若字符型特殊文件存在，则结果为真<br>7) -s，若文件存在且里面有内容，则结果为真<br>8) -r，若文件且可读，则结果为真<br>9) -w，若文件且可写，则结果为真<br>10) -x，若文件且可执行，则结果为真<br>11) -nt，若两个文件存在且前一个文件比后一个文件新，则结果为真<br>12) -ot，若两个文件存在且前一个文件比后一个文件新，则结果为真</p>
+
+
+
+<h4>1.4 [[]] 逻辑符号</h4>
+
+
+
+<p>1) &amp;&amp;，和<br>2) ||，或<br>3) !，非</p>
+
+
+
+<h4>1.5 [[]] 运算符号</h4>
+
+
+
+<p>1) +，若两个数值存在，则相加<br>2) -，若两个数值存在，则相减<br>3) *，若两个数值存在，则相乘<br>4) /，若两个数值存在，则相除<br>5) %，若两个数值存在，则取余</p>
+
+
+
+<h4>1.6 [[]] 其他符号</h4>
+
+
+
+<p>1) =~，两个字符串或数值存在且后一个字符串或数值匹配正则表达式后一样，则结果为真<br>2) [0-9] 等所有 Linux 正则表达式<br>3) * 等所有 Linux 通配符</p>
+
+
+
+<h4>内容二：[[]] 的数值比较案例<br>2.1 案例一：对整数进行比较</h4>
+
+
+
+<pre class="wp-block-code"><code># &#91;&#91; 0 -ne 1 ]]
+# echo $?
+0</code></pre>
+
+
+
+<p>（补充：这里以测试数字 0 是否不等于数字 1 为例）</p>
+
+
+
+<h4>2.2 案例二：对字符串进行比较</h4>
+
+
+
+<pre class="wp-block-code"><code># &#91;&#91; a == a ]]
+# echo $?
+0</code></pre>
+
+
+
+<p>（补充：这里以测试字符串 a 是否等于字符串 a 为例）</p>
+
+
+
+<h4>2.3 案例三：对文件进行比较</h4>
+
+
+
+<pre class="wp-block-code"><code># &#91;&#91; -f test.txt ]]
+# echo $?
+0</code></pre>
+
+
+
+<p>（补充：这里以测试文件 test.txt 是否存在为例）</p>
+
+
+
+<h4>2.4 案例四：对变量进行比较</h4>
+
+
+
+<pre class="wp-block-code"><code># a=1
+# &#91;&#91; $a == 1 ]]
+# echo $?
+0</code></pre>
+
+
+
+<p>（补充：这里以测试变量 a 是否等于数字 1 为例）</p>
+
+
+
+<h4>2.5 案例五：对数值运算后进行比较</h4>
+
+
+
+<pre class="wp-block-code"><code># a=2
+# b=3
+# c=5
+# &#91;&#91; $a+$b -eq $c ]]
+# echo $?
+0</code></pre>
+
+
+
+<p>（补充：这里以测试变量 a 加变量 b 是否等于变量 c 为例）</p>
+
+
+
+<p>（注意： [[]] 数值运算后需要使用 -eq、-ne、-gt、-lt、-ge、-le 进行比较而不是使用 ==、!=、&gt;、&lt;、&gt;=、&lt;=）</p>
+
+
+
+<h4>2.6 案例六：使用逻辑符号对多个变量进行比较</h4>
+
+
+
+<pre class="wp-block-code"><code># a=eternalcenter
+# b=eternalcenter
+# c=eternalcentre
+# &#91;&#91; $a == $b &amp;&amp; $b != $c ]]
+# echo $?
+# 0</code></pre>
+
+
+
+<p>（补充：这里以测试变量 a 是否等于变量 b 且变量 b 是否不等于变量 c 为例）</p>
+
+
+
+<h4>2.7 案例七：使用通配符对字符串进行比较</h4>
+
+
+
+<pre class="wp-block-code"><code># &#91;&#91; eternalcenter = eternalcen??? ]]
+# echo $?
+# 0</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># &#91;&#91; eternalcenter = e*r ]]
+# echo $?
+# 0</code></pre>
+
+
+
+<p>（补充：这里以测试字符串 eternalcenter 是否等于字符串加通配符 eternalcen??? 或字符串加通配符 e*r 为例）</p>
+
+
+
+<h4>2.8 案例八：使用正则表达式对字符串进行比较</h4>
+
+
+
+<pre class="wp-block-code"><code># &#91;&#91; 10 =~ &#91;0-9]{2} ]]
+# echo $?
+# 0</code></pre>
+
+
+
+<p>（补充：这里以测试数字 10 是否是每位数是 0 到 9 的两位数为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>WordPress 值得使用的主题和插件</title>
+		<link>https://eternalcenter-now.github.io/wordpress-theme-plugins/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 27 Dec 2021 14:26:53 +0000</pubDate>
+				<category><![CDATA[Articles (文章)]]></category>
+		<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Information Technology (IT) Articles (信息技术类文章)]]></category>
+		<category><![CDATA[Languages (语言)]]></category>
+		<category><![CDATA[Personal Website Building (个人网站建设)]]></category>
+		<category><![CDATA[PHP]]></category>
+		<category><![CDATA[Project (项目)]]></category>
+		<category><![CDATA[Website Programs (网页程序)]]></category>
+		<category><![CDATA[Writings (写作)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=20391</guid>
+
+					<description><![CDATA[主题 Twenty Seventeen Twenty Seventeen 是一个开源的 WordPress 主题，非常适合目录较多的网站，首页能够巧妙地将图片和文字结合在一起。 插件 All In One WP Security All In One WP Security 是一个开源的 WordPress 安全插件，比较全面地对 WordPress 进行安全加强，安装了这个插件以后，基本上就不需要再安装其他安全插件。 Easy WP SMTP Easy WP SMTP 是一个开源的 WordPress 邮件插件，可以实现 WordPress 通过 SMTP 发送邮件。 Simply Static Simply Static 是一个开源的 WordPress 动态网站转静态网站插件，可以将动态网站转换成静态网站。]]></description>
+										<content:encoded><![CDATA[
+<h2>主题</h2>
+
+
+
+<h2 class="has-normal-font-size">Twenty Seventeen</h2>
+
+
+
+<p>Twenty Seventeen 是一个开源的 WordPress 主题，非常适合目录较多的网站，首页能够巧妙地将图片和文字结合在一起。</p>
+
+
+
+<h2>插件</h2>
+
+
+
+<h2 class="has-normal-font-size">All In One WP Security</h2>
+
+
+
+<p>All In One WP Security 是一个开源的 WordPress 安全插件，比较全面地对 WordPress 进行安全加强，安装了这个插件以后，基本上就不需要再安装其他安全插件。</p>
+
+
+
+<h2 class="has-normal-font-size">Easy WP SMTP</h2>
+
+
+
+<p>Easy WP SMTP 是一个开源的 WordPress 邮件插件，可以实现 WordPress 通过 SMTP 发送邮件。</p>
+
+
+
+<h2 class="has-normal-font-size">Simply Static</h2>
+
+
+
+<p>Simply Static 是一个开源的 WordPress 动态网站转静态网站插件，可以将动态网站转换成静态网站。</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[工具] Shell 博客 WordPress 数据去隐私化</title>
+		<link>https://eternalcenter-now.github.io/shell-blog-wordpress-de-privacy/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sat, 18 Dec 2021 16:12:50 +0000</pubDate>
+				<category><![CDATA[Automation Maintenance (自动化运维)]]></category>
+		<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Languages (语言)]]></category>
+		<category><![CDATA[Nginx]]></category>
+		<category><![CDATA[Nginx Management (管理)]]></category>
+		<category><![CDATA[Personal Website Building (个人网站建设)]]></category>
+		<category><![CDATA[Project (项目)]]></category>
+		<category><![CDATA[Services (服务)]]></category>
+		<category><![CDATA[Shell]]></category>
+		<category><![CDATA[Shell Backup (备份)]]></category>
+		<category><![CDATA[Website Services (网站服务)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=19868</guid>
+
+					<description><![CDATA[介绍： 作者：朱明宇名称：Shell 博客 WordPress 数据去隐私化作用：修改 WordPress 备份中某个用户的密码并再次进行备份 使用方法：1. 在此脚本的分割线内写入相应的内容2. 给此脚本添加执行权限3. 执行此脚本 脚本分割线里的变量：1. path=/home/zhumingyu/EternalCenter #本地备份目录2. filename=eternalcenter-backup #本地备份文件3. cpath=&#8221;/srv/www/htdocs&#8221; #网站程序目录4. sqlfile=eternalcenter/eternalcenter.sql #网站数据库数据备份5. tarfile=eternalcenter/eternalcenter.tar.gz #网站网页数据备份6. newfilename=clone-eternalcenter-backup #新备份的文件名7. user=&#8217;Mingyu Zhu&#8217; #要修改密码的用户8. newpw=eternalcenter #新的用户密码9. dbuser=ec #用于连接数据库的用户10. dbuserpw=eternalcenter #用于连接数据库的密码11. db=ec #网站数据库数据在数据库中的库 注意：1. 本地需要已经搭建好 LNMP 平台2. 执行此脚本的用户需要有远程服务器的 sudo tar 和 sudo rm 权限3. 脚本 ”mysql -uroot -p&#8217;eternalcenter&#8217; -e &#8220;drop database $db;&#8221;“ 中 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/shell-blog-wordpress-de-privacy/" class="more-link">Continue reading<span class="screen-reader-text"> "[工具] Shell 博客 WordPress 数据去隐私化"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2>介绍：</h2>
+
+
+
+<p>作者：朱明宇<br>名称：Shell 博客 WordPress 数据去隐私化<br>作用：修改 WordPress 备份中某个用户的密码并再次进行备份</p>
+
+
+
+<p>使用方法：<br>1. 在此脚本的分割线内写入相应的内容<br>2. 给此脚本添加执行权限<br>3. 执行此脚本</p>
+
+
+
+<p>脚本分割线里的变量：<br>1. path=/home/zhumingyu/EternalCenter #本地备份目录<br>2. filename=eternalcenter-backup #本地备份文件<br>3. cpath=&#8221;/srv/www/htdocs&#8221; #网站程序目录<br>4. sqlfile=eternalcenter/eternalcenter.sql #网站数据库数据备份<br>5. tarfile=eternalcenter/eternalcenter.tar.gz #网站网页数据备份<br>6. newfilename=clone-eternalcenter-backup #新备份的文件名<br>7. user=&#8217;Mingyu Zhu&#8217; #要修改密码的用户<br>8. newpw=eternalcenter #新的用户密码<br>9. dbuser=ec #用于连接数据库的用户<br>10. dbuserpw=eternalcenter #用于连接数据库的密码<br>11. db=ec #网站数据库数据在数据库中的库</p>
+
+
+
+<p>注意：<br>1. 本地需要已经搭建好 LNMP 平台<br>2. 执行此脚本的用户需要有远程服务器的 sudo tar 和 sudo rm 权限<br>3. 脚本 ”mysql -uroot -p&#8217;eternalcenter&#8217; -e &#8220;drop database $db;&#8221;“ 中 “eternalcenter“ 是指远程 MariaDB 数据库 root 用户的密码，需要修改成远程 MariaDB 数据库的 root 用户密码</p>
+
+
+
+<h2>脚本：</h2>
+
+
+
+<pre class="wp-block-code"><code>#!/bin/bash
+
+####################### Separator ########################
+
+path=/home/zhumingyu/EternalCenter
+filename=eternalcenter-backup
+cpath="/srv/www/htdocs"
+sqlfile=eternalcenter/eternalcenter.sql
+tarfile=eternalcenter/eternalcenter.tar.gz
+newfilename=clone-eternalcenter-backup
+user='Mingyu Zhu'
+newpw=eternalcenter
+dbuser=ec
+dbuserpw=eternalcenter
+db=ec
+
+####################### Separator ########################
+
+date=$(date +%Y-%m-%d-%H)
+dir=`pwd`
+
+sudo systemctl stop nginx
+sudo systemctl stop php-fpm
+
+mkdir -p $path/$newfilename-$date &amp;&gt; /dev/null
+
+mysql -uroot -p'eternalcenter' -e "drop database $db;"
+mysql -uroot -p'eternalcenter' -e "create database $db;"
+mysql -uroot -e "create user \"$dbuser\"@\"localhost\" identified by \"$dbuserpw\";"
+mysql -uroot -p'eternalcenter' -e "grant all privileges on $db.* to \"$dbuser\"@'localhost';"
+mysql -uroot -p'eternalcenter' ec &lt; $sqlfile
+mysql -uroot -p'eternalcenter' -e "update $db.ec_users set user_pass = md5(\'$newpw\') where user_login = \'$user\';"
+sudo rm -rf $cpath/*
+sudo tar -zxvf $tarfile -C $cpath &amp;&gt; /dev/null
+cd $cpath
+sudo sed -i "s/define('DB_PASSWORD', .*);/define('DB_PASSWORD', \'$dbuserpw\');/" wp-config.php
+
+mysqldump -uroot -p'eternalcenter' $db &gt; $path/$newfilename-$date/$newfilename-$date.sql
+sudo tar -zcvf $path/$newfilename-$date/$newfilename-$date.tar.gz .&#91;!.]* * &amp;&gt; /dev/null
+cd $dir
+
+sudo systemctl start nginx
+sudo systemctl start php-fpm
+
+cd $dir</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[工具] Shell 将远程 LNMP 的网站数据库备份到本地</title>
+		<link>https://eternalcenter-now.github.io/shell-lnmp-backup/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sat, 18 Dec 2021 14:48:32 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Languages (语言)]]></category>
+		<category><![CDATA[Nginx]]></category>
+		<category><![CDATA[Nginx Management (管理)]]></category>
+		<category><![CDATA[Services (服务)]]></category>
+		<category><![CDATA[Shell]]></category>
+		<category><![CDATA[Shell Backup (备份)]]></category>
+		<category><![CDATA[Shell Tool (工具)]]></category>
+		<category><![CDATA[Website Services (网站服务)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=19861</guid>
+
+					<description><![CDATA[介绍： 作者：朱明宇名称：将远程 LNMP 的网站数据库备份到本地作用：将远程 LNMP 的网站数据库备份到本地 使用方法：1. 在此脚本的分割线内写入相应的内容2. 给此脚本添加执行权限3. 执行此脚本 脚本分割线里的变量：1. path=/home/zhumingyu/EternalCenter #本地备份目录2. filename=eternalcenter-backup #本地备份文件3. key=&#8221;~/.ssh/eternalcenter&#8221; #本地备份本地私钥4. whost=&#8221;eternalcenter.com&#8221; #远程服务器5. wpath=&#8221;/usr/share/nginx/html&#8221; #远程服务器网站程序目录7. wcache=&#8221;/cache&#8221; #远程服务器临时备份目录 注意：1. 远程需要已经搭建好 LNMP 平台2. 用于远程服务器的用户，需要能免密钥 ssh 远程服务器，且对于本地用于本地数据的备份目录和远程服务器的目录拥有读和执行的权限3. 执行此脚本的用户需要有远程服务器的 sudo tar 权限4. 脚本 ”mysqldump -uroot -p&#8217;eternalcenter&#8217; ec &#62; $wcache/$filename-$date.sql“ 中 “eternalcenter“ 是指远程 MariaDB 数据库 root 用户的密码，需要修改成远程 MariaDB 数据库的 root 用户密码 脚本：]]></description>
+										<content:encoded><![CDATA[
+<h2>介绍：</h2>
+
+
+
+<p>作者：朱明宇<br>名称：将远程 LNMP 的网站数据库备份到本地<br>作用：将远程 LNMP 的网站数据库备份到本地</p>
+
+
+
+<p>使用方法：<br>1. 在此脚本的分割线内写入相应的内容<br>2. 给此脚本添加执行权限<br>3. 执行此脚本</p>
+
+
+
+<p>脚本分割线里的变量：<br>1. path=/home/zhumingyu/EternalCenter #本地备份目录<br>2. filename=eternalcenter-backup #本地备份文件<br>3. key=&#8221;~/.ssh/eternalcenter&#8221; #本地备份本地私钥<br>4. whost=&#8221;eternalcenter.com&#8221; #远程服务器<br>5. wpath=&#8221;/usr/share/nginx/html&#8221; #远程服务器网站程序目录<br>7. wcache=&#8221;/cache&#8221; #远程服务器临时备份目录</p>
+
+
+
+<p>注意：<br>1. 远程需要已经搭建好 LNMP 平台<br>2. 用于远程服务器的用户，需要能免密钥 ssh 远程服务器，且对于本地用于本地数据的备份目录和远程服务器的目录拥有读和执行的权限<br>3. 执行此脚本的用户需要有远程服务器的 sudo tar 权限<br>4. 脚本 ”mysqldump -uroot -p&#8217;eternalcenter&#8217; ec &gt; $wcache/$filename-$date.sql“ 中 “eternalcenter“ 是指远程 MariaDB 数据库 root 用户的密码，需要修改成远程 MariaDB 数据库的 root 用户密码</p>
+
+
+
+<h2>脚本：</h2>
+
+
+
+<pre class="wp-block-code"><code>#!/bin/bash
+
+####################### Separator ########################
+
+path=/home/zhumingyu/EternalCenter
+filename=eternalcenter-backup
+key="~/.ssh/eternalcenter"
+
+whost="eternalcenter.com"
+wpath="/usr/share/nginx/html"
+wcache="/cache"
+
+####################### Separator ########################
+
+date=$(date +%Y-%m-%d-%H)
+
+echo "copy eternalcenter data from website to local server"
+ping -c3 -i0.4 $whost &gt; /dev/null
+if &#91; $? -eq 0 ];then
+
+        ssh -i $key $whost "
+        mkdir $wcache &amp;&gt; /dev/null
+        rm -rf $wcache/* &amp;&gt; /dev/null
+        mysqldump -uroot -p'eternalcenter' ec &gt; $wcache/$filename-$date.sql
+        cd $wpath
+        sudo tar -zcvf $wcache/$filename-$date.tar.gz .&#91;!.]* * &amp;&gt; /dev/null
+        "
+
+        mkdir -p $path/$date &amp;&gt; /dev/null
+        scp -i $key $whost:$wcache/$filename-$date* $path/$date
+
+fi
+echo</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[工具] Shell 将同目录下最新的某个目录里的所有文件替换到 GitHub 库里 （Git LFS 版）</title>
+		<link>https://eternalcenter-now.github.io/shell-github-replace-git-lfs/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sat, 18 Dec 2021 13:44:56 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Git]]></category>
+		<category><![CDATA[Languages (语言)]]></category>
+		<category><![CDATA[Other Services (其他服务)]]></category>
+		<category><![CDATA[Services (服务)]]></category>
+		<category><![CDATA[Shell]]></category>
+		<category><![CDATA[Shell Backup (备份)]]></category>
+		<category><![CDATA[Shell Tool (工具)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=19851</guid>
+
+					<description><![CDATA[介绍： 作者：朱明宇名称：将同目录下最新的某个目录里的所有文件替换到 GitHub 库里作用：将同目录下最新的某个目录里的所有文件替换到 GitHub 库里 使用方法：1. 在此脚本的分割线内写入相应的内容2. 给此脚本添加执行权限3. 执行此脚本 脚本分割线里的变量：1. directory=download-eternalcenter #本地的缓冲目录2. gituser=mingyuzhu #GitHub 用户3. gitemail=mingyu.zhu@eternalcenter.com #GitHub 邮箱4. gitrepository=download-eternalcenter #GitHub 库5. gitbranch=’master’ #GitHub 库的分支6. backupfile=all #备份后的文件7. keyword=clone #同目录下要备份目录名称的关键字 注意：需要提前安装 git 和 git-lfs，注册 GitHub，创建相应的 GitHub 库，并且创建和设置了对应的 ssh 密钥 脚本：]]></description>
+										<content:encoded><![CDATA[
+<h2>介绍：</h2>
+
+
+
+<p>作者：朱明宇<br>名称：将同目录下最新的某个目录里的所有文件替换到 GitHub 库里<br>作用：将同目录下最新的某个目录里的所有文件替换到 GitHub 库里</p>
+
+
+
+<p>使用方法：<br>1. 在此脚本的分割线内写入相应的内容<br>2. 给此脚本添加执行权限<br>3. 执行此脚本</p>
+
+
+
+<p>脚本分割线里的变量：<br>1. directory=download-eternalcenter #本地的缓冲目录<br>2. gituser=mingyuzhu #GitHub 用户<br>3. gitemail=mingyu.zhu@eternalcenter.com #GitHub 邮箱<br>4. gitrepository=download-eternalcenter #GitHub 库<br>5. gitbranch=’master’ #GitHub 库的分支<br>6. backupfile=all #备份后的文件<br>7. keyword=clone #同目录下要备份目录名称的关键字</p>
+
+
+
+<p>注意：需要提前安装 git 和 git-lfs，注册 GitHub，创建相应的 GitHub 库，并且创建和设置了对应的 ssh 密钥</p>
+
+
+
+<h2>脚本：</h2>
+
+
+
+<pre class="wp-block-code"><code>#!/bin/bash
+
+####################### Separator ########################
+
+directory=download-eternalcenter
+gituser=mingyuzhu
+gitemail=mingyu.zhu@eternalcenter.com
+gitrepository=download-eternalcenter
+gitbranch='master'
+backupfile=all
+keyword=clone
+
+####################### Separator ########################
+
+backupdirectory=`ls -rtlh | grep $keyword | awk '{print $NF}' | tail -1`
+
+sqlfile=`ls $backupdirectory | grep sql`
+tarfile=`ls $backupdirectory | grep tar`
+
+rm -rf $directory
+mkdir -p $directory &amp;> /dev/null
+
+echo $gituser
+git config --global user.email "$gitemail"
+git config --global user.name "$gituser"
+
+rm -rf $directory
+mkdir -p $directory &amp;> /dev/null
+cd $directory
+git init
+git lfs install
+git remote add origin git@github.com:$gituser/$gitrepository
+git pull --rebase origin $gitbranch -f
+git lfs track *
+git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch *' --prune-empty --tag-name-filter cat -- --all
+git commit -m 'cleapup'
+git push -u origin $gitbranch -f
+rm -rf .git/refs/original/
+git reflog expire --expire=now --all
+git gc --prune=now
+git gc --aggressive --prune=now
+
+cd ..
+
+rm -rf $directory
+mkdir -p $directory &amp;> /dev/null
+cd $directory
+git init
+git lfs install
+git remote add origin git@github.com:$gituser/$gitrepository
+git pull --rebase origin $gitbranch -f
+git lfs track *
+git rm *
+git commit -m 'cleapup'
+
+cd ../$backupdirectory/
+tar -zcvf ../$directory/$backupfile.tar.gz *
+cd ../$directory
+
+git lfs track *
+git add *
+git status
+git commit -m 'upload'
+git push -u origin $gitbranch -f
+cd ..</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[工具] Shell 自动化部署 LNMP + SSL 平台 （Fedora 35 版）</title>
+		<link>https://eternalcenter-now.github.io/shell-lnmp-install-fedora-35/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sat, 18 Dec 2021 13:29:31 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Languages (语言)]]></category>
+		<category><![CDATA[Nginx]]></category>
+		<category><![CDATA[Nginx Installation (安装)]]></category>
+		<category><![CDATA[Services (服务)]]></category>
+		<category><![CDATA[Shell]]></category>
+		<category><![CDATA[Shell Deployment (部署)]]></category>
+		<category><![CDATA[Shell Tool (工具)]]></category>
+		<category><![CDATA[Shell Website (网站)]]></category>
+		<category><![CDATA[Website Services (网站服务)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=19844</guid>
+
+					<description><![CDATA[介绍： 作者：朱明宇名称：自动化部署 LNMP + SSL 平台作用：自动化安装 LNMP + SSL，即通过 Linux、Nginx、MariaDB、PHP、php-fpm、SSL，实现 HTTPS 使用方法：1. 将网站的网页数据备份、网站的 SSL 公钥、网站的 SSL 私钥、网站的数据库备份和本脚本，5 个文件放在同一目录下2. 如果没有网站的数据库备份则将网页数据备份、网站的 SSL 公钥、网站的 SSL 私钥和本脚本，4 个文件放在同一目录下3. 在此脚本的分割线内写入相应的内容4. 服务器都要开启 SELinux5. 给此脚本添加执行权限6. 执行此脚本：./&#60;此脚本&#62; 脚本分割线里的变量：1. webdomain=”eternalcenter.com” #网站的域名，注意不要在前面加任何前缀2. webtar=”eternalcenter-backup-*.tar.gz”网站的网页数据备份，如果没有这个备份，可以下载一个开源的 WordPress 网页程序3. webcrt=”eternalcenter.com.crt” #网站 SSL 的公钥，可以自己创建也可以在 FreeSSL 上申请4. webkey=”eternalcenter.com.key” #网站 SSL 的私钥，可以自己创建也可以在 FreeSSL 上申请5. sqlbackup=”eternalcenter-backup-*.sql” #网站数据库数据备份，如果没有这个备份（数据库是全量备份），则这里可以为空6. db=”ec” #网站在数据库中库7. dbuser=”ec” #网站在数据库中的用户8. dbuserpw=”eternalcenter” #网站在数据库中的用户密码9. &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/shell-lnmp-install-fedora-35/" class="more-link">Continue reading<span class="screen-reader-text"> "[工具] Shell 自动化部署 LNMP + SSL 平台 （Fedora 35 版）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2 id="介绍">介绍：</h2>
+
+
+
+<p>作者：朱明宇<br>名称：自动化部署 LNMP + SSL 平台<br>作用：自动化安装 LNMP + SSL，即通过 Linux、Nginx、MariaDB、PHP、php-fpm、SSL，实现 HTTPS</p>
+
+
+
+<p>使用方法：<br>1. 将网站的网页数据备份、网站的 SSL 公钥、网站的 SSL 私钥、网站的数据库备份和本脚本，5 个文件放在同一目录下<br>2. 如果没有网站的数据库备份则将网页数据备份、网站的 SSL 公钥、网站的 SSL 私钥和本脚本，4 个文件放在同一目录下<br>3. 在此脚本的分割线内写入相应的内容<br>4. 服务器都要开启 SELinux<br>5. 给此脚本添加执行权限<br>6. 执行此脚本：./&lt;此脚本&gt;</p>
+
+
+
+<p>脚本分割线里的变量：<br>1. webdomain=”eternalcenter.com” #网站的域名，注意不要在前面加任何前缀<br>2. webtar=”eternalcenter-backup-*.tar.gz”网站的网页数据备份，如果没有这个备份，可以下载一个开源的 WordPress 网页程序<br>3. webcrt=”eternalcenter.com.crt” #网站 SSL 的公钥，可以自己创建也可以在 FreeSSL 上申请<br>4. webkey=”eternalcenter.com.key” #网站 SSL 的私钥，可以自己创建也可以在 FreeSSL 上申请<br>5. sqlbackup=”eternalcenter-backup-*.sql” #网站数据库数据备份，如果没有这个备份（数据库是全量备份），则这里可以为空<br>6. db=”ec” #网站在数据库中库<br>7. dbuser=”ec” #网站在数据库中的用户<br>8. dbuserpw=”eternalcenter” #网站在数据库中的用户密码<br>9. dbrootpw=”eternalcenter” #数据库的 root 密码</p>
+
+
+
+<p>注意：<br>1. 服务器的系统需要是 Fedora 35 版本<br>2. 服务器系统要配置好可用的软件源<br>3. 服务器要能够连接外网</p>
+
+
+
+<h2 id="脚本">脚本：</h2>
+
+
+
+<pre class="wp-block-code"><code>#!/bin/bash
+
+####################### Separator ########################
+webdomain="eternalcenter.com"
+webtar="eternalcenter-backup-*.tar.gz"
+webcrt="eternalcenter.com.crt"
+webkey="eternalcenter.com.key"
+sqlbackup="eternalcenter-backup-*.sql"
+db="ec"
+dbuser="ec"
+dbuserpw="eternalcenter"
+dbrootpw="eternalcenter"
+####################### Separator ########################
+
+#Determine whether SELinux is on
+getenforce | grep Enforcing
+if &#91; $? -ne 0 ];then
+	echo "SELinux is not set to enforcing mode and cannot continue"
+	exit 2
+fi
+
+#Determine whether the required file exists
+ls $webtar
+if &#91; $? -ne 0 ];then
+	echo "No web page data backup, unable to continue"
+	exit 2
+fi
+
+ls $webcrt
+if &#91; $? -ne 0 ];then
+	echo "Cannot continue without site public key"
+	exit 2
+fi
+
+ls $webkey
+if &#91; $? -ne 0 ];then
+	echo "Unable to continue without site private key"
+	exit 2
+fi
+
+#Update system
+yum clean all
+yum repolist
+yum makecache
+yum -y update
+
+#Make sure the required software is installed
+yum -y install tar
+yum -y install firewalld
+
+#Deploying Nginx
+yum -y install nginx
+
+echo 'worker_processes  1;
+
+events {
+    worker_connections  1024;
+}
+
+http {
+    limit_req_zone $binary_remote_addr zone=one:10m rate=1r/s;
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    sendfile        on;
+
+    keepalive_timeout  60;
+    client_body_timeout 20s;
+    client_header_timeout 10s;
+    send_timeout 30s;
+
+    server {
+        listen       80;
+        limit_req zone=one burst=5;
+        server_name www.eternalcenter.com eternalcenter.com;
+
+        rewrite ^/(.*)$ https://eternalcenter-now.github.io/$1 permanent;
+      
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   html;
+        }
+
+        }
+
+    server {
+        listen       443 ssl;
+        server_name www.eternalcenter.com eternalcenter.com;
+
+        if ($request_method !~ ^(GET|POST)$){
+        return 444;
+        }
+
+        ssl_certificate      /etc/nginx/ssl/eternalcenter.com.crt;
+        ssl_certificate_key  /etc/nginx/ssl/eternalcenter.com.key;
+
+        ssl_session_cache    shared:SSL:1m;
+        ssl_session_timeout  5m;
+
+        ssl_ciphers  HIGH:!aNULL:!MD5;
+        ssl_prefer_server_ciphers  on;
+
+        location ~ \.php$ {
+            fastcgi_pass 127.0.0.1:9000;
+            fastcgi_index index.php;
+            include fastcgi.conf;
+            fastcgi_param  SCRIPT_FILENAME  /usr/share/nginx/html/$fastcgi_script_name;
+            include fastcgi_params;
+        } 
+
+        location / {
+        root html;
+        index index.php index.html index.htm;
+
+        if (-f $request_filename/index.html){rewrite (.) $1/index.html break;}
+        if (-f $request_filename/index.php){rewrite (.) $1/index.php;}
+        if (!-f $request_filename){rewrite (.) /index.php;}
+        
+        }
+
+        location ~ ^/\.user\.ini {
+        deny all;
+        }
+    
+        location ~*\.(jpd|jpeg|gif|png|css|js|ico|xml)$ {
+        expires 30d;
+        }
+
+        error_page  404              /404.html;
+
+        }
+
+        gzip on;
+	gzip_min_length 1000;
+	gzip_comp_level 4;
+	gzip_types text/plain test/css application/json application/x-javascript text/xml application/xml
+	application/xml+rss text/javascripts;
+
+	client_header_buffer_size 1k;
+	large_client_header_buffers 4 4k;
+
+	open_file_cache max=2000 inactive=20s;
+	open_file_cache_valid  60s;
+	open_file_cache_min_uses 5;
+	open_file_cache_errors off;
+
+}' > /etc/nginx/nginx.conf
+
+sed -i "s/server_name www.eternalcenter.com eternalcenter.com;/server_name www.$webdomain $webdomain;/" /etc/nginx/nginx.conf
+sed -i "s@rewrite ^/(.*)$ https://eternalcenter-now.github.io/\$1 permanent@rewrite ^/(.*)$ https://$webdomain/\$1 permanent@" /etc/nginx/nginx.conf;
+sed -i "s/eternalcenter.com.crt/$webcrt/" /etc/nginx/nginx.conf
+sed -i "s/eternalcenter.com.key/$webkey/" /etc/nginx/nginx.conf
+
+mkdir /etc/nginx/ssl
+mv $webcrt /etc/nginx/ssl
+mv $webkey /etc/nginx/ssl
+chcon -t httpd_config_t /etc/nginx/ssl/$webcrt
+chcon -t httpd_config_t /etc/nginx/ssl/$webkey
+chcon -t httpd_config_t /etc/nginx/ssl/
+
+rm -rf /usr/share/nginx/html/*
+tar -xvf $webtar -C /usr/share/nginx/html/ &amp;&amp; rm -rf $webtar
+chcon -t httpd_sys_content_t -R /usr/share/nginx/html/*
+
+yum -y install sendmail
+yum -y install policycoreutils
+setsebool -P httpd_can_network_connect 1
+setsebool -P httpd_can_network_connect_db 1
+setsebool -P httpd_can_sendmail 1
+setsebool -P httpd_can_connect_ftp 1
+setsebool -P httpd_unified 1
+setsebool -P httpd_enable_cgi 1
+setsebool -P httpd_builtin_scripting 1
+setsebool -P mysql_connect_http 1
+
+systemctl start nginx
+systemctl enable nginx
+
+#Deploy MariaDB
+yum -y install mariadb mariadb-server
+
+grep "^log_bin=" /etc/my.cnf.d/mariadb-server.cnf
+if &#91; $? -ne 0 ];then
+	sed -i '/^datadir/a log_bin=ec' /etc/my.cnf.d/mariadb-server.cnf
+fi
+
+grep "^binlog_format=" /etc/my.cnf.d/mariadb-server.cnf
+if &#91; $? -ne 0 ];then
+	sed -i '/^datadir/a binlog_format=\"mixed\"' /etc/my.cnf.d/mariadb-server.cnf
+fi
+
+grep "^server_id=" /etc/my.cnf.d/mariadb-server.cnf
+if &#91; $? -ne 0 ];then
+	sed -i '/^datadir/a server_id=51' /etc/my.cnf.d/mariadb-server.cnf
+fi
+
+sed -i 's/^plugin-load-add=auth_gssapi.so/#plugin-load-add=auth_gssapi.so/' /etc/my.cnf.d/auth_gssapi.cnf
+
+sed -i '/^user=.*/d' /etc/my.cnf.d/mariadb-server.cnf
+sed -i "/\&#91;mysqld\]/a user=mysql" /etc/my.cnf.d/mariadb-server.cnf
+
+sed -i '/^bind-address=.*/d' /etc/my.cnf.d/mariadb-server.cnf
+sed -i "/\&#91;mysqld\]/a bind-address=127.0.0.1" /etc/my.cnf.d/mariadb-server.cnf
+
+chown -R mysql /var/lib/mysql
+
+systemctl start mariadb
+systemctl enable mariadb
+
+ls $sqlbackup
+if &#91; $? -ne 0 ];then
+        mysql -uroot -e "create database $db;"
+        mysql -uroot -e "create user \"$dbuser\"@\"localhost\" identified by \"$dbuserpw\";"
+        mysql -uroot -e "grant all privileges on $db.* to \"$dbuser\"@\"localhost\" identified by \"$dbuserpw\";"
+        mysql -uroot -e "set password for 'root'@'localhost'=password(\"$dbrootpw\")"
+else
+        mysql -uroot -e "create database $db;"
+        mysql -uroot $db &lt; $sqlbackup
+	mysql -uroot -e "create user \"$dbuser\"@\"localhost\" identified by \"$dbuserpw\";"
+	mysql -uroot -e "grant all privileges on $db.* to \"$dbuser\"@\"localhost\" identified by \"$dbuserpw\";"
+	mysql -uroot -e "set password for 'root'@'localhost'=password(\"$dbrootpw\")"
+	rm -rf $sqlbackup
+fi
+	
+systemctl restart mariadb
+
+#Deploy PHP
+yum -y install php php-fpm php-mysqlnd php-gd php-mbstring php-opcache php-json php-xml php-xmlrpc php-pecl-zip php-pecl-imagick php-intl
+useradd php-fpm -s /sbin/nologin
+chown -R php-fpm:php-fpm /usr/share/nginx/html/*
+
+sed -i /"^user =.*"/d /etc/php-fpm.conf
+sed -i /"^group =.*"/d /etc/php-fpm.conf
+sed -i /"^listen =.*"/d /etc/php-fpm.conf
+sed -i /"^&#91;www]"/d /etc/php-fpm.conf
+sed -i /"^pm = .*"/d /etc/php-fpm.conf
+sed -i /"^pm.start_servers = .*"/d /etc/php-fpm.conf
+sed -i /"^pm.min_spare_servers = .*"/d /etc/php-fpm.conf
+sed -i /"^pm.max_spare_servers = .*"/d /etc/php-fpm.conf
+sed -i /"^pm.max_children = .*"/d /etc/php-fpm.conf
+sed -i /"^pm.max_requests = .*"/d /etc/php-fpm.conf
+sed -i /"^request_terminate_timeout = .*"/d /etc/php-fpm.conf
+
+echo '&#91;www]' >> /etc/php-fpm.conf
+echo 'user = php-fpm' >> /etc/php-fpm.conf
+echo 'group = php-fpm' >> /etc/php-fpm.conf
+echo 'listen = 127.0.0.1:9000' >> /etc/php-fpm.conf
+echo 'pm = dynamic' >> /etc/php-fpm.conf
+echo 'pm.start_servers = 2' >> /etc/php-fpm.conf
+echo 'pm.min_spare_servers = 2' >> /etc/php-fpm.conf
+echo 'pm.max_spare_servers = 4' >> /etc/php-fpm.conf
+echo 'pm.max_children = 4' >> /etc/php-fpm.conf
+echo 'pm.max_requests = 1024' >> /etc/php-fpm.conf
+echo 'request_terminate_timeout = 300' >> /etc/php-fpm.conf
+
+systemctl start php-fpm
+systemctl enable php-fpm
+
+#Improve system performance
+grep "^* soft nofile" /etc/security/limits.conf
+if &#91; $? -ne 0 ];then
+	echo '* soft nofile 1024' >> /etc/security/limits.conf
+fi
+
+grep "^* hard nofile" /etc/security/limits.conf
+if &#91; $? -ne 0 ];then
+	echo '* hard nofile 1024' >> /etc/security/limits.conf
+fi
+
+#Open firewall
+systemctl start firewalld
+systemctl enable firewalld
+firewall-cmd --add-service=http --permanent
+firewall-cmd --add-service=https --permanent
+firewall-cmd --reload
+
+#Limit log space
+yum -y install rsyslog
+systemctl enable --now rsyslog
+
+echo "/var/log/mariadb/mariadb.log {
+        create 600 mysql mysql
+        notifempty
+	daily
+        rotate 3
+        missingok
+        compress
+    postrotate
+	# just if mysqld is really running
+        if &#91; -e /run/mariadb/mariadb.pid ]
+        then
+           kill -1 $(&lt;/run/mariadb/mariadb.pid)
+        fi
+    endscript
+}" > /etc/logrotate.d/mariadb
+
+echo "/var/log/nginx/*log {
+    create 0664 nginx root
+    size 1024M
+    rotate 1
+    missingok
+    notifempty
+    compress
+    sharedscripts
+    postrotate
+        /bin/kill -USR1 `cat /run/nginx.pid 2>/dev/null` 2>/dev/null || true
+    endscript
+}" > /etc/logrotate.d/nginx
+
+echo "/var/log/php-fpm/*log {
+    size 100M
+    rotate 1
+    missingok
+    notifempty
+    sharedscripts
+    delaycompress
+    postrotate
+        /bin/kill -SIGUSR1 `cat /run/php-fpm/php-fpm.pid 2>/dev/null` 2>/dev/null || true
+    endscript
+}" > /etc/logrotate.d/php-fpm
+
+echo "/var/log/cron
+/var/log/maillog
+/var/log/messages
+/var/log/secure
+/var/log/spooler
+{
+    size 100M
+    rotate 1
+    missingok
+    sharedscripts
+    postrotate
+        /usr/bin/systemctl kill -s HUP rsyslog.service >/dev/null 2>&amp;1 || true
+    endscript
+}" > /etc/logrotate.d/rsyslog
+
+#Delete this script
+scriptwhere=`readlink -f "$0"`
+rm -rf $scriptwhere
+
+#Restart the system
+reboot</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[工具] Shell 将同目录下最新的某个目录里的所有文件替换到 GitHub 库里</title>
+		<link>https://eternalcenter-now.github.io/shell-github-replace/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sat, 18 Dec 2021 13:11:35 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Git]]></category>
+		<category><![CDATA[Languages (语言)]]></category>
+		<category><![CDATA[Other Services (其他服务)]]></category>
+		<category><![CDATA[Services (服务)]]></category>
+		<category><![CDATA[Shell]]></category>
+		<category><![CDATA[Shell Backup (备份)]]></category>
+		<category><![CDATA[Shell Tool (工具)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=19836</guid>
+
+					<description><![CDATA[介绍： 作者：朱明宇名称：将同目录下最新的某个目录里的所有文件替换到 GitHub 库里作用：将同目录下最新的某个目录里的所有文件替换到 GitHub 库里 使用方法：1. 在此脚本的分割线内写入相应的内容2. 给此脚本添加执行权限3. 执行此脚本 脚本分割线里的变量：1. directory=download-eternalcenter #本地的缓冲目录2. gituser=mingyuzhu #GitHub 用户3. gitemail=mingyu.zhu@eternalcenter.com #GitHub 邮箱4. gitrepository=download-eternalcenter #GitHub 库5. gitbranch=’master’ #GitHub 库的分支6. backupfile=all #备份后的文件7. keyword=clone #同目录下要备份目录名称的关键字 注意：需要提前安装 git，注册 GitHub，创建相应的 GitHub 库，并且创建和设置了对应的 ssh 密钥 脚本：]]></description>
+										<content:encoded><![CDATA[
+<h2>介绍：</h2>
+
+
+
+<p>作者：朱明宇<br>名称：将同目录下最新的某个目录里的所有文件替换到 GitHub 库里<br>作用：将同目录下最新的某个目录里的所有文件替换到 GitHub 库里</p>
+
+
+
+<p>使用方法：<br>1. 在此脚本的分割线内写入相应的内容<br>2. 给此脚本添加执行权限<br>3. 执行此脚本</p>
+
+
+
+<p>脚本分割线里的变量：<br>1. directory=download-eternalcenter #本地的缓冲目录<br>2. gituser=mingyuzhu #GitHub 用户<br>3. gitemail=mingyu.zhu@eternalcenter.com #GitHub 邮箱<br>4. gitrepository=download-eternalcenter #GitHub 库<br>5. gitbranch=’master’ #GitHub 库的分支<br>6. backupfile=all #备份后的文件<br>7. keyword=clone #同目录下要备份目录名称的关键字</p>
+
+
+
+<p>注意：需要提前安装 git，注册 GitHub，创建相应的 GitHub 库，并且创建和设置了对应的 ssh 密钥</p>
+
+
+
+<h2>脚本：</h2>
+
+
+
+<pre class="wp-block-code"><code>#!/bin/bash
+
+####################### Separator ########################
+
+directory=download-eternalcenter
+gituser=mingyuzhu
+gitemail=mingyu.zhu@eternalcenter.com
+gitrepository=download-eternalcenter
+gitbranch='master'
+backupfile=all
+keyword=clone
+
+####################### Separator ########################
+
+backupdirectory=`ls -rtlh | grep $keyword | awk '{print $NF}' | tail -1`
+
+sqlfile=`ls $backupdirectory | grep sql`
+tarfile=`ls $backupdirectory | grep tar`
+
+rm -rf $directory
+mkdir -p $directory &amp;> /dev/null
+
+echo $gituser
+git config --global user.email "$gitemail"
+git config --global user.name "$gituser"
+
+rm -rf $directory
+mkdir -p $directory &amp;> /dev/null
+cd $directory
+git init
+git remote add origin git@github.com:$gituser/$gitrepository
+git pull --rebase origin $gitbranch -f
+git filter-branch --force --index-filter 'git rm --cached --ignore-unmatch *' --prune-empty --tag-name-filter cat -- --all
+git commit -m 'cleapup'
+git push -u origin $gitbranch -f
+rm -rf .git/refs/original/
+git reflog expire --expire=now --all
+git gc --prune=now
+git gc --aggressive --prune=now
+
+cd ..
+
+rm -rf $directory
+mkdir -p $directory &amp;> /dev/null
+cd $directory
+git init
+git remote add origin git@github.com:$gituser/$gitrepository
+git pull --rebase origin $gitbranch -f
+git rm *
+git commit -m 'cleapup'
+
+cd ../$backupdirectory/
+tar -zcvf ../$directory/$backupfile.tar.gz *
+cd ../$directory
+
+git add *
+git status
+git commit -m 'upload'
+git push -u origin $gitbranch -f
+cd ..</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[功能] HTML 下载链接</title>
+		<link>https://eternalcenter-now.github.io/%e5%8a%9f%e8%83%bd-html-%e4%b8%8b%e8%bd%bd%e9%93%be%e6%8e%a5/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sun, 12 Dec 2021 14:05:45 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[HTML]]></category>
+		<category><![CDATA[Languages (语言)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=19784</guid>
+
+					<description><![CDATA[（补充：这里以下载和此 html 文件在同目录下的 eternalcenter-2021.txt 文件，且下载命名为 eternalcenter.txt 为例）]]></description>
+										<content:encoded><![CDATA[
+<pre class="wp-block-code"><code>&lt;html&gt;
+&lt;body&gt;
+&lt;a href="eternalcenter-2021.txt" download="eternalcenter.txt"&gt;Download test.txt&lt;/a&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+
+
+<p>（补充：这里以下载和此 html 文件在同目录下的 eternalcenter-2021.txt 文件，且下载命名为 eternalcenter.txt 为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[工具] Shell 将远程服务器的 LNMP 备份在本地复原</title>
+		<link>https://eternalcenter-now.github.io/shell-remote-lnmp-restore/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 10 Dec 2021 15:05:51 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Languages (语言)]]></category>
+		<category><![CDATA[Nginx]]></category>
+		<category><![CDATA[Nginx Management (管理)]]></category>
+		<category><![CDATA[Services (服务)]]></category>
+		<category><![CDATA[Shell]]></category>
+		<category><![CDATA[Shell Backup (备份)]]></category>
+		<category><![CDATA[Shell Deployment (部署)]]></category>
+		<category><![CDATA[Shell Tool (工具)]]></category>
+		<category><![CDATA[Shell Website (网站)]]></category>
+		<category><![CDATA[Website Services (网站服务)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=19609</guid>
+
+					<description><![CDATA[介绍： 作者：朱明宇名称：将远程服务器的 LNMP 备份还原到本地作用：将远程服务器的 LNMP 备份还原到本地 使用方法：1. 在此脚本的分割线内写入相应的内容2. 给此脚本添加执行权限3. 执行此脚本 脚本分割线里的变量：1. tmppath=/cache #本地用于备份数据的目录2. webpath=/usr/share/nginx/html #本地用于存放网站文件的目录3. key=”~/.ssh/eternalcenter” #本地私钥4. tmpfile=tmpfile.txt #用于存储记录的文件5. dbuser=ec #网站在数据库中的用户6. ruser=eternalcenter #用于远程服务器的用户7. rhost=eternalcenter.com #远程服务器8. rcache=”/cache” #远程服务器用于备份数据的目录 注意：1. 本地需要已经搭建好 LNMP 平台2. 用于远程服务器的用户，需要能免密钥 ssh 远程服务器，且对于本地用于备份数据的目录和远程服务器用于备份数据的目录拥有读和执行的权限3. 执行此脚本的用户需要有 sudo systemctl 权限4. 脚本 ”mysql -uroot -p&#8217;eternalcenter&#8217; ec &#60; $sqlfile“ 中 “eternalcenter“ 是指本地 MariaDB 数据库 root 用户的密码，需要修改成本地 MariaDB 数据库的 root &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/shell-remote-lnmp-restore/" class="more-link">Continue reading<span class="screen-reader-text"> "[工具] Shell 将远程服务器的 LNMP 备份在本地复原"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2>介绍：</h2>
+
+
+
+<p>作者：朱明宇<br>名称：将远程服务器的 LNMP 备份还原到本地<br>作用：将远程服务器的 LNMP 备份还原到本地</p>
+
+
+
+<p>使用方法：<br>1. 在此脚本的分割线内写入相应的内容<br>2. 给此脚本添加执行权限<br>3. 执行此脚本</p>
+
+
+
+<p>脚本分割线里的变量：<br>1. tmppath=/cache #本地用于备份数据的目录<br>2. webpath=/usr/share/nginx/html #本地用于存放网站文件的目录<br>3. key=”~/.ssh/eternalcenter” #本地私钥<br>4. tmpfile=tmpfile.txt #用于存储记录的文件<br>5. dbuser=ec #网站在数据库中的用户<br>6. ruser=eternalcenter #用于远程服务器的用户<br>7. rhost=eternalcenter.com #远程服务器<br>8. rcache=”/cache” #远程服务器用于备份数据的目录</p>
+
+
+
+<p>注意：<br>1. 本地需要已经搭建好 LNMP 平台<br>2. 用于远程服务器的用户，需要能免密钥 ssh 远程服务器，且对于本地用于备份数据的目录和远程服务器用于备份数据的目录拥有读和执行的权限<br>3. 执行此脚本的用户需要有 sudo systemctl 权限<br>4. 脚本 ”mysql -uroot -p&#8217;eternalcenter&#8217; ec &lt; $sqlfile“ 中 “eternalcenter“ 是指本地 MariaDB 数据库 root 用户的密码，需要修改成本地 MariaDB 数据库的 root 用户密码</p>
+
+
+
+<h2>脚本：</h2>
+
+
+
+<pre class="wp-block-code"><code>#!/bin/bash
+
+####################### Separator ########################
+
+tmppath=/cache
+webpath=/usr/share/nginx/html
+key="~/.ssh/eternalcenter"
+tmpfile=tmpfile.txt
+dbuser=ec
+
+ruser=eternalcenter
+rhost=eternalcenter.com
+rcache="/cache"
+
+####################### Separator ########################
+
+nowdirectory=`pwd`
+
+a=`ssh -i $key $ruser@$rhost "du -s $rcache" | awk '{print $1}'`
+sleep 10
+b=`ssh -i $key $ruser@$rhost "du -s $rcache" | awk '{print $1}'`
+
+if &#91; $a -eq 0 ];then
+	echo "no file"
+fi
+
+if &#91; $a -ne $b ];then
+        echo "backup is running now"
+        exit
+fi
+
+c=0
+
+if &#91; -f $tmpfile ];then
+        c=`cat $tmpfile`
+fi
+
+if &#91; $a -eq $c ];then
+        echo "no new file"
+        exit
+fi
+
+echo $a &gt; $tmpfile
+
+sqlfile=`ssh -i $key $ruser@$rhost "ls -rtlh $rcache | grep sql | tail -1" | awk '{print $NF}'`
+if &#91; $? -eq 0 ]; then
+
+        tarfile=`ssh -i $key $ruser@$rhost "ls -rtlh $rcache | grep tar | tail -1" | awk '{print $NF}'`
+        if &#91; $? -eq 0 ]; then
+
+                rm -rf $tmppath/*
+                mkdir $tmppatch &amp;&gt; /dev/null
+
+                echo $sqlfile
+                echo $tarfile
+
+                scp -i $key $ruser@$rhost:$rcache/$sqlfile $tmppath
+                scp -i $key $ruser@$rhost:$rcache/$tarfile $tmppath
+
+#                sudo systemctl stop nginx
+#                sudo systemctl stop php-fpm
+
+                cd $tmppath
+
+                mysql -uroot -p'eternalcenter' -e "drop database $dbuser;"
+                mysql -uroot -p'eternalcenter' -e "create database $dbuser;"
+                mysql -uroot -p'eternalcenter' -e "grant all privileges on $dbuser.* to \"$dbuser\"@\"localhost\";"
+                mysql -uroot -p'eternalcenter' ec &lt; $sqlfile
+
+                sudo rm -rf $webpath/*
+                sudo tar -zxvf $tarfile -C $webpath/ &amp;&gt; /dev/null
+
+#                sudo systemctl start nginx
+#                sudo systemctl start php-fpm
+
+                cd $nowdirectory
+
+        fi
+fi</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[工具] Shell LNMP 没运行则重启系统 （systemctl 版）</title>
+		<link>https://eternalcenter-now.github.io/shell-lnmp-check-restart-systemctl/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 10 Dec 2021 14:26:19 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Languages (语言)]]></category>
+		<category><![CDATA[Nginx]]></category>
+		<category><![CDATA[Nginx Monitor (监控)]]></category>
+		<category><![CDATA[Services (服务)]]></category>
+		<category><![CDATA[Shell]]></category>
+		<category><![CDATA[Shell Monitor (监控)]]></category>
+		<category><![CDATA[Shell Tool (工具)]]></category>
+		<category><![CDATA[Website Services (网站服务)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=19607</guid>
+
+					<description><![CDATA[介绍： 作者：朱明宇名称：LNMP 没运行则重启系统作用：LNMP 没运行则重启系统 使用方法：1. 在此脚本的分割线内写入相应的内容2. 给此脚本添加执行权限3. 执行此脚本 脚本：]]></description>
+										<content:encoded><![CDATA[
+<h2>介绍：</h2>
+
+
+
+<p>作者：朱明宇<br>名称：LNMP 没运行则重启系统<br>作用：LNMP 没运行则重启系统</p>
+
+
+
+<p>使用方法：<br>1. 在此脚本的分割线内写入相应的内容<br>2. 给此脚本添加执行权限<br>3. 执行此脚本</p>
+
+
+
+<h2>脚本：</h2>
+
+
+
+<pre class="wp-block-code"><code>#!/bin/bash
+  
+systemctl status nginx | grep 'active (running)'
+if &#91; $? -ne 0 ];then
+        /usr/sbin/reboot
+fi
+
+systemctl status mariadb | grep 'active (running)'
+if &#91; $? -ne 0 ];then
+        /usr/sbin/reboot
+fi
+
+systemctl status php-fpm | grep 'active (running)'
+if &#91; $? -ne 0 ];then
+        /usr/sbin/reboot
+fi</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[FUN] HTML Mingyu Zhu&#8217;s Personal Web Page</title>
+		<link>https://eternalcenter-now.github.io/html-mingyuzhu-en_us/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sun, 14 Nov 2021 11:03:28 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[HTML]]></category>
+		<category><![CDATA[Languages (语言)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=18354</guid>
+
+					<description><![CDATA[中文 Code Background picture]]></description>
+										<content:encoded><![CDATA[
+<p class="has-text-align-right has-vivid-red-color has-text-color has-medium-font-size"><a href="https://eternalcenter-now.github.io/html-zhumingyu-zh_cn/" data-type="URL" data-id="https://eternalcenter-now.github.io/html-zhumingyu-zh_cn/">中文</a></p>
+
+
+
+<h2>Code</h2>
+
+
+
+<pre class="wp-block-code"><code>&lt;html>
+
+&lt;meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+&lt;head>
+
+&lt;title>Mingyu Zhu&lt;/title>
+
+&lt;/head>
+
+&lt;body>
+
+&lt;div style="position:absolute; width:100%; height:100%; z-index:-1; left:0; top:0;"> 
+&lt;img src="https://filedn.eu/ltLpz9YGUS2hi1pJmklNfDb/en_us/dimfigure.JPG" height="100%" width="100%" style="position:absolute;left:0; top:0;"> 
+&lt;/div>
+
+&lt;div style="width:300px;height:50px;float:left"> 
+&lt;form action="http://www.google.com/search" method="get"> 
+&lt;input type="text" name="q" size="20" maxlength="255" value="" /> 
+&lt;input type="submit" name="btnG" value="Google" /> 
+&lt;/form>
+&lt;a href="https://zhu-mingyu.github.io/" style="right: 15px; position: absolute; font-size:25px;color:red">中文 （GitHub）&lt;/a>
+&lt;a href="https://zhumingyu.com/" style="right: 215px; position: absolute; font-size:25px;color:red">中文&lt;/a>
+&lt;/div> 
+
+&lt;div style="left: 8px; position: absolute; top: 75px;font-size:45px;">Mingyu Zhu's Personal Web Page&lt;/div>
+
+&lt;div style="left: 800px; position: absolute; top: 300px;font-size:15px;">"Hope everyone can achieve self achievement and self happiness fairly."&lt;/div>
+
+&lt;a href="https://eternalcenter-now.github.io/" target="_blank" style="left: 8px; position: absolute; top: 185px;font-size:20px;color:black">Eternal Center (eternalcenter.com), Mingyu Zhu's personal website&lt;/a>
+&lt;a href="https://e.pcloud.link/publink/show?code=kZukhJZUhQq66Fxs0yg5rL1LsAgrSD3ytMk" target="_blank" style="left: 8px; position: absolute; top: 215px;font-size:20px;color:black">Mingyu Zhu's personal website data for cloning&lt;/a>
+&lt;a href="https://github.com/eternalcenter-now/eternalcenter-now" target="_blank" style="left: 8px; position: absolute; top: 245px;font-size:20px;color:black">Mingyu Zhu's personal website code for cloning&lt;/a>
+&lt;a href="http://static.eternalcenter.com/" target="_blank" style="left: 8px; position: absolute; top: 275px;font-size:20px;color:black">Effect display page of Mingyu Zhu's personal website&lt;/a>
+&lt;a href="https://eternalcenter-now.github.io/" target="_blank" style="left: 8px; position: absolute; top: 305px;font-size:20px;color:black">Effect display page of Mingyu Zhu's personal website (GitHub)&lt;/a>
+&lt;a href="https://e.pcloud.link/publink/show?code=kZrJhJZbVIBf8jmVFzumvaYnEwPlLLc34DX" target="_blank" style="left: 8px; position: absolute; top: 335px;font-size:20px;color:black">Public personal data of Mingyu Zhu&lt;/a>
+
+&lt;/body>
+
+&lt;html/></code></pre>
+
+
+
+<h2>Background picture</h2>
+
+
+
+<div class="wp-block-image"><figure class="aligncenter size-large"><img width="1024" height="678" src="https://eternalcenter-now.github.io/wp-content/uploads/2021/11/dimfigure-1024x678.jpg" alt="" class="wp-image-18360" srcset="https://eternalcenter-now.github.io/wp-content/uploads/2021/11/dimfigure-1024x678.jpg 1024w, https://eternalcenter-now.github.io/wp-content/uploads/2021/11/dimfigure-300x199.jpg 300w, https://eternalcenter-now.github.io/wp-content/uploads/2021/11/dimfigure-768x509.jpg 768w, https://eternalcenter-now.github.io/wp-content/uploads/2021/11/dimfigure-1536x1018.jpg 1536w, https://eternalcenter-now.github.io/wp-content/uploads/2021/11/dimfigure.jpg 2000w" sizes="(max-width: 767px) 89vw, (max-width: 1000px) 54vw, (max-width: 1071px) 543px, 580px" /></figure></div>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令  set （设置 Shell 里的位置变量或者 Shell 的执行方式）</title>
+		<link>https://eternalcenter-now.github.io/set/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Wed, 10 Nov 2021 13:05:41 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Languages (语言)]]></category>
+		<category><![CDATA[Shell]]></category>
+		<category><![CDATA[Shell Basic (基础)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=18278</guid>
+
+					<description><![CDATA[内容一：set 命令的格式1.1 设置 Shell 的位置变量的格式 1.2 设置 Shell 的执行方式 或者： 或者： （补充：+o 代表打开特殊属性，-o 代表结束特殊属性） 内容二： set 的常用参数 1) -a 将已修改的变量进行标记，为将其输出至环境变量做准备2) -b 让被中止的后台进程立刻显示退出状态代码3) -d 取消使用杂凑表记忆中使用过的指令4) -e 若退出状态代码不为 0 （正常退出）则立即退出，并显示错误原因5) -f 取消通配符6) -h 默认自动记录函数位置7) -k 让命令的参数为此命令的环境变量8) -l 默认自动记录 for 循环变量名9) -m 监视模式10) -n 测试模式（只读取不执行）11) -p 优先顺序模式12) -P 让文件或目录代替符号链接13) -t 让随后的命令执行后立即退出14) -u 使用未定义的变量时显示错误信息15) -v 显示输入值16) -H shell 使用感叹号 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/set/" class="more-link">Continue reading<span class="screen-reader-text"> "[命令] Linux 命令  set （设置 Shell 里的位置变量或者 Shell 的执行方式）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h4>内容一：set 命令的格式<br>1.1 设置 Shell 的位置变量的格式</h4>
+
+
+
+<pre class="wp-block-code"><code># set &lt;Value of the first position variable&gt; &lt;Value of the second location variable&gt; ......</code></pre>
+
+
+
+<h4>1.2 设置 Shell 的执行方式</h4>
+
+
+
+<pre class="wp-block-code"><code># set &lt;parameter&gt;</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># set &lt;parameter&gt; +o</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># set &lt;parameter&gt; -o</code></pre>
+
+
+
+<p>（补充：+o 代表打开特殊属性，-o 代表结束特殊属性）</p>
+
+
+
+<h4>内容二： set 的常用参数</h4>
+
+
+
+<p>1) -a 将已修改的变量进行标记，为将其输出至环境变量做准备<br>2) -b 让被中止的后台进程立刻显示退出状态代码<br>3) -d 取消使用杂凑表记忆中使用过的指令<br>4) -e 若退出状态代码不为 0 （正常退出）则立即退出，并显示错误原因<br>5) -f 取消通配符<br>6) -h 默认自动记录函数位置<br>7) -k 让命令的参数为此命令的环境变量<br>8) -l 默认自动记录 for 循环变量名<br>9) -m 监视模式<br>10) -n 测试模式（只读取不执行）<br>11) -p 优先顺序模式<br>12) -P 让文件或目录代替符号链接<br>13) -t 让随后的命令执行后立即退出<br>14) -u 使用未定义的变量时显示错误信息<br>15) -v 显示输入值<br>16) -H shell 使用感叹号 “!” + 号码的方式调用 history 命令中的历史命令<br>17) -x 命令指向前先显示此命令的参数或变量</p>
+
+
+
+<p>（补充：将以上参数前面的 &#8211; 换成 + 则会变成相反的效果）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[娱乐] Shell 将文件里的一列变成一行并以冒号分隔</title>
+		<link>https://eternalcenter-now.github.io/shell-column-to-row-colon/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Tue, 02 Nov 2021 14:33:02 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Languages (语言)]]></category>
+		<category><![CDATA[Shell]]></category>
+		<category><![CDATA[Shell Fun (娱乐)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=18155</guid>
+
+					<description><![CDATA[（补充：这里以将 list.txt 文件里的一列变成一行并以冒号分隔）]]></description>
+										<content:encoded><![CDATA[
+<pre class="wp-block-code"><code>a=`for i in $(cat list.txt); do echo -e ":$i\c" ; done`;a=${a#*:};echo $a</code></pre>
+
+
+
+<p>（补充：这里以将  list.txt  文件里的一列变成一行并以冒号分隔）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Linux 数组</title>
+		<link>https://eternalcenter-now.github.io/array/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sat, 30 Oct 2021 14:20:29 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Languages (语言)]]></category>
+		<category><![CDATA[Shell]]></category>
+		<category><![CDATA[Shell Basic (基础)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=18121</guid>
+
+					<description><![CDATA[内容目录： 内容一：定义数组1.1 定义数组全部的值1.1.1 在命令行中定义数组的值1.1.2 在脚本中定义数组的值1.2 定义数组某个指定位置元素的值1.2.1 在命令行定义数组某个指定位置元素的值1.2.2 在脚本定义数组某个指定位置元素的值1.3 给数组追加新的元素 内容二：读取数组2.1 读取数组全部的值2.2 读取数组元素的个数2.3 读取数组最长单个元素的长度2.4 读取数组单个元素的值2.5 读取数组位置经过计算得出的元素的值2.6 读取数组位置经过计算得出的元素的值，并在计算过程中使用变量2.7 读取数组单个元素的值，并在前面加前缀 内容三：数组的使用案例3.1 创建使用数组的脚本3.2 执行使用数组的脚本 具体的内容： 内容一：定义数组1.1 定义数组全部的值1.1.1 在命令行中定义数组的值 或者： 1.1.2 在脚本中定义数组的值 或者： 1.2 定义数组某个指定位置元素的值1.2.1 在命令行定义数组某个指定位置元素的值 （补充：这里以定义数组第 1 个元素位置的值为例） 1.2.2 在脚本定义数组某个指定位置元素的值 （补充：这里以定义数组第 1 个元素位置的值为例） 1.3 给数组追加新的元素 或者： （补充：这里每个空格间隔 1 个新的元素，元素的位置依次递增） 内容二：读取数组2.1 读取数组全部的值 或者： 2.2 读取数组元素的个数 或者： 2.3 读取数组最长单个元素的长度 2.4 读取数组单个元素的值 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/array/" class="more-link">Continue reading<span class="screen-reader-text"> "[内容] Linux 数组"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2 id="内容目录">内容目录：</h2>
+
+
+
+<h4>内容一：定义数组<br>1.1 定义数组全部的值<br>1.1.1 在命令行中定义数组的值<br>1.1.2 在脚本中定义数组的值<br>1.2 定义数组某个指定位置元素的值<br>1.2.1 在命令行定义数组某个指定位置元素的值<br>1.2.2 在脚本定义数组某个指定位置元素的值<br>1.3 给数组追加新的元素</h4>
+
+
+
+<h4>内容二：读取数组<br>2.1 读取数组全部的值<br>2.2 读取数组元素的个数<br>2.3 读取数组最长单个元素的长度<br>2.4 读取数组单个元素的值<br>2.5 读取数组位置经过计算得出的元素的值<br>2.6 读取数组位置经过计算得出的元素的值，并在计算过程中使用变量<br>2.7 读取数组单个元素的值，并在前面加前缀</h4>
+
+
+
+<h4 id="内容三-数组的使用案例3-1-创建使用数组的脚本3-2-执行使用数组的脚本">内容三：数组的使用案例<br>3.1 创建使用数组的脚本<br>3.2 执行使用数组的脚本</h4>
+
+
+
+<h2 id="具体的内容">具体的内容：</h2>
+
+
+
+<h4 id="内容一-定义数组1-1-定义数组全部的值1-1-1-在命令行中定义数组的值">内容一：定义数组<br>1.1 定义数组全部的值<br>1.1.1 在命令行中定义数组的值</h4>
+
+
+
+<pre class="wp-block-code"><code># &lt;array_name&gt;=(&lt;value0&gt; &lt;value1&gt; &lt;value2&gt; &lt;value3&gt; &lt;value4&gt;)</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># &lt;array_name&gt;=(\
+&lt;value0&gt;\
+&lt;value1&gt;\
+&lt;value2&gt;\
+&lt;value3&gt;\
+&lt;value4&gt;\
+)</code></pre>
+
+
+
+<h4 id="1-1-2-在脚本中定义数组的值">1.1.2 在脚本中定义数组的值</h4>
+
+
+
+<pre class="wp-block-code"><code>&lt;array_name&gt;=(
+&lt;value0&gt;
+&lt;value1&gt;
+&lt;value2&gt;
+&lt;value3&gt;
+&lt;value4&gt;
+)</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code>&lt;array_name&gt;&#91;0]=&lt;value0&gt;
+&lt;array_name&gt;&#91;1]=&lt;value1&gt;
+&lt;array_name&gt;&#91;2]=&lt;value2&gt;
+&lt;array_name&gt;&#91;3]=&lt;value3&gt;
+&lt;array_name&gt;&#91;4]=&lt;value4&gt;</code></pre>
+
+
+
+<h4 id="1-2-定义数组某个指定位置元素的值1-2-1-在命令行定义数组某个指定位置元素的值">1.2 定义数组某个指定位置元素的值<br>1.2.1 在命令行定义数组某个指定位置元素的值</h4>
+
+
+
+<pre class="wp-block-code"><code># &lt;array_name&gt;&#91;0]=&lt;value0&gt;</code></pre>
+
+
+
+<p>（补充：这里以定义数组第 1 个元素位置的值为例）</p>
+
+
+
+<h4 id="1-2-2-在脚本定义数组某个指定位置元素的值">1.2.2 在脚本定义数组某个指定位置元素的值</h4>
+
+
+
+<pre class="wp-block-code"><code>&lt;array_name&gt;&#91;0]=&lt;value0&gt;</code></pre>
+
+
+
+<p>（补充：这里以定义数组第 1 个元素位置的值为例）</p>
+
+
+
+<h4>1.3 给数组追加新的元素</h4>
+
+
+
+<pre class="wp-block-code"><code># &lt;array_name&gt;+=(&lt;the value of the new element&gt; &lt;the value of the new element&gt; &lt;the value of the new element&gt; ......)</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># &lt;array_name&gt;+=('&lt;the value of the new element&gt;' '&lt;the value of the new element&gt;' '&lt;the value of the new element&gt;' ......)</code></pre>
+
+
+
+<p>（补充：这里每个空格间隔 1 个新的元素，元素的位置依次递增）</p>
+
+
+
+<h4 id="内容二-读取数组2-1-读取数组全部的值">内容二：读取数组<br>2.1 读取数组全部的值</h4>
+
+
+
+<pre class="wp-block-code"><code># echo ${&lt;array_name&gt;&#91;*]}</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># echo ${&lt;array_name&gt;&#91;@]}</code></pre>
+
+
+
+<h4 id="2-2-读取数组元素的个数">2.2 读取数组元素的个数</h4>
+
+
+
+<pre class="wp-block-code"><code># echo ${#&lt;array_name&gt;&#91;*]}</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># echo ${#&lt;array_name&gt;&#91;@]}</code></pre>
+
+
+
+<h4 id="2-3-读取数组最长单个元素的长度">2.3 读取数组最长单个元素的长度</h4>
+
+
+
+<pre class="wp-block-code"><code># echo ${#&lt;array_name&gt;&#91;n]}</code></pre>
+
+
+
+<h4 id="2-4-读取数组单个元素的值">2.4 读取数组单个元素的值</h4>
+
+
+
+<pre class="wp-block-code"><code># echo ${&lt;array_name&gt;&#91;1]}</code></pre>
+
+
+
+<p>（补充：这里以显示数组第 2 个元素的值为例）</p>
+
+
+
+<h4>2.5 读取数组位置经过计算得出的元素的值</h4>
+
+
+
+<pre class="wp-block-code"><code># echo ${command_array&#91;2 + 1]} </code></pre>
+
+
+
+<p>（补充：这里以显示数组第 2 + 1 = 3 个，也就是第 3 个元素的值为例）</p>
+
+
+
+<h4>2.6 读取数组位置经过计算得出的元素的值，并在计算过程中使用变量</h4>
+
+
+
+<pre class="wp-block-code"><code># echo ${command_array&#91;(2 * $i) + 1]}</code></pre>
+
+
+
+<p>（补充：这里以显示数组第 2 乘以变量 i 的值再加上 1 的位置的元素的值为例）</p>
+
+
+
+<h4 id="2-5-读取数组单个元素的值-并在前面加前缀">2.7 读取数组单个元素的值，并在前面加前缀</h4>
+
+
+
+<pre class="wp-block-code"><code># echo "First Index: ${&lt;array_name&gt;&#91;0]}"</code></pre>
+
+
+
+<p>（补充：这里以显示数组第 1 个元素的值，并在前面加上 First Index: 前缀为例）</p>
+
+
+
+<h4 id="内容三-数组的使用案例3-1-创建使用数组的脚本">内容三：数组的使用案例<br>3.1 创建使用数组的脚本</h4>
+
+
+
+<pre class="wp-block-code"><code># vim test.sh</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>#!/bin/bash
+  
+NAME&#91;0]='a1'
+NAME&#91;1]='b2'
+NAME&#91;2]='c3'
+NAME&#91;3]='d4'
+NAME&#91;4]='e5'
+
+echo "first one: ${NAME&#91;0]}"
+echo "${NAME&#91;*]}"</code></pre>
+
+
+
+<p>（补充：这里以创建名为 test.sh 显示数组的第 1 个值和所有值，并在第 1 个值前面添加 first one 前缀的脚本为例）</p>
+
+
+
+<h4 id="3-2-执行使用数组的脚本">3.2 执行使用数组的脚本</h4>
+
+
+
+<pre class="wp-block-code"><code># . test.sh 
+first one: a1
+all: a1 b2 c3 d4 e5</code></pre>
+
+
+
+<p>（补充：这里以执行名为 test.sh 的脚本，显示第 1 行是 first one: a1 第 2 行是 all: a1 b2 c3 d4 e5 的结果为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

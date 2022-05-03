@@ -1,0 +1,2441 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>System Setting (系统设置) &#8211; Eternal Center</title>
+	<atom:link href="https://eternalcenter-now.github.io/category/system/system-operation-system-setting-system-software/system-setting/feed/" rel="self" type="application/rss+xml" />
+	<link>https://eternalcenter-now.github.io/</link>
+	<description></description>
+	<lastBuildDate>Fri, 29 Apr 2022 14:49:27 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	
+	<item>
+		<title>[步骤] Linux SSH 密钥的批量更新</title>
+		<link>https://eternalcenter-now.github.io/ssh-key-batch-renew/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 29 Apr 2022 14:36:55 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Port Security (系统端口安全)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23423</guid>
+
+					<description><![CDATA[步骤目录： 步骤一：生成新的 SSH 密钥1.1 进入 ~/.ssh 目录1.2 生成新的 SSH 密钥 步骤二：将新的 SSH 公钥拷贝到目标服务器 步骤三：更新 SSH 密钥3.1 更新 SSH 私钥3.1.1 备份旧有的 SSH 私钥3.1.2 更新 SSH 私钥3.2 更新 SSH 公钥3.2.1 备份旧有的 SSH 公钥3.2.2 更新 SSH 公钥 步骤四：删除目标服务器的旧有 SSH 公钥4.1 删除目标服务器的旧有 SSH 公钥4.2 确定目标服务器就有的 SSH 已经删除 具体的操作步骤： 步骤一：生成新的 SSH 密钥1.1 进入 ~/.ssh 目录 1.2 生成新的 SSH 密钥 步骤二：将新的 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/ssh-key-batch-renew/" class="more-link">Continue reading<span class="screen-reader-text"> "[步骤] Linux SSH 密钥的批量更新"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2>步骤目录：</h2>
+
+
+
+<h4>步骤一：生成新的 SSH 密钥<br>1.1 进入 ~/.ssh 目录<br>1.2 生成新的 SSH 密钥</h4>
+
+
+
+<h4>步骤二：将新的 SSH 公钥拷贝到目标服务器</h4>
+
+
+
+<h4>步骤三：更新 SSH 密钥<br>3.1 更新 SSH 私钥<br>3.1.1 备份旧有的 SSH 私钥<br>3.1.2 更新 SSH 私钥<br>3.2 更新 SSH 公钥<br>3.2.1 备份旧有的 SSH 公钥<br>3.2.2 更新 SSH 公钥</h4>
+
+
+
+<h4>步骤四：删除目标服务器的旧有 SSH 公钥<br>4.1 删除目标服务器的旧有 SSH 公钥<br>4.2 确定目标服务器就有的 SSH 已经删除</h4>
+
+
+
+<h2>具体的操作步骤：</h2>
+
+
+
+<h4>步骤一：生成新的 SSH 密钥<br>1.1 进入 ~/.ssh 目录</h4>
+
+
+
+<pre class="wp-block-code"><code># cd ~/.ssh</code></pre>
+
+
+
+<h4>1.2 生成新的 SSH 密钥</h4>
+
+
+
+<pre class="wp-block-code"><code># ssh-keygen -b 4096 -t rsa -C "&lt;content&gt;" -f "&lt;public private key name&gt;"</code></pre>
+
+
+
+<h4>步骤二：将新的 SSH 公钥拷贝到目标服务器</h4>
+
+
+
+<pre class="wp-block-code"><code># for i in `cat &lt;server list&gt;`;do echo $i;ssh-copy-id -i ~/.ssh/&lt;public private key name&gt;.pub $i;echo;done</code></pre>
+
+
+
+<h4>步骤三：更新 SSH 密钥<br>3.1 更新 SSH 私钥<br>3.1.1 备份旧有的 SSH 私钥</h4>
+
+
+
+<pre class="wp-block-code"><code># mv id_rsa id_rsa.backup</code></pre>
+
+
+
+<h4>3.1.2 更新 SSH 私钥</h4>
+
+
+
+<pre class="wp-block-code"><code># cp &lt;public private key name&gt; id_rsa</code></pre>
+
+
+
+<h4>3.2 更新 SSH 公钥<br>3.2.1 备份旧有的 SSH 公钥</h4>
+
+
+
+<pre class="wp-block-code"><code># mv id_rsa.pub id_rsa.pub.backup</code></pre>
+
+
+
+<h4>3.2.2 更新 SSH 公钥</h4>
+
+
+
+<pre class="wp-block-code"><code># cp &lt;public private key name&gt;.pub id_rsa.pub</code></pre>
+
+
+
+<h4>步骤四：删除目标服务器的旧有 SSH 公钥<br>4.1 删除目标服务器的旧有 SSH 公钥</h4>
+
+
+
+<pre class="wp-block-code"><code># for i in `cat &lt;server list&gt;`;do echo $i;ssh $i "sed -i /&lt;old SSH key content&gt;/d ~/.ssh/authorized_keys";echo;done</code></pre>
+
+
+
+<h4>4.2 确定目标服务器就有的 SSH 已经删除</h4>
+
+
+
+<pre class="wp-block-code"><code># for i in `cat &lt;server list&gt;`;do echo $i;ssh $i "cat ~/.ssh/authorized_keys | egrep -v '&lt;content&gt;'";echo;done</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[排错] 解决重启系统后无法进入系统，并提示：/grub2/i386-pc/normoal.mod not found gpt</title>
+		<link>https://eternalcenter-now.github.io/debug-grub2-i386-pc-normoal-mod-not-found-gpt/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Thu, 28 Apr 2022 15:29:58 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23367</guid>
+
+					<description><![CDATA[报错代码： 解决方法：步骤目录： 步骤一：挂载官方镜像 步骤二：登录拯救模式2.1 进入拯救模式2.2 登录拯救模式 步骤三：在救援模式确定系统的根目录分区 步骤四：在救援模式将系统的分区挂载到救援模式的 /mnt 目录4.1 在救援模式将系统的根分区挂载到救援模式的 /mnt 目录4.2 在救援模式将救援模式的 /dev 目录关联到救援模式的 /mnt/dev 目录4.3 在救援模式将救援模式的 /proc 目录关联到救援模式的 /mnt/proc 目录4.4 在救援模式将救援模式的 /sys 目录关联到救援模式的 /mnt/sys 目录4.5 在救援模式将救援模式的 /run 目录关联到救援模式的 /mnt/run 目录 步骤五：将当前的根目录从救援模式的根目录切换到系统的根目录5.1 将当前的根目录从救援模式的根目录切换到系统的根目录5.2 在系统模式下确认当前的挂载状态5.3 在系统模式下确认当前根目录下的目录 步骤六：在系统模式下修复 grub2 步骤七：重启系统 具体的操作步骤： 步骤一：挂载官方镜像 （步骤略） 步骤二：登录拯救模式2.1 进入拯救模式 （步骤略） 2.2 登录拯救模式 步骤三：在救援模式确定系统的根目录分区 （步骤略） （补充：1) 物理分区可以使用 lsblk 命令和 fdisk &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/debug-grub2-i386-pc-normoal-mod-not-found-gpt/" class="more-link">Continue reading<span class="screen-reader-text"> "[排错] 解决重启系统后无法进入系统，并提示：/grub2/i386-pc/normoal.mod not found gpt"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2>报错代码：</h2>
+
+
+
+<pre class="wp-block-code"><code>/grub2/i386-pc/normoal.mod not found gpt</code></pre>
+
+
+
+<h2>解决方法：<br>步骤目录：</h2>
+
+
+
+<h4>步骤一：挂载官方镜像</h4>
+
+
+
+<h4>步骤二：登录拯救模式<br>2.1 进入拯救模式<br>2.2 登录拯救模式</h4>
+
+
+
+<h4>步骤三：在救援模式确定系统的根目录分区</h4>
+
+
+
+<h4>步骤四：在救援模式将系统的分区挂载到救援模式的 /mnt 目录<br>4.1 在救援模式将系统的根分区挂载到救援模式的 /mnt 目录<br>4.2 在救援模式将救援模式的 /dev 目录关联到救援模式的 /mnt/dev 目录<br>4.3 在救援模式将救援模式的 /proc 目录关联到救援模式的 /mnt/proc 目录<br>4.4 在救援模式将救援模式的 /sys 目录关联到救援模式的 /mnt/sys 目录<br>4.5 在救援模式将救援模式的 /run 目录关联到救援模式的 /mnt/run 目录</h4>
+
+
+
+<h4>步骤五：将当前的根目录从救援模式的根目录切换到系统的根目录<br>5.1 将当前的根目录从救援模式的根目录切换到系统的根目录<br>5.2 在系统模式下确认当前的挂载状态<br>5.3 在系统模式下确认当前根目录下的目录</h4>
+
+
+
+<h4>步骤六：在系统模式下修复 grub2</h4>
+
+
+
+<h4>步骤七：重启系统</h4>
+
+
+
+<h2>具体的操作步骤：</h2>
+
+
+
+<h4>步骤一：挂载官方镜像</h4>
+
+
+
+<p>（步骤略）</p>
+
+
+
+<h4>步骤二：登录拯救模式<br>2.1 进入拯救模式</h4>
+
+
+
+<p>（步骤略）</p>
+
+
+
+<h4>2.2 登录拯救模式</h4>
+
+
+
+<pre class="wp-block-code"><code>rescue login:root</code></pre>
+
+
+
+<h4>步骤三：在救援模式确定系统的根目录分区</h4>
+
+
+
+<p>（步骤略）</p>
+
+
+
+<p>（<br>补充：<br>1) 物理分区可以使用 lsblk 命令和 fdisk -l 命令辅助确定<br>2) 逻辑分区还可以可以使用 pvs 命令和 lvs 命令辅助确定<br>）</p>
+
+
+
+<h4>步骤四：在救援模式将系统的分区挂载到救援模式的 /mnt 目录<br>4.1 在救援模式将系统的根分区挂载到救援模式的 /mnt 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount &lt;root spartition&gt; /mnt</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 如果是物理分区，系统的根分区就在救援模式的 /dev/ 目录里，例如救援模式的 /dev/sda1<br>2) 如果是逻辑分区，Rocky Linux &amp; RHEL 的系统根分区就是救援模式里的 /dev/&lt;volume group>/&lt;logical volume> 例如救援模式里的 /dev/vg/lv，openSUSE &amp; SUSE 的系统根分区就是救援模式里的 /dev/mapper/&lt;volume group>-&lt;logical volume> 例如救援模式里的 /dev/mapper/vg-lv<br>）</p>
+
+
+
+<h4>4.2 在救援模式将救援模式的 /dev 目录关联到救援模式的 /mnt/dev 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount --bind /dev /mnt/dev</code></pre>
+
+
+
+<p>（补充：此时所有对救援模式的 /mnt/dev 目录的访问都会变成对救援模式的 /dev 目录的访问）</p>
+
+
+
+<h4>4.3 在救援模式将救援模式的 /proc 目录关联到救援模式的 /mnt/proc 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount --bind /proc /mnt/proc</code></pre>
+
+
+
+<p>（补充：此时所有对救援模式的 /mnt/proc 目录的访问都会变成对救援模式的 /proc 目录的访问）</p>
+
+
+
+<h4>4.4 在救援模式将救援模式的 /sys 目录关联到救援模式的 /mnt/sys 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount --bind /sys /mnt/sys</code></pre>
+
+
+
+<p>（补充：此时所有对救援模式的 /mnt/sys 目录的访问都会变成对救援模式的 /sys 目录的访问）</p>
+
+
+
+<h4>4.5 在救援模式将救援模式的 /run 目录关联到救援模式的 /mnt/run 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount --bind /run /mnt/run</code></pre>
+
+
+
+<p>（补充：此时所有对救援模式的 /mnt/run 目录的访问都会变成对救援模式的 /run 目录的访问）</p>
+
+
+
+<h4>步骤五：将当前的根目录从救援模式的根目录切换到系统的根目录<br>5.1 将当前的根目录从救援模式的根目录切换到系统的根目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ /bash # chroot /mnt</code></pre>
+
+
+
+<p>（补充：这里以 /mnt 作为系统根目录为例）</p>
+
+
+
+<h4>5.2 在系统模式下确认当前的挂载状态</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# mount -a</code></pre>
+
+
+
+<h4>5.3 在系统模式下确认当前根目录下的目录</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# ls
+bin boot dev home lib lib64 mnt opt proc root run sbin selinux srv sys tmp usr var</code></pre>
+
+
+
+<h4>步骤六：在系统模式下修复 grub2</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# grub2-install /dev/sda</code></pre>
+
+
+
+<h4>步骤七：重启系统</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# reboot</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Linux 用户开机自动登录 （GNOME 版）</title>
+		<link>https://eternalcenter-now.github.io/automatic-logon/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Wed, 27 Apr 2022 15:08:01 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23340</guid>
+
+					<description><![CDATA[步骤一：创建用于自动登录的用户1.1 创建用于自动登录的用户 （补充：这里以创建 monitor 用户为例） 1.2 清空用于自动登录用户的密码 （补充：这里以清空 monitor 用户的密码为例） 步骤二： 设置 Linux 用户开机自动登录 如果是 Rocky Linux &#38; RHEL： 在： 下面添加以下内容： 如果是 openSUSE &#38; SUSE： 将以下内容： 修改为： （补充：这里以设置 monitor 用户开机自动登录为例） 步骤三：重启系统]]></description>
+										<content:encoded><![CDATA[
+<h4>步骤一：创建用于自动登录的用户<br>1.1 创建用于自动登录的用户</h4>
+
+
+
+<pre class="wp-block-code"><code># useradd monitor</code></pre>
+
+
+
+<p>（补充：这里以创建 monitor 用户为例）</p>
+
+
+
+<h4>1.2 清空用于自动登录用户的密码</h4>
+
+
+
+<pre class="wp-block-code"><code># passwd -d monitor</code></pre>
+
+
+
+<p>（补充：这里以清空 monitor 用户的密码为例）</p>
+
+
+
+<h4>步骤二： 设置 Linux 用户开机自动登录</h4>
+
+
+
+<p>如果是 Rocky Linux &amp; RHEL：</p>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/gdm/custom.conf</code></pre>
+
+
+
+<p>在：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+&#91;daemon]
+......</code></pre>
+
+
+
+<p>下面添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+AutomaticLoginEnable=True
+AutomaticLogin=monitor
+......</code></pre>
+
+
+
+<p>如果是 openSUSE &amp; SUSE：</p>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/gdm/custom.conf</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+DISPLAYMANAGER_AUTOLOGIN=""
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+DISPLAYMANAGER_AUTOLOGIN="monitor"
+......</code></pre>
+
+
+
+<p>（补充：这里以设置 monitor 用户开机自动登录为例）</p>
+
+
+
+<h4>步骤三：重启系统</h4>
+
+
+
+<pre class="wp-block-code"><code># reboot</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Linux 自动退出时间的设置</title>
+		<link>https://eternalcenter-now.github.io/automatic-exit-time/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 25 Apr 2022 12:14:46 +0000</pubDate>
+				<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23284</guid>
+
+					<description><![CDATA[步骤一：确认目前正在使用的解释器是 /bin/bash 步骤二：设置多久以后会自动退出 （补充：这里以设置 30 秒后会自动退出为例）]]></description>
+										<content:encoded><![CDATA[
+<h4>步骤一：确认目前正在使用的解释器是 /bin/bash</h4>
+
+
+
+<pre class="wp-block-code"><code># echo $SHELL
+/bin/bash</code></pre>
+
+
+
+<h4>步骤二：设置多久以后会自动退出</h4>
+
+
+
+<pre class="wp-block-code"><code># export TMOUT=30</code></pre>
+
+
+
+<p>（补充：这里以设置 30 秒后会自动退出为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Linux 图形桌面 （Fedora 版）</title>
+		<link>https://eternalcenter-now.github.io/graphic-desktop-fedora/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sun, 17 Apr 2022 10:01:55 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<category><![CDATA[System Software (系统软件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23200</guid>
+
+					<description><![CDATA[内容目录： 内容一：Xfce 图形桌面1.1 Xfce 的安装方法1.2 Xfce 的简介1.3 Xfce 的展示和介绍网站 内容二：LXDE 图形桌面2.1 LXDE 的安装方法2.2 LXDE 的简介2.3 LXDE 的展示和介绍网站 内容三：LXQt 图形桌面3.1 LXQt 的安装方法3.2 LXQt 的简介3.3 LXQt 的展示和介绍网站 内容四：Cinnamon 图形桌面4.1 Cinnamon 的安装方法4.2 Cinnamon 的简介4.3 Cinnamon 的展示和介绍网站 内容五：MATE 图形桌面5.1 MATE 的安装方法5.2 MATE 的简介5.3 MATE 的展示和介绍网站 内容六：Sugar 图形桌面 内容七：Deepin 图形桌面 内容八：i3 图形桌面8.1 i3 的安装方法8.2 i3 的简介8.3 i3 的展示和介绍网站 内容九：Basic 图形桌面 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/graphic-desktop-fedora/" class="more-link">Continue reading<span class="screen-reader-text"> "[内容] Linux 图形桌面 （Fedora 版）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2>内容目录：</h2>
+
+
+
+<h4>内容一：Xfce 图形桌面<br>1.1 Xfce 的安装方法<br>1.2 Xfce 的简介<br>1.3 Xfce 的展示和介绍网站</h4>
+
+
+
+<h4>内容二：LXDE 图形桌面<br>2.1 LXDE 的安装方法<br>2.2 LXDE 的简介<br>2.3 LXDE 的展示和介绍网站</h4>
+
+
+
+<h4>内容三：LXQt 图形桌面<br>3.1 LXQt 的安装方法<br>3.2 LXQt 的简介<br>3.3 LXQt 的展示和介绍网站</h4>
+
+
+
+<h4>内容四：Cinnamon 图形桌面<br>4.1 Cinnamon 的安装方法<br>4.2 Cinnamon 的简介<br>4.3 Cinnamon 的展示和介绍网站</h4>
+
+
+
+<h4>内容五：MATE 图形桌面<br>5.1 MATE 的安装方法<br>5.2 MATE 的简介<br>5.3 MATE 的展示和介绍网站</h4>
+
+
+
+<h4>内容六：Sugar 图形桌面</h4>
+
+
+
+<h4>内容七：Deepin 图形桌面</h4>
+
+
+
+<h4>内容八：i3 图形桌面<br>8.1 i3 的安装方法<br>8.2 i3 的简介<br>8.3 i3 的展示和介绍网站</h4>
+
+
+
+<h4>内容九：Basic 图形桌面</h4>
+
+
+
+<h4>内容十：Pantheon 图形桌面</h4>
+
+
+
+<h4>内容十一：KDE 图形桌面</h4>
+
+
+
+<h4>内容十二：GNOME 图形桌面</h4>
+
+
+
+<h2>具体的内容：</h2>
+
+
+
+<h4>内容一：Xfce 图形桌面<br>1.1 Xfce 的安装方法</h4>
+
+
+
+<pre class="wp-block-code"><code># dnf install @xfce-desktop-enviroment</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># yum groupinstall "Xfce Desktop"</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># dnf group install -y "Xfce Desktop"</code></pre>
+
+
+
+<h4>1.2 Xfce 的简介</h4>
+
+
+
+<p>Fedora Xfce 定制版展示了 Xfce 桌面，Xfce 桌面追求快速和轻巧，同时用户界面友好并有精彩的视觉盛宴。</p>
+
+
+
+<h4>1.3 Xfce 的展示和介绍网站</h4>
+
+
+
+<p>https://spins.fedoraproject.org/xfce/</p>
+
+
+
+<h4>内容二：LXDE 图形桌面<br>2.1 LXDE 的安装方法</h4>
+
+
+
+<pre class="wp-block-code"><code># dnf install @lxde-desktop</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># yum groupinstall "LXDE Desktop"</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># dnf group install -y "LXDE Desktop"</code></pre>
+
+
+
+<h4>2.2 LXDE 的简介</h4>
+
+
+
+<p>LXDE，全名为“轻量级 X11 桌面环境”，是一款极速轻快、实用而且低功耗的桌面环境。</p>
+
+
+
+<h4>2.3 LXDE 的展示和介绍网站</h4>
+
+
+
+<p>https://spins.fedoraproject.org/lxde/</p>
+
+
+
+<h4>内容三：LXQt 图形桌面<br>3.1 LXQt 的安装方法</h4>
+
+
+
+<pre class="wp-block-code"><code># dnf install @lxqt-desktop</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># yum groupinstall "LXQt Desktop"</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># dnf group install -y "LXQt Desktop"</code></pre>
+
+
+
+<h4>3.2 LXQt 的简介</h4>
+
+
+
+<p>Fedora LXQt 提供了一个轻量、完整的 LXQt 桌面环境。</p>
+
+
+
+<h4>3.3 LXQt 的展示和介绍网站</h4>
+
+
+
+<p>https://spins.fedoraproject.org/zh_Hans_CN/lxqt/</p>
+
+
+
+<h4>内容四：Cinnamon 图形桌面<br>4.1 Cinnamon 的安装方法</h4>
+
+
+
+<pre class="wp-block-code"><code># dnf install @cinnamon-desktop</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># yum groupinstall "Cinnamon Desktop"</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># dnf group install -y "Cinnamon Desktop"</code></pre>
+
+
+
+<h4>4.2 Cinnamon 的简介</h4>
+
+
+
+<p>Cinnamon 是一种提供高级创新功能并且尊重传统的用户习惯的Linux桌面环境。</p>
+
+
+
+<h4>4.3 Cinnamon 的展示和介绍网站</h4>
+
+
+
+<p>https://spins.fedoraproject.org/cinnamon/</p>
+
+
+
+<h4>内容五：MATE 图形桌面<br>5.1 MATE 的安装方法</h4>
+
+
+
+<pre class="wp-block-code"><code># dnf install @mate-desktop</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># yum groupinstall "MATE Desktop"</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># dnf group install -y "MATE Desktop"</code></pre>
+
+
+
+<h4>5.2 MATE 的简介</h4>
+
+
+
+<p>MATE Compiz 是一款轻量、强大，专为高效率和高性能打造的桌面环境。</p>
+
+
+
+<h4>5.3 MATE 的展示和介绍网站</h4>
+
+
+
+<p>https://spins.fedoraproject.org/mate-compiz/</p>
+
+
+
+<h4>内容六：Sugar 图形桌面</h4>
+
+
+
+<p>Sugar 的安装方法</p>
+
+
+
+<pre class="wp-block-code"><code># yum groupinstall "Sugar Desktop Environment"</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># dnf group install -y "Sugar Desktop Environment"</code></pre>
+
+
+
+<h4>内容七：Deepin 图形桌面</h4>
+
+
+
+<p>Deepin 的安装方法</p>
+
+
+
+<pre class="wp-block-code"><code># yum groupinstall "Deepin Desktop"</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># dnf group install -y "Deepin Desktop"</code></pre>
+
+
+
+<h4>内容八：i3 图形桌面<br>8.1 i3 的安装方法</h4>
+
+
+
+<pre class="wp-block-code"><code># yum groupinstall "i3 desktop"</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># dnf group install -y "i3 desktop"</code></pre>
+
+
+
+<h4>8.2 i3 的简介</h4>
+
+
+
+<p>Fedora i3 定制版提供了流行的 i3 平铺窗口管理器。其使得 i3 对于那些不想用鼠标、触摸板，或是其他指点设备的无论是新手还是高级用户都易于访问且更具吸引力。</p>
+
+
+
+<h4>8.3 i3 的展示和介绍网站</h4>
+
+
+
+<p>https://spins.fedoraproject.org/i3/</p>
+
+
+
+<h4>内容九：Basic 图形桌面</h4>
+
+
+
+<p>Basic 的安装方法</p>
+
+
+
+<pre class="wp-block-code"><code># yum groupinstall "Basic Desktop"</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># dnf group install -y "Basic Desktop"</code></pre>
+
+
+
+<h4>内容十：Pantheon 图形桌面</h4>
+
+
+
+<p>Pantheon 的安装方法</p>
+
+
+
+<pre class="wp-block-code"><code># yum groupinstall "Pantheon Desktop"</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># dnf group install -y "Pantheon Desktop"</code></pre>
+
+
+
+<h4>内容十一：KDE 图形桌面</h4>
+
+
+
+<p>KDE 的安装方法</p>
+
+
+
+<pre class="wp-block-code"><code># dnf install @KDE-desktop</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># yum groupinstall "KDE Plasma Workspaces"</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># dnf group install -y "KDE Plasma Workspaces"</code></pre>
+
+
+
+<h4>内容十二：GNOME 图形桌面</h4>
+
+
+
+<p>GNOME 的安装方法</p>
+
+
+
+<pre class="wp-block-code"><code># dnf install @gnome</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># yum groupinstall "GNOME"</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># dnf group install -y "GNOME"</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] 全球公共免费 DNS</title>
+		<link>https://eternalcenter-now.github.io/free-dns/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Thu, 14 Apr 2022 15:24:23 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[DNS]]></category>
+		<category><![CDATA[Other Services (其他服务)]]></category>
+		<category><![CDATA[Services (服务)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Network (系统网络)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23164</guid>
+
+					<description><![CDATA[AdGuard Cloudflare COMODO DNS Watch Dyn Level 3 Neustar FreeDNS Google OpenDNS SAFEDNS Symantec]]></description>
+										<content:encoded><![CDATA[
+<h2>AdGuard</h2>
+
+
+
+<pre class="wp-block-code"><code>94.140.14.14
+94.140.14.15
+94.140.15.15
+94.140.15.16</code></pre>
+
+
+
+<h2>Cloudflare</h2>
+
+
+
+<pre class="wp-block-code"><code>1.0.0.1
+1.0.0.2
+1.0.0.3
+1.1.1.1
+1.1.1.2
+1.1.1.3</code></pre>
+
+
+
+<h2>COMODO</h2>
+
+
+
+<pre class="wp-block-code"><code>8.20.247.20
+8.26.56.26</code></pre>
+
+
+
+<h2>DNS Watch</h2>
+
+
+
+<pre class="wp-block-code"><code>84.200.69.80
+84.200.70.40</code></pre>
+
+
+
+<h2>Dyn</h2>
+
+
+
+<pre class="wp-block-code"><code>216.146.35.35
+216.146.36.36</code></pre>
+
+
+
+<h2>Level 3</h2>
+
+
+
+<pre class="wp-block-code"><code>209.244.0.3
+209.244.0.4</code></pre>
+
+
+
+<h2>Neustar</h2>
+
+
+
+<pre class="wp-block-code"><code>156.154.70.1
+156.154.71.1</code></pre>
+
+
+
+<h2>FreeDNS</h2>
+
+
+
+<pre class="wp-block-code"><code>37.235.1.174
+37.235.1.177</code></pre>
+
+
+
+<h2>Google</h2>
+
+
+
+<pre class="wp-block-code"><code>8.8.4.4
+8.8.8.8</code></pre>
+
+
+
+<h2>OpenDNS</h2>
+
+
+
+<pre class="wp-block-code"><code>208.67.220.220
+208.67.222.222</code></pre>
+
+
+
+<h2>SAFEDNS</h2>
+
+
+
+<pre class="wp-block-code"><code>195.46.39.39
+195.46.39.40</code></pre>
+
+
+
+<h2>Symantec</h2>
+
+
+
+<pre class="wp-block-code"><code>199.85.126.10
+199.85.137.10</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[排错] 解决 SSH 远程登录时很慢但 ping 时延迟很低</title>
+		<link>https://eternalcenter-now.github.io/debug-ssh-slow/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Wed, 13 Apr 2022 15:15:39 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Network (系统网络)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23106</guid>
+
+					<description><![CDATA[分析： ssh 远程某台服务器时很慢，但是 ping 时延迟却很低。这可能是 DNS 解析出现问题造成的，禁用服务器上 sshd 的 GSSAPIAuthentication 参数和 UseDNS 参数可以解决，这两个参数的作用是：1) GSSAPIAuthentication，当服务器的 sshd 服务此参数处于开启状态时，客户端 SSH 登录此服务器时，客户端会对服务器的 IP 地址进行 PTR 反解析，获得服务器的域名，再通过服务器的域名对服务器进行 DNS A 正向 IP 地址解析，通过此方法来防止欺骗。2) UseDNS，当服务器的 sshd 服务此参数处于开启状态时，客户端 SSH 登录此服务器时，服务器会对客户端的 IP 地址进行反解析，获得客户端的域名，再通过客户端的域名对客户端进行 DNS A 正向 IP 地址解析，通过此方法来防止欺骗。 解决方法： 步骤一：修改 SSH 的配置文件 将以下内容： 修改为： 步骤二：让修改的 SSH 配置文件生效]]></description>
+										<content:encoded><![CDATA[
+<h2>分析：</h2>
+
+
+
+<p>ssh 远程某台服务器时很慢，但是 ping 时延迟却很低。这可能是 DNS 解析出现问题造成的，禁用服务器上 sshd 的 GSSAPIAuthentication 参数和 UseDNS 参数可以解决，这两个参数的作用是：<br>1) GSSAPIAuthentication，当服务器的 sshd 服务此参数处于开启状态时，客户端 SSH 登录此服务器时，客户端会对服务器的 IP 地址进行 PTR 反解析，获得服务器的域名，再通过服务器的域名对服务器进行 DNS A 正向 IP 地址解析，通过此方法来防止欺骗。<br>2) UseDNS，当服务器的 sshd 服务此参数处于开启状态时，客户端 SSH 登录此服务器时，服务器会对客户端的 IP 地址进行反解析，获得客户端的域名，再通过客户端的域名对客户端进行 DNS A 正向 IP 地址解析，通过此方法来防止欺骗。</p>
+
+
+
+<h2>解决方法：</h2>
+
+
+
+<h4>步骤一：修改 SSH 的配置文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/ssh/sshd_conf</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+UseDNS yes
+......
+GSSAPIAuthentication yes
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+UseDNS no
+......
+GSSAPIAuthentication no
+......</code></pre>
+
+
+
+<h4>步骤二：让修改的  SSH 配置文件生效</h4>
+
+
+
+<pre class="wp-block-code"><code># systemctl restart sshd</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[排错] 解决 Linux 运行 authselect 命令时报错 “[error] [/etc/authselect/system-auth] has unexpected content!” 或者 “[error] [/etc/authselect/password-auth] has unexpected content!”</title>
+		<link>https://eternalcenter-now.github.io/debug-error-etc-authselect-system-auth-has-unexpected-content-or-error-etc-authselect-passwor/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 11 Apr 2022 15:40:00 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<category><![CDATA[System User (系统用户)]]></category>
+		<category><![CDATA[System User & System Privilege (系统用户 & 系统权限)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23013</guid>
+
+					<description><![CDATA[报错代码： 或者： 或者： 分析： /etc/authselect/system-auth 文件或 /etc/authselect/password-auth 文件是不应该被手动修改的，如果被手动修改了，再使用 authselect select sssd 命令或者 authselect apply-changes 命令时则会有此类报错 解决方法： （注意：此方法会刷新 /etc/authselect/system-auth 文件和 /etc/authselect/password-auth 文件里的所有内容）]]></description>
+										<content:encoded><![CDATA[
+<h2>报错代码：</h2>
+
+
+
+<pre class="wp-block-code"><code>&#91;error] &#91;/etc/authselect/system-auth] has unexpected content!
+&#91;error] &#91;/etc/authselect/password-auth] has unexpected content!
+&#91;error] Unexpected changes to the configuration were detected.
+&#91;error] Refusing to activate profile unless those changes are removed or overwrite is requested.</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code>&#91;error] &#91;/etc/authselect/system-auth] has unexpected content!
+&#91;error] Unexpected changes to the configuration were detected.
+&#91;error] Refusing to activate profile unless those changes are removed or overwrite is requested.</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code>&#91;error] &#91;/etc/authselect/password-auth] has unexpected content!
+&#91;error] Unexpected changes to the configuration were detected.
+&#91;error] Refusing to activate profile unless those changes are removed or overwrite is requested.</code></pre>
+
+
+
+<h2>分析：</h2>
+
+
+
+<p>/etc/authselect/system-auth 文件或 /etc/authselect/password-auth 文件是不应该被手动修改的，如果被手动修改了，再使用 authselect select sssd 命令或者 authselect apply-changes 命令时则会有此类报错</p>
+
+
+
+<h2>解决方法：</h2>
+
+
+
+<pre class="wp-block-code"><code># authselect apply-changes</code></pre>
+
+
+
+<p>（注意：此方法会刷新 /etc/authselect/system-auth 文件和 /etc/authselect/password-auth 文件里的所有内容）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Linux 同时按下 “ctrl” 键和 “alt” 键和 “delete” 键锁屏功能的禁用</title>
+		<link>https://eternalcenter-now.github.io/ctrl-alt-del-disable/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sun, 03 Apr 2022 16:21:51 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=22678</guid>
+
+					<description><![CDATA[]]></description>
+										<content:encoded><![CDATA[
+<pre class="wp-block-code"><code># systemctl mask ctrl-alt-del.target</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Linux 提高触发 Kdump 的几率</title>
+		<link>https://eternalcenter-now.github.io/kdump-probability-increase/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 18 Feb 2022 09:12:39 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System General Log (系统普通日志)]]></category>
+		<category><![CDATA[System Log (系统日志)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=22075</guid>
+
+					<description><![CDATA[注意： 在提高触发 Kdump 的几率之前要先开启 Kdump： 正文： 步骤一：配置提高触发 Kdump 几率的参数1.1 配置提高触发 Kdump 几率的参数 添加以下内容： 1.2 让刚刚配置的参数生效 （注意：此时每有一次软锁都会触发 Kdump） 步骤二：当 Kdmup 触发后分析奔溃的信息 步骤三；删除提高触发 Kdump 几率的参数 （重要）3.1 删除提高触发 Kdump 几率的参数 （重要） 删除以下内容： 3.2 让刚刚删除参数的配置生效 （重要） （注意：此时每有一次软锁都会触发 Kdump） 参考文献： https://www.suse.com/support/kb/doc/?id=000019217]]></description>
+										<content:encoded><![CDATA[
+<h2 id="注意">注意：</h2>
+
+
+
+<p>在提高触发 Kdump 的几率之前要先开启 Kdump：</p>
+
+
+
+<div class="wp-container-1 wp-block-buttons">
+<div class="wp-block-button aligncenter is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/kdump/">Linux Kdump 的开启 <br>（用于收集内核崩溃时的信息）</a></div>
+</div>
+
+
+
+<h2 id="正文">正文：</h2>
+
+
+
+<h4 id="步骤一-配置提高触发-kdump-几率的参数1-1-配置提高触发-kdump-几率的参数">步骤一：配置提高触发 Kdump 几率的参数<br>1.1 配置提高触发 Kdump 几率的参数</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/sysctl.conf</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+kernel.softlockup_panic = 1</code></pre>
+
+
+
+<h4 id="1-2-让刚刚配置的参数生效">1.2 让刚刚配置的参数生效</h4>
+
+
+
+<pre class="wp-block-code"><code># sysctl -p</code></pre>
+
+
+
+<p>（注意：此时每有一次软锁都会触发 Kdump）</p>
+
+
+
+<h4 id="步骤二-当-kdmup-触发后分析奔溃的信息">步骤二：当 Kdmup 触发后分析奔溃的信息</h4>
+
+
+
+<div class="wp-container-2 wp-block-buttons">
+<div class="wp-block-button aligncenter is-style-outline"><a class="wp-block-button__link" href="https://eternalcenter-now.github.io/kdump-analysis/" style="border-radius:0px">Linux Kdump 内核奔溃信息的分析</a></div>
+</div>
+
+
+
+<h4 id="步骤三-删除提高触发-kdump-几率的参数-重要-3-1-删除提高触发-kdump-几率的参数-重要">步骤三；删除提高触发 Kdump 几率的参数 （重要）<br>3.1 删除提高触发 Kdump 几率的参数 （重要）</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/sysctl.conf</code></pre>
+
+
+
+<p>删除以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+kernel.softlockup_panic = 1</code></pre>
+
+
+
+<h4 id="3-2-让刚刚删除参数的配置生效-重要">3.2 让刚刚删除参数的配置生效 （重要）</h4>
+
+
+
+<pre class="wp-block-code"><code># sysctl -p</code></pre>
+
+
+
+<p>（注意：此时每有一次软锁都会触发 Kdump）</p>
+
+
+
+<h2>参考文献：</h2>
+
+
+
+<p class="has-text-align-center">https://www.suse.com/support/kb/doc/?id=000019217</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Linux Kdump 内核奔溃信息的分析 （Rocky Linux &#038; RHEL 版）</title>
+		<link>https://eternalcenter-now.github.io/kdump-analysis/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Tue, 15 Feb 2022 07:49:50 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System General Log (系统普通日志)]]></category>
+		<category><![CDATA[System Log (系统日志)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=21941</guid>
+
+					<description><![CDATA[注意： 在分析 Kdump 内核奔溃信息之前要先开启 Kdump： 正文： 步骤一：确保 crash 和 kernel-debuginfo 两个软件包已安装 （注意：如果 crash 和 kernel-debuginfo 两个软件包已安装的话，这里会有 crash 和 kernel-debuginfo 信息的显示） 步骤二：进入存放 KDUMP 内核奔溃信息的目录 步骤三：解析 KDUMP 生成内核崩溃信息 （补充：这里以使用 2.6.32.12-0.7-default 版本的 kernel-debuginfo 解析为例） 步骤四：确认生成了 vmlinux-2.6.32.12-0.7-default.gz 压缩包 （注意：如果这里生成了 vmlinux-2.6.32.12-0.7-default.gz 压缩包的话，这里会有 vmlinux-2.6.32.12-0.7-default.gz 信息的显示） （补充：这里以确认 2.6.32.12-0.7-default 版本的 kernel-debuginfo 生成的压缩包为例） 步骤五：解压 vmlinux-2.6.32.12-0.7-default.gz 压缩包 （补充：这里以解压 2.6.32.12-0.7-default 版本的 kernel-debuginfo 生成的压缩包为例） 步骤六：分析 KDUMP 生成的内核奔溃信息 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/kdump-analysis/" class="more-link">Continue reading<span class="screen-reader-text"> "[步骤] Linux Kdump 内核奔溃信息的分析 （Rocky Linux &#038; RHEL 版）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2 id="注意">注意：</h2>
+
+
+
+<p>在分析 Kdump 内核奔溃信息之前要先开启 Kdump：</p>
+
+
+
+<div class="wp-container-3 wp-block-buttons">
+<div class="wp-block-button aligncenter is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/kdump/">Linux Kdump 的开启 <br>（用于收集内核崩溃时的信息）</a></div>
+</div>
+
+
+
+<h2 id="正文">正文：</h2>
+
+
+
+<h4 id="步骤一-确保-crash-和-kernel-debuginfo-两个软件包已安装">步骤一：确保 crash 和 kernel-debuginfo 两个软件包已安装</h4>
+
+
+
+<pre class="wp-block-code"><code># rpm -qa | grep "crash|kernel-debug"</code></pre>
+
+
+
+<p>（注意：如果 crash 和 kernel-debuginfo 两个软件包已安装的话，这里会有 crash 和 kernel-debuginfo 信息的显示）</p>
+
+
+
+<h4 id="步骤二-进入存放-kdump-内核奔溃信息的目录">步骤二：进入存放 KDUMP 内核奔溃信息的目录</h4>
+
+
+
+<pre class="wp-block-code"><code># cd /var/crash/&lt;date&gt;/</code></pre>
+
+
+
+<h4 id="步骤三-解析-kdump-生成内核崩溃信息">步骤三：解析 KDUMP 生成内核崩溃信息</h4>
+
+
+
+<pre class="wp-block-code"><code># crash vmlinux-2.6.32.12-0.7-default vmcore</code></pre>
+
+
+
+<p>（补充：这里以使用 2.6.32.12-0.7-default 版本的 kernel-debuginfo 解析为例）</p>
+
+
+
+<h4 id="步骤四-确认生成了-vmlinux-2-6-32-12-0-7-default-gz-压缩包">步骤四：确认生成了 vmlinux-2.6.32.12-0.7-default.gz 压缩包</h4>
+
+
+
+<pre class="wp-block-code"><code># ls vmlinux-2.6.32.12-0.7-default.gz</code></pre>
+
+
+
+<p>（注意：如果这里生成了 vmlinux-2.6.32.12-0.7-default.gz 压缩包的话，这里会有 vmlinux-2.6.32.12-0.7-default.gz 信息的显示）</p>
+
+
+
+<p>（补充：这里以确认 2.6.32.12-0.7-default 版本的 kernel-debuginfo 生成的压缩包为例）</p>
+
+
+
+<h4 id="步骤五-解压-vmlinux-2-6-32-12-0-7-default-gz-压缩包">步骤五：解压 vmlinux-2.6.32.12-0.7-default.gz 压缩包</h4>
+
+
+
+<pre class="wp-block-code"><code># gzip -d vmlinux-2.6.32.12-0.7-default.gz</code></pre>
+
+
+
+<p>（补充：这里以解压 2.6.32.12-0.7-default 版本的 kernel-debuginfo 生成的压缩包为例）</p>
+
+
+
+<h4 id="步骤六-分析-kdump-生成的内核奔溃信息">步骤六：分析 KDUMP 生成的内核奔溃信息</h4>
+
+
+
+<p>（步骤略）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[排错] 解决 Linux 运行时报错 “watchdog: Bug: soft lockup &#8211; CPU&#8230;&#8230;” （CPU 软锁）</title>
+		<link>https://eternalcenter-now.github.io/debug-watchdog-bug-soft-lockup-cpu/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Tue, 15 Feb 2022 07:35:47 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Computer & System Hardware & System Installation & System Upgradation (系统电脑 & 系统硬件 & 系统安装 & 系统升级)]]></category>
+		<category><![CDATA[System Hardware (系统硬件)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Process (系统进程)]]></category>
+		<category><![CDATA[System Process & System Performance (系统进程 & 系统性能)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=21928</guid>
+
+					<description><![CDATA[报错代码： 分析： 当 CPU 的负载过高时，一个 CPU 在运行某一个进程时，在内核模式下超过 20 秒没有回应，则看门狗程序会将系统所有 CPU 软锁住，然后会让这些 CPU 显示各自正在运行的进程堆栈跟踪 缓解方法： 延长看门狗等待 CPU 内核模式下的回应时间 方法一：通过 /proc/sys/kernel/watchdog_thresh 文件提高看门狗软所 CPU 的时间 （补充：这里以将看门狗的值提高到为 20 为例，也可以根据自己的需求提高更多，默认值为 10） 方法二：通过新建文件提高看门狗软所 CPU 的时间2.1 通过新建文件提高看门狗软所 CPU 的时间 （补充：这里以将看门狗的值提高到为 20 为例，也可以根据自己的需求提高更多，默认值为 10） 2.2 让新建文件立刻生效 深究方法： 开启 Kdump，等此报错再次发生时分析 Kdump 在内核崩溃时搜集信息 vmcore]]></description>
+										<content:encoded><![CDATA[
+<h2 id="报错代码">报错代码：</h2>
+
+
+
+<pre class="wp-block-code"><code>watchdog: Bug: soft lockup - CPU......</code></pre>
+
+
+
+<h2 id="分析">分析：</h2>
+
+
+
+<p>当 CPU 的负载过高时，一个 CPU 在运行某一个进程时，在内核模式下超过 20 秒没有回应，则看门狗程序会将系统所有 CPU 软锁住，然后会让这些 CPU 显示各自正在运行的进程堆栈跟踪</p>
+
+
+
+<h2 id="缓解方法">缓解方法：</h2>
+
+
+
+<p>延长看门狗等待 CPU 内核模式下的回应时间</p>
+
+
+
+<h4 id="方法一-通过-proc-sys-kernel-watchdog-thresh-文件提高看门狗软所-cpu-的时间">方法一：通过 /proc/sys/kernel/watchdog_thresh 文件提高看门狗软所 CPU 的时间</h4>
+
+
+
+<pre class="wp-block-code"><code># echo 20 &gt; /proc/sys/kernel/watchdog_thresh</code></pre>
+
+
+
+<p>（补充：这里以将看门狗的值提高到为 20 为例，也可以根据自己的需求提高更多，默认值为 10）</p>
+
+
+
+<h4 id="方法二-通过新建文件提高看门狗软所-cpu-的时间2-1-通过新建文件提高看门狗软所-cpu-的时间">方法二：通过新建文件提高看门狗软所 CPU 的时间<br>2.1 通过新建文件提高看门狗软所 CPU 的时间</h4>
+
+
+
+<pre class="wp-block-code"><code># echo "kernel.watchdog_thresh=20" &gt; /etc/sysctl.d/99-watchdog_thresh.conf</code></pre>
+
+
+
+<p>（补充：这里以将看门狗的值提高到为 20 为例，也可以根据自己的需求提高更多，默认值为 10）</p>
+
+
+
+<h4 id="2-2-让新建文件立刻生效">2.2 让新建文件立刻生效</h4>
+
+
+
+<pre class="wp-block-code"><code># sysctl -p  /etc/sysctl.d/99-watchdog_thresh.conf</code></pre>
+
+
+
+<h2 id="深究方法">深究方法：</h2>
+
+
+
+<p>开启 Kdump，等此报错再次发生时分析 Kdump 在内核崩溃时搜集信息 vmcore</p>
+
+
+
+<div class="wp-container-4 wp-block-buttons">
+<div class="wp-block-button aligncenter is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/kdump/">Linux Kdump 的开启 <br>（用于收集内核崩溃时的信息）</a></div>
+
+
+
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link" href="https://eternalcenter-now.github.io/kdump-analysis/" style="border-radius:0px">Linux Kdump 内核奔溃信息的分析</a></div>
+</div>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Rocky Linux 8 &#038; RHEL 8 命令 update-crypto-policies</title>
+		<link>https://eternalcenter-now.github.io/update-crypto-policies/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sat, 12 Feb 2022 09:12:59 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Network (系统网络)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Port Security (系统端口安全)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=21893</guid>
+
+					<description><![CDATA[内容一：update-crypto-policies 参数的意义 1) DEFAULT 不严格的安全等级，可以让系统使用 TLSv1.22) FUTURE 严格的安全等级，只能让系统使用 TLSv1.2 不能使用 TLSv1.3 内容二：显示当前的 update-crypto-policies 参数 （补充：从这里可以看出目前的 update-crypto-policies 参数是 DEFAULT） 内容三：设置 update-crypto-policies 参数 （补充：这里以将 update-crypto-policies 参数设置为 FUTURE 为例）]]></description>
+										<content:encoded><![CDATA[
+<h4 id="内容一-update-crypto-policies-参数的意义">内容一：update-crypto-policies 参数的意义</h4>
+
+
+
+<p>1) DEFAULT 不严格的安全等级，可以让系统使用 TLSv1.2<br>2) FUTURE 严格的安全等级，只能让系统使用 TLSv1.2 不能使用 TLSv1.3</p>
+
+
+
+<h4 id="内容二-查看当前的-update-crypto-policies-参数">内容二：显示当前的 update-crypto-policies 参数</h4>
+
+
+
+<pre class="wp-block-code"><code># update-crypto-policies --show
+DEFAULT</code></pre>
+
+
+
+<p>（补充：从这里可以看出目前的 update-crypto-policies 参数是 DEFAULT）</p>
+
+
+
+<h4 id="内容三-设置-update-crypto-policies-参数">内容三：设置 update-crypto-policies 参数</h4>
+
+
+
+<pre class="wp-block-code"><code># update-crypto-policies --set=FUTURE</code></pre>
+
+
+
+<p>（补充：这里以将 update-crypto-policies 参数设置为 FUTURE 为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[排错] 解决 Linux 执行 curl 命令时报错 “curl: (35) error:14094410:SSL routines:ssl3_read_bytes:sslv3 alert handshake failure”</title>
+		<link>https://eternalcenter-now.github.io/debug-35-error14094410ssl-routinesssl3_read_bytessslv3-alert-handshake-failure/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sat, 12 Feb 2022 09:03:09 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Network (系统网络)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Port Security (系统端口安全)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=21890</guid>
+
+					<description><![CDATA[报错代码： 分析： Rocky Linux 8 &#38; RHEL 8 已经默认废弃 TLSv1.2可以使用 TLSv1.3 替代 TLSv1.2 或者将 update-crypto-policies 参数设置为 DEFAULT 以解决此报错 解决方法： 步骤一：显示当前的 update-crypto-policies 参数 （补充：从这里可以看出目前的 update-crypto-policies 参数是 FUTURE） 步骤二：将 update-crypto-policies 参数设置为 DEFAULT （补充：这里以将 update-crypto-policies 参数设置为 DEFAULT 为例）]]></description>
+										<content:encoded><![CDATA[
+<h2 id="报错代码">报错代码：</h2>
+
+
+
+<pre class="wp-block-code"><code>curl: (35) error:14094410:SSL routines:ssl3_read_bytes:sslv3 alert handshake failure</code></pre>
+
+
+
+<h2 id="分析">分析：</h2>
+
+
+
+<p>Rocky Linux 8 &amp; RHEL 8 已经默认废弃 TLSv1.2<br>可以使用 TLSv1.3 替代 TLSv1.2 或者将 update-crypto-policies 参数设置为 DEFAULT 以解决此报错</p>
+
+
+
+<h2 id="解决方法">解决方法：</h2>
+
+
+
+<h4 id="步骤一-查看当前的-update-crypto-policies-参数">步骤一：显示当前的 update-crypto-policies 参数</h4>
+
+
+
+<pre class="wp-block-code"><code># update-crypto-policies --show
+FUTURE</code></pre>
+
+
+
+<p>（补充：从这里可以看出目前的 update-crypto-policies 参数是 FUTURE）</p>
+
+
+
+<h4 id="步骤二-将-update-crypto-policies-参数设置为-default">步骤二：将 update-crypto-policies 参数设置为 DEFAULT</h4>
+
+
+
+<pre class="wp-block-code"><code># update-crypto-policies --set=DEFAULT</code></pre>
+
+
+
+<p>（补充：这里以将 update-crypto-policies 参数设置为 DEFAULT 为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] sudo 提权的实现 （sudo 提权的同时可以使用代理） （openSUSE &#038; SLE）</title>
+		<link>https://eternalcenter-now.github.io/sudo-self-proxy-opensuse-sle/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sat, 15 Jan 2022 14:47:45 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Privilege (系统权限)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<category><![CDATA[System User & System Privilege (系统用户 & 系统权限)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=21217</guid>
+
+					<description><![CDATA[步骤一：给用户添加相应的 sudo 权限 添加以下内容： （补充：这里以给用户 zhumingyu 添加 /usr/bin/mysql 命令为例） 步骤二：设置用户使用自己的密码实现 sudo 提权 在 这一行下面添加： （补充：这里以允许用户在进行 sudo 提权的同时也能使用 http_proxy、https_proxy 为例）]]></description>
+										<content:encoded><![CDATA[
+<h4>步骤一：给用户添加相应的 sudo 权限</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/sudoers</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>……
+zhumingyu ALL=(ALL) /usr/bin/mysql</code></pre>
+
+
+
+<p>（补充：这里以给用户 zhumingyu 添加 /usr/bin/mysql 命令为例）</p>
+
+
+
+<h4>步骤二：设置用户使用自己的密码实现 sudo 提权</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/sudoers</code></pre>
+
+
+
+<p>在</p>
+
+
+
+<pre class="wp-block-code"><code>......
+env_reset
+......</code></pre>
+
+
+
+<p>这一行下面添加：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+Defaults env_keep += "http_proxy https_proxy"
+......</code></pre>
+
+
+
+<p>（补充：这里以允许用户在进行 sudo 提权的同时也能使用 http_proxy、https_proxy 为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Linux 本地和 SSH 输错密码次数的限制 （pam_faillock 版） （CentOS Linux 8 &#038; RHEL 8 版）</title>
+		<link>https://eternalcenter-now.github.io/local-ssh-login-attempt-pam_faillock-centos-linux-8-rhel-8/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sun, 02 Jan 2022 08:34:31 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=21068</guid>
+
+					<description><![CDATA[步骤目录： 步骤一：背景了解 步骤二：设置 SSH 的登录限制2.1 在 sshd 中开启 UsePAM2.1.1 修改 sshd 的配置文件2.1.2 让修改的 sshd 配置文件生效2.2 确保 /etc/pam.d/login 包含 password-auth2.3 添加 pam_faillock 模块 步骤三：远程登录密码输错次数的用户管理3.1 显示某个用户近期输错了几次密码3.2 重制所有远程登录密码输错次数 具体的操作步骤： 步骤一：背景了解 从 CentOS Linux 8 &#38; RHEL 8 开始，系统的身份验证模块从 CentOS Linux 7 &#38; RHEL 7 的 pam_tally2 换成了 pam_faillock 步骤二：设置 SSH 的登录限制2.1 在 sshd 中开启 UsePAM2.1.1 修改 sshd 的配置文件 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/local-ssh-login-attempt-pam_faillock-centos-linux-8-rhel-8/" class="more-link">Continue reading<span class="screen-reader-text"> "[步骤] Linux 本地和 SSH 输错密码次数的限制 （pam_faillock 版） （CentOS Linux 8 &#038; RHEL 8 版）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2 id="步骤目录">步骤目录：</h2>
+
+
+
+<h4 id="步骤一-背景了解">步骤一：背景了解</h4>
+
+
+
+<h4 id="步骤二-设置-ssh-的登录限制-2-1-在-sshd-中开启-usepam-2-1-1-修改-sshd-配置文件-2-1-2-让-sshd-的配置生效-2-2-确保-etc-pam-d-login-包含-password-auth-2-3-添加-pam-faillock-模块">步骤二：设置 SSH 的登录限制<br>2.1 在 sshd 中开启 UsePAM<br>2.1.1 修改 sshd 的配置文件<br>2.1.2 让修改的 sshd 配置文件生效<br>2.2 确保 /etc/pam.d/login 包含 password-auth<br>2.3 添加 pam_faillock 模块</h4>
+
+
+
+<h4 id="步骤三-远程登录密码输错次数的用户管理-3-1-显示某个用户近期输错了几次密码-3-2-重制所有远程登录密码输错次数">步骤三：远程登录密码输错次数的用户管理<br>3.1 显示某个用户近期输错了几次密码<br>3.2 重制所有远程登录密码输错次数</h4>
+
+
+
+<h2 id="具体的操作步骤">具体的操作步骤：</h2>
+
+
+
+<h4 id="步骤一-背景了解">步骤一：背景了解</h4>
+
+
+
+<p>从 CentOS Linux 8 &amp; RHEL 8 开始，系统的身份验证模块从 CentOS Linux 7 &amp; RHEL 7 的 pam_tally2 换成了 pam_faillock</p>
+
+
+
+<h4 id="步骤二-设置-ssh-的登录限制-2-1-在-sshd-中开启-usepam-2-1-1-修改-sshd-配置文件">步骤二：设置 SSH 的登录限制<br>2.1 在 sshd 中开启 UsePAM<br>2.1.1 修改 sshd 的配置文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/ssh/sshd_config</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+#UsePAM no
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+UsePAM yes
+......</code></pre>
+
+
+
+<h4 id="2-1-2-让-sshd-的配置生效">2.1.2 让修改的 sshd 配置文件生效</h4>
+
+
+
+<pre class="wp-block-code"><code># systemctl restart sshd</code></pre>
+
+
+
+<h4 id="2-2-确保-etc-pam-d-login-包含-password-auth">2.2 确保 /etc/pam.d/login 包含 password-auth</h4>
+
+
+
+<pre class="wp-block-code"><code># cat /etc/pam.d/login | grep password-auth
+auth       substack     password-auth
+account    include      password-auth
+password   include      password-auth
+session    include      password-auth</code></pre>
+
+
+
+<p>（注意：如果输出结果中不包含这 4 条内容则需要手动添加）</p>
+
+
+
+<h4 id="2-3-添加-pam-faillock-模块">2.3 添加 pam_faillock 模块</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/pam.d/password-auth</code></pre>
+
+
+
+<p>在</p>
+
+
+
+<pre class="wp-block-code"><code>......
+auth required pam_env.so
+......</code></pre>
+
+
+
+<p>这一行下面添加：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+auth  required  pam_faillock.so preauth silent audit even_deny_root deny=6 unlock_time=180
+......</code></pre>
+
+
+
+<p>在</p>
+
+
+
+<pre class="wp-block-code"><code>auth sufficient pam_unix.so try_first_pass nullok</code></pre>
+
+
+
+<p>这一行下面添加：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+auth  &#91;default=die] pam_faillock.so authfail audit even_deny_root deny=6 unlock_time=180
+......</code></pre>
+
+
+
+<p>在</p>
+
+
+
+<pre class="wp-block-code"><code>account required pam_unix.so</code></pre>
+
+
+
+<p>这一行下面添加：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+account required pam_faillock.so
+......</code></pre>
+
+
+
+<p>（补充：这里以包括 root 用户每使用密码 ssh 远程登录失败 6 次则被锁定 180 秒为例）</p>
+
+
+
+<h4 id="步骤三-远程登录密码输错次数的用户管理-3-1-显示某个用户近期输错了几次密码">步骤三：远程登录密码输错次数的用户管理<br>3.1 显示某个用户近期输错了几次密码</h4>
+
+
+
+<pre class="wp-block-code"><code># faillock --user root</code></pre>
+
+
+
+<p>（补充：这里以显示 root 用户近期输错了几次密码为例）</p>
+
+
+
+<h4 id="3-2-重制所有登录密码输错次数">3.2 重制所有登录密码输错次数</h4>
+
+
+
+<pre class="wp-block-code"><code># faillock --reset</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Linux 本地和 SSH 输错密码次数的限制 （pam_faillock 版） （authselect 版） （CentOS Linux 8 &#038; RHEL 8 版）</title>
+		<link>https://eternalcenter-now.github.io/ssh-attempt-pam_faillock-authselect-centos-linux-8-rhel-8/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sat, 01 Jan 2022 14:04:37 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<category><![CDATA[System User (系统用户)]]></category>
+		<category><![CDATA[System User & System Privilege (系统用户 & 系统权限)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=20768</guid>
+
+					<description><![CDATA[步骤目录： 步骤一：了解背景 步骤二：设置 SSH 的登录限制2.1 在 sshd 中开启 UsePAM2.1.1 修改 sshd 的配置文件2.1.2 让修改的 sshd 配置文件生效2.2 确保 /etc/pam.d/sshd 包含 password-auth 步骤三：检查是否选择了 authselect 自定义认证 步骤四：配置认证4.1 如果 authselect 自定义认证存在4.1.1 修改 system-auth 文件4.1.2 修改 password-auth 文件4.2 如果 authselect 自定义认证不存在4.2.1 生成新的自定义认证4.2.1.1 备份当前的自定义认证4.2.1.2 创建新的自定义认证4.2.1.3 选择自定义认证4.2.1.4 显示当前选择的自定义认证4.2 修改自定义认证4.2.1 修改 system-auth 文件4.2.2 修改 password-auth 文件 步骤五：让配置的认证生效 步骤六：管理远程登录密码输错次数的用户6.1 显示某个用户近期输错了几次密码6.2 重制所有远程登录密码输错次数 具体的操作步骤： 步骤一：了解背景 从 CentOS &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/ssh-attempt-pam_faillock-authselect-centos-linux-8-rhel-8/" class="more-link">Continue reading<span class="screen-reader-text"> "[步骤] Linux 本地和 SSH 输错密码次数的限制 （pam_faillock 版） （authselect 版） （CentOS Linux 8 &#038; RHEL 8 版）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2 id="步骤目录">步骤目录：</h2>
+
+
+
+<h4 id="步骤一-背景了解">步骤一：了解背景</h4>
+
+
+
+<h4 id="步骤二-设置-ssh-的登录限制-2-1-在-sshd-中开启-usepam-2-1-1-修改-sshd-配置文件-2-1-2-让-sshd-的配置生效-2-2-确保-etc-pam-d-sshd-包含-password-auth">步骤二：设置 SSH 的登录限制<br>2.1 在 sshd 中开启 UsePAM<br>2.1.1 修改 sshd 的配置文件<br>2.1.2 让修改的 sshd 配置文件生效<br>2.2 确保 /etc/pam.d/sshd 包含 password-auth</h4>
+
+
+
+<h4 id="步骤三-检查是否选择了-authselect-自定义认证">步骤三：检查是否选择了  authselect  自定义认证</h4>
+
+
+
+<h4>步骤四：配置认证<br>4.1 如果 authselect 自定义认证存在<br>4.1.1 修改 system-auth 文件<br>4.1.2 修改 password-auth 文件<br>4.2 如果 authselect 自定义认证不存在<br>4.2.1 生成新的自定义认证<br>4.2.1.1 备份当前的自定义认证<br>4.2.1.2 创建新的自定义认证<br>4.2.1.3 选择自定义认证<br>4.2.1.4 显示当前选择的自定义认证<br>4.2 修改自定义认证<br>4.2.1 修改 system-auth 文件<br>4.2.2 修改 password-auth 文件</h4>
+
+
+
+<h4 id="步骤五-让配置的认证生效">步骤五：让配置的认证生效</h4>
+
+
+
+<h4 id="步骤六-远程登录密码输错次数的用户管理-6-1-显示某个用户近期输错了几次密码-6-2-重制所有远程登录密码输错次数">步骤六：管理远程登录密码输错次数的用户<br>6.1 显示某个用户近期输错了几次密码<br>6.2 重制所有远程登录密码输错次数</h4>
+
+
+
+<h2 id="具体的操作步骤">具体的操作步骤：</h2>
+
+
+
+<h4 id="步骤一-背景了解">步骤一：了解背景</h4>
+
+
+
+<p>从 CentOS Linux 8 &amp; RHEL 8 开始，系统的身份验证模块从 CentOS Linux 7 &amp; RHEL 7 的 pam_tally2 换成了 pam_faillock</p>
+
+
+
+<h4 id="步骤二-设置-ssh-的登录限制-2-1-在-sshd-中开启-usepam-2-1-1-修改-sshd-配置文件">步骤二：设置 SSHd 的登录限制<br>2.1 在 sshd 中开启 UsePAM<br>2.1.1 修改 sshd 的配置文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/ssh/sshd_config</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+#UsePAM no
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+UsePAM yes
+......</code></pre>
+
+
+
+<h4 id="2-1-2-让-sshd-的配置生效">2.1.2 让修改 sshd 配置文件生效</h4>
+
+
+
+<pre class="wp-block-code"><code># systemctl restart sshd</code></pre>
+
+
+
+<h4 id="2-2-确保-etc-pam-d-sshd-包含-password-auth">2.2 确保 /etc/pam.d/sshd 包含 password-auth</h4>
+
+
+
+<pre class="wp-block-code"><code># cat /etc/pam.d/sshd | grep password-auth
+auth       substack     password-auth
+account    include      password-auth
+password   include      password-auth
+session    include      password-auth</code></pre>
+
+
+
+<p>（注意：如果输出结果中不包含这 4 条内容则需要手动添加）</p>
+
+
+
+<h4 id="步骤三-检查是否选择了-authselect-自定义认证">步骤三：检查是否选择了  authselect  自定义认证</h4>
+
+
+
+<pre class="wp-block-code"><code># authselect current | awk 'NR == 1 {print $3}' | grep custom/
+custom/password-policy</code></pre>
+
+
+
+<p>（<br>补充：<br>（1）如果这条命令里没有输出则代表没有选择自定义认证<br>（2）从这里的输出结果可以看出这里选择的自定义认证是 custom/password-policy<br>）</p>
+
+
+
+<h4 id="步骤四-配置认证-4-1-如果-authselect-自定义认证存在-4-1-1-修改-system-auth-文件">步骤四：配置认证<br>4.1 如果  authselect  自定义认证存在<br>4.1.1 修改 system-auth 文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/authselect/custom/password-policy/system-auth</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+auth        required                                     pam_faillock.so preauth silent                               {include if "with-faillock"}
+......
+auth        required                                     pam_faillock.so authfail                               {include if "with-faillock"}
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+auth        required                                     pam_faillock.so preauth silent audit even_deny_root deny=6 unlock_time=180                               {include if "with-faillock"}
+......
+auth        required                                     pam_faillock.so authfail audit even_deny_root deny=6 unlock_time=180                               {include if "with-faillock"}
+......</code></pre>
+
+
+
+<p>（补充：这里以包括 root 用户每使用密码 ssh 远程登录失败 6 次则被锁定 180 秒为例）</p>
+
+
+
+<h4 id="4-1-2-修改-password-auth-文件"> 4.1.2 修改 password-auth 文件 </h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/authselect/custom/password-policy/password-auth</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+auth        required                                     pam_faillock.so preauth silent                               {include if "with-faillock"}
+......
+auth        required                                     pam_faillock.so authfail                               {include if "with-faillock"}
+......
+
+修改为：
+......
+auth        required                                     pam_faillock.so preauth silent audit even_deny_root deny=6 unlock_time=180                               {include if "with-faillock"}
+......
+auth        required                                     pam_faillock.so authfail audit even_deny_root deny=6 unlock_time=180                               {include if "with-faillock"}
+......</code></pre>
+
+
+
+<p>（补充：这里以包括 root 用户每使用密码 ssh 远程登录失败 6 次则被锁定 180 秒为例）</p>
+
+
+
+<h4>4.2 如果 authselect 自定义认证不存在<br>4.2.1 生成新的自定义认证<br>4.2.1.1 备份当前的自定义认证</h4>
+
+
+
+<pre class="wp-block-code"><code># authselect apply-changes -b --backup=sssd.backup</code></pre>
+
+
+
+<p>（补充：这里以创建 sssd.backup 备份文件为例）</p>
+
+
+
+<h4>4.2.1.2 创建新的自定义认证</h4>
+
+
+
+<pre class="wp-block-code"><code># authselect create-profile password-policy -b sssd --symlink-meta --symlink-pam</code></pre>
+
+
+
+<p>（补充：这里以生成名为 password-policy 的自定义认证为例）</p>
+
+
+
+<h4>4.2.1.3 选择自定义认证</h4>
+
+
+
+<pre class="wp-block-code"><code># authselect select custom/password-policy with-sudo with-faillock without-nullok with-mkhomedir</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里以选择名为 password-policy 的自定义认证为例<br>2) 这里设置了 with-sudo、with-faillock、without-nullok 和 with-mkhomedir 参数<br>）</p>
+
+
+
+<h4>4.2.1.4 显示当前选择的自定义认证</h4>
+
+
+
+<pre class="wp-block-code"><code># authselect current</code></pre>
+
+
+
+<p>（补充：这里以生成并选择名为 password-policy 的自定义认证为例）</p>
+
+
+
+<h4 id="4-2-如果-authselect-自定义认证不存在-4-2-1-修改-system-auth-文件">4.2 修改自定义认证<br>4.2.1 修改 system-auth 文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/authselect/custom/password-policy/password-auth</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+auth        required                                     pam_faillock.so preauth silent                               {include if "with-faillock"}
+......
+auth        required                                     pam_faillock.so authfail                               {include if "with-faillock"}
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+auth        required                                     pam_faillock.so preauth silent audit even_deny_root deny=6 unlock_time=180                               {include if "with-faillock"}
+......
+auth        required                                     pam_faillock.so authfail audit even_deny_root deny=6 unlock_time=180                               {include if "with-faillock"}
+......</code></pre>
+
+
+
+<p>（补充：这里以包括 root 用户每使用密码 ssh 远程登录失败 6 次则被锁定 180 秒为例）</p>
+
+
+
+<h4 id="4-2-2-修改-password-auth-文件">4.2.2 修改 password-auth 文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/authselect/custom/password-policy/password-auth</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+auth        required                                     pam_faillock.so preauth silent                               {include if "with-faillock"}
+......
+auth        required                                     pam_faillock.so authfail                               {include if "with-faillock"}
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+auth        required                                     pam_faillock.so preauth silent audit even_deny_root deny=6 unlock_time=180                               {include if "with-faillock"}
+......
+auth        required                                     pam_faillock.so authfail audit even_deny_root deny=6 unlock_time=180                               {include if "with-faillock"}
+......</code></pre>
+
+
+
+<p>（补充：这里以包括 root 用户每使用密码 ssh 远程登录失败 6 次则被锁定 180 秒为例）</p>
+
+
+
+<h4 id="步骤五-让配置的认证生效">步骤五：让配置的认证生效</h4>
+
+
+
+<pre class="wp-block-code"><code># authselect apply-changes</code></pre>
+
+
+
+<p>（注意：此步骤会刷新 /etc/authselect/system-auth 文件和 /etc/authselect/password-auth 文件）</p>
+
+
+
+<h4 id="步骤六-远程登录密码输错次数的用户管理-6-1-显示某个用户近期输错了几次密码">步骤六：管理远程登录密码输错次数的用户<br>6.1 显示某个用户近期输错了几次密码</h4>
+
+
+
+<pre class="wp-block-code"><code># faillock --user root</code></pre>
+
+
+
+<p>（补充：这里以显示 root 用户近期输错了几次密码为例）</p>
+
+
+
+<h4 id="6-2-重制所有远程登录密码输错次数">6.2 重制所有远程登录密码输错次数</h4>
+
+
+
+<pre class="wp-block-code"><code># faillock --reset</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令  set （设置 Shell 里的位置变量或者 Shell 的执行方式）</title>
+		<link>https://eternalcenter-now.github.io/set/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Wed, 10 Nov 2021 13:05:41 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Languages (语言)]]></category>
+		<category><![CDATA[Shell]]></category>
+		<category><![CDATA[Shell Basic (基础)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=18278</guid>
+
+					<description><![CDATA[内容一：set 命令的格式1.1 设置 Shell 的位置变量的格式 1.2 设置 Shell 的执行方式 或者： 或者： （补充：+o 代表打开特殊属性，-o 代表结束特殊属性） 内容二： set 的常用参数 1) -a 将已修改的变量进行标记，为将其输出至环境变量做准备2) -b 让被中止的后台进程立刻显示退出状态代码3) -d 取消使用杂凑表记忆中使用过的指令4) -e 若退出状态代码不为 0 （正常退出）则立即退出，并显示错误原因5) -f 取消通配符6) -h 默认自动记录函数位置7) -k 让命令的参数为此命令的环境变量8) -l 默认自动记录 for 循环变量名9) -m 监视模式10) -n 测试模式（只读取不执行）11) -p 优先顺序模式12) -P 让文件或目录代替符号链接13) -t 让随后的命令执行后立即退出14) -u 使用未定义的变量时显示错误信息15) -v 显示输入值16) -H shell 使用感叹号 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/set/" class="more-link">Continue reading<span class="screen-reader-text"> "[命令] Linux 命令  set （设置 Shell 里的位置变量或者 Shell 的执行方式）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h4>内容一：set 命令的格式<br>1.1 设置 Shell 的位置变量的格式</h4>
+
+
+
+<pre class="wp-block-code"><code># set &lt;Value of the first position variable&gt; &lt;Value of the second location variable&gt; ......</code></pre>
+
+
+
+<h4>1.2 设置 Shell 的执行方式</h4>
+
+
+
+<pre class="wp-block-code"><code># set &lt;parameter&gt;</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># set &lt;parameter&gt; +o</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># set &lt;parameter&gt; -o</code></pre>
+
+
+
+<p>（补充：+o 代表打开特殊属性，-o 代表结束特殊属性）</p>
+
+
+
+<h4>内容二： set 的常用参数</h4>
+
+
+
+<p>1) -a 将已修改的变量进行标记，为将其输出至环境变量做准备<br>2) -b 让被中止的后台进程立刻显示退出状态代码<br>3) -d 取消使用杂凑表记忆中使用过的指令<br>4) -e 若退出状态代码不为 0 （正常退出）则立即退出，并显示错误原因<br>5) -f 取消通配符<br>6) -h 默认自动记录函数位置<br>7) -k 让命令的参数为此命令的环境变量<br>8) -l 默认自动记录 for 循环变量名<br>9) -m 监视模式<br>10) -n 测试模式（只读取不执行）<br>11) -p 优先顺序模式<br>12) -P 让文件或目录代替符号链接<br>13) -t 让随后的命令执行后立即退出<br>14) -u 使用未定义的变量时显示错误信息<br>15) -v 显示输入值<br>16) -H shell 使用感叹号 “!” + 号码的方式调用 history 命令中的历史命令<br>17) -x 命令指向前先显示此命令的参数或变量</p>
+
+
+
+<p>（补充：将以上参数前面的 &#8211; 换成 + 则会变成相反的效果）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Linux rm 命令的监控</title>
+		<link>https://eternalcenter-now.github.io/rm-monitor/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sun, 07 Nov 2021 13:29:10 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System File (系统文件)]]></category>
+		<category><![CDATA[System File Security (系统文件安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=18208</guid>
+
+					<description><![CDATA[步骤一：将原来的 rm 命令进行备份 步骤二：创建一个记录 rm 命令使用的脚本 步骤三：给记录 rm 命令使用的脚本执行权限 步骤四：下次使用 rm 命令后就可以监控 /var/log/rm_command.log 日志了 （步骤略）]]></description>
+										<content:encoded><![CDATA[
+<h4>步骤一：将原来的 rm 命令进行备份</h4>
+
+
+
+<pre class="wp-block-code"><code># cp /usr/bin/rm  /usr/bin/rm.original</code></pre>
+
+
+
+<h4>步骤二：创建一个记录 rm 命令使用的脚本</h4>
+
+
+
+<pre class="wp-block-code"><code># cat /usr/bin/rm
+#!/bin/bash
+log=/var/log/rm_command.log
+echo "The $$ is calling rm command" &gt;&gt; $log
+echo "The full command is $*" &gt;&gt; $log
+echo
+echo "now use this command to get more information: /bin/ps axwwo user,pid,ppid,%cpu,%mem,vsz,rss,stat,time,cmd" &gt;&gt;$log
+/bin/ps axwwo user,pid,ppid,%cpu,%mem,vsz,rss,stat,time,cmd &gt;&gt;$log
+/usr/bin/rm.original $*
+echo "============================================================" &gt;&gt;$log</code></pre>
+
+
+
+<h4>步骤三：给记录 rm 命令使用的脚本执行权限</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod 755 /usr/bin/rm.original</code></pre>
+
+
+
+<h4>步骤四：下次使用 rm 命令后就可以监控 /var/log/rm_command.log 日志了</h4>
+
+
+
+<p>（步骤略）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] 通过 zypper 升级内核保留旧内核数量的设置 （openSUSE &#038; SLE ）</title>
+		<link>https://eternalcenter-now.github.io/zypper-kernel-reserve-opensuse-sle/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 27 Sep 2021 14:06:47 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Computer & System Hardware & System Installation & System Upgradation (系统电脑 & 系统硬件 & 系统安装 & 系统升级)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Patch (系统补丁)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<category><![CDATA[System Upgradation (系统升级)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=17666</guid>
+
+					<description><![CDATA[将以下内容： 修改为： （补充：这里以使用 zypper 升级内核时保留内核的数量从 3 个增加到 5 个为例）]]></description>
+										<content:encoded><![CDATA[
+<pre class="wp-block-code"><code># vim /etc/zypp/zypp.conf</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+multiversion.kernels = latest,latest-1,running
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+multiversion.kernels = latest,latest-1,latest-2,latest-3,running
+......</code></pre>
+
+
+
+<p>（补充：这里以使用 zypper 升级内核时保留内核的数量从 3 个增加到 5 个为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

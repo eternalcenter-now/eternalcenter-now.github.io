@@ -1,0 +1,2613 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>System (系统) &#8211; Eternal Center</title>
+	<atom:link href="https://eternalcenter-now.github.io/category/system/feed/" rel="self" type="application/rss+xml" />
+	<link>https://eternalcenter-now.github.io/</link>
+	<description></description>
+	<lastBuildDate>Fri, 29 Apr 2022 14:51:15 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	
+	<item>
+		<title>[步骤] Linux SSH 密钥的批量更新</title>
+		<link>https://eternalcenter-now.github.io/ssh-key-batch-renew/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 29 Apr 2022 14:36:55 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Port Security (系统端口安全)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23423</guid>
+
+					<description><![CDATA[步骤目录： 步骤一：生成新的 SSH 密钥1.1 进入 ~/.ssh 目录1.2 生成新的 SSH 密钥 步骤二：将新的 SSH 公钥拷贝到目标服务器 步骤三：更新 SSH 密钥3.1 更新 SSH 私钥3.1.1 备份旧有的 SSH 私钥3.1.2 更新 SSH 私钥3.2 更新 SSH 公钥3.2.1 备份旧有的 SSH 公钥3.2.2 更新 SSH 公钥 步骤四：删除目标服务器的旧有 SSH 公钥4.1 删除目标服务器的旧有 SSH 公钥4.2 确定目标服务器就有的 SSH 已经删除 具体的操作步骤： 步骤一：生成新的 SSH 密钥1.1 进入 ~/.ssh 目录 1.2 生成新的 SSH 密钥 步骤二：将新的 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/ssh-key-batch-renew/" class="more-link">Continue reading<span class="screen-reader-text"> "[步骤] Linux SSH 密钥的批量更新"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2>步骤目录：</h2>
+
+
+
+<h4>步骤一：生成新的 SSH 密钥<br>1.1 进入 ~/.ssh 目录<br>1.2 生成新的 SSH 密钥</h4>
+
+
+
+<h4>步骤二：将新的 SSH 公钥拷贝到目标服务器</h4>
+
+
+
+<h4>步骤三：更新 SSH 密钥<br>3.1 更新 SSH 私钥<br>3.1.1 备份旧有的 SSH 私钥<br>3.1.2 更新 SSH 私钥<br>3.2 更新 SSH 公钥<br>3.2.1 备份旧有的 SSH 公钥<br>3.2.2 更新 SSH 公钥</h4>
+
+
+
+<h4>步骤四：删除目标服务器的旧有 SSH 公钥<br>4.1 删除目标服务器的旧有 SSH 公钥<br>4.2 确定目标服务器就有的 SSH 已经删除</h4>
+
+
+
+<h2>具体的操作步骤：</h2>
+
+
+
+<h4>步骤一：生成新的 SSH 密钥<br>1.1 进入 ~/.ssh 目录</h4>
+
+
+
+<pre class="wp-block-code"><code># cd ~/.ssh</code></pre>
+
+
+
+<h4>1.2 生成新的 SSH 密钥</h4>
+
+
+
+<pre class="wp-block-code"><code># ssh-keygen -b 4096 -t rsa -C "&lt;content&gt;" -f "&lt;public private key name&gt;"</code></pre>
+
+
+
+<h4>步骤二：将新的 SSH 公钥拷贝到目标服务器</h4>
+
+
+
+<pre class="wp-block-code"><code># for i in `cat &lt;server list&gt;`;do echo $i;ssh-copy-id -i ~/.ssh/&lt;public private key name&gt;.pub $i;echo;done</code></pre>
+
+
+
+<h4>步骤三：更新 SSH 密钥<br>3.1 更新 SSH 私钥<br>3.1.1 备份旧有的 SSH 私钥</h4>
+
+
+
+<pre class="wp-block-code"><code># mv id_rsa id_rsa.backup</code></pre>
+
+
+
+<h4>3.1.2 更新 SSH 私钥</h4>
+
+
+
+<pre class="wp-block-code"><code># cp &lt;public private key name&gt; id_rsa</code></pre>
+
+
+
+<h4>3.2 更新 SSH 公钥<br>3.2.1 备份旧有的 SSH 公钥</h4>
+
+
+
+<pre class="wp-block-code"><code># mv id_rsa.pub id_rsa.pub.backup</code></pre>
+
+
+
+<h4>3.2.2 更新 SSH 公钥</h4>
+
+
+
+<pre class="wp-block-code"><code># cp &lt;public private key name&gt;.pub id_rsa.pub</code></pre>
+
+
+
+<h4>步骤四：删除目标服务器的旧有 SSH 公钥<br>4.1 删除目标服务器的旧有 SSH 公钥</h4>
+
+
+
+<pre class="wp-block-code"><code># for i in `cat &lt;server list&gt;`;do echo $i;ssh $i "sed -i /&lt;old SSH key content&gt;/d ~/.ssh/authorized_keys";echo;done</code></pre>
+
+
+
+<h4>4.2 确定目标服务器就有的 SSH 已经删除</h4>
+
+
+
+<pre class="wp-block-code"><code># for i in `cat &lt;server list&gt;`;do echo $i;ssh $i "cat ~/.ssh/authorized_keys | egrep -v '&lt;content&gt;'";echo;done</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[排错] 解决 Linux 运行 gzip 命令时报错 gzip: wtmp-20220429.xz: unknown suffix &#8212; ignored</title>
+		<link>https://eternalcenter-now.github.io/debug-gzip-wtmp-20220429-xz-unknown-suffix-ignored/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 29 Apr 2022 13:37:57 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Directory (系统目录)]]></category>
+		<category><![CDATA[System File (系统文件)]]></category>
+		<category><![CDATA[System Storage (系统存储)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23417</guid>
+
+					<description><![CDATA[报错代码： 解决方法：]]></description>
+										<content:encoded><![CDATA[
+<h2>报错代码：</h2>
+
+
+
+<pre class="wp-block-code"><code>gzip: wtmp-20220429.xz: unknown suffix -- ignored</code></pre>
+
+
+
+<h2>解决方法：</h2>
+
+
+
+<pre class="wp-block-code"><code># xz -d &lt;file&gt;</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Linux 救援模式软件的安装</title>
+		<link>https://eternalcenter-now.github.io/resuce-rpm/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 29 Apr 2022 12:29:07 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Software (系统软件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23378</guid>
+
+					<description><![CDATA[步骤目录： 步骤一：挂载官方镜像 步骤二：登录拯救模式2.1 进入拯救模式2.2 登录拯救模式 步骤三：在救援模式确定系统的根目录分区 步骤四：在救援模式将系统的分区挂载到救援模式的 /mnt 目录4.1 在救援模式将系统的根分区挂载到救援模式的 /mnt 目录4.2 在救援模式将救援模式的 /dev 目录关联到救援模式的 /mnt/dev 目录4.3 在救援模式将救援模式的 /proc 目录关联到救援模式的 /mnt/proc 目录4.4 在救援模式将救援模式的 /sys 目录关联到救援模式的 /mnt/sys 目录4.5 在救援模式将救援模式的 /run 目录关联到救援模式的 /mnt/run 目录 步骤五：将当前的根目录从救援模式的根目录切换到系统的根目录5.1 将当前的根目录从救援模式的根目录切换到系统的根目录5.2 在系统模式下确认当前的挂载状态5.3 在系统模式下确认当前根目录下的目录 步骤六：在系统模式安装软件6.1 在系统模式挂载官方镜像6.1.1 在系统模式创建用于挂载镜像的 /media 目录6.1.2 在系统模式挂将官方镜像挂载到 /media 目录6.2 在系统模式安装 rpm 软件6.2.1 在系统模式安装拷贝 rpm 软件包到当前目录6.2.2 在系统模式创建用于安装 rpm 软件的 pkg 目录6.2.3 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/resuce-rpm/" class="more-link">Continue reading<span class="screen-reader-text"> "[步骤] Linux 救援模式软件的安装"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2>步骤目录：</h2>
+
+
+
+<h4>步骤一：挂载官方镜像</h4>
+
+
+
+<h4>步骤二：登录拯救模式<br>2.1 进入拯救模式<br>2.2 登录拯救模式</h4>
+
+
+
+<h4>步骤三：在救援模式确定系统的根目录分区</h4>
+
+
+
+<h4>步骤四：在救援模式将系统的分区挂载到救援模式的 /mnt 目录<br>4.1 在救援模式将系统的根分区挂载到救援模式的 /mnt 目录<br>4.2 在救援模式将救援模式的 /dev 目录关联到救援模式的 /mnt/dev 目录<br>4.3 在救援模式将救援模式的 /proc 目录关联到救援模式的 /mnt/proc 目录<br>4.4 在救援模式将救援模式的 /sys 目录关联到救援模式的 /mnt/sys 目录<br>4.5 在救援模式将救援模式的 /run 目录关联到救援模式的 /mnt/run 目录</h4>
+
+
+
+<h4>步骤五：将当前的根目录从救援模式的根目录切换到系统的根目录<br>5.1 将当前的根目录从救援模式的根目录切换到系统的根目录<br>5.2 在系统模式下确认当前的挂载状态<br>5.3 在系统模式下确认当前根目录下的目录</h4>
+
+
+
+<h4>步骤六：在系统模式安装软件<br>6.1 在系统模式挂载官方镜像<br>6.1.1 在系统模式创建用于挂载镜像的 /media 目录<br>6.1.2 在系统模式挂将官方镜像挂载到 /media 目录<br>6.2 在系统模式安装 rpm 软件<br>6.2.1 在系统模式安装拷贝 rpm 软件包到当前目录<br>6.2.2 在系统模式创建用于安装 rpm 软件的 pkg 目录<br>6.2.3 在系统模式进入 pkg 目录<br>6.2.4 在系统模式安装 rpm 软件<br>6.2.5 在系统模式将 bin/rpm 目录拷贝到 /bin 目录</h4>
+
+
+
+<h2>具体的操作步骤：</h2>
+
+
+
+<h4>步骤一：挂载官方镜像</h4>
+
+
+
+<p>（步骤略）</p>
+
+
+
+<h4>步骤二：登录拯救模式<br>2.1 进入拯救模式</h4>
+
+
+
+<p>（步骤略）</p>
+
+
+
+<h4>2.2 登录拯救模式</h4>
+
+
+
+<pre class="wp-block-code"><code>rescue login:root</code></pre>
+
+
+
+<h4>步骤三：在救援模式确定系统的根目录分区</h4>
+
+
+
+<p>（步骤略）</p>
+
+
+
+<p>（<br>补充：<br>1) 物理分区可以使用 lsblk 命令和 fdisk -l 命令辅助确定<br>2) 逻辑分区还可以可以使用 pvs 命令和 lvs 命令辅助确定<br>）</p>
+
+
+
+<h4>步骤四：在救援模式将系统的分区挂载到救援模式的 /mnt 目录<br>4.1 在救援模式将系统的根分区挂载到救援模式的 /mnt 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount &lt;root spartition&gt; /mnt</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 如果是物理分区，系统的根分区就在救援模式的 /dev/ 目录里，例如救援模式的 /dev/sda1<br>2) 如果是逻辑分区，Rocky Linux &amp; RHEL 的系统根分区就是救援模式里的 /dev/&lt;volume group>/&lt;logical volume> 例如救援模式里的 /dev/vg/lv，openSUSE &amp; SUSE 的系统根分区就是救援模式里的 /dev/mapper/&lt;volume group>-&lt;logical volume> 例如救援模式里的 /dev/mapper/vg-lv<br>）</p>
+
+
+
+<h4>4.2 在救援模式将救援模式的 /dev 目录关联到救援模式的 /mnt/dev 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount --bind /dev /mnt/dev</code></pre>
+
+
+
+<p>（补充：此时所有对救援模式的 /mnt/dev 目录的访问都会变成对救援模式的 /dev 目录的访问）</p>
+
+
+
+<h4>4.3 在救援模式将救援模式的 /proc 目录关联到救援模式的 /mnt/proc 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount --bind /proc /mnt/proc</code></pre>
+
+
+
+<p>（补充：此时所有对救援模式的 /mnt/proc 目录的访问都会变成对救援模式的 /proc 目录的访问）</p>
+
+
+
+<h4>4.4 在救援模式将救援模式的 /sys 目录关联到救援模式的 /mnt/sys 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount --bind /sys /mnt/sys</code></pre>
+
+
+
+<p>（补充：此时所有对救援模式的 /mnt/sys 目录的访问都会变成对救援模式的 /sys 目录的访问）</p>
+
+
+
+<h4>4.5 在救援模式将救援模式的 /run 目录关联到救援模式的 /mnt/run 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount --bind /run /mnt/run</code></pre>
+
+
+
+<p>（补充：此时所有对救援模式的 /mnt/run 目录的访问都会变成对救援模式的 /run 目录的访问）</p>
+
+
+
+<h4>步骤五：将当前的根目录从救援模式的根目录切换到系统的根目录<br>5.1 将当前的根目录从救援模式的根目录切换到系统的根目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ /bash # chroot /mnt</code></pre>
+
+
+
+<p>（补充：这里以 /mnt 作为系统根目录为例）</p>
+
+
+
+<h4>5.2 在系统模式下确认当前的挂载状态</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# mount -a</code></pre>
+
+
+
+<h4>5.3 在系统模式下确认当前根目录下的目录</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# ls
+bin boot dev home lib lib64 mnt opt proc root run sbin selinux srv sys tmp usr var</code></pre>
+
+
+
+<h4>步骤六：在系统模式安装软件<br>6.1 在系统模式挂载官方镜像<br>6.1.1 在系统模式创建用于挂载镜像的 /media 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# mkdir /media</code></pre>
+
+
+
+<h4>6.1.2 在系统模式挂将官方镜像挂载到 /media 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# mount /dev/dvd /media</code></pre>
+
+
+
+<h4>6.2 在系统模式安装 rpm 软件<br>6.2.1 在系统模式安装拷贝 rpm 软件包到当前目录</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# cp /media/suse/x86_64/rpm-4.11.2-16.21.1.x86_64.rpm .</code></pre>
+
+
+
+<p>（补充：这里以安装 rpm-4.11.2-16.21.1.x86_64.rpm 软件为例）</p>
+
+
+
+<h4>6.2.2 在系统模式创建用于安装 rpm 软件的 pkg 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# mkdir pkg</code></pre>
+
+
+
+<h4>6.2.3 在系统模式进入 pkg 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# cd pkg</code></pre>
+
+
+
+<h4>6.2.4 在系统模式安装 rpm 软件</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# rpm2cpio ../rpm-4.11.2-16.21.1.x86_64.rpm | cpio -ivd</code></pre>
+
+
+
+<p>（补充：这里以安装 rpm-4.11.2-16.21.1.x86_64.rpm 软件为例）</p>
+
+
+
+<h4>6.2.5 在系统模式将 bin/rpm 目录拷贝到 /bin 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# cp bin/rpm /bin/</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[排错] 解决重启系统后无法进入系统，并提示：/grub2/i386-pc/normoal.mod not found gpt</title>
+		<link>https://eternalcenter-now.github.io/debug-grub2-i386-pc-normoal-mod-not-found-gpt/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Thu, 28 Apr 2022 15:29:58 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23367</guid>
+
+					<description><![CDATA[报错代码： 解决方法：步骤目录： 步骤一：挂载官方镜像 步骤二：登录拯救模式2.1 进入拯救模式2.2 登录拯救模式 步骤三：在救援模式确定系统的根目录分区 步骤四：在救援模式将系统的分区挂载到救援模式的 /mnt 目录4.1 在救援模式将系统的根分区挂载到救援模式的 /mnt 目录4.2 在救援模式将救援模式的 /dev 目录关联到救援模式的 /mnt/dev 目录4.3 在救援模式将救援模式的 /proc 目录关联到救援模式的 /mnt/proc 目录4.4 在救援模式将救援模式的 /sys 目录关联到救援模式的 /mnt/sys 目录4.5 在救援模式将救援模式的 /run 目录关联到救援模式的 /mnt/run 目录 步骤五：将当前的根目录从救援模式的根目录切换到系统的根目录5.1 将当前的根目录从救援模式的根目录切换到系统的根目录5.2 在系统模式下确认当前的挂载状态5.3 在系统模式下确认当前根目录下的目录 步骤六：在系统模式下修复 grub2 步骤七：重启系统 具体的操作步骤： 步骤一：挂载官方镜像 （步骤略） 步骤二：登录拯救模式2.1 进入拯救模式 （步骤略） 2.2 登录拯救模式 步骤三：在救援模式确定系统的根目录分区 （步骤略） （补充：1) 物理分区可以使用 lsblk 命令和 fdisk &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/debug-grub2-i386-pc-normoal-mod-not-found-gpt/" class="more-link">Continue reading<span class="screen-reader-text"> "[排错] 解决重启系统后无法进入系统，并提示：/grub2/i386-pc/normoal.mod not found gpt"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2>报错代码：</h2>
+
+
+
+<pre class="wp-block-code"><code>/grub2/i386-pc/normoal.mod not found gpt</code></pre>
+
+
+
+<h2>解决方法：<br>步骤目录：</h2>
+
+
+
+<h4>步骤一：挂载官方镜像</h4>
+
+
+
+<h4>步骤二：登录拯救模式<br>2.1 进入拯救模式<br>2.2 登录拯救模式</h4>
+
+
+
+<h4>步骤三：在救援模式确定系统的根目录分区</h4>
+
+
+
+<h4>步骤四：在救援模式将系统的分区挂载到救援模式的 /mnt 目录<br>4.1 在救援模式将系统的根分区挂载到救援模式的 /mnt 目录<br>4.2 在救援模式将救援模式的 /dev 目录关联到救援模式的 /mnt/dev 目录<br>4.3 在救援模式将救援模式的 /proc 目录关联到救援模式的 /mnt/proc 目录<br>4.4 在救援模式将救援模式的 /sys 目录关联到救援模式的 /mnt/sys 目录<br>4.5 在救援模式将救援模式的 /run 目录关联到救援模式的 /mnt/run 目录</h4>
+
+
+
+<h4>步骤五：将当前的根目录从救援模式的根目录切换到系统的根目录<br>5.1 将当前的根目录从救援模式的根目录切换到系统的根目录<br>5.2 在系统模式下确认当前的挂载状态<br>5.3 在系统模式下确认当前根目录下的目录</h4>
+
+
+
+<h4>步骤六：在系统模式下修复 grub2</h4>
+
+
+
+<h4>步骤七：重启系统</h4>
+
+
+
+<h2>具体的操作步骤：</h2>
+
+
+
+<h4>步骤一：挂载官方镜像</h4>
+
+
+
+<p>（步骤略）</p>
+
+
+
+<h4>步骤二：登录拯救模式<br>2.1 进入拯救模式</h4>
+
+
+
+<p>（步骤略）</p>
+
+
+
+<h4>2.2 登录拯救模式</h4>
+
+
+
+<pre class="wp-block-code"><code>rescue login:root</code></pre>
+
+
+
+<h4>步骤三：在救援模式确定系统的根目录分区</h4>
+
+
+
+<p>（步骤略）</p>
+
+
+
+<p>（<br>补充：<br>1) 物理分区可以使用 lsblk 命令和 fdisk -l 命令辅助确定<br>2) 逻辑分区还可以可以使用 pvs 命令和 lvs 命令辅助确定<br>）</p>
+
+
+
+<h4>步骤四：在救援模式将系统的分区挂载到救援模式的 /mnt 目录<br>4.1 在救援模式将系统的根分区挂载到救援模式的 /mnt 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount &lt;root spartition&gt; /mnt</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 如果是物理分区，系统的根分区就在救援模式的 /dev/ 目录里，例如救援模式的 /dev/sda1<br>2) 如果是逻辑分区，Rocky Linux &amp; RHEL 的系统根分区就是救援模式里的 /dev/&lt;volume group>/&lt;logical volume> 例如救援模式里的 /dev/vg/lv，openSUSE &amp; SUSE 的系统根分区就是救援模式里的 /dev/mapper/&lt;volume group>-&lt;logical volume> 例如救援模式里的 /dev/mapper/vg-lv<br>）</p>
+
+
+
+<h4>4.2 在救援模式将救援模式的 /dev 目录关联到救援模式的 /mnt/dev 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount --bind /dev /mnt/dev</code></pre>
+
+
+
+<p>（补充：此时所有对救援模式的 /mnt/dev 目录的访问都会变成对救援模式的 /dev 目录的访问）</p>
+
+
+
+<h4>4.3 在救援模式将救援模式的 /proc 目录关联到救援模式的 /mnt/proc 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount --bind /proc /mnt/proc</code></pre>
+
+
+
+<p>（补充：此时所有对救援模式的 /mnt/proc 目录的访问都会变成对救援模式的 /proc 目录的访问）</p>
+
+
+
+<h4>4.4 在救援模式将救援模式的 /sys 目录关联到救援模式的 /mnt/sys 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount --bind /sys /mnt/sys</code></pre>
+
+
+
+<p>（补充：此时所有对救援模式的 /mnt/sys 目录的访问都会变成对救援模式的 /sys 目录的访问）</p>
+
+
+
+<h4>4.5 在救援模式将救援模式的 /run 目录关联到救援模式的 /mnt/run 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount --bind /run /mnt/run</code></pre>
+
+
+
+<p>（补充：此时所有对救援模式的 /mnt/run 目录的访问都会变成对救援模式的 /run 目录的访问）</p>
+
+
+
+<h4>步骤五：将当前的根目录从救援模式的根目录切换到系统的根目录<br>5.1 将当前的根目录从救援模式的根目录切换到系统的根目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ /bash # chroot /mnt</code></pre>
+
+
+
+<p>（补充：这里以 /mnt 作为系统根目录为例）</p>
+
+
+
+<h4>5.2 在系统模式下确认当前的挂载状态</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# mount -a</code></pre>
+
+
+
+<h4>5.3 在系统模式下确认当前根目录下的目录</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# ls
+bin boot dev home lib lib64 mnt opt proc root run sbin selinux srv sys tmp usr var</code></pre>
+
+
+
+<h4>步骤六：在系统模式下修复 grub2</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# grub2-install /dev/sda</code></pre>
+
+
+
+<h4>步骤七：重启系统</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# reboot</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Linux 系统被删根 （rm -rf /*） 后锁定删根 （rm -rf /*） 用户的尝试 （系统层面）</title>
+		<link>https://eternalcenter-now.github.io/rm-rf-user/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Thu, 28 Apr 2022 15:03:04 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23353</guid>
+
+					<description><![CDATA[步骤目录： 步骤一：系统被删根 （rm -rf /*） 后的现象 步骤二：挂载官方镜像 步骤三：登录拯救模式3.1 进入拯救模式3.2 登录拯救模式 步骤四：在救援模式确定系统的根目录分区 步骤五：在救援模式将系统的分区挂载到救援模式的 /mnt 目录5.1 在救援模式将系统的根分区挂载到救援模式的 /mnt 目录5.2 在救援模式将救援模式的 /dev 目录关联到救援模式的 /mnt/dev 目录5.3 在救援模式将救援模式的 /proc 目录关联到救援模式的 /mnt/proc 目录5.4 在救援模式将救援模式的 /sys 目录关联到救援模式的 /mnt/sys 目录5.5 在救援模式将救援模式的 /run 目录关联到救援模式的 /mnt/run 目录 步骤六：显示系统被删根 （rm -rf /*） 后的现象6.1 尝试将当前根目录从救援模式的根目录切换到系统的根目录时会报错 “chroot: failed to run command #/bin/bash#: No such file or directory”6.2 在救援模式显示 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/rm-rf-user/" class="more-link">Continue reading<span class="screen-reader-text"> "[步骤] Linux 系统被删根 （rm -rf /*） 后锁定删根 （rm -rf /*） 用户的尝试 （系统层面）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2>步骤目录：</h2>
+
+
+
+<h4>步骤一：系统被删根 （rm -rf /*） 后的现象</h4>
+
+
+
+<h4>步骤二：挂载官方镜像</h4>
+
+
+
+<h4>步骤三：登录拯救模式<br>3.1 进入拯救模式<br>3.2 登录拯救模式</h4>
+
+
+
+<h4>步骤四：在救援模式确定系统的根目录分区</h4>
+
+
+
+<h4>步骤五：在救援模式将系统的分区挂载到救援模式的 /mnt 目录<br>5.1 在救援模式将系统的根分区挂载到救援模式的 /mnt 目录<br>5.2 在救援模式将救援模式的 /dev 目录关联到救援模式的 /mnt/dev 目录<br>5.3 在救援模式将救援模式的 /proc 目录关联到救援模式的 /mnt/proc 目录<br>5.4 在救援模式将救援模式的 /sys 目录关联到救援模式的 /mnt/sys 目录<br>5.5 在救援模式将救援模式的 /run 目录关联到救援模式的 /mnt/run 目录</h4>
+
+
+
+<h4>步骤六：显示系统被删根 （rm -rf /*） 后的现象<br>6.1 尝试将当前根目录从救援模式的根目录切换到系统的根目录时会报错 “chroot: failed to run command #/bin/bash#: No such file or directory”<br>6.2 在救援模式显示 /boot 目录里的文件时，会发现此目录下只有 grub2 目录，而此 grub2 目录里也是空的<br>6.3 在救援模式显示 /bin 目录时，会显示并无此目录<br>6.4 在救援模式显示 /etc 目录里的文件时，会发现此目录下只有 lvm 文件</h4>
+
+
+
+<h4>步骤七：在救援模式修复系统的 /bin 目录和里面的文件<br>7.1 在救援模式创建 /mnt/bin 目录<br>7.2 在救援模式挂载官方镜像<br>7.2.1 在救援模式创建用于挂载镜像的 /media 目录<br>7.2.2 在救援模式挂将官方镜像挂载到 /media 目录<br>7.3 在救援模式安装 bash 软件<br>7.3.1 在救援模式安装拷贝 bash 软件包到当前目录<br>7.3.2 在救援模式创建用于安装 bash 软件的 bash 目录<br>7.3.3 在救援模式进入 bash 目录<br>7.3.4 在救援模式安装 bash 软件<br>7.3.5 在救援模式显示安装 bash 软件后生成的目录<br>7.4 在救援模式将 bin 目录拷贝到 /mnt/bin 目录</h4>
+
+
+
+<h4>步骤八：将当前的根目录从救援模式的根目录切换到系统的根目录<br>8.1 将当前的根目录从救援模式的根目录切换到系统的根目录<br>8.2 在系统模式下确认当前的挂载状态<br>8.3 在系统模式下确认当前根目录下的目录</h4>
+
+
+
+<h4>步骤九：锁定有删根 （rm -rf /*<em>） 操作的用户</em><br><em>9.1 在系统模式显示历史命令以确认有没有用户输入过 rm -rf /* 命令</em><br><em>9.2 在系统模式显示用户登录记录</em><br><em>9.3 根据步骤 9.1 和步骤 9.2 推测是哪个用户进行过删根 （rm -rf /</em>*） 操作</h4>
+
+
+
+<h2>具体的操作步骤：</h2>
+
+
+
+<h4>步骤一：系统被删根 （rm -rf /*） 后的现象总结</h4>
+
+
+
+<p>1) 系统无法被 ssh<br>2) 通过 console 口登录系统在输入密码时会卡住<br>3) 尝试将当前根目录从救援模式的根目录切换到系统的根目录时会报错 “chroot: failed to run command #/bin/bash#: No such file or directory”<br>4) 重启系统后无法进入系统，并提示：/grub2/i386-pc/normoal.mod not found gpt<br>5）在救援模式显示 /boot 目录里的文件时，会发现此目录下只有 grub2 目录，而此 grub2 目录里也是空的<br>6) 在救援模式显示 /bin 目录时，会显示并无此目录<br>7) 在救援模式显示 /etc 目录里的文件时，会发现此目录下只有 lvm 文件</p>
+
+
+
+<h4>步骤二：挂载官方镜像</h4>
+
+
+
+<p>（步骤略）</p>
+
+
+
+<h4>步骤三：登录拯救模式<br>3.1 进入拯救模式</h4>
+
+
+
+<p>（步骤略）</p>
+
+
+
+<h4>3.2 登录拯救模式</h4>
+
+
+
+<pre class="wp-block-code"><code>rescue login:root</code></pre>
+
+
+
+<h4>步骤四：在救援模式确定系统的根目录分区</h4>
+
+
+
+<p>（步骤略）</p>
+
+
+
+<p>（<br>补充：<br>1) 物理分区可以使用 lsblk 命令和 fdisk -l 命令辅助确定<br>2) 逻辑分区还可以可以使用 pvs 命令和 lvs 命令辅助确定<br>）</p>
+
+
+
+<h4>步骤五：在救援模式将系统的分区挂载到救援模式的 /mnt 目录<br>5.1 在救援模式将系统的根分区挂载到救援模式的 /mnt 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount &lt;root spartition&gt; /mnt</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 如果是物理分区，系统的根分区就在救援模式的 /dev/ 目录里，例如救援模式的 /dev/sda1<br>2) 如果是逻辑分区，Rocky Linux &amp; RHEL 的系统根分区就是救援模式里的 /dev/&lt;volume group>/&lt;logical volume> 例如救援模式里的 /dev/vg/lv，openSUSE &amp; SUSE 的系统根分区就是救援模式里的 /dev/mapper/&lt;volume group>-&lt;logical volume> 例如救援模式里的 /dev/mapper/vg-lv<br>）</p>
+
+
+
+<h4>5.2 在救援模式将救援模式的 /dev 目录关联到救援模式的 /mnt/dev 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount --bind /dev /mnt/dev</code></pre>
+
+
+
+<p>（补充：此时所有对救援模式的 /mnt/dev 目录的访问都会变成对救援模式的 /dev 目录的访问）</p>
+
+
+
+<h4>5.3 在救援模式将救援模式的 /proc 目录关联到救援模式的 /mnt/proc 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount --bind /proc /mnt/proc</code></pre>
+
+
+
+<p>（补充：此时所有对救援模式的 /mnt/proc 目录的访问都会变成对救援模式的 /proc 目录的访问）</p>
+
+
+
+<h4>5.4 在救援模式将救援模式的 /sys 目录关联到救援模式的 /mnt/sys 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount --bind /sys /mnt/sys</code></pre>
+
+
+
+<p>（补充：此时所有对救援模式的 /mnt/sys 目录的访问都会变成对救援模式的 /sys 目录的访问）</p>
+
+
+
+<h4>5.5 在救援模式将救援模式的 /run 目录关联到救援模式的 /mnt/run 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount --bind /run /mnt/run</code></pre>
+
+
+
+<p>（补充：此时所有对救援模式的 /mnt/run 目录的访问都会变成对救援模式的 /run 目录的访问）</p>
+
+
+
+<h4>步骤六：显示系统被删根 （rm -rf /*） 后的现象<br>6.1 尝试将当前根目录从救援模式的根目录切换到系统的根目录时会报错 “chroot: failed to run command #/bin/bash#: No such file or directory”</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # chroot /mnt
+chroot: failed to run command #/bin/bash#: No such file or directory</code></pre>
+
+
+
+<p>（补充：这里以 /mnt 作为系统根目录为例）</p>
+
+
+
+<p>（注意：因为在使用 rm -rf /* 命令删过根以后，/bin/bash 已经被删除，所以会报错：chroot: failed to run command #/bin/bash#: No such file or directory）</p>
+
+
+
+<h4>6.2 在救援模式显示 /boot 目录里的文件时，会发现此目录下只有 grub2 目录，而此 grub2 目录里也是空的</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # ls /boot 
+grub2</code></pre>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # ls /boot</code></pre>
+
+
+
+<p>此步骤也可以通过以下方法实现：</p>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # ls -l /mounts/mp_0001/boot
+total 0
+......grub2</code></pre>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # ls -l /mounts/mp_0001/boot/grub2
+total 0</code></pre>
+
+
+
+<h4>6.3 在救援模式显示 /bin 目录时，会显示并无此目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # ls /mnt/bin
+ls: cannot access '/mnt/bin' : No such file or directory</code></pre>
+
+
+
+<h4>6.4 在救援模式显示 /etc 目录里的文件时，会发现此目录下只有 lvm 文件</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # ls /etc/
+lvm</code></pre>
+
+
+
+<h4>步骤七：在救援模式修复系统的 /bin 目录和里面的文件<br>7.1 在救援模式创建 /mnt/bin 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mkdir /mnt/bin</code></pre>
+
+
+
+<h4>7.2 在救援模式挂载官方镜像<br>7.2.1 在救援模式创建用于挂载镜像的 /media 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # /media</code></pre>
+
+
+
+<h4>7.2.2 在救援模式挂将官方镜像挂载到 /media 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mount /dev/dvd /media</code></pre>
+
+
+
+<h4>7.3 在救援模式安装 bash 软件<br>7.3.1 在救援模式安装拷贝 bash 软件包到当前目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # cp /media/suse/x86_64/bash-4.3-83.23.1.x86_64.rpm .</code></pre>
+
+
+
+<p>（补充：这里以拷贝 /media/suse/x86_64/bash-4.3-83.23.1.x86_64.rpm）</p>
+
+
+
+<h4>7.3.2 在救援模式创建用于安装 bash 软件的 bash 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # mkdir bash</code></pre>
+
+
+
+<h4>7.3.3 在救援模式进入 bash 目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ # cd bash</code></pre>
+
+
+
+<h4>7.3.4 在救援模式安装 bash 软件</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ /bash # rpm2cpio ../bash-4.3-83.23.1.x86_64.rpm | cpio -ivd</code></pre>
+
+
+
+<p>（补充：这里以安装 bash-4.3-83.23.1.x86_64.rpm 软件为例）</p>
+
+
+
+<h4>7.3.5 在救援模式显示安装 bash 软件后生成的目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ /bash # ls
+bin etc usr</code></pre>
+
+
+
+<h4>7.4 在救援模式将 bin 目录拷贝到 /bin/mnt 目录下</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ /bash # cp -rpv bin /mnt/bin
+'bin/bash' -&gt; '/mnt/bin/bash'
+'bin/sh' -&gt; '/mnt/bin/sh'</code></pre>
+
+
+
+<h4>步骤八：将当前的根目录从救援模式的根目录切换到系统的根目录<br>8.1 将当前的根目录从救援模式的根目录切换到系统的根目录</h4>
+
+
+
+<pre class="wp-block-code"><code>tty1:rescue:~ /bash # chroot /mnt</code></pre>
+
+
+
+<p>（补充：这里以 /mnt 作为系统根目录为例）</p>
+
+
+
+<h4>8.2 在系统模式下确认当前的挂载状态</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# mount -a</code></pre>
+
+
+
+<h4>8.3 在系统模式下确认当前根目录下的目录</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# ls
+bin boot dev home lib lib64 mnt opt proc root run sbin selinux srv sys tmp usr var</code></pre>
+
+
+
+<h4>步骤九：锁定有删根 （rm -rf /*<em>） 操作的用户 </em><br><em>9.1 在系统模式显示历史命令以确认有没有用户输入过 rm -rf /</em> 命令</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# history | less</code></pre>
+
+
+
+<h4>9.2 在系统模式显示用户登录记录</h4>
+
+
+
+<pre class="wp-block-code"><code>bash-4.3# last | less</code></pre>
+
+
+
+<p>（补充：此时会显示最后登录系统的用户、登陆时间、且可能最后 1 个登录系统的用户无退出时间）</p>
+
+
+
+<h4>9.3 根据步骤 9.1 和步骤 9.2 推测是哪个用户进行过删根 （rm -rf /*） 操作</h4>
+
+
+
+<p>（步骤略）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Linux 网卡的显示</title>
+		<link>https://eternalcenter-now.github.io/network-card/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Wed, 27 Apr 2022 15:36:01 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Computer & System Hardware & System Installation & System Upgradation (系统电脑 & 系统硬件 & 系统安装 & 系统升级)]]></category>
+		<category><![CDATA[System Hardware (系统硬件)]]></category>
+		<category><![CDATA[System Network (系统网络)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23346</guid>
+
+					<description><![CDATA[方法一：ip 命令 方法二：ifconfig 命令 方法三：iwconfig 命令]]></description>
+										<content:encoded><![CDATA[
+<h4>方法一：ip 命令</h4>
+
+
+
+<pre class="wp-block-code"><code># ip a s
+1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: eth0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
+    link/ether 00:1c:42:c9:3c:81 brd ff:ff:ff:ff:ff:ff
+    inet 10.10.10.129/24 brd 10.10.10.255 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet6 fdb2:2c26:f4e4:0:55da:1265:541f:8007/64 scope global temporary dynamic 
+       valid_lft 563315sec preferred_lft 44695sec
+    inet6 fdb2:2c26:f4e4:0:21c:42ff:fec9:3c81/64 scope global dynamic mngtmpaddr 
+       valid_lft 2591846sec preferred_lft 604646sec
+    inet6 fe80::21c:42ff:fec9:3c81/64 scope link 
+       valid_lft forever preferred_lft forever</code></pre>
+
+
+
+<h4>方法二：ifconfig 命令</h4>
+
+
+
+<pre class="wp-block-code"><code># ifconfig
+eth0: flags=4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
+        inet 10.10.10.129  netmask 255.255.255.0  broadcast 10.10.10.255
+        inet6 fdb2:2c26:f4e4:0:21c:42ff:fec9:3c81  prefixlen 64  scopeid 0x0&lt;global&gt;
+        inet6 fe80::21c:42ff:fec9:3c81  prefixlen 64  scopeid 0x20&lt;link&gt;
+        inet6 fdb2:2c26:f4e4:0:55da:1265:541f:8007  prefixlen 64  scopeid 0x0&lt;global&gt;
+        ether 00:1c:42:c9:3c:81  txqueuelen 1000  (Ethernet)
+        RX packets 698666  bytes 485434755 (462.9 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 372557  bytes 699406543 (667.0 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+lo: flags=73&lt;UP,LOOPBACK,RUNNING&gt;  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10&lt;host&gt;
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 73792  bytes 394285172 (376.0 MiB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 73792  bytes 394285172 (376.0 MiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0</code></pre>
+
+
+
+<h4>方法三：<strong>iwconfig</strong> 命令</h4>
+
+
+
+<pre class="wp-block-code"><code># iwconfig 
+lo        no wireless extensions.
+
+eth0      no wireless extensions.
+</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Linux 用户开机自动登录 （GNOME 版）</title>
+		<link>https://eternalcenter-now.github.io/automatic-logon/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Wed, 27 Apr 2022 15:08:01 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23340</guid>
+
+					<description><![CDATA[步骤一：创建用于自动登录的用户1.1 创建用于自动登录的用户 （补充：这里以创建 monitor 用户为例） 1.2 清空用于自动登录用户的密码 （补充：这里以清空 monitor 用户的密码为例） 步骤二： 设置 Linux 用户开机自动登录 如果是 Rocky Linux &#38; RHEL： 在： 下面添加以下内容： 如果是 openSUSE &#38; SUSE： 将以下内容： 修改为： （补充：这里以设置 monitor 用户开机自动登录为例） 步骤三：重启系统]]></description>
+										<content:encoded><![CDATA[
+<h4>步骤一：创建用于自动登录的用户<br>1.1 创建用于自动登录的用户</h4>
+
+
+
+<pre class="wp-block-code"><code># useradd monitor</code></pre>
+
+
+
+<p>（补充：这里以创建 monitor 用户为例）</p>
+
+
+
+<h4>1.2 清空用于自动登录用户的密码</h4>
+
+
+
+<pre class="wp-block-code"><code># passwd -d monitor</code></pre>
+
+
+
+<p>（补充：这里以清空 monitor 用户的密码为例）</p>
+
+
+
+<h4>步骤二： 设置 Linux 用户开机自动登录</h4>
+
+
+
+<p>如果是 Rocky Linux &amp; RHEL：</p>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/gdm/custom.conf</code></pre>
+
+
+
+<p>在：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+&#91;daemon]
+......</code></pre>
+
+
+
+<p>下面添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+AutomaticLoginEnable=True
+AutomaticLogin=monitor
+......</code></pre>
+
+
+
+<p>如果是 openSUSE &amp; SUSE：</p>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/gdm/custom.conf</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+DISPLAYMANAGER_AUTOLOGIN=""
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+DISPLAYMANAGER_AUTOLOGIN="monitor"
+......</code></pre>
+
+
+
+<p>（补充：这里以设置 monitor 用户开机自动登录为例）</p>
+
+
+
+<h4>步骤三：重启系统</h4>
+
+
+
+<pre class="wp-block-code"><code># reboot</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] GNOME 命令 gnome-terminal （打开新的命令行终端）</title>
+		<link>https://eternalcenter-now.github.io/gnome-terminal-2/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Wed, 27 Apr 2022 14:56:15 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23338</guid>
+
+					<description><![CDATA[案例一：打开新的命令行终端，在 1 个新的窗口上运行 案例二：打开新的命令行终端，并自定义窗口的大小和位置，在 1 个新的窗口上运行 （补充：这里以打开新的命令行终端，并将终端窗口设置为宽 120，高 80，左偏移量 20，上偏移量 80 为例） 案例三：最大化打开新的命令行终端，在 1 个新的窗口上运行 案例四：全屏话化打开新的命令行终端，在 1 个新的窗口上运行 案例五：打开新的命令行终端，并设置标题，在 1 个新的窗口上运行 （补充：这里以打开新的命令行终端，并将终端窗口名命名为 Eternal Center 为例） 案例六：同时打开多个新的命令行终端，在 1 个新的窗口上运行6.1 同时打开 2 个新的命令行终端，在新的窗口上运行 （每 1 个窗口 1 个新的命令行终端） 6.2 同时打开 4 个新的命令行终端，在新的窗口上运行 （每 1 个窗口 2 个新的命令行终端）]]></description>
+										<content:encoded><![CDATA[
+<h4>案例一：打开新的命令行终端，在 1 个新的窗口上运行</h4>
+
+
+
+<pre class="wp-block-code"><code># gnome-terminal</code></pre>
+
+
+
+<h4>案例二：打开新的命令行终端，并自定义窗口的大小和位置，在 1 个新的窗口上运行</h4>
+
+
+
+<pre class="wp-block-code"><code># gnome-terminal --geometry=120*80+20+10</code></pre>
+
+
+
+<p>（补充：这里以打开新的命令行终端，并将终端窗口设置为宽 120，高 80，左偏移量 20，上偏移量 80 为例）</p>
+
+
+
+<h4>案例三：最大化打开新的命令行终端，在 1 个新的窗口上运行</h4>
+
+
+
+<pre class="wp-block-code"><code># gnome-terminal --maximize</code></pre>
+
+
+
+<h4>案例四：全屏话化打开新的命令行终端，在 1 个新的窗口上运行</h4>
+
+
+
+<pre class="wp-block-code"><code># gnome-terminal --full-screen</code></pre>
+
+
+
+<h4>案例五：打开新的命令行终端，并设置标题，在 1 个新的窗口上运行</h4>
+
+
+
+<pre class="wp-block-code"><code># gnome-terminal --title="Eternal Center"</code></pre>
+
+
+
+<p>（补充：这里以打开新的命令行终端，并将终端窗口名命名为 Eternal Center 为例）</p>
+
+
+
+<h4>案例六：同时打开多个新的命令行终端，在 1 个新的窗口上运行<br>6.1 同时打开 2 个新的命令行终端，在新的窗口上运行 （每 1 个窗口 1 个新的命令行终端）</h4>
+
+
+
+<pre class="wp-block-code"><code># gnome-terminal --window --window</code></pre>
+
+
+
+<h4>6.2 同时打开 4 个新的命令行终端，在新的窗口上运行 （每 1 个窗口 2 个新的命令行终端）</h4>
+
+
+
+<pre class="wp-block-code"><code># gnome-terminal --window --tab --window --tab</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[工具] Shell 显示系统常用信息</title>
+		<link>https://eternalcenter-now.github.io/shell-display-system-common-information/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Tue, 26 Apr 2022 16:14:48 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Languages (语言)]]></category>
+		<category><![CDATA[Shell]]></category>
+		<category><![CDATA[Shell Monitor (监控)]]></category>
+		<category><![CDATA[Shell Tool (工具)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Computer & System Hardware & System Installation & System Upgradation (系统电脑 & 系统硬件 & 系统安装 & 系统升级)]]></category>
+		<category><![CDATA[System Directory (系统目录)]]></category>
+		<category><![CDATA[System Hardware (系统硬件)]]></category>
+		<category><![CDATA[System Network (系统网络)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Performance (系统性能)]]></category>
+		<category><![CDATA[System Port Security (系统端口安全)]]></category>
+		<category><![CDATA[System Process & System Performance (系统进程 & 系统性能)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Software (系统软件)]]></category>
+		<category><![CDATA[System Storage (系统存储)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23311</guid>
+
+					<description><![CDATA[介绍： 作者：朱明宇名称：显示系统常用信息作用：显示系统常用信息 使用方法：1. 在此脚本的分割线内写入相应的内容2. 给此脚本添加执行权限3. 执行此脚本 脚本分割线里的变量：1) times=2 #显示系统常用信息的次数2) sleeptime=0.1 #大部分行与行之间显示的间隔时间 注意：部分功能需要安装了 sysstat 软件或搭建了 KVM 虚拟化平台后执行此脚本的用户能够使用 sudo virsh list 命令后才能实现 脚本：]]></description>
+										<content:encoded><![CDATA[
+<h2>介绍：</h2>
+
+
+
+<p>作者：朱明宇<br>名称：显示系统常用信息<br>作用：显示系统常用信息</p>
+
+
+
+<p>使用方法：<br>1. 在此脚本的分割线内写入相应的内容<br>2. 给此脚本添加执行权限<br>3. 执行此脚本</p>
+
+
+
+<p>脚本分割线里的变量：<br>1) times=2 #显示系统常用信息的次数<br>2) sleeptime=0.1 #大部分行与行之间显示的间隔时间</p>
+
+
+
+<p>注意：部分功能需要安装了 sysstat 软件或搭建了 KVM 虚拟化平台后执行此脚本的用户能够使用 sudo virsh list 命令后才能实现</p>
+
+
+
+<h2>脚本：</h2>
+
+
+
+<pre class="wp-block-code"><code>#!/bin/bash
+
+####################### Separator ########################
+times=2
+sleeptime=0.1
+####################### Separator ########################
+
+nowtime=1
+
+while (( nowtime &lt;= times))
+do
+        echo -e "Start Monitoring: \c"
+	for i in {1..100}
+	do
+	        echo -e "#\c"
+		sleep 0.01
+        done
+	echo
+
+	sleep $sleeptime
+        host=`hostname`
+        echo -e "Name:\t\t\t\t\t\t \033&#91;1m$host\033&#91;0m"
+
+        ip=`ip a s | awk '/&#91;1-2]?&#91;0-9]{0,2}\.&#91;1-2]?&#91;0-9]{0,2}/&amp;&amp;!/127.0.0.1/{print $2}' | awk -F/ '{print $1}'`
+        for iip in `echo $ip`
+        do
+		sleep $sleeptime
+                echo -e "IP Address:\t\t\t\t\t \033&#91;1m$iip\033&#91;0m"
+        done
+
+        sleep $sleeptime
+
+        cpu=`top -bn 1 | awk -F',' '/^%Cpu/{print $4 }' | awk '{print $1}' | awk '{print 100-$1}'`
+        echo -e "CPU Usage (Total):\t\t\t\t \033&#91;1m$cpu%\033&#91;0m"
+
+        sleep $sleeptime
+
+        mem=`free | grep Mem | awk '{print $3/$2 * 100.0}' | egrep -o "&#91;1]?&#91;0-9]{0,2}\.&#91;0-9]"`
+        echo -e "Memory Usage (Total):\t\t\t\t \033&#91;1m$mem%\033&#91;0m"
+
+	directory=`df -h | grep -v run | grep -v boot | awk '$1~/\/dev/{print $6}'`
+        for idirectory in `echo $directory`
+        do
+                sleep $sleeptime
+                directoryusage=`df -h | grep -v run | grep -v boot | awk '$1~/\/dev/{print}' | grep $idirectory$ | awk '{print $5}'`
+		if &#91; $idirectory == / -o $idirectory == /ec  ];then
+                        echo -e "Directory Usage ($idirectory):\t\t\t\t \033&#91;1m$directoryusage\033&#91;0m"
+	        else
+                        echo -e "Directory Usage ($idirectory):\t\t\t \033&#91;1m$directoryusage\033&#91;0m"
+		fi
+        done
+
+	sudo -l | grep 'virsh list' &amp;&gt; /dev/null
+        if &#91; $? -eq 0 ];then
+	        sleep $sleeptime
+	        virtual=`sudo virsh list | egrep &#91;0-9] | wc -l`
+	        echo -e "Number of Virtual Machines (Total):\t\t \033&#91;1m$virtual\033&#91;0m"
+        fi
+
+        sleep $sleeptime
+
+        user=`who | wc -l`
+        echo -e "Number of User Logins (Total):\t\t\t \033&#91;1m$user\033&#91;0m"
+
+        soft=`rpm -qa | wc -l`
+        echo -e "Number of Softwares (Total):\t\t\t \033&#91;1m$soft\033&#91;0m"
+
+        sleep $sleeptime
+
+        port=`ss -ntulap | wc -l`
+        echo -e "Number of Open Ports (Total):\t\t\t \033&#91;1m$port\033&#91;0m"
+
+        which sar &amp;&gt; /dev/null
+        if &#91; $? -eq 0 ];then
+                networkcard=`ifconfig | awk -F: '/flags/&amp;&amp;!/lo/{print $1}'`
+                for inetworkcard in `echo $networkcard`
+                do
+                        networkread="`sar -n DEV 1 1 | grep $inetworkcard | awk '/&#91;0-9]&#91;0-9]:&#91;0-9]&#91;0-9]/{print $3/1000}'` m/s"
+                        networkwrite="`sar -n DEV 1 1 | grep $inetworkcard | awk '/&#91;0-9]&#91;0-9]:&#91;0-9]&#91;0-9]/{print $4/1000}'` m/s"
+			echo $inetworkcard | grep eth &amp;&gt; /dev/null
+			if &#91; $?  -ne 0 ];then
+	                echo -e "Network Card IO ($inetworkcard):\t\t\t \033&#91;1m$networkread\033&#91;0m (Read)\t\033&#91;1m$networkwrite\033&#91;0m (Write)"
+		        else
+	                echo -e "Network Card IO ($inetworkcard):\t\t\t\t \033&#91;1m$networkread\033&#91;0m (Read)\t\033&#91;1m$networkwrite\033&#91;0m (Write)"
+			fi
+                done
+        fi
+
+        which iostat &amp;&gt; /dev/null
+        if &#91; $? -eq 0 ];then
+	        disk=`iostat -d -k 1 1 | awk '!/^$/&amp;&amp;!/Device/&amp;&amp;!/Linux/{print $1}'`
+                for idisk in `echo $disk`
+	        do
+			sleep $sleeptime
+		        diskread="`iostat -d -k 1 1 | grep $idisk |  awk '{print $3/1000}'` m/s"
+		        diskwrite="`iostat -d -k 1 1 | grep $idisk |  awk '{print $4/1000}'` m/s"
+			echo $idisk | grep 'nvme' &amp;&gt; /dev/null
+			if &#91; $? -eq 0 ];then
+		                echo -e "Disk IO (/dev/$idisk):\t\t\t\t \033&#91;1m$diskread\033&#91;0m (Read)\t\033&#91;1m$diskwrite\033&#91;0m (Write)"
+		        else
+		                echo -e "Disk IO (/dev/$idisk):\t\t\t\t \033&#91;1m$diskread\033&#91;0m (Read)\t\033&#91;1m$diskwrite\033&#91;0m (Write)"
+			fi
+	        done
+
+        fi
+
+        echo -e "Complete Monitoring: \c"
+        for i in {1..97}
+        do
+                echo -e "#\c"
+                sleep 0.01
+        done
+        echo
+        sleep $sleeptime
+
+        let nowtime++
+done
+
+        echo -e "Terminal Monitoring: \c"
+        for i in {1..97}
+        do
+                echo -e "#\c"
+                sleep 0.01
+        done
+
+exit</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Linux 自动退出时间的设置</title>
+		<link>https://eternalcenter-now.github.io/automatic-exit-time/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 25 Apr 2022 12:14:46 +0000</pubDate>
+				<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23284</guid>
+
+					<description><![CDATA[步骤一：确认目前正在使用的解释器是 /bin/bash 步骤二：设置多久以后会自动退出 （补充：这里以设置 30 秒后会自动退出为例）]]></description>
+										<content:encoded><![CDATA[
+<h4>步骤一：确认目前正在使用的解释器是 /bin/bash</h4>
+
+
+
+<pre class="wp-block-code"><code># echo $SHELL
+/bin/bash</code></pre>
+
+
+
+<h4>步骤二：设置多久以后会自动退出</h4>
+
+
+
+<pre class="wp-block-code"><code># export TMOUT=30</code></pre>
+
+
+
+<p>（补充：这里以设置 30 秒后会自动退出为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] iptables 防火墙规则持久化 （让防火墙规则开机自启）</title>
+		<link>https://eternalcenter-now.github.io/iptables-rule-permanent/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 25 Apr 2022 07:28:11 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Firewall (系统防火墙)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network (系统网络)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Port Security (系统端口安全)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23270</guid>
+
+					<description><![CDATA[内容一：Rocky Linux &#38; RHEL iptables 防火墙规则持久化 内容二：Rocky Linux &#38; RHEL 和 openSUSE &#38; SUSE iptables 防火墙规则持久化2.1 导出现在 iptables 防火墙的规则 （补充：这里以将 iptables 防火墙规则导出到 /root/iptables_save 文件为例） 2.2 创建用于加载 iptables 防火墙规则的 systemctl 管理文件 创建以下内容： （补充：这里以创建 systemctl 管理文件 /etc/systemd/system/iptables_save.service 将 /root/iptables_save 文件里的内容导入到 iptables 防火墙为例） 2.3 加载刚刚创建的 systemctl 管理文件 2.4 给刚刚创建的 systemctl 管理文件添加执行权限 （补充：这里以给 systemctl 管理文件 /etc/systemd/system/iptables_save.service 添加执行权限为例） 2.5 让防火墙规则开机自启 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/iptables-rule-permanent/" class="more-link">Continue reading<span class="screen-reader-text"> "[内容] iptables 防火墙规则持久化 （让防火墙规则开机自启）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h4>内容一：Rocky Linux &amp; RHEL iptables 防火墙规则持久化</h4>
+
+
+
+<pre class="wp-block-code"><code># service iptables save</code></pre>
+
+
+
+<h4>内容二：Rocky Linux &amp; RHEL 和 openSUSE &amp; SUSE iptables 防火墙规则持久化<br>2.1 导出现在 iptables 防火墙的规则</h4>
+
+
+
+<pre class="wp-block-code"><code># iptables-save &gt; /root/iptables_save</code></pre>
+
+
+
+<p>（补充：这里以将 iptables 防火墙规则导出到 /root/iptables_save 文件为例）</p>
+
+
+
+<h4>2.2 创建用于加载 iptables 防火墙规则的 systemctl 管理文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/systemd/system/iptables_save.service</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>&#91;Unit]
+Description=iptables_save
+After=default.target
+
+&#91;Service]
+Type=oneshot
+ExecStart=/usr/sbin/iptables-restore &lt; /root/iptables_save
+
+&#91;Install]
+WantedBy=default.target</code></pre>
+
+
+
+<p>（补充：这里以创建 systemctl 管理文件 /etc/systemd/system/iptables_save.service 将 /root/iptables_save 文件里的内容导入到 iptables 防火墙为例）</p>
+
+
+
+<h4>2.3 加载刚刚创建的 systemctl 管理文件</h4>
+
+
+
+<pre class="wp-block-code"><code># systemctl daemon-reload</code></pre>
+
+
+
+<h4>2.4 给刚刚创建的 systemctl 管理文件添加执行权限</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod u+x /etc/systemd/system/iptables_save.service</code></pre>
+
+
+
+<p>（补充：这里以给 systemctl 管理文件 /etc/systemd/system/iptables_save.service 添加执行权限为例）</p>
+
+
+
+<h4>2.5 让防火墙规则开机自启</h4>
+
+
+
+<pre class="wp-block-code"><code># systemctl enable iptables_save.service</code></pre>
+
+
+
+<p>（补充：这里以开机自启 iptables_save.service 服务为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] iptables 防火墙规则的导出和导入</title>
+		<link>https://eternalcenter-now.github.io/iptables-rule-export-import/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 25 Apr 2022 07:20:19 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Firewall (系统防火墙)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network (系统网络)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Port Security (系统端口安全)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23267</guid>
+
+					<description><![CDATA[内容一：导出 iptables 防火墙规则 （补充：这里以将 iptables 防火墙规则导出到 /root/iptables_save 文件为例） 内容二：导入 iptables 防火墙规则 （补充：这里以将 /root/iptables_save 文件里的内容导入到 iptables 防火墙为例）]]></description>
+										<content:encoded><![CDATA[
+<h4>内容一：导出 iptables 防火墙规则</h4>
+
+
+
+<pre class="wp-block-code"><code># iptables-save &gt; /root/iptables_save</code></pre>
+
+
+
+<p>（补充：这里以将 iptables 防火墙规则导出到 /root/iptables_save 文件为例）</p>
+
+
+
+<h4>内容二：导入 iptables 防火墙规则</h4>
+
+
+
+<pre class="wp-block-code"><code># iptables-restore &lt; /root/iptables_save</code></pre>
+
+
+
+<p>（补充：这里以将 /root/iptables_save 文件里的内容导入到 iptables 防火墙为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Linux SNMPv3 客户端自查 （检查 SNMPv3 客户端是否能正常传输数据）</title>
+		<link>https://eternalcenter-now.github.io/snmpv3-client-check/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 25 Apr 2022 07:04:26 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System General Log (系统普通日志)]]></category>
+		<category><![CDATA[System Log (系统日志)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23261</guid>
+
+					<description><![CDATA[]]></description>
+										<content:encoded><![CDATA[
+<pre class="wp-block-code"><code># snmpwalk -v3 -u siemens -l authNoPriv -a MD5 -x DES -A '&lt;user&gt;' -X '&lt;password&gt;' localhost</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[[内容] Linux 官方软件库列表 （RHEL 8 版）</title>
+		<link>https://eternalcenter-now.github.io/official-software-repository-list-rhel/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sat, 23 Apr 2022 15:24:12 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Other Services (其他服务)]]></category>
+		<category><![CDATA[Red Hat Satellite]]></category>
+		<category><![CDATA[Services (服务)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Software (系统软件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23248</guid>
+
+					<description><![CDATA[内容一：基础软件源 内容二：Red Hat Satellite Tool 软件源 （补充：这里以 Red Hat Satellite Tool 6.10 软件源为例）]]></description>
+										<content:encoded><![CDATA[
+<h4>内容一：基础软件源</h4>
+
+
+
+<pre class="wp-block-code"><code>rhel-8-for-x86_64-baseos-rpms</code></pre>
+
+
+
+<pre class="wp-block-code"><code>rhel-8-for-x86_64-appstream-rpms</code></pre>
+
+
+
+<h4>内容二：Red Hat Satellite Tool 软件源</h4>
+
+
+
+<pre class="wp-block-code"><code>satellite-tools-6.10-for-rhel-8-x86_64-rpms</code></pre>
+
+
+
+<p>（补充：这里以 Red Hat Satellite Tool 6.10 软件源为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 tcpdump （网络抓包）</title>
+		<link>https://eternalcenter-now.github.io/tcpdump/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Tue, 19 Apr 2022 04:09:50 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Network (系统网络)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23246</guid>
+
+					<description><![CDATA[将所有抓到的网络数据包 （注意：此时会抓取所有的网络数据包，并保存到文件 /tmp/telnet.cap，想要退出则同时按下 “ctrl” 键和 “c” 键） （补充：这里以将所有抓到的信息导出到 /tmp/telnet.cap 文件为例）]]></description>
+										<content:encoded><![CDATA[
+<p>将所有抓到的网络数据包</p>
+
+
+
+<pre class="wp-block-code"><code># tcpdump -i any -w /tmp/telnet.cap</code></pre>
+
+
+
+<p>（注意：此时会抓取所有的网络数据包，并保存到文件 /tmp/telnet.cap，想要退出则同时按下 “ctrl” 键和 “c” 键）</p>
+
+
+
+<p>（补充：这里以将所有抓到的信息导出到 /tmp/telnet.cap 文件为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Linux 图形桌面 （Fedora 版）</title>
+		<link>https://eternalcenter-now.github.io/graphic-desktop-fedora/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sun, 17 Apr 2022 10:01:55 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<category><![CDATA[System Software (系统软件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23200</guid>
+
+					<description><![CDATA[内容目录： 内容一：Xfce 图形桌面1.1 Xfce 的安装方法1.2 Xfce 的简介1.3 Xfce 的展示和介绍网站 内容二：LXDE 图形桌面2.1 LXDE 的安装方法2.2 LXDE 的简介2.3 LXDE 的展示和介绍网站 内容三：LXQt 图形桌面3.1 LXQt 的安装方法3.2 LXQt 的简介3.3 LXQt 的展示和介绍网站 内容四：Cinnamon 图形桌面4.1 Cinnamon 的安装方法4.2 Cinnamon 的简介4.3 Cinnamon 的展示和介绍网站 内容五：MATE 图形桌面5.1 MATE 的安装方法5.2 MATE 的简介5.3 MATE 的展示和介绍网站 内容六：Sugar 图形桌面 内容七：Deepin 图形桌面 内容八：i3 图形桌面8.1 i3 的安装方法8.2 i3 的简介8.3 i3 的展示和介绍网站 内容九：Basic 图形桌面 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/graphic-desktop-fedora/" class="more-link">Continue reading<span class="screen-reader-text"> "[内容] Linux 图形桌面 （Fedora 版）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2>内容目录：</h2>
+
+
+
+<h4>内容一：Xfce 图形桌面<br>1.1 Xfce 的安装方法<br>1.2 Xfce 的简介<br>1.3 Xfce 的展示和介绍网站</h4>
+
+
+
+<h4>内容二：LXDE 图形桌面<br>2.1 LXDE 的安装方法<br>2.2 LXDE 的简介<br>2.3 LXDE 的展示和介绍网站</h4>
+
+
+
+<h4>内容三：LXQt 图形桌面<br>3.1 LXQt 的安装方法<br>3.2 LXQt 的简介<br>3.3 LXQt 的展示和介绍网站</h4>
+
+
+
+<h4>内容四：Cinnamon 图形桌面<br>4.1 Cinnamon 的安装方法<br>4.2 Cinnamon 的简介<br>4.3 Cinnamon 的展示和介绍网站</h4>
+
+
+
+<h4>内容五：MATE 图形桌面<br>5.1 MATE 的安装方法<br>5.2 MATE 的简介<br>5.3 MATE 的展示和介绍网站</h4>
+
+
+
+<h4>内容六：Sugar 图形桌面</h4>
+
+
+
+<h4>内容七：Deepin 图形桌面</h4>
+
+
+
+<h4>内容八：i3 图形桌面<br>8.1 i3 的安装方法<br>8.2 i3 的简介<br>8.3 i3 的展示和介绍网站</h4>
+
+
+
+<h4>内容九：Basic 图形桌面</h4>
+
+
+
+<h4>内容十：Pantheon 图形桌面</h4>
+
+
+
+<h4>内容十一：KDE 图形桌面</h4>
+
+
+
+<h4>内容十二：GNOME 图形桌面</h4>
+
+
+
+<h2>具体的内容：</h2>
+
+
+
+<h4>内容一：Xfce 图形桌面<br>1.1 Xfce 的安装方法</h4>
+
+
+
+<pre class="wp-block-code"><code># dnf install @xfce-desktop-enviroment</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># yum groupinstall "Xfce Desktop"</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># dnf group install -y "Xfce Desktop"</code></pre>
+
+
+
+<h4>1.2 Xfce 的简介</h4>
+
+
+
+<p>Fedora Xfce 定制版展示了 Xfce 桌面，Xfce 桌面追求快速和轻巧，同时用户界面友好并有精彩的视觉盛宴。</p>
+
+
+
+<h4>1.3 Xfce 的展示和介绍网站</h4>
+
+
+
+<p>https://spins.fedoraproject.org/xfce/</p>
+
+
+
+<h4>内容二：LXDE 图形桌面<br>2.1 LXDE 的安装方法</h4>
+
+
+
+<pre class="wp-block-code"><code># dnf install @lxde-desktop</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># yum groupinstall "LXDE Desktop"</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># dnf group install -y "LXDE Desktop"</code></pre>
+
+
+
+<h4>2.2 LXDE 的简介</h4>
+
+
+
+<p>LXDE，全名为“轻量级 X11 桌面环境”，是一款极速轻快、实用而且低功耗的桌面环境。</p>
+
+
+
+<h4>2.3 LXDE 的展示和介绍网站</h4>
+
+
+
+<p>https://spins.fedoraproject.org/lxde/</p>
+
+
+
+<h4>内容三：LXQt 图形桌面<br>3.1 LXQt 的安装方法</h4>
+
+
+
+<pre class="wp-block-code"><code># dnf install @lxqt-desktop</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># yum groupinstall "LXQt Desktop"</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># dnf group install -y "LXQt Desktop"</code></pre>
+
+
+
+<h4>3.2 LXQt 的简介</h4>
+
+
+
+<p>Fedora LXQt 提供了一个轻量、完整的 LXQt 桌面环境。</p>
+
+
+
+<h4>3.3 LXQt 的展示和介绍网站</h4>
+
+
+
+<p>https://spins.fedoraproject.org/zh_Hans_CN/lxqt/</p>
+
+
+
+<h4>内容四：Cinnamon 图形桌面<br>4.1 Cinnamon 的安装方法</h4>
+
+
+
+<pre class="wp-block-code"><code># dnf install @cinnamon-desktop</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># yum groupinstall "Cinnamon Desktop"</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># dnf group install -y "Cinnamon Desktop"</code></pre>
+
+
+
+<h4>4.2 Cinnamon 的简介</h4>
+
+
+
+<p>Cinnamon 是一种提供高级创新功能并且尊重传统的用户习惯的Linux桌面环境。</p>
+
+
+
+<h4>4.3 Cinnamon 的展示和介绍网站</h4>
+
+
+
+<p>https://spins.fedoraproject.org/cinnamon/</p>
+
+
+
+<h4>内容五：MATE 图形桌面<br>5.1 MATE 的安装方法</h4>
+
+
+
+<pre class="wp-block-code"><code># dnf install @mate-desktop</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># yum groupinstall "MATE Desktop"</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># dnf group install -y "MATE Desktop"</code></pre>
+
+
+
+<h4>5.2 MATE 的简介</h4>
+
+
+
+<p>MATE Compiz 是一款轻量、强大，专为高效率和高性能打造的桌面环境。</p>
+
+
+
+<h4>5.3 MATE 的展示和介绍网站</h4>
+
+
+
+<p>https://spins.fedoraproject.org/mate-compiz/</p>
+
+
+
+<h4>内容六：Sugar 图形桌面</h4>
+
+
+
+<p>Sugar 的安装方法</p>
+
+
+
+<pre class="wp-block-code"><code># yum groupinstall "Sugar Desktop Environment"</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># dnf group install -y "Sugar Desktop Environment"</code></pre>
+
+
+
+<h4>内容七：Deepin 图形桌面</h4>
+
+
+
+<p>Deepin 的安装方法</p>
+
+
+
+<pre class="wp-block-code"><code># yum groupinstall "Deepin Desktop"</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># dnf group install -y "Deepin Desktop"</code></pre>
+
+
+
+<h4>内容八：i3 图形桌面<br>8.1 i3 的安装方法</h4>
+
+
+
+<pre class="wp-block-code"><code># yum groupinstall "i3 desktop"</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># dnf group install -y "i3 desktop"</code></pre>
+
+
+
+<h4>8.2 i3 的简介</h4>
+
+
+
+<p>Fedora i3 定制版提供了流行的 i3 平铺窗口管理器。其使得 i3 对于那些不想用鼠标、触摸板，或是其他指点设备的无论是新手还是高级用户都易于访问且更具吸引力。</p>
+
+
+
+<h4>8.3 i3 的展示和介绍网站</h4>
+
+
+
+<p>https://spins.fedoraproject.org/i3/</p>
+
+
+
+<h4>内容九：Basic 图形桌面</h4>
+
+
+
+<p>Basic 的安装方法</p>
+
+
+
+<pre class="wp-block-code"><code># yum groupinstall "Basic Desktop"</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># dnf group install -y "Basic Desktop"</code></pre>
+
+
+
+<h4>内容十：Pantheon 图形桌面</h4>
+
+
+
+<p>Pantheon 的安装方法</p>
+
+
+
+<pre class="wp-block-code"><code># yum groupinstall "Pantheon Desktop"</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># dnf group install -y "Pantheon Desktop"</code></pre>
+
+
+
+<h4>内容十一：KDE 图形桌面</h4>
+
+
+
+<p>KDE 的安装方法</p>
+
+
+
+<pre class="wp-block-code"><code># dnf install @KDE-desktop</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># yum groupinstall "KDE Plasma Workspaces"</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># dnf group install -y "KDE Plasma Workspaces"</code></pre>
+
+
+
+<h4>内容十二：GNOME 图形桌面</h4>
+
+
+
+<p>GNOME 的安装方法</p>
+
+
+
+<pre class="wp-block-code"><code># dnf install @gnome</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># yum groupinstall "GNOME"</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># dnf group install -y "GNOME"</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 lsscsi （查看硬盘类型，例：SSD、HD、SATA、FC &#8230;&#8230;）</title>
+		<link>https://eternalcenter-now.github.io/lsscsi/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sun, 17 Apr 2022 07:52:04 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Computer & System Hardware & System Installation & System Upgradation (系统电脑 & 系统硬件 & 系统安装 & 系统升级)]]></category>
+		<category><![CDATA[System Hardware (系统硬件)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23173</guid>
+
+					<description><![CDATA[内容一：lsscsi 命令的格式 内容二：lsscsi 命令的选项 1) -c 以硬盘全称的形式显示硬盘默认信息2) -d 显示硬盘主设备号和次设备号3) -g 显示硬盘对应的 sg 设备4) -H 显示硬盘的控制器列表5) -i 显示硬盘的 udev 信息6) -l 显示硬盘状态7) -ll 显示硬盘状态，比 -l 选项能显示更多信息8) -lll 或者 -L 显示硬盘状态，比 -ll 选项能显示更多信息9) -p 显示硬盘的 DIF DIX 保护类型10) -P 显示硬盘有效的保护类型11) -s 显示硬盘容量12) -v 显示硬盘设备所在目录13) -w 显示硬盘的 WWN 信息14) -x 以 16 进制显示硬盘的 lun 号]]></description>
+										<content:encoded><![CDATA[
+<h4>内容一：lsscsi 命令的格式</h4>
+
+
+
+<pre class="wp-block-code"><code># lsscsi &lt;option&gt;</code></pre>
+
+
+
+<h4>内容二：lsscsi 命令的选项</h4>
+
+
+
+<p>1) -c 以硬盘全称的形式显示硬盘默认信息<br>2) -d 显示硬盘主设备号和次设备号<br>3) -g 显示硬盘对应的 sg 设备<br>4) -H 显示硬盘的控制器列表<br>5) -i 显示硬盘的 udev 信息<br>6) -l 显示硬盘状态<br>7) -ll 显示硬盘状态，比 -l 选项能显示更多信息<br>8) -lll 或者 -L 显示硬盘状态，比 -ll 选项能显示更多信息<br>9) -p 显示硬盘的 DIF DIX 保护类型<br>10) -P 显示硬盘有效的保护类型<br>11) -s 显示硬盘容量<br>12) -v 显示硬盘设备所在目录<br>13) -w 显示硬盘的 WWN 信息<br>14) -x 以 16 进制显示硬盘的 lun 号</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] 全球公共免费 DNS</title>
+		<link>https://eternalcenter-now.github.io/free-dns/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Thu, 14 Apr 2022 15:24:23 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[DNS]]></category>
+		<category><![CDATA[Other Services (其他服务)]]></category>
+		<category><![CDATA[Services (服务)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Network (系统网络)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23164</guid>
+
+					<description><![CDATA[AdGuard Cloudflare COMODO DNS Watch Dyn Level 3 Neustar FreeDNS Google OpenDNS SAFEDNS Symantec]]></description>
+										<content:encoded><![CDATA[
+<h2>AdGuard</h2>
+
+
+
+<pre class="wp-block-code"><code>94.140.14.14
+94.140.14.15
+94.140.15.15
+94.140.15.16</code></pre>
+
+
+
+<h2>Cloudflare</h2>
+
+
+
+<pre class="wp-block-code"><code>1.0.0.1
+1.0.0.2
+1.0.0.3
+1.1.1.1
+1.1.1.2
+1.1.1.3</code></pre>
+
+
+
+<h2>COMODO</h2>
+
+
+
+<pre class="wp-block-code"><code>8.20.247.20
+8.26.56.26</code></pre>
+
+
+
+<h2>DNS Watch</h2>
+
+
+
+<pre class="wp-block-code"><code>84.200.69.80
+84.200.70.40</code></pre>
+
+
+
+<h2>Dyn</h2>
+
+
+
+<pre class="wp-block-code"><code>216.146.35.35
+216.146.36.36</code></pre>
+
+
+
+<h2>Level 3</h2>
+
+
+
+<pre class="wp-block-code"><code>209.244.0.3
+209.244.0.4</code></pre>
+
+
+
+<h2>Neustar</h2>
+
+
+
+<pre class="wp-block-code"><code>156.154.70.1
+156.154.71.1</code></pre>
+
+
+
+<h2>FreeDNS</h2>
+
+
+
+<pre class="wp-block-code"><code>37.235.1.174
+37.235.1.177</code></pre>
+
+
+
+<h2>Google</h2>
+
+
+
+<pre class="wp-block-code"><code>8.8.4.4
+8.8.8.8</code></pre>
+
+
+
+<h2>OpenDNS</h2>
+
+
+
+<pre class="wp-block-code"><code>208.67.220.220
+208.67.222.222</code></pre>
+
+
+
+<h2>SAFEDNS</h2>
+
+
+
+<pre class="wp-block-code"><code>195.46.39.39
+195.46.39.40</code></pre>
+
+
+
+<h2>Symantec</h2>
+
+
+
+<pre class="wp-block-code"><code>199.85.126.10
+199.85.137.10</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[排错] 解决 SSH 远程登录时很慢但 ping 时延迟很低</title>
+		<link>https://eternalcenter-now.github.io/debug-ssh-slow/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Wed, 13 Apr 2022 15:15:39 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Network (系统网络)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23106</guid>
+
+					<description><![CDATA[分析： ssh 远程某台服务器时很慢，但是 ping 时延迟却很低。这可能是 DNS 解析出现问题造成的，禁用服务器上 sshd 的 GSSAPIAuthentication 参数和 UseDNS 参数可以解决，这两个参数的作用是：1) GSSAPIAuthentication，当服务器的 sshd 服务此参数处于开启状态时，客户端 SSH 登录此服务器时，客户端会对服务器的 IP 地址进行 PTR 反解析，获得服务器的域名，再通过服务器的域名对服务器进行 DNS A 正向 IP 地址解析，通过此方法来防止欺骗。2) UseDNS，当服务器的 sshd 服务此参数处于开启状态时，客户端 SSH 登录此服务器时，服务器会对客户端的 IP 地址进行反解析，获得客户端的域名，再通过客户端的域名对客户端进行 DNS A 正向 IP 地址解析，通过此方法来防止欺骗。 解决方法： 步骤一：修改 SSH 的配置文件 将以下内容： 修改为： 步骤二：让修改的 SSH 配置文件生效]]></description>
+										<content:encoded><![CDATA[
+<h2>分析：</h2>
+
+
+
+<p>ssh 远程某台服务器时很慢，但是 ping 时延迟却很低。这可能是 DNS 解析出现问题造成的，禁用服务器上 sshd 的 GSSAPIAuthentication 参数和 UseDNS 参数可以解决，这两个参数的作用是：<br>1) GSSAPIAuthentication，当服务器的 sshd 服务此参数处于开启状态时，客户端 SSH 登录此服务器时，客户端会对服务器的 IP 地址进行 PTR 反解析，获得服务器的域名，再通过服务器的域名对服务器进行 DNS A 正向 IP 地址解析，通过此方法来防止欺骗。<br>2) UseDNS，当服务器的 sshd 服务此参数处于开启状态时，客户端 SSH 登录此服务器时，服务器会对客户端的 IP 地址进行反解析，获得客户端的域名，再通过客户端的域名对客户端进行 DNS A 正向 IP 地址解析，通过此方法来防止欺骗。</p>
+
+
+
+<h2>解决方法：</h2>
+
+
+
+<h4>步骤一：修改 SSH 的配置文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/ssh/sshd_conf</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+UseDNS yes
+......
+GSSAPIAuthentication yes
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+UseDNS no
+......
+GSSAPIAuthentication no
+......</code></pre>
+
+
+
+<h4>步骤二：让修改的  SSH 配置文件生效</h4>
+
+
+
+<pre class="wp-block-code"><code># systemctl restart sshd</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 eval （执行变量里的命令或实现指针）</title>
+		<link>https://eternalcenter-now.github.io/eval/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Wed, 13 Apr 2022 14:19:09 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Languages (语言)]]></category>
+		<category><![CDATA[Shell]]></category>
+		<category><![CDATA[Shell Basic (基础)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23101</guid>
+
+					<description><![CDATA[内容目录： 内容一：eval 命令的作用 内容二：eval 直接执行命令的案例2.1 设置变量2.2 显示变量里内容 内容三：eval 将变量转换成命令后执行的案例3.1 将命令设置成变量3.2 显示变量里的命令3.3 执行变量里的命令 内容四：eval 显示脚本里最后 1 个位置变量的内容4.1 创建显示最后 1 个位置变量的脚本4.2 带位置变量执行脚本 内容五：eval 实现指针5.1 设置变量5.2 设置指针5.3 显示指针指向的变量5.4 显示指针最终指向的内容 具体的内容： 内容一：eval 命令的作用 对将要执行的命令进行 2 次扫描，第 1 次扫描时把扫描的内容替换成命令，第 2 次扫描时执行扫描到的命令 内容二：eval 直接执行命令的案例2.1 设置变量 （补充：这里以将内容 eternalcenter.com 赋值给变量 url 为例） 2.2 显示变量里内容 或者： （补充：这里以显示变量 url 里的内容 eternalcenter.com 为例） 内容三：eval 将变量转换成命令后执行的案例3.1 将命令设置成变量 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/eval/" class="more-link">Continue reading<span class="screen-reader-text"> "[命令] Linux 命令 eval （执行变量里的命令或实现指针）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2>内容目录：</h2>
+
+
+
+<h4>内容一：eval 命令的作用</h4>
+
+
+
+<h4>内容二：eval 直接执行命令的案例<br>2.1 设置变量<br>2.2 显示变量里内容</h4>
+
+
+
+<h4>内容三：eval 将变量转换成命令后执行的案例<br>3.1 将命令设置成变量<br>3.2 显示变量里的命令<br>3.3 执行变量里的命令</h4>
+
+
+
+<h4>内容四：eval 显示脚本里最后 1 个位置变量的内容<br>4.1 创建显示最后 1 个位置变量的脚本<br>4.2 带位置变量执行脚本</h4>
+
+
+
+<h4>内容五：eval 实现指针<br>5.1 设置变量<br>5.2 设置指针<br>5.3 显示指针指向的变量<br>5.4 显示指针最终指向的内容</h4>
+
+
+
+<h2>具体的内容：</h2>
+
+
+
+<h4>内容一：eval 命令的作用</h4>
+
+
+
+<p>对将要执行的命令进行 2 次扫描，第 1 次扫描时把扫描的内容替换成命令，第 2 次扫描时执行扫描到的命令</p>
+
+
+
+<h4>内容二：eval 直接执行命令的案例<br>2.1 设置变量</h4>
+
+
+
+<pre class="wp-block-code"><code># url=eternalcenter.com</code></pre>
+
+
+
+<p>（补充：这里以将内容 eternalcenter.com 赋值给变量 url 为例）</p>
+
+
+
+<h4>2.2 显示变量里内容</h4>
+
+
+
+<pre class="wp-block-code"><code># echo $url
+eternalcenter.com</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># eval echo $url
+eternalcenter.com</code></pre>
+
+
+
+<p>（补充：这里以显示变量 url 里的内容 eternalcenter.com 为例）</p>
+
+
+
+<h4>内容三：eval 将变量转换成命令后执行的案例<br>3.1 将命令设置成变量</h4>
+
+
+
+<pre class="wp-block-code"><code># command=pwd</code></pre>
+
+
+
+<p>（补充：这里以将命令 pwd 赋值给变量 command 为例）</p>
+
+
+
+<h4>3.2 显示变量里的命令</h4>
+
+
+
+<pre class="wp-block-code"><code># echo $command
+pwd</code></pre>
+
+
+
+<p>（补充：这里以显示变量 command 里的 pwd 命令为例）</p>
+
+
+
+<h4>3.3 执行变量里的命令</h4>
+
+
+
+<pre class="wp-block-code"><code># eval $command
+/root</code></pre>
+
+
+
+<p>（补充：这里以执行变量 command 里的 pwd 命令为例）</p>
+
+
+
+<h4>内容四：eval 显示脚本里最后 1 个位置变量的内容<br>4.1 创建显示最后 1 个位置变量的脚本</h4>
+
+
+
+<pre class="wp-block-code"><code># vim test.sh</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>#!/bin/bash
+eval echo \$$#</code></pre>
+
+
+
+<p>（补充：这里创建名为 test.sh 的脚本为例）</p>
+
+
+
+<h4>4.2 带位置变量执行脚本</h4>
+
+
+
+<pre class="wp-block-code"><code># . test.txt a b c d e
+e</code></pre>
+
+
+
+<p>（补充：这里执行名为 test.sh 的脚本并附带 a b c d e 5 个位置变量为例）</p>
+
+
+
+<h4>内容五：eval 实现指针<br>5.1 设置变量</h4>
+
+
+
+<pre class="wp-block-code"><code># url=eternalcenter.com</code></pre>
+
+
+
+<p>（补充：这里以将内容 eternalcenter.com 赋值给变量 url 为例）</p>
+
+
+
+<h4>5.2 设置指针</h4>
+
+
+
+<pre class="wp-block-code"><code># pointer=url</code></pre>
+
+
+
+<p>（补充：这里以让指针 pointer 指向 url 变量为例）</p>
+
+
+
+<h4>5.3 显示指针指向的变量</h4>
+
+
+
+<pre class="wp-block-code"><code># echo $pointer
+url</code></pre>
+
+
+
+<p>（补充：这里以显示指针 pointer 指向的变量 url 为例）</p>
+
+
+
+<h4>5.4 显示指针最终指向的内容</h4>
+
+
+
+<pre class="wp-block-code"><code># eval echo \$$pointer
+eternalcenter.com</code></pre>
+
+
+
+<p>（补充：这里以显示指针 pointer 指向的最终内容 eternalcenter.com 为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

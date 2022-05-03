@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	
+	>
+<channel>
+	<title>
+	Comments on: [命令] Linux 命令 seq （显示数字序列）	</title>
+	<atom:link href="https://eternalcenter-now.github.io/%E5%91%BD%E4%BB%A4-linux-%E5%91%BD%E4%BB%A4-seq-%EF%BC%88%E6%89%93%E5%8D%B0%E6%95%B0%E5%AD%97%E5%BA%8F%E5%88%97%EF%BC%89/feed/" rel="self" type="application/rss+xml" />
+	<link>https://eternalcenter-now.github.io/%e5%91%bd%e4%bb%a4-linux-%e5%91%bd%e4%bb%a4-seq-%ef%bc%88%e6%89%93%e5%8d%b0%e6%95%b0%e5%ad%97%e5%ba%8f%e5%88%97%ef%bc%89/</link>
+	<description></description>
+	<lastBuildDate>Thu, 03 Feb 2022 07:35:54 +0000</lastBuildDate>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	
+</channel>
+</rss>

@@ -1,0 +1,2040 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>System File (系统文件) &#8211; Eternal Center</title>
+	<atom:link href="https://eternalcenter-now.github.io/category/system/system-space-system-directory-system-file/system-file/feed/" rel="self" type="application/rss+xml" />
+	<link>https://eternalcenter-now.github.io/</link>
+	<description></description>
+	<lastBuildDate>Fri, 29 Apr 2022 13:40:02 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	
+	<item>
+		<title>[排错] 解决 Linux 运行 gzip 命令时报错 gzip: wtmp-20220429.xz: unknown suffix &#8212; ignored</title>
+		<link>https://eternalcenter-now.github.io/debug-gzip-wtmp-20220429-xz-unknown-suffix-ignored/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 29 Apr 2022 13:37:57 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Directory (系统目录)]]></category>
+		<category><![CDATA[System File (系统文件)]]></category>
+		<category><![CDATA[System Storage (系统存储)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23417</guid>
+
+					<description><![CDATA[报错代码： 解决方法：]]></description>
+										<content:encoded><![CDATA[
+<h2>报错代码：</h2>
+
+
+
+<pre class="wp-block-code"><code>gzip: wtmp-20220429.xz: unknown suffix -- ignored</code></pre>
+
+
+
+<h2>解决方法：</h2>
+
+
+
+<pre class="wp-block-code"><code># xz -d &lt;file&gt;</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[排错] 解决 Linux 运行 tar 命令时报错 “tar: This does not look like a tar archive”</title>
+		<link>https://eternalcenter-now.github.io/debug-tar-this-does-not-look-like-a-tar-archive/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 11 Apr 2022 15:06:31 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Directory (系统目录)]]></category>
+		<category><![CDATA[System File (系统文件)]]></category>
+		<category><![CDATA[System Storage (系统存储)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23010</guid>
+
+					<description><![CDATA[报错代码： 解决方法： 或者：]]></description>
+										<content:encoded><![CDATA[
+<h2>报错代码：</h2>
+
+
+
+<pre class="wp-block-code"><code>tar: This does not look like a tar archive
+tar: Skipping to next header
+tar: Error exit delayed from previous errors</code></pre>
+
+
+
+<h2>解决方法：</h2>
+
+
+
+<pre class="wp-block-code"><code># gzip -d &lt;file&gt;</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># xz -d &lt;file&gt;</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 paster (将多个文件里内容合并，后 1 个文件里的每 1 行内容添加到前 1 个文件里对应每 1 行内容的后面)</title>
+		<link>https://eternalcenter-now.github.io/paster/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sat, 26 Mar 2022 14:24:27 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System File (系统文件)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=22444</guid>
+
+					<description><![CDATA[]]></description>
+										<content:encoded><![CDATA[
+<pre class="wp-block-code"><code># paste &lt;first file> &lt;second file> ......</code></pre>
+
+
+
+<p></p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 uniq （文件里字符重复的管理）</title>
+		<link>https://eternalcenter-now.github.io/uniq/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 26 Nov 2021 14:17:52 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System File (系统文件)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=19136</guid>
+
+					<description><![CDATA[案例一：uniq 命令去重 （补充：这里以给 test.txt 文件里的字符为例） 案例二：uniq 只显示重复的行 （补充：这里以只显示 test.txt 文件里重复的行为例） 案例三：uniq 只显示不重复的行 （补充：这里以只显示 test.txt 文件里不重复的行为例） 案例四：显示每个字符出现的次数 （补充：这里以显示 test.txt 每个字符出现的次数为例）]]></description>
+										<content:encoded><![CDATA[
+<h4>案例一：uniq 命令去重</h4>
+
+
+
+<pre class="wp-block-code"><code># cat test.txt 
+a1
+b2
+c3
+a1
+d2
+e3
+a1
+c3
+
+# sort test.txt  | uniq
+a1
+b2
+c3
+d2
+e3</code></pre>
+
+
+
+<p>（补充：这里以给 test.txt 文件里的字符为例）</p>
+
+
+
+<h4>案例二：uniq 只显示重复的行</h4>
+
+
+
+<pre class="wp-block-code"><code># cat test.txt 
+a1
+b2
+c3
+a1
+d2
+e3
+a1
+c3
+
+# sort test.txt  | uniq -d
+a1
+c3</code></pre>
+
+
+
+<p>（补充：这里以只显示 test.txt 文件里重复的行为例）</p>
+
+
+
+<h4>案例三：uniq 只显示不重复的行</h4>
+
+
+
+<pre class="wp-block-code"><code># cat test.txt 
+a1
+b2
+c3
+a1
+d2
+e3
+a1
+c3
+
+# sort test.txt  | uniq -u
+b2
+d2
+e3</code></pre>
+
+
+
+<p>（补充：这里以只显示 test.txt 文件里不重复的行为例）</p>
+
+
+
+<h4>案例四：显示每个字符出现的次数</h4>
+
+
+
+<pre class="wp-block-code"><code># cat test.txt 
+a1
+b2
+c3
+a1
+d2
+e3
+a1
+c3
+
+# sort test.txt  | uniq -c
+      3 a1
+      1 b2
+      2 c3
+      1 d2
+      1 e3</code></pre>
+
+
+
+<p>（补充：这里以显示 test.txt 每个字符出现的次数为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Linux 加密压缩 （tar 版）</title>
+		<link>https://eternalcenter-now.github.io/encryption-compression-tar/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 15 Nov 2021 15:52:52 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Directory (系统目录)]]></category>
+		<category><![CDATA[System File (系统文件)]]></category>
+		<category><![CDATA[System File Security (系统文件安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Storage (系统存储)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=18392</guid>
+
+					<description><![CDATA[步骤一：创建测试文件 （补充：这里以创建 test.txt 文件为例） 步骤二：加密压缩文件或目录2.1 交互式加密压缩文件或目录 （补充：1) 这里以将 test.txt 文件加密压缩成 test1.tar.gz （压缩）包为例2) 如果要以 bzip2 的格式进行压缩，则将命令中的 -zcf 换成 -jcvf 将 test1.tar.gz 换成 test1.tar.bz23) 如果要以 xz 的格式进行压缩，则将命令中的 -zcf 换成 -Jcvf 将 test1.tar.gz 换成 test1.tar.xz） 2.2 非交互式加密压缩文件或目录 （补充：1) 这里以将 test.txt 文件加密压缩成 test1.tar.gz （压缩）包并且将密码设置为 eternalcenter 为例2) 如果要以 bzip2 的格式进行压缩，则将命令中的 -zcf 换成 -jcvf 将 test1.tar.gz 换成 test2.tar.bz23) 如果要以 xz 的格式进行压缩，则将命令中的 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/encryption-compression-tar/" class="more-link">Continue reading<span class="screen-reader-text"> "[步骤] Linux 加密压缩 （tar 版）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h4>步骤一：创建测试文件</h4>
+
+
+
+<pre class="wp-block-code"><code># touch test.txt</code></pre>
+
+
+
+<p>（补充：这里以创建 test.txt 文件为例）</p>
+
+
+
+<h4>步骤二：加密压缩文件或目录<br>2.1 交互式加密压缩文件或目录</h4>
+
+
+
+<pre class="wp-block-code"><code># tar -zcf - test.txt | openssl des3 -salt | dd of=test1.tar.gz
+enter des-ede3-cbc encryption password:
+Verifying - enter des-ede3-cbc encryption password:
+*** WARNING : deprecated key derivation used.
+Using -iter or -pbkdf2 would be better.
+0+1 records in
+0+1 records out
+224 bytes copied, 7.04902 s, 0.0 kB/s</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里以将 test.txt 文件加密压缩成 test1.tar.gz （压缩）包为例<br>2) 如果要以 bzip2 的格式进行压缩，则将命令中的 -zcf 换成 -jcvf 将 test1.tar.gz 换成 test1.tar.bz2<br>3) 如果要以 xz 的格式进行压缩，则将命令中的 -zcf 换成 -Jcvf 将 test1.tar.gz 换成 test1.tar.xz<br>）</p>
+
+
+
+<h4>2.2 非交互式加密压缩文件或目录</h4>
+
+
+
+<pre class="wp-block-code"><code># tar -zcf - test.txt | openssl des3 -salt -f eternalcenter | dd of=test2.tar.gz
+des3: Unrecognized flag f
+des3: Use -help for summary.
+0+0 records in
+0+0 records out
+0 bytes copied, 0.00376576 s, 0.0 kB/s</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里以将 test.txt 文件加密压缩成 test1.tar.gz （压缩）包并且将密码设置为 eternalcenter 为例<br>2) 如果要以 bzip2 的格式进行压缩，则将命令中的 -zcf 换成 -jcvf 将 test1.tar.gz 换成 test2.tar.bz2<br>3) 如果要以 xz 的格式进行压缩，则将命令中的 -zcf 换成 -Jcvf 将 test1.tar.gz 换成 test2.tar.xz<br>）</p>
+
+
+
+<h4>步骤三：解压加密文件或目录<br>3.1 交互式解压加密文件或目录<br>3.1.1 删除原测试目录和里面的文件</h4>
+
+
+
+<pre class="wp-block-code"><code># rm -rf test.txt</code></pre>
+
+
+
+<p>（补充：这里以删除 test.txt 文件为例）</p>
+
+
+
+<h4>3.1.2 交互式解压加密文件或目录</h4>
+
+
+
+<pre class="wp-block-code"><code># dd if=test2.tar.gz | openssl des3 -d | tar zxf -
+0+1 records in
+0+1 records out
+224 bytes copied, 0.000589721 s, 380 kB/s
+enter des-ede3-cbc decryption password:
+*** WARNING : deprecated key derivation used.
+Using -iter or -pbkdf2 would be better.</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里以解压 test2.tar.gz （压缩）包为例<br>2) 如果是 bzip2 格式的（压缩）包，则将命令中的 -zxf 换成 -jcvf 将 test1.tar.gz 换成 test1.tar.bz2<br>3) 如果是 xz 格式的（压缩）包，则将命令中的 -zxf 换成 -Jcvf 将 test1.tar.gz 换成 test1.tar.xz<br>）</p>
+
+
+
+<h4>3.2 非交互式解压加密文件或目录<br>3.2.1 删除原测试目录和里面的文件</h4>
+
+
+
+<pre class="wp-block-code"><code># rm -rf test.txt</code></pre>
+
+
+
+<p>（补充：这里以删除 test.txt 文件为例）</p>
+
+
+
+<h4>3.2.2 非交互式解压加密文件或目录</h4>
+
+
+
+<pre class="wp-block-code"><code># dd if=test1.tar.gz | openssl des3 -d -k eternalcenter | tar zxf -
+0+1 records in
+0+1 records out
+224 bytes copied, 0.000574539 s, 390 kB/s
+*** WARNING : deprecated key derivation used.
+Using -iter or -pbkdf2 would be better.</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里以解压 test1.tar.gz （压缩）包并且解压密码为 eternalcenter 为例<br>2) 如果是 bzip2 格式的（压缩）包，则将命令中的 -zxf 换成 -jcvf 将 test1.tar.gz 换成 test1.tar.bz2<br>3) 如果是 xz 格式的（压缩）包，则将命令中的 -zxf 换成 -Jcvf 将 test1.tar.gz 换成 test1.tar.xz<br>）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Linux 加密压缩 （zip 版）</title>
+		<link>https://eternalcenter-now.github.io/encryption-compression-zip/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 15 Nov 2021 15:48:09 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Directory (系统目录)]]></category>
+		<category><![CDATA[System File (系统文件)]]></category>
+		<category><![CDATA[System File Security (系统文件安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Storage (系统存储)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=18388</guid>
+
+					<description><![CDATA[步骤一：创建测试目录和测试文件 （补充：这里以创建 test 目录和里面的 test.txt 文件为例） 步骤二：加密压缩文件或目录2.1 交互式加密压缩文件或目录 （补充：这里以将 test 目录和里面的 test.txt 文件加密压缩成 test1.zip （压缩）包为例） 2.2 非交互式加密解压文件或目录 （补充：这里以将 test 目录和里面的 test.txt 文件加密压缩成 test2.zip （压缩）包并且将密码设置为 eternalcenter 为例） 步骤三：解压加密文件或目录3.1 交互式解压加密文件或目录3.1.1 删除原测试目录和里面的文件 （补充：这里以删除 test 目录和里面的文件为例） 3.1.2 交互式解压加密文件或目录 （补充：这里以解压 test2.zip （压缩）包为例） 3.2 非交互式解压加密文件或目录3.2.1 删除原测试目录和里面的文件 （补充：这里以删除 test 目录和里面的文件为例） 3.2.2 非交互式解压加密文件 （补充：这里以解压 test2.zip （压缩）包并且解压密码为 eternalcenter 为例）]]></description>
+										<content:encoded><![CDATA[
+<h4>步骤一：创建测试目录和测试文件</h4>
+
+
+
+<pre class="wp-block-code"><code># mkdir test
+# touch test/test.txt</code></pre>
+
+
+
+<p>（补充：这里以创建 test 目录和里面的 test.txt 文件为例）</p>
+
+
+
+<h4>步骤二：加密压缩文件或目录<br>2.1 交互式加密压缩文件或目录</h4>
+
+
+
+<pre class="wp-block-code"><code># zip -re test1.zip test
+Enter password: 
+Verify password: 
+  adding: test/ (stored 0%)
+  adding: test/test.txt (stored 0%)</code></pre>
+
+
+
+<p>（补充：这里以将 test 目录和里面的 test.txt 文件加密压缩成 test1.zip （压缩）包为例）</p>
+
+
+
+<h4>2.2 非交互式加密解压文件或目录</h4>
+
+
+
+<pre class="wp-block-code"><code># zip -rP eternalcenter test2.zip test
+  adding: test/ (stored 0%)
+  adding: test/test.txt (stored 0%)</code></pre>
+
+
+
+<p>（补充：这里以将 test 目录和里面的 test.txt 文件加密压缩成 test2.zip （压缩）包并且将密码设置为 eternalcenter 为例）</p>
+
+
+
+<h4>步骤三：解压加密文件或目录<br>3.1 交互式解压加密文件或目录<br>3.1.1 删除原测试目录和里面的文件</h4>
+
+
+
+<pre class="wp-block-code"><code># rm -rf test</code></pre>
+
+
+
+<p>（补充：这里以删除 test 目录和里面的文件为例）</p>
+
+
+
+<h4>3.1.2 交互式解压加密文件或目录</h4>
+
+
+
+<pre class="wp-block-code"><code># unzip test2.zip
+Archive:  test2.zip
+   creating: test/
+&#91;test2.zip] test/test.txt password: 
+ extracting: test/test.txt</code></pre>
+
+
+
+<p>（补充：这里以解压 test2.zip （压缩）包为例）</p>
+
+
+
+<h4>3.2 非交互式解压加密文件或目录<br>3.2.1 删除原测试目录和里面的文件</h4>
+
+
+
+<pre class="wp-block-code"><code># rm -rf test</code></pre>
+
+
+
+<p>（补充：这里以删除 test 目录和里面的文件为例）</p>
+
+
+
+<h4>3.2.2 非交互式解压加密文件</h4>
+
+
+
+<pre class="wp-block-code"><code># unzip -P eternalcenter test1.zip 
+Archive:  test1.zip
+   creating: test/
+ extracting: test/test.txt  </code></pre>
+
+
+
+<p>（补充：这里以解压 test2.zip （压缩）包并且解压密码为 eternalcenter 为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Linux rm 命令的监控</title>
+		<link>https://eternalcenter-now.github.io/rm-monitor/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sun, 07 Nov 2021 13:29:10 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System File (系统文件)]]></category>
+		<category><![CDATA[System File Security (系统文件安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=18208</guid>
+
+					<description><![CDATA[步骤一：将原来的 rm 命令进行备份 步骤二：创建一个记录 rm 命令使用的脚本 步骤三：给记录 rm 命令使用的脚本执行权限 步骤四：下次使用 rm 命令后就可以监控 /var/log/rm_command.log 日志了 （步骤略）]]></description>
+										<content:encoded><![CDATA[
+<h4>步骤一：将原来的 rm 命令进行备份</h4>
+
+
+
+<pre class="wp-block-code"><code># cp /usr/bin/rm  /usr/bin/rm.original</code></pre>
+
+
+
+<h4>步骤二：创建一个记录 rm 命令使用的脚本</h4>
+
+
+
+<pre class="wp-block-code"><code># cat /usr/bin/rm
+#!/bin/bash
+log=/var/log/rm_command.log
+echo "The $$ is calling rm command" &gt;&gt; $log
+echo "The full command is $*" &gt;&gt; $log
+echo
+echo "now use this command to get more information: /bin/ps axwwo user,pid,ppid,%cpu,%mem,vsz,rss,stat,time,cmd" &gt;&gt;$log
+/bin/ps axwwo user,pid,ppid,%cpu,%mem,vsz,rss,stat,time,cmd &gt;&gt;$log
+/usr/bin/rm.original $*
+echo "============================================================" &gt;&gt;$log</code></pre>
+
+
+
+<h4>步骤三：给记录 rm 命令使用的脚本执行权限</h4>
+
+
+
+<pre class="wp-block-code"><code># chmod 755 /usr/bin/rm.original</code></pre>
+
+
+
+<h4>步骤四：下次使用 rm 命令后就可以监控 /var/log/rm_command.log 日志了</h4>
+
+
+
+<p>（步骤略）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[排错] 解决 Linux 执行命令时报错 “bash: $&#8217;\r&#8217;: command not found”</title>
+		<link>https://eternalcenter-now.github.io/debug-bash-r-command-not-found/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sat, 06 Nov 2021 11:18:25 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System File (系统文件)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=18181</guid>
+
+					<description><![CDATA[报错代码： 分析： Windows 系统文件换行使用的换行符是 \r\nLinux 系统文件换行使用的换行符是 \n在 Windows 编辑的文本换行符可能就是 \r\n要解决这个问题需要将换行符从 \r\n 换成 \n 解决方法： 方法一：使用 dos2unix 转换文件换行符1.1 安装 dos2unix 软件 1.2 使用 dos2unix 转换文件换行符 方法二：使用 vim 转换文件换行符2.1 使用 vim 进入文件 2.2 转换文件换行符 （注意：是在 vim 的末行模式下执行以上命令） 2.3 保存文件 （注意：是在 vim 的末行模式下执行以上命令）]]></description>
+										<content:encoded><![CDATA[
+<h2>报错代码：</h2>
+
+
+
+<pre class="wp-block-code"><code>bash: $'\r': command not found</code></pre>
+
+
+
+<h2>分析：</h2>
+
+
+
+<p>Windows 系统文件换行使用的换行符是 \r\n<br>Linux 系统文件换行使用的换行符是 \n<br>在 Windows 编辑的文本换行符可能就是 \r\n<br>要解决这个问题需要将换行符从 \r\n 换成 \n</p>
+
+
+
+<h2>解决方法：</h2>
+
+
+
+<h4>方法一：使用 dos2unix 转换文件换行符<br>1.1 安装 dos2unix 软件</h4>
+
+
+
+<pre class="wp-block-code"><code># yum -y install dos2unix</code></pre>
+
+
+
+<h4>1.2 使用 dos2unix 转换文件换行符</h4>
+
+
+
+<pre class="wp-block-code"><code># dos2unix &lt;file&gt;</code></pre>
+
+
+
+<h4>方法二：使用 vim 转换文件换行符<br>2.1 使用 vim 进入文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim &lt;file&gt;</code></pre>
+
+
+
+<h4>2.2 转换文件换行符</h4>
+
+
+
+<pre class="wp-block-code"><code>: set ff=unix</code></pre>
+
+
+
+<p>（注意：是在 vim 的末行模式下执行以上命令）</p>
+
+
+
+<h4>2.3 保存文件</h4>
+
+
+
+<pre class="wp-block-code"><code>: wq</code></pre>
+
+
+
+<p>（注意：是在 vim 的末行模式下执行以上命令）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[排错] 解决 Linux 运行时报错 “-bash: /dev/null: Permission denied”</title>
+		<link>https://eternalcenter-now.github.io/debug-bash-dev-null-permission-denied/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 29 Oct 2021 07:44:35 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System File (系统文件)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=18113</guid>
+
+					<description><![CDATA[错误代码： 解决方法：]]></description>
+										<content:encoded><![CDATA[
+<h2>错误代码：</h2>
+
+
+
+<pre class="wp-block-code"><code>-bash: /dev/null: Permission denied</code></pre>
+
+
+
+<h2>解决方法：</h2>
+
+
+
+<pre class="wp-block-code"><code># rm -f /dev/null;mknod /dev/null c 1 3;chmod 666 /dev/null</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 sort（对数字或字母进行排序）</title>
+		<link>https://eternalcenter-now.github.io/sort/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Thu, 07 Oct 2021 13:56:39 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System File (系统文件)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=18091</guid>
+
+					<description><![CDATA[内容目录： 内容一：sort 命令的选项 内容二：sort 排序的案例2.1 案例一：检查是否已经排序2.2 案例二：sort 排序一列数字2.3 案例三：sort 排序一列字母2.4 案例四：sort 以相反的顺序进行排序2.5 案例五：sort 以 2 列中的第 1 列进行排序2.6 案例六：sort 以 2 列中的第 2 列进行排序2.7 案例七：sort 对 IP 地址进行排序2.8 案例八：sort 以 IP 地址的第三组数字进行排序 具体的内容： 内容一：sort 命令的选项 1) -b 排序时忽略每行前面的空格2) -c 检查是否已排序3) -f 排序时忽略大小写字母4) -n 按照数值到大小进行排序5) -o 将排序结果导入到指定文件6) -r 以相反的顺序进行排序7) -t 指定排序的分隔符8) -k 以指定的列进行排序 内容二：sort 排序的案例2.1 案例一：检查是否已经排序 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/sort/" class="more-link">Continue reading<span class="screen-reader-text"> "[命令] Linux 命令 sort（对数字或字母进行排序）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2>内容目录：</h2>
+
+
+
+<h4>内容一：sort 命令的选项</h4>
+
+
+
+<h4>内容二：sort 排序的案例<br>2.1 案例一：检查是否已经排序<br>2.2 案例二：sort 排序一列数字<br>2.3 案例三：sort 排序一列字母<br>2.4 案例四：sort 以相反的顺序进行排序<br>2.5 案例五：sort 以 2 列中的第 1 列进行排序<br>2.6 案例六：sort 以 2 列中的第 2 列进行排序<br>2.7 案例七：sort 对 IP 地址进行排序<br>2.8 案例八：sort 以 IP 地址的第三组数字进行排序</h4>
+
+
+
+<h2>具体的内容：</h2>
+
+
+
+<h4>内容一：sort 命令的选项</h4>
+
+
+
+<p>1) -b 排序时忽略每行前面的空格<br>2) -c 检查是否已排序<br>3) -f 排序时忽略大小写字母<br>4) -n 按照数值到大小进行排序<br>5) -o 将排序结果导入到指定文件<br>6) -r 以相反的顺序进行排序<br>7) -t 指定排序的分隔符<br>8) -k 以指定的列进行排序</p>
+
+
+
+<h4>内容二：sort 排序的案例<br>2.1 案例一：检查是否已经排序</h4>
+
+
+
+<pre class="wp-block-code"><code># cat test.txt
+3
+5
+4
+2
+1
+
+# sort -c test.txt 
+sort: test.txt:3: disorder: 4</code></pre>
+
+
+
+<p>（补充：这里以检查 test.txt 文件里的排列为例）</p>
+
+
+
+<h4>2.2 案例二：sort 排序一列数字</h4>
+
+
+
+<pre class="wp-block-code"><code># cat test.txt
+3
+5
+4
+2
+20
+1
+
+# sort -n test.txt 
+1
+2
+3
+4
+5
+20</code></pre>
+
+
+
+<p>（补充：这里以排列 test.txt 文件里的列为例）</p>
+
+
+
+<h4>2.3 案例三：sort 排序一列字母</h4>
+
+
+
+<pre class="wp-block-code"><code># cat test.txt 
+c
+e
+d
+b
+a
+
+# sort test.txt 
+a
+b
+c
+d
+e</code></pre>
+
+
+
+<p>（补充：这里以排列 test.txt 文件里的列为例）</p>
+
+
+
+<h4>2.4 案例四：sort 以相反的顺序进行排序</h4>
+
+
+
+<pre class="wp-block-code"><code># cat test.txt 
+c
+e
+d
+b
+a
+
+# sort -r test.txt 
+e
+d
+c
+b
+a</code></pre>
+
+
+
+<p>（补充：这里以排列 test.txt 文件里的列为例）</p>
+
+
+
+<h4>2.5 案例五：sort 以 2 列中的第 1 列进行排序</h4>
+
+
+
+<pre class="wp-block-code"><code># cat test.txt 
+3 d
+5 c
+4 a
+2 e
+1 b
+
+# sort test.txt 
+1 b
+2 e
+3 d
+4 a
+5 c</code></pre>
+
+
+
+<p>（补充：这里以排列 test.txt 文件里的列为例）</p>
+
+
+
+<h4>2.6 案例六：sort 以 2 列中的第 2 列进行排序</h4>
+
+
+
+<pre class="wp-block-code"><code># cat test.txt 
+3 d
+5 c
+4 a
+2 e
+1 b
+
+# sort -k2 test.txt 
+4 a
+1 b
+5 c
+3 d
+2 e</code></pre>
+
+
+
+<p>（补充：这里以排列 test.txt 文件里的列为例）</p>
+
+
+
+<h4>2.7 案例七：sort 对 IP 地址进行排序</h4>
+
+
+
+<pre class="wp-block-code"><code># cat test.txt 
+10.0.200.10
+172.16.50.10
+192.168.100.1
+192.168.100.10
+172.16.50.1
+10.0.200.1
+
+# sort test.txt
+10.0.200.1
+10.0.200.10
+172.16.50.1
+172.16.50.10
+192.168.100.1
+192.168.100.10</code></pre>
+
+
+
+<p>（补充：这里以排列 test.txt 文件里的列为例）</p>
+
+
+
+<h4>2.8 案例八：sort 以 IP 地址的第三组数字进行排序</h4>
+
+
+
+<pre class="wp-block-code"><code># cat test.txt 
+10.0.200.10
+172.16.50.10
+192.168.100.1
+192.168.100.10
+172.16.50.1
+10.0.200.1
+
+# sort -t'.' -k3n test.txt
+172.16.50.1
+172.16.50.10
+192.168.100.1
+192.168.100.10
+10.0.200.1
+10.0.200.10</code></pre>
+
+
+
+<p>（补充：这里以排列 test.txt 文件里的列为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Linux 输出信息的重定向</title>
+		<link>https://eternalcenter-now.github.io/redirect/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Tue, 05 Oct 2021 14:18:59 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System File (系统文件)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=18085</guid>
+
+					<description><![CDATA[内容目录： 内容一：以清空原文的方式进行输出信息的重定向1.1 以清空原文的方式将所有的输出信息重定向到某一个文件1.2 以清空原文的方式只将正确的输出信息重定向到某一个文件1.3 以清空原文的方式只将错误的输出信息重定向到某一个文件 内容二：以在原文后面追加的方式进行输出信息的重定向2.1 以在原文后面追加的方式将所有的输出信息重定向到某一个文件2.2 以在原文后面追加的方式只将正确的输出信息重定向到某一个文件2.3 以在原文后面追加的方式只将错误的输出信息重定向到某一个文件 内容三：通过重定向转换输出信息的正误3.1 将错误的输出信息重定向成正确的输出信息3.2 将正确的输出信息重定向成错误的输出信息 内容四：将输出信息重定向到黑洞 具体的内容： 内容一：以清空原文的方式进行输出信息的重定向1.1 以清空原文的方式将所有的输出信息重定向到某一个文件 或者： 1.2 以清空原文的方式只将正确的输出信息重定向到某一个文件 或者： 1.3 以清空原文的方式只将错误的输出信息重定向到某一个文件 内容二：以在原文后面追加的方式进行输出信息的重定向2.1 以在原文后面追加的方式将所有的输出信息重定向到某一个文件 或者： 2.2 以在原文后面追加的方式只将正确的输出信息重定向到某一个文件 或者： 2.3 以在原文后面追加的方式只将错误的输出信息重定向到某一个文件 内容三：通过重定向转换输出信息的正误3.1 将错误的输出信息重定向成正确的输出信息 或者： 3.2 将正确的输出信息重定向成错误的输出信息 或者： 内容四：将输出信息重定向到黑洞 或者： 或者： 或者： 或者： 或者： 或者： 或者： 或者： 或者： 或者： 或者： （补充：通过此种方法输出信息就既不会显示出来也不会被重定向到一个文件里）]]></description>
+										<content:encoded><![CDATA[
+<h2>内容目录：</h2>
+
+
+
+<h4>内容一：以清空原文的方式进行输出信息的重定向<br>1.1 以清空原文的方式将所有的输出信息重定向到某一个文件<br>1.2 以清空原文的方式只将正确的输出信息重定向到某一个文件<br>1.3 以清空原文的方式只将错误的输出信息重定向到某一个文件</h4>
+
+
+
+<h4>内容二：以在原文后面追加的方式进行输出信息的重定向<br>2.1 以在原文后面追加的方式将所有的输出信息重定向到某一个文件<br>2.2 以在原文后面追加的方式只将正确的输出信息重定向到某一个文件<br>2.3 以在原文后面追加的方式只将错误的输出信息重定向到某一个文件</h4>
+
+
+
+<h4>内容三：通过重定向转换输出信息的正误<br>3.1 将错误的输出信息重定向成正确的输出信息<br>3.2 将正确的输出信息重定向成错误的输出信息</h4>
+
+
+
+<h4>内容四：将输出信息重定向到黑洞</h4>
+
+
+
+<h2>具体的内容：</h2>
+
+
+
+<h4>内容一：以清空原文的方式进行输出信息的重定向<br>1.1 以清空原文的方式将所有的输出信息重定向到某一个文件</h4>
+
+
+
+<pre class="wp-block-code"><code>&lt;command&gt; &amp;&gt; &lt;file&gt;</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code>&lt;command&gt; &gt;&amp; &lt;file&gt;</code></pre>
+
+
+
+<h4>1.2 以清空原文的方式只将正确的输出信息重定向到某一个文件</h4>
+
+
+
+<pre class="wp-block-code"><code>&lt;command&gt; 1&gt; &lt;file&gt;</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code>&lt;command&gt; &gt; &lt;file&gt;</code></pre>
+
+
+
+<h4>1.3 以清空原文的方式只将错误的输出信息重定向到某一个文件</h4>
+
+
+
+<pre class="wp-block-code"><code>&lt;command&gt; 2&gt; &lt;file&gt;</code></pre>
+
+
+
+<h4>内容二：以在原文后面追加的方式进行输出信息的重定向<br>2.1 以在原文后面追加的方式将所有的输出信息重定向到某一个文件</h4>
+
+
+
+<pre class="wp-block-code"><code>&lt;command&gt; &amp;&gt;&gt; &lt;file&gt;</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code>&lt;command&gt; &gt;&gt;&amp; &lt;file&gt;</code></pre>
+
+
+
+<h4>2.2 以在原文后面追加的方式只将正确的输出信息重定向到某一个文件</h4>
+
+
+
+<pre class="wp-block-code"><code>&lt;command&gt; 1&gt;&gt; &lt;file&gt;</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code>&lt;command&gt; &gt;&gt; &lt;file&gt;</code></pre>
+
+
+
+<h4>2.3 以在原文后面追加的方式只将错误的输出信息重定向到某一个文件</h4>
+
+
+
+<pre class="wp-block-code"><code>&lt;command&gt; 2&gt;&gt; &lt;file&gt;</code></pre>
+
+
+
+<h4>内容三：通过重定向转换输出信息的正误<br>3.1 将错误的输出信息重定向成正确的输出信息</h4>
+
+
+
+<pre class="wp-block-code"><code>&lt;command&gt; 2&amp;&gt;1</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code>&lt;command&gt; 2&gt;&amp;1</code></pre>
+
+
+
+<h4>3.2 将正确的输出信息重定向成错误的输出信息</h4>
+
+
+
+<pre class="wp-block-code"><code>&lt;command&gt; 1&amp;&gt;2</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code>&lt;command&gt; 1&gt;&amp;2</code></pre>
+
+
+
+<h4>内容四：将输出信息重定向到黑洞</h4>
+
+
+
+<pre class="wp-block-code"><code>&lt;command&gt; &amp;&gt; /dev/null</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code>&lt;command&gt; &amp;&gt;&gt; /dev/null</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code>&lt;command&gt; &gt;&amp; /dev/null</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code>&lt;command&gt; &gt;&gt;&amp; /dev/null</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code>&lt;command&gt; 1&gt; /dev/null 2&gt;&amp;1</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code>&lt;command&gt; 1&gt;&gt; /dev/null 2&gt;&amp;1</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code>&lt;command&gt; 1&gt; /dev/null 2&gt;&gt;&amp;1</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code>&lt;command&gt; 1&gt;&gt; /dev/null 2&gt;&gt;&amp;1</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code>&lt;command&gt; 2&gt; /dev/null 1&gt;&amp;2</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code>&lt;command&gt; 2&gt;&gt; /dev/null 1&gt;&amp;2</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code>&lt;command&gt; 2&gt; /dev/null 1&gt;&gt;&amp;2</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code>&lt;command&gt; 2&gt;&gt; /dev/null 1&gt;&gt;&amp;2</code></pre>
+
+
+
+<p>（补充：通过此种方法输出信息就既不会显示出来也不会被重定向到一个文件里）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 seq （显示数字序列）</title>
+		<link>https://eternalcenter-now.github.io/%e5%91%bd%e4%bb%a4-linux-%e5%91%bd%e4%bb%a4-seq-%ef%bc%88%e6%89%93%e5%8d%b0%e6%95%b0%e5%ad%97%e5%ba%8f%e5%88%97%ef%bc%89/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 04 Oct 2021 09:41:15 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System File (系统文件)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=17786</guid>
+
+					<description><![CDATA[内容目录： 内容一：seq 命令格式 内容二：seq 命令的选项 内容三：seq 命令的使用案例3.1 案例一：seq 显示普通的数字序列3.1.1 显示从 1 到某个数字到数字序列3.1.2 显示从某个数字开始到某个数字结束的数字序列3.1.3 显示从某个数字开始到某个数字结束有数值差距的数字序列3.2 案例二：seq 显示指定前缀的数字序列3.2.1 显示将某个字符串作为前缀的数字序列3.2.2 显示将某个字符串和几个空格作为前缀的数字序列3.2.3 显示将某个字符串和几个字符作为前缀的数字序列3.3 案例三：seq 显示指定间隔符的数字序列3.3.1 显示没有间隔符的数字序列3.3.2 显示间隔符是空格的数字序列3.3.3 显示间隔符是某一个字符的数字序列3.4 案例四：seq 显示指定宽度的数字序列3.5 案例五：seq 使用变量显示数字序列3.6 案例六：将 seq 显示的数字序列导入到一个文件里 具体的内容： 内容一：seq 命令格式 内容二：seq 命令的选项 1) -f 指定序列的格式2) -s 指定序列的间隔符3) -w 使序列宽度相同4) &#8211;equal-width 使序列宽度相同 内容三：seq 命令的使用案例3.1 案例一：seq 显示普通的数字序列3.1.1 显示从 1 到某个数字到数字序列 （补充：这里以显示 1 到 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/%e5%91%bd%e4%bb%a4-linux-%e5%91%bd%e4%bb%a4-seq-%ef%bc%88%e6%89%93%e5%8d%b0%e6%95%b0%e5%ad%97%e5%ba%8f%e5%88%97%ef%bc%89/" class="more-link">Continue reading<span class="screen-reader-text"> "[命令] Linux 命令 seq （显示数字序列）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2 id="内容目录">内容目录：</h2>
+
+
+
+<h4 id="内容一-seq-命令格式">内容一：seq 命令格式</h4>
+
+
+
+<h4 id="内容二-seq-命令的选项">内容二：seq 命令的选项</h4>
+
+
+
+<h4 id="内容三-seq-命令的使用案例-3-1-案例一-seq-显示普通的数字序列-3-1-1-显示从-1-到某个数字到数字序列-3-1-2-显示从某个数字开始到某个数字结束的数字序列-3-1-3-显示从某个数字开始到某个数字结束有数值差距的数字序列-3-2-案例二-seq-显示指定前缀的数字序列-3-2-1-显示将某个字符串作为前缀的数字序列-3-2-2-显示将某个字符串和几个空格作为前缀的数字序列-3-2-3-显示将某个字符串和几个字符作为前缀的数字序列-3-3-案例三-seq-显示指定间隔符的数字序列-3-3-1-显示没有间隔符的数字序列-3-3-2-显示间隔符是空格的数字序列-3-3-3-显示间隔符是某一个字符的数字序列-3-4-案例四-seq-显示指定宽度的数字序列-3-5-案例五-seq-使用变量显示数字序列-3-6-案例六-将-seq-显示的数字序列导入到一个文件里">内容三：seq 命令的使用案例<br>3.1 案例一：seq 显示普通的数字序列<br>3.1.1 显示从 1 到某个数字到数字序列<br>3.1.2 显示从某个数字开始到某个数字结束的数字序列<br>3.1.3 显示从某个数字开始到某个数字结束有数值差距的数字序列<br>3.2 案例二：seq 显示指定前缀的数字序列<br>3.2.1 显示将某个字符串作为前缀的数字序列<br>3.2.2 显示将某个字符串和几个空格作为前缀的数字序列<br>3.2.3 显示将某个字符串和几个字符作为前缀的数字序列<br>3.3 案例三：seq 显示指定间隔符的数字序列<br>3.3.1 显示没有间隔符的数字序列<br>3.3.2 显示间隔符是空格的数字序列<br>3.3.3 显示间隔符是某一个字符的数字序列<br>3.4 案例四：seq 显示指定宽度的数字序列<br>3.5 案例五：seq 使用变量显示数字序列<br>3.6 案例六：将 seq 显示的数字序列导入到一个文件里</h4>
+
+
+
+<h2 id="具体的内容">具体的内容：</h2>
+
+
+
+<h4 id="内容一-seq-命令格式">内容一：seq 命令格式</h4>
+
+
+
+<pre class="wp-block-code"><code>1) seq &lt;option&gt; &lt;first number&gt;
+2) seq &lt;option&gt; &lt;first number&gt; &lt;last number&gt;
+3) seq &lt;option&gt; &lt;first number&gt; &lt;increment&gt; &lt;last number&gt;</code></pre>
+
+
+
+<h4 id="内容二-seq-命令的选项">内容二：seq 命令的选项</h4>
+
+
+
+<p>1) -f 指定序列的格式<br>2) -s 指定序列的间隔符<br>3) -w 使序列宽度相同<br>4) &#8211;equal-width 使序列宽度相同</p>
+
+
+
+<h4 id="内容三-seq-命令的使用案例-3-1-案例一-seq-显示普通的数字序列-3-1-1-显示从-1-到某个数字到数字序列">内容三：seq 命令的使用案例<br>3.1 案例一：seq 显示普通的数字序列<br>3.1.1 显示从 1 到某个数字到数字序列</h4>
+
+
+
+<pre class="wp-block-code"><code># seq 5
+1
+2
+3
+4
+5</code></pre>
+
+
+
+<p>（补充：这里以显示 1 到 5 的数字序列为例）</p>
+
+
+
+<h4 id="3-1-2-显示从某个数字开始到某个数字结束的数字序列">3.1.2 显示从某个数字开始到某个数字结束的数字序列</h4>
+
+
+
+<pre class="wp-block-code"><code># seq 3 7
+3
+4
+5
+6
+7</code></pre>
+
+
+
+<p>（补充：这里以显示 3 到 7 的数字序列为例）</p>
+
+
+
+<h4 id="3-1-3-显示从某个数字开始到某个数字结束有数值差距的数字序列">3.1.3 显示从某个数字开始到某个数字结束有数值差距的数字序列</h4>
+
+
+
+<pre class="wp-block-code"><code># seq 4 2 8
+4
+6
+8</code></pre>
+
+
+
+<p>（补充：这里以显示 4 到 8 数值差距为 2 的数字序列为例）</p>
+
+
+
+<h4 id="3-2-案例二-seq-显示指定前缀的数字序列-3-2-1-显示将某个字符串作为前缀的数字序列">3.2 案例二：seq 显示指定前缀的数字序列<br>3.2.1 显示将某个字符串作为前缀的数字序列</h4>
+
+
+
+<pre class="wp-block-code"><code># seq -f "num%g" 5
+num1
+num2
+num3
+num4
+num5</code></pre>
+
+
+
+<p>（补充：这里以显示 1 到 5 并且将 num 作为前缀的数字序列为例）</p>
+
+
+
+<h4 id="3-2-2-显示将某个字符串和几个空格作为前缀的数字序列">3.2.2 显示将某个字符串和几个空格作为前缀的数字序列</h4>
+
+
+
+<pre class="wp-block-code"><code># seq -f "num%3g" 5
+num  1
+num  2
+num  3
+num  4
+num  5</code></pre>
+
+
+
+<p>（补充：这里以显示 1 到 5 并且将 num 和 2 个空格作为前缀的数字序列为例）</p>
+
+
+
+<h4 id="3-2-3-显示将某个字符串和几个字符作为前缀的数字序列">3.2.3 显示将某个字符串和几个字符作为前缀的数字序列</h4>
+
+
+
+<pre class="wp-block-code"><code># seq -f "num%03g" 5
+num001
+num002
+num003
+num004
+num005</code></pre>
+
+
+
+<p>（补充：这里以显示 1 到 5 并且将 num 和 2 个 0 作为前缀的数字序列为例）</p>
+
+
+
+<h4 id="3-3-案例三-seq-显示指定间隔符的数字序列-3-3-1-显示没有间隔符的数字序列">3.3 案例三：seq 显示指定间隔符的数字序列<br>3.3.1 显示没有间隔符的数字序列</h4>
+
+
+
+<pre class="wp-block-code"><code># seq -s '' 5
+12345</code></pre>
+
+
+
+<p>（补充：这里以显示 1 到 5 并且没有间隔符的数字序列为例）</p>
+
+
+
+<h4 id="3-3-2-显示间隔符是空格的数字序列">3.3.2 显示间隔符是空格的数字序列</h4>
+
+
+
+<pre class="wp-block-code"><code># seq -s ' ' 5
+1 2 3 4 5</code></pre>
+
+
+
+<p>（补充：这里以显示 1 到 5 并且以空格作为间隔的数字序列为例）</p>
+
+
+
+<h4 id="3-3-3-显示间隔符是某一个字符的数字序列">3.3.3 显示间隔符是某一个字符的数字序列</h4>
+
+
+
+<pre class="wp-block-code"><code># seq -s '#' 5
+1#2#3#4#5</code></pre>
+
+
+
+<p>（补充：这里以显示 1 到 5 并且以 # 作为间隔的数字序列为例）</p>
+
+
+
+<h4 id="3-4-案例四-seq-显示指定宽度的数字序列">3.4 案例四：seq 显示指定宽度的数字序列</h4>
+
+
+
+<pre class="wp-block-code"><code># seq -w 1 10
+01
+02
+03
+04
+05
+06
+07
+08
+09
+10</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># seq --equal-width 1 10
+01
+02
+03
+04
+05
+06
+07
+08
+09
+10</code></pre>
+
+
+
+<h4 id="3-5-案例五-seq-使用变量显示数字序列">3.5 案例五：seq 使用变量显示数字序列</h4>
+
+
+
+<pre class="wp-block-code"><code># a=5
+# seq $a
+1
+2
+3
+4
+5</code></pre>
+
+
+
+<p>（补充：这里以将变量 a 的值设置为 5 ，并且显示 1 到变量 a 的值的数字变量为例）</p>
+
+
+
+<h4 id="3-6-案例六-将-seq-显示的数字序列导入到一个文件里">3.6 案例六：将 seq 显示的数字序列导入到一个文件里</h4>
+
+
+
+<pre class="wp-block-code"><code># seq 1 5 &gt; test.txt
+# cat test.txt
+1
+2
+3
+4
+5</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># seq 1 5 | xargs -I{} echo {} &gt; test.txt
+
+# cat test.txt
+1
+2
+3
+4
+5</code></pre>
+
+
+
+<p>（补充：这里以显示 1 到 5 的数字序列并导入到 test.txt 文件为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 echo （显示字符串）</title>
+		<link>https://eternalcenter-now.github.io/echo/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 20 Sep 2021 02:26:02 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Languages (语言)]]></category>
+		<category><![CDATA[Shell]]></category>
+		<category><![CDATA[Shell Basic (基础)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System File (系统文件)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=17649</guid>
+
+					<description><![CDATA[内容一：echo 的命令选项 1) -n 输出不换行2) -e 处理某些特殊字符\a 蜂鸣声报警\b 删除前面一个字符\c 在末尾不换行\e 输出 esc\f 换行，同时光标停在原处\n 换行\r 不换行，同时光标停在原处\t tab，水平方向\v tab，垂直方向\ 输出 \\Onnn 输出八进制 ASCII 字符\xHH 输出十六进制 ASCII 字符3) -E 不再转义 内容二：echo 的其他显示选项 1) \033[0m 将所有显示属性关闭2) \033[1m 高亮3) \033[4m 下划线4) \033[5m 闪烁5) \033[7m 反显6) \033[8m 消隐7) \033[37m — \33[0m 设置字体颜色，这里以将字体颜色设置为白色为例8) \033[40m — \33[0m 设置背景颜色，这里以将背景颜色设置为白色为例9) \033[A 将光标向上移 n 行10) \033[B &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/echo/" class="more-link">Continue reading<span class="screen-reader-text"> "[命令] Linux 命令 echo （显示字符串）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h4>内容一：echo 的命令选项</h4>
+
+
+
+<p>1) -n 输出不换行<br>2) -e 处理某些特殊字符<br>\a 蜂鸣声报警<br>\b 删除前面一个字符<br>\c 在末尾不换行<br>\e 输出 esc<br>\f 换行，同时光标停在原处<br>\n 换行<br>\r 不换行，同时光标停在原处<br>\t tab，水平方向<br>\v tab，垂直方向<br>\ 输出 \<br>\Onnn 输出八进制 ASCII 字符<br>\xHH 输出十六进制 ASCII 字符<br>3) -E 不再转义</p>
+
+
+
+<h4>内容二：echo 的其他显示选项</h4>
+
+
+
+<p>1) \033[0m 将所有显示属性关闭<br>2) \033[1m 高亮<br>3) \033[4m 下划线<br>4) \033[5m 闪烁<br>5) \033[7m 反显<br>6) \033[8m 消隐<br>7) \033[37m — \33[0m 设置字体颜色，这里以将字体颜色设置为白色为例<br>8) \033[40m — \33[0m 设置背景颜色，这里以将背景颜色设置为白色为例<br>9) \033[A 将光标向上移 n 行<br>10) \033[B 将光标向下移 n 行<br>11) \033[C 将光标向右移 n 行<br>12) \033[D 将光标向左移 n 行<br>13) \033[;H 将光标跳转到 x 和 y 位置<br>14) \033[2J 清屏<br>15) \033[K 将光标所在位置到行尾的所有位置全部清除<br>16) \033[s 将光标位置保存<br>17) \033[u 将光标位置恢复<br>18) \033[?25l 将光标隐藏<br>19) \033[?25h 将光标显示</p>
+
+
+
+<h4>内容三：echo 显示不同颜色字体的案例</h4>
+
+
+
+<pre class="wp-block-code"><code># echo -e "\033&#91;30m black characters \033&#91;0m" 
+# echo -e "\033&#91;31m red characters \033&#91;0m"
+# echo -e "\033&#91;32m green characters \033&#91;0m" 
+# echo -e "\033&#91;33m yellow characters \033&#91;0m"
+# echo -e "\033&#91;34m blue characters \033&#91;0m"
+# echo -e "\033&#91;35m purple character \033&#91;0m"
+# echo -e "\033&#91;36m sky blue character \033&#91;0m"
+# echo -e "\033&#91;37m white character \033&#91;0m"</code></pre>
+
+
+
+<h4>内容三：echo 显示不同颜色背景的案例</h4>
+
+
+
+<pre class="wp-block-code"><code># echo -e "\033&#91;40;37m white characters on black background \033&#91;0m"
+# echo -e "\033&#91;41;37m white characters on red background \033&#91;0m"
+# echo -e "\033&#91;42;37m white characters on green background \033&#91;0m"
+# echo -e "\033&#91;43;37m white characters on yellow background \033&#91;0m"
+# echo -e "\033&#91;44;37m white characters on blue background \033&#91;0m"
+# echo -e "\033&#91;45;37m white characters on purple background \033&#91;0m"
+# echo -e "\033&#91;46;37m white characters on sky blue background \033&#91;0m"
+# echo -e "\033&#91;47;30m black characters on white background \033&#91;0m"</code></pre>
+
+
+
+<h4>内容四：echo 的其他案例<br>4.1 案例一：不换行带 tab 输出</h4>
+
+
+
+<pre class="wp-block-code"><code># for month in Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec;do echo -e "$month\t\c";done
+Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec</code></pre>
+
+
+
+<p>(补充：这里以不换行带 tab 输出 Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec 为例)</p>
+
+
+
+<h4>4.2 案例二：先清屏再不换行输出</h4>
+
+
+
+<pre class="wp-block-code"><code># echo -e "\033&#91;2J\033&#91;10A\Eternal Center\c"</code></pre>
+
+
+
+<p>（补充：这里以先清屏再不换行输出 Eternal Center 为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 tee （将输出内容保存到文件里）</title>
+		<link>https://eternalcenter-now.github.io/tee/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sun, 12 Sep 2021 13:23:57 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System File (系统文件)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=17620</guid>
+
+					<description><![CDATA[内容一：tee 命令的格式 内容二：tee 命令的选项 1) -a 或者 &#8211;append 将输出内容添加到文件里内容的末尾2) -i 或者 &#8211;ignore-interrupts 忽略中断信号3) &#8211;help 显示帮助信息4) &#8211;version 显示版本信息 内容三：tee 的使用案例3.1 将输出内容添加到另一个文件里内容的末尾 （补充：这里以将输出内容 &#8216;tee test&#8217; 添加到另一个文件 test.txt 里内容的末尾为例） 3.2 将文件内容添加到另一个文件里内容的末尾 （补充：这里以将 test1.txt 文件里的内容添加到另一个文件 test2.txt 里内容的末尾为例） 3.3 将输出内容变成另一个文件里的所有内容 （补充：这里以将输出内容 ‘tee test’ 变成另一个文件 test.txt 里的所有内容为例） 3.4 将文件内容变成另一个文件里的所有内容 （补充：这里以将 test1.txt 文件里的内容变成另一个文件 test2.txt 里的所有内容为例）]]></description>
+										<content:encoded><![CDATA[
+<h4 id="内容一-tee-命令的格式">内容一：tee 命令的格式</h4>
+
+
+
+<pre class="wp-block-code"><code># tee &#91;option] &#91;file]......</code></pre>
+
+
+
+<h4 id="内容二-tee-命令的选项">内容二：tee 命令的选项</h4>
+
+
+
+<p>1) -a 或者 &#8211;append 将输出内容添加到文件里内容的末尾<br>2) -i 或者 &#8211;ignore-interrupts 忽略中断信号<br>3) &#8211;help 显示帮助信息<br>4) &#8211;version 显示版本信息</p>
+
+
+
+<h4 id="内容三-tee-的使用案例3-1-将输出内容添加到另一个文件里内容的末尾">内容三：tee 的使用案例<br>3.1 将输出内容添加到另一个文件里内容的末尾</h4>
+
+
+
+<pre class="wp-block-code"><code># echo 'tee test' | tee -a test.txt
+tee test
+# tail -1 test.txt
+tee test
+</code></pre>
+
+
+
+<p>（补充：这里以将输出内容 &#8216;tee test&#8217; 添加到另一个文件 test.txt 里内容的末尾为例）</p>
+
+
+
+<h4 id="3-2-将文件内容添加到另一个文件里内容的末尾">3.2 将文件内容添加到另一个文件里内容的末尾</h4>
+
+
+
+<pre class="wp-block-code"><code># cat test1.txt | tee -a test2.txt
+test1
+# tail -1 test2.txt
+test1</code></pre>
+
+
+
+<p> （补充：这里以将 test1.txt 文件里的内容添加到另一个文件 test2.txt 里内容的末尾为例） </p>
+
+
+
+<h4 id="3-3-将输出内容变成另一个文件里的所有内容">3.3 将输出内容变成另一个文件里的所有内容</h4>
+
+
+
+<pre class="wp-block-code"><code># echo 'tee test' | tee test.txt
+tee test
+# cat test.txt
+tee test</code></pre>
+
+
+
+<p>（补充：这里以将输出内容 ‘tee test’ 变成另一个文件 test.txt 里的所有内容为例）</p>
+
+
+
+<h4 id="3-4-将文件内容变成另一个文件里的所有内容">3.4 将文件内容变成另一个文件里的所有内容</h4>
+
+
+
+<pre class="wp-block-code"><code># cat test1.txt | tee -a test2.txt
+test1
+# cat test2.txt
+test1</code></pre>
+
+
+
+<p>（补充：这里以将 test1.txt 文件里的内容变成另一个文件 test2.txt 里的所有内容为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 rm （删除目录或文件）</title>
+		<link>https://eternalcenter-now.github.io/rm/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Thu, 04 Mar 2021 08:31:42 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Directory (系统目录)]]></category>
+		<category><![CDATA[System File (系统文件)]]></category>
+		<category><![CDATA[System Storage (系统存储)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=13585</guid>
+
+					<description><![CDATA[案例一：删除某一个文件 案例二：删除某一个目录以及目录里的所有文件 案例三：非交互式删除某一个目录以及目录里的所有文件 案例四：非交互式删除当前目录下的所有隐藏文件 案例五：非交互式删除所有特定后缀名称的文件 （补充：这里以非交互式删除所有以 txt 作为后缀名称的文件为例）]]></description>
+										<content:encoded><![CDATA[
+<h4>案例一：删除某一个文件</h4>
+
+
+
+<pre class="wp-block-code"><code># rm &lt;file></code></pre>
+
+
+
+<h4>案例二：删除某一个目录以及目录里的所有文件</h4>
+
+
+
+<pre class="wp-block-code"><code># rm -r &lt;directory></code></pre>
+
+
+
+<h4>案例三：非交互式删除某一个目录以及目录里的所有文件</h4>
+
+
+
+<pre class="wp-block-code"><code># rm -rf &lt;directory></code></pre>
+
+
+
+<h4>案例四：非交互式删除当前目录下的所有隐藏文件</h4>
+
+
+
+<pre class="wp-block-code"><code># rm -rf .#*</code></pre>
+
+
+
+<h4>案例五：非交互式删除所有特定后缀名称的文件</h4>
+
+
+
+<pre class="wp-block-code"><code># rm -rf *txt</code></pre>
+
+
+
+<p>（补充：这里以非交互式删除所有以 txt 作为后缀名称的文件为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 convert （转换图片文件）</title>
+		<link>https://eternalcenter-now.github.io/convert/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 15 Jan 2021 07:40:28 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System File (系统文件)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=13220</guid>
+
+					<description><![CDATA[内容一：convert 命令的使用格式 内容二：convert 命令的使用案例2.1 案例一：直接转换某一个文件 （补充：这里以将 a.png 转换成 a.png.jpg 为例） 2.2 案例二：转换当前目录下的所有文件 （补充：这里以将当前目录下的所有 *.png 文件转换成 *.png.jpg 文件）]]></description>
+										<content:encoded><![CDATA[
+<h4>内容一：convert 命令的使用格式</h4>
+
+
+
+<pre class="wp-block-code"><code># convert &lt;input options> &lt;output file name> &lt;output options> &lt;output file name></code></pre>
+
+
+
+<h4>内容二：convert 命令的使用案例<br>2.1 案例一：直接转换某一个文件</h4>
+
+
+
+<pre class="wp-block-code"><code># convert "a.png" "a.png.jpg"</code></pre>
+
+
+
+<p>（补充：这里以将 a.png 转换成 a.png.jpg 为例）</p>
+
+
+
+<h4>2.2 案例二：转换当前目录下的所有文件</h4>
+
+
+
+<pre class="wp-block-code"><code># ls -1 *.png | xargs -n 1 bash -c 'convert "$0" "${0%.png}.jpg"'</code></pre>
+
+
+
+<p>（补充：这里以将当前目录下的所有 *.png 文件转换成 *.png.jpg 文件）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Linux 文件或目录的查找 （特殊权限）</title>
+		<link>https://eternalcenter-now.github.io/special-privilege-find/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 07 Aug 2020 03:02:56 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Directory (系统目录)]]></category>
+		<category><![CDATA[System File (系统文件)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Privilege (系统权限)]]></category>
+		<category><![CDATA[System Privilege Security (系统权限安全)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<category><![CDATA[System User & System Privilege (系统用户 & 系统权限)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=10429</guid>
+
+					<description><![CDATA[]]></description>
+										<content:encoded><![CDATA[
+<pre class="wp-block-code"><code># find / -type f \( -perm -1000 -o -perm -2000 -o -perm -4000 \) -print</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Linux acl 权限</title>
+		<link>https://eternalcenter-now.github.io/acl/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 27 Jul 2020 14:13:44 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Directory (系统目录)]]></category>
+		<category><![CDATA[System File (系统文件)]]></category>
+		<category><![CDATA[System File Security (系统文件安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Privilege (系统权限)]]></category>
+		<category><![CDATA[System Privilege Security (系统权限安全)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<category><![CDATA[System User & System Privilege (系统用户 & 系统权限)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=10342</guid>
+
+					<description><![CDATA[案例目录： 案例一：给某一个文件或目录添加 acl1.1 给某一个文件或目录添加一个用户的 acl1.2 给某一个文件或目录添加一个组的 acl1.3 递归给某一个目录和目录里的所有内容添加一个 acl 案例二：删除某一个文件或目录的 acl2.1 删除某一个文件或目录一个用户的 acl2.2 删除某一个文件或目录一个组的 acl2.3 删除某一个文件或目录的所有 acl2.4 递归删除某一个文件或目录的 acl2.5 递归删除某一个文件或目录的所有 acl 案例三：显示某一个文件或目录的 acl 案例四：备份和还原某一个文件或目录的 acl4.1 备份某一个文件或目录的 acl4.2 还原某一给文件或目录的 acl 具体的案例： 案例一：给某一个文件或目录添加 acl1.1 给某一个文件或目录添加一个用户的 acl （补充：这里以在 /var 目录上给 zhumingyu 用户设置读和执行的 acl 权限为例） 1.2 给某一个文件或目录添加一个组的 acl （补充：这里以在 /var 目录上给 zhumingyu 组设置读和执行的 acl 权限为例） 1.3 递归给某一个目录和目录里的所有内容添加一个 acl （补充：这里以在 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/acl/" class="more-link">Continue reading<span class="screen-reader-text"> "[内容] Linux acl 权限"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2 id="案例目录">案例目录：</h2>
+
+
+
+<h4 id="案例一-给某一个文件或目录添加-acl1-1-给某一个文件或目录添加一个用户的-acl1-2-给某一个文件或目录添加一个组的-acl1-3-递归给某一个目录和目录里的所有内容添加一个-acl">案例一：给某一个文件或目录添加 acl<br>1.1 给某一个文件或目录添加一个用户的 acl<br>1.2 给某一个文件或目录添加一个组的 acl<br>1.3 递归给某一个目录和目录里的所有内容添加一个 acl</h4>
+
+
+
+<h4 id="案例二-删除某一个文件或目录的-acl2-1-删除某一个文件或目录一个用户的-acl2-2-删除某一个文件或目录一个组的-acl2-3-删除某一个文件或目录的所有-acl2-4-递归删除某一个文件或目录的-acl2-5-递归删除某一个文件或目录的所有-acl">案例二：删除某一个文件或目录的 acl<br>2.1 删除某一个文件或目录一个用户的 acl<br>2.2 删除某一个文件或目录一个组的 acl<br>2.3 删除某一个文件或目录的所有 acl<br>2.4 递归删除某一个文件或目录的 acl<br>2.5 递归删除某一个文件或目录的所有 acl</h4>
+
+
+
+<h4 id="案例三-查看某一个文件或目录的-acl">案例三：显示某一个文件或目录的 acl</h4>
+
+
+
+<h4 id="案例四-备份和还原某一个文件或目录的-acl4-1-备份某一个文件或目录的-acl4-2-还原某一给文件或目录的-acl">案例四：备份和还原某一个文件或目录的 acl<br>4.1 备份某一个文件或目录的 acl<br>4.2 还原某一给文件或目录的 acl</h4>
+
+
+
+<h2 id="具体的案例">具体的案例：</h2>
+
+
+
+<h4 id="案例一-给某一个文件或目录添加-acl1-1-给某一个文件或目录添加一个用户的-acl">案例一：给某一个文件或目录添加 acl<br>1.1 给某一个文件或目录添加一个用户的 acl</h4>
+
+
+
+<pre class="wp-block-code"><code># setfacl -m u:zhumingyu:r-x /var</code></pre>
+
+
+
+<p>（补充：这里以在 /var 目录上给 zhumingyu 用户设置读和执行的 acl 权限为例）</p>
+
+
+
+<h4 id="1-2-给某一个文件或目录添加一个组的-acl">1.2 给某一个文件或目录添加一个组的 acl</h4>
+
+
+
+<pre class="wp-block-code"><code># setfacl -m g:zhumingyu:r-x /var</code></pre>
+
+
+
+<p>（补充：这里以在 /var 目录上给 zhumingyu 组设置读和执行的 acl 权限为例）</p>
+
+
+
+<h4 id="1-3-递归给某一个目录和目录里的所有内容添加一个-acl">1.3 递归给某一个目录和目录里的所有内容添加一个 acl</h4>
+
+
+
+<pre class="wp-block-code"><code># setfacl -Rm u:zhumingyu:r-x /var</code></pre>
+
+
+
+<p>（补充：这里以在 /var 目录上递归给 zhumingyu 组设置读和执行的 acl 权限为例）</p>
+
+
+
+<h4 id="案例二-删除某一个文件或目录的-acl2-1-删除某一个文件或目录一个用户的-acl">案例二：删除某一个文件或目录的 acl<br>2.1 删除某一个文件或目录一个用户的 acl</h4>
+
+
+
+<pre class="wp-block-code"><code># setfacl -x u:zhumingyu /var</code></pre>
+
+
+
+<p>（补充：这里以在 /var 目录上删除 zhumingyu 用户的 acl 权限为例）</p>
+
+
+
+<h4 id="2-2-删除某一个文件或目录一个组的-acl">2.2 删除某一个文件或目录一个组的 acl</h4>
+
+
+
+<pre class="wp-block-code"><code># setfacl -x g:zhumingyu /var</code></pre>
+
+
+
+<p>（补充：这里以在 /var 目录上删除 zhumingyu 组的 acl 权限为例）</p>
+
+
+
+<h4 id="2-3-删除某一个文件或目录的所有-acl">2.3 删除某一个文件或目录的所有 acl</h4>
+
+
+
+<pre class="wp-block-code"><code># setfacl -b /var</code></pre>
+
+
+
+<p>（补充：这里以在 /var 目录上删除所有 acl 权限为例）</p>
+
+
+
+<h4 id="2-4-递归删除某一个文件或目录的-acl">2.4 递归删除某一个文件或目录的 acl</h4>
+
+
+
+<pre class="wp-block-code"><code># setfacl -Rx u:zhumingyu:r-x /var</code></pre>
+
+
+
+<p>（补充：这里以在 /var 目录上递归删除 zhumingyu 用户的 acl 权限为例）</p>
+
+
+
+<h4 id="2-5-递归删除某一个文件或目录的所有-acl">2.5 递归删除某一个文件或目录的所有 acl</h4>
+
+
+
+<pre class="wp-block-code"><code># setfacl -Rb /var</code></pre>
+
+
+
+<p>（补充：这里以在 /var 目录上递归删除所有 acl 权限为例）</p>
+
+
+
+<h4 id="案例三-查看某一个文件或目录的-acl">案例三：显示某一个文件或目录的 acl</h4>
+
+
+
+<pre class="wp-block-code"><code># getfacl /var</code></pre>
+
+
+
+<p>（补充：这里以显示 /var 目录的 acl 权限为例）</p>
+
+
+
+<h4 id="案例四-备份和还原某一个文件或目录的-acl4-1-备份某一个文件或目录的-acl">案例四：备份和还原某一个文件或目录的 acl<br>4.1 备份某一个文件或目录的 acl</h4>
+
+
+
+<pre class="wp-block-code"><code># getfacl -R /var &gt; /acl.backup</code></pre>
+
+
+
+<p>（补充：这里以备份 /var 目录的 acl 权限为例）</p>
+
+
+
+<h4 id="4-2-还原某一给文件或目录的-acl">4.2 还原某一给文件或目录的 acl</h4>
+
+
+
+<pre class="wp-block-code"><code># setfacl --restore /acl.backup</code></pre>
+
+
+
+<p>（补充：这里以还原 /var 目录的 acl 权限为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] 临时文件或目录的自动删除（CentOS Linux &#038; RHEL 版）</title>
+		<link>https://eternalcenter-now.github.io/clean-auto-centos-linux-rhel/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 24 Jul 2020 12:51:14 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Directory (系统目录)]]></category>
+		<category><![CDATA[System File (系统文件)]]></category>
+		<category><![CDATA[System Storage (系统存储)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=10248</guid>
+
+					<description><![CDATA[步骤一：创建自动清理临时文件或目录的配置文件 将以下内容： 修改为： （补充：这样设置后会将 /tmp 目录下，权限为 1777 超过 5 天的文件或目录删除） 步骤二：自动清理临时文件或目录]]></description>
+										<content:encoded><![CDATA[
+<h4>步骤一：创建自动清理临时文件或目录的配置文件</h4>
+
+
+
+<pre class="wp-block-code"><code># cp /usr/lib/tmpfiles.d/tmp.conf /etc/tmpfiles.d/
+# vim /etc/tmpfiles.d/tmp.conf</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+q /tmp 1777 root root 10d
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+q /tmp 1777 root root 5d
+......</code></pre>
+
+
+
+<p>（补充：这样设置后会将 /tmp 目录下，权限为 1777 超过 5 天的文件或目录删除）</p>
+
+
+
+<h4>步骤二：自动清理临时文件或目录</h4>
+
+
+
+<pre class="wp-block-code"><code># systemd-tmpfiles --clean /etc/tmpfiles.d/tmp.conf </code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 rsync （差异同步）</title>
+		<link>https://eternalcenter-now.github.io/rsync/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Thu, 16 Jul 2020 12:18:12 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Directory (系统目录)]]></category>
+		<category><![CDATA[System File (系统文件)]]></category>
+		<category><![CDATA[System Storage (系统存储)]]></category>
+		<category><![CDATA[System Storage & System Directory & System File (系统存储 & 系统目录 & 系统文件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=10070</guid>
+
+					<description><![CDATA[案例一：将一个地方里的所有差异数据同步到另一个地方 案例二：将一个地方里的所有差异数据同步到另一个地方，并且被同步的地方有的数据而原地方没有的数据都将被删除]]></description>
+										<content:encoded><![CDATA[
+<h4>案例一：将一个地方里的所有差异数据同步到另一个地方</h4>
+
+
+
+<pre class="wp-block-code"><code># rsync -avDogp &lt;source directory>/* &lt;target directory></code></pre>
+
+
+
+<h4>案例二：将一个地方里的所有差异数据同步到另一个地方，并且被同步的地方有的数据而原地方没有的数据都将被删除</h4>
+
+
+
+<pre class="wp-block-code"><code># rsync -avDogp --delete &lt;source directory>/* &lt;target directory></code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

@@ -1,0 +1,2379 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>System Log (系统日志) &#8211; Eternal Center</title>
+	<atom:link href="https://eternalcenter-now.github.io/category/system/system-network-system-security-system-log/system-log/feed/" rel="self" type="application/rss+xml" />
+	<link>https://eternalcenter-now.github.io/</link>
+	<description></description>
+	<lastBuildDate>Mon, 25 Apr 2022 07:32:32 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	
+	<item>
+		<title>[内容] Linux SNMPv3 客户端自查 （检查 SNMPv3 客户端是否能正常传输数据）</title>
+		<link>https://eternalcenter-now.github.io/snmpv3-client-check/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 25 Apr 2022 07:04:26 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System General Log (系统普通日志)]]></category>
+		<category><![CDATA[System Log (系统日志)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=23261</guid>
+
+					<description><![CDATA[]]></description>
+										<content:encoded><![CDATA[
+<pre class="wp-block-code"><code># snmpwalk -v3 -u siemens -l authNoPriv -a MD5 -x DES -A '&lt;user&gt;' -X '&lt;password&gt;' localhost</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Linux 常用日志 （openSUSE &#038; SUSE 版）</title>
+		<link>https://eternalcenter-now.github.io/log-opensusesuse/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Thu, 07 Apr 2022 09:24:12 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Computer & System Hardware & System Installation & System Upgradation (系统电脑 & 系统硬件 & 系统安装 & 系统升级)]]></category>
+		<category><![CDATA[System General Log (系统普通日志)]]></category>
+		<category><![CDATA[System Hardware (系统硬件)]]></category>
+		<category><![CDATA[System Log (系统日志)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Security Log (系统安全日志)]]></category>
+		<category><![CDATA[System Statistic Log (系统统计日志)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=22930</guid>
+
+					<description><![CDATA[1) /var/log/boot.msg，包含系统启动时显示在屏幕上的信息（补充：当进入系统时，可以同时按下 “ctrl” 键和 “alt” 键和 “f10” 键切换到显示日志的界面，之后可以再通过 KVM 显示系统启动时显示在屏幕上的信息。）2) /var/log/boot.omsg，包含上一次系统启动时显示在屏幕上的信息3) /var/log/messages，包含几乎所有日志4) /var/log/warn，包含 WARNING 也就是级别 4 以上的所有日志5) /var/log/wtmp，包含和系统登陆和重启的所有日志（补充：可以通过 last 命令读取）6) /var/log/YaST2/y2log，包含 YaST 的所有日志7) /var/log/xinetd.log，包含 xinetd 服务的所有日志8) /var/log/dump/，包含 Kdump 工具在系统宕机时收集的所有故障信息9) /var/log/atop，包含 Atop 工具收集的系统资源 （CPU、内存、系统进程、IO） 的所有使用信息]]></description>
+										<content:encoded><![CDATA[
+<p>1) /var/log/boot.msg，包含系统启动时显示在屏幕上的信息<br>（补充：当进入系统时，可以同时按下 “ctrl” 键和 “alt” 键和 “f10” 键切换到显示日志的界面，之后可以再通过 KVM 显示系统启动时显示在屏幕上的信息。）<br>2) /var/log/boot.omsg，包含上一次系统启动时显示在屏幕上的信息<br>3) /var/log/messages，包含几乎所有日志<br>4) /var/log/warn，包含 WARNING 也就是级别 4 以上的所有日志<br>5) /var/log/wtmp，包含和系统登陆和重启的所有日志<br>（补充：可以通过 last 命令读取）<br>6) /var/log/YaST2/y2log，包含 YaST 的所有日志<br>7) /var/log/xinetd.log，包含 xinetd 服务的所有日志<br>8) /var/log/dump/，包含 Kdump 工具在系统宕机时收集的所有故障信息<br>9) /var/log/atop，包含 Atop 工具收集的系统资源 （CPU、内存、系统进程、IO） 的所有使用信息</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Linux 提高触发 Kdump 的几率</title>
+		<link>https://eternalcenter-now.github.io/kdump-probability-increase/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 18 Feb 2022 09:12:39 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System General Log (系统普通日志)]]></category>
+		<category><![CDATA[System Log (系统日志)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=22075</guid>
+
+					<description><![CDATA[注意： 在提高触发 Kdump 的几率之前要先开启 Kdump： 正文： 步骤一：配置提高触发 Kdump 几率的参数1.1 配置提高触发 Kdump 几率的参数 添加以下内容： 1.2 让刚刚配置的参数生效 （注意：此时每有一次软锁都会触发 Kdump） 步骤二：当 Kdmup 触发后分析奔溃的信息 步骤三；删除提高触发 Kdump 几率的参数 （重要）3.1 删除提高触发 Kdump 几率的参数 （重要） 删除以下内容： 3.2 让刚刚删除参数的配置生效 （重要） （注意：此时每有一次软锁都会触发 Kdump） 参考文献： https://www.suse.com/support/kb/doc/?id=000019217]]></description>
+										<content:encoded><![CDATA[
+<h2 id="注意">注意：</h2>
+
+
+
+<p>在提高触发 Kdump 的几率之前要先开启 Kdump：</p>
+
+
+
+<div class="wp-container-1 wp-block-buttons">
+<div class="wp-block-button aligncenter is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/kdump/">Linux Kdump 的开启 <br>（用于收集内核崩溃时的信息）</a></div>
+</div>
+
+
+
+<h2 id="正文">正文：</h2>
+
+
+
+<h4 id="步骤一-配置提高触发-kdump-几率的参数1-1-配置提高触发-kdump-几率的参数">步骤一：配置提高触发 Kdump 几率的参数<br>1.1 配置提高触发 Kdump 几率的参数</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/sysctl.conf</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+kernel.softlockup_panic = 1</code></pre>
+
+
+
+<h4 id="1-2-让刚刚配置的参数生效">1.2 让刚刚配置的参数生效</h4>
+
+
+
+<pre class="wp-block-code"><code># sysctl -p</code></pre>
+
+
+
+<p>（注意：此时每有一次软锁都会触发 Kdump）</p>
+
+
+
+<h4 id="步骤二-当-kdmup-触发后分析奔溃的信息">步骤二：当 Kdmup 触发后分析奔溃的信息</h4>
+
+
+
+<div class="wp-container-2 wp-block-buttons">
+<div class="wp-block-button aligncenter is-style-outline"><a class="wp-block-button__link" href="https://eternalcenter-now.github.io/kdump-analysis/" style="border-radius:0px">Linux Kdump 内核奔溃信息的分析</a></div>
+</div>
+
+
+
+<h4 id="步骤三-删除提高触发-kdump-几率的参数-重要-3-1-删除提高触发-kdump-几率的参数-重要">步骤三；删除提高触发 Kdump 几率的参数 （重要）<br>3.1 删除提高触发 Kdump 几率的参数 （重要）</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/sysctl.conf</code></pre>
+
+
+
+<p>删除以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+kernel.softlockup_panic = 1</code></pre>
+
+
+
+<h4 id="3-2-让刚刚删除参数的配置生效-重要">3.2 让刚刚删除参数的配置生效 （重要）</h4>
+
+
+
+<pre class="wp-block-code"><code># sysctl -p</code></pre>
+
+
+
+<p>（注意：此时每有一次软锁都会触发 Kdump）</p>
+
+
+
+<h2>参考文献：</h2>
+
+
+
+<p class="has-text-align-center">https://www.suse.com/support/kb/doc/?id=000019217</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Linux Kdump 的触发 （魔术键版）</title>
+		<link>https://eternalcenter-now.github.io/kdump-trigger-magic-key/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Thu, 17 Feb 2022 09:25:43 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System General Log (系统普通日志)]]></category>
+		<category><![CDATA[System Log (系统日志)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=22041</guid>
+
+					<description><![CDATA[注意： 在触发 Kdump 之前要先开启 Kdump： 正文： 步骤一：在本地登陆系统 （步骤略） 步骤二：强制同步屏幕 同时按下 “Left” 键和 “Alt” 键和 “Print Screen” 键和 “s” 键 步骤三：触发 Kdump 同时按下 “Left” 键和 “Alt” 键和 “Print Screen” 键和 “c” 键]]></description>
+										<content:encoded><![CDATA[
+<h2 id="注意">注意：</h2>
+
+
+
+<p>在触发 Kdump 之前要先开启 Kdump：</p>
+
+
+
+<div class="wp-container-3 wp-block-buttons">
+<div class="wp-block-button aligncenter is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/kdump/">Linux Kdump 的开启 <br>（用于收集内核崩溃时的信息）</a></div>
+</div>
+
+
+
+<h2 id="正文">正文：</h2>
+
+
+
+<h4 id="步骤一-在本地登陆系统">步骤一：在本地登陆系统</h4>
+
+
+
+<p>（步骤略）</p>
+
+
+
+<h4 id="步骤二-强制同步屏幕">步骤二：强制同步屏幕</h4>
+
+
+
+<p>同时按下 “Left” 键和 “Alt” 键和 “Print Screen” 键和 “s” 键</p>
+
+
+
+<h4 id="步骤三-触发-kdump">步骤三：触发 Kdump</h4>
+
+
+
+<p>同时按下 “Left” 键和 “Alt” 键和 “Print Screen” 键和 “c” 键</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[工具] Shell 监控普通登录记录 （排除 SFTP 登录记录只监控普通登录记录）</title>
+		<link>https://eternalcenter-now.github.io/shell-login-log-exclude-sftp/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Tue, 15 Feb 2022 14:52:50 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Languages (语言)]]></category>
+		<category><![CDATA[Other Services (其他服务)]]></category>
+		<category><![CDATA[Services (服务)]]></category>
+		<category><![CDATA[SFTP]]></category>
+		<category><![CDATA[Shell]]></category>
+		<category><![CDATA[Shell Monitor (监控)]]></category>
+		<category><![CDATA[Shell Tool (工具)]]></category>
+		<category><![CDATA[Storage Services (存储服务)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System General Log (系统普通日志)]]></category>
+		<category><![CDATA[System Log (系统日志)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=21977</guid>
+
+					<description><![CDATA[注意： 在排除 SFTP 登录记录只监控普通登录记录前要先开启 SFTP 日志： 介绍： 作者：朱明宇名称：监控普通登录记录 （排除 SFTP 登录记录只监控普通登录记录）作用：监控普通登录记录 （排除 SFTP 登录记录只监控普通登录记录） 使用方法：1. 在此脚本的分割线内写入相应的内容2. 给此脚本添加执行权限3. 执行此脚本4. 普通登录记录会同时记录在系统日志和 $logfile 里 脚本分割线里的变量：1. logfile=logfile.txt #用户保存记录的文件2. prompt=&#8221;and no sftp info&#8221; #记录里普通登录记录的文件 脚本：]]></description>
+										<content:encoded><![CDATA[
+<h2 id="注意">注意：</h2>
+
+
+
+<p>在排除 SFTP 登录记录只监控普通登录记录前要先开启 SFTP 日志：</p>
+
+
+
+<div class="wp-container-4 wp-block-buttons">
+<div class="wp-block-button aligncenter is-style-outline"><a class="wp-block-button__link" href="https://eternalcenter-now.github.io/sftp-log/" style="border-radius:0px">SFTP 日志的开启</a></div>
+</div>
+
+
+
+<h2 id="介绍">介绍：</h2>
+
+
+
+<p>作者：朱明宇<br>名称：监控普通登录记录 （排除 SFTP 登录记录只监控普通登录记录）<br>作用：监控普通登录记录 （排除 SFTP 登录记录只监控普通登录记录）</p>
+
+
+
+<p>使用方法：<br>1. 在此脚本的分割线内写入相应的内容<br>2. 给此脚本添加执行权限<br>3. 执行此脚本<br>4. 普通登录记录会同时记录在系统日志和 $logfile 里</p>
+
+
+
+<p>脚本分割线里的变量：<br>1. logfile=logfile.txt #用户保存记录的文件<br>2. prompt=&#8221;and no sftp info&#8221; #记录里普通登录记录的文件</p>
+
+
+
+<h2 id="脚本">脚本：</h2>
+
+
+
+<pre class="wp-block-code"><code>#!/bin/bash
+
+####################### Separator ########################
+
+logfile=logfile.txt
+prompt="and no sftp info"
+
+####################### Separator ########################
+
+checktime=`date +%Y-%m-%dT%H -d "-1 day"`
+
+for i in `cat -n /var/log/messages | grep $check_time | grep 'Started Session' | grep -v 'root' | awk '{print $1}'`
+
+do
+   line=`sed -n $&#91;i]p /var/log/messages`
+   time=`echo $line | awk '{print $1}'`
+   session=`echo $line | awk '{print $6}'`
+   user=`echo $line | awk '{print $9}'`
+   user=${user%.}
+
+   message="ACCESS CHECK LOG: Time:$time Session:$session $user has accessed `hostname`, $prompt"
+
+   let sftpline=i+3
+
+   sed -n $&#91;sftpline]p /var/log/messages | grep sftp-server &amp;&gt; /dev/null
+   if &#91; $? -ne 0 ];then
+           echo $message
+           echo $message &gt;&gt; $logfile.txt
+           logger $message
+   fi
+   echo
+done</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 logger （手动向系统日志写入信息）</title>
+		<link>https://eternalcenter-now.github.io/logger/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Tue, 15 Feb 2022 13:15:26 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System General Log (系统普通日志)]]></category>
+		<category><![CDATA[System Log (系统日志)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=21966</guid>
+
+					<description><![CDATA[内容一：手动向系统日志写入信息 （补充：这里以往系统日志里写入一条包含 This is test message 内容的信息为例） 内容二：显示手动向系统日志写入信息 （补充：这里在系统里查找一条包含 This is test message 内容的信息为例）]]></description>
+										<content:encoded><![CDATA[
+<h4 id="内容一-手动向系统日志写入信息">内容一：手动向系统日志写入信息</h4>
+
+
+
+<pre class="wp-block-code"><code># logger &#91;This is test message]</code></pre>
+
+
+
+<p>（补充：这里以往系统日志里写入一条包含 This is test message 内容的信息为例）</p>
+
+
+
+<h4 id="内容二-显示手动向系统日志写入信息">内容二：显示手动向系统日志写入信息</h4>
+
+
+
+<pre class="wp-block-code"><code># grep "This is test message" /var/log/messages</code></pre>
+
+
+
+<p>（补充：这里在系统里查找一条包含 This is test message 内容的信息为例）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Linux Kdump 内核奔溃信息的分析 （Rocky Linux &#038; RHEL 版）</title>
+		<link>https://eternalcenter-now.github.io/kdump-analysis/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Tue, 15 Feb 2022 07:49:50 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System General Log (系统普通日志)]]></category>
+		<category><![CDATA[System Log (系统日志)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=21941</guid>
+
+					<description><![CDATA[注意： 在分析 Kdump 内核奔溃信息之前要先开启 Kdump： 正文： 步骤一：确保 crash 和 kernel-debuginfo 两个软件包已安装 （注意：如果 crash 和 kernel-debuginfo 两个软件包已安装的话，这里会有 crash 和 kernel-debuginfo 信息的显示） 步骤二：进入存放 KDUMP 内核奔溃信息的目录 步骤三：解析 KDUMP 生成内核崩溃信息 （补充：这里以使用 2.6.32.12-0.7-default 版本的 kernel-debuginfo 解析为例） 步骤四：确认生成了 vmlinux-2.6.32.12-0.7-default.gz 压缩包 （注意：如果这里生成了 vmlinux-2.6.32.12-0.7-default.gz 压缩包的话，这里会有 vmlinux-2.6.32.12-0.7-default.gz 信息的显示） （补充：这里以确认 2.6.32.12-0.7-default 版本的 kernel-debuginfo 生成的压缩包为例） 步骤五：解压 vmlinux-2.6.32.12-0.7-default.gz 压缩包 （补充：这里以解压 2.6.32.12-0.7-default 版本的 kernel-debuginfo 生成的压缩包为例） 步骤六：分析 KDUMP 生成的内核奔溃信息 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/kdump-analysis/" class="more-link">Continue reading<span class="screen-reader-text"> "[步骤] Linux Kdump 内核奔溃信息的分析 （Rocky Linux &#038; RHEL 版）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2 id="注意">注意：</h2>
+
+
+
+<p>在分析 Kdump 内核奔溃信息之前要先开启 Kdump：</p>
+
+
+
+<div class="wp-container-5 wp-block-buttons">
+<div class="wp-block-button aligncenter is-style-outline"><a class="wp-block-button__link no-border-radius" href="https://eternalcenter-now.github.io/kdump/">Linux Kdump 的开启 <br>（用于收集内核崩溃时的信息）</a></div>
+</div>
+
+
+
+<h2 id="正文">正文：</h2>
+
+
+
+<h4 id="步骤一-确保-crash-和-kernel-debuginfo-两个软件包已安装">步骤一：确保 crash 和 kernel-debuginfo 两个软件包已安装</h4>
+
+
+
+<pre class="wp-block-code"><code># rpm -qa | grep "crash|kernel-debug"</code></pre>
+
+
+
+<p>（注意：如果 crash 和 kernel-debuginfo 两个软件包已安装的话，这里会有 crash 和 kernel-debuginfo 信息的显示）</p>
+
+
+
+<h4 id="步骤二-进入存放-kdump-内核奔溃信息的目录">步骤二：进入存放 KDUMP 内核奔溃信息的目录</h4>
+
+
+
+<pre class="wp-block-code"><code># cd /var/crash/&lt;date&gt;/</code></pre>
+
+
+
+<h4 id="步骤三-解析-kdump-生成内核崩溃信息">步骤三：解析 KDUMP 生成内核崩溃信息</h4>
+
+
+
+<pre class="wp-block-code"><code># crash vmlinux-2.6.32.12-0.7-default vmcore</code></pre>
+
+
+
+<p>（补充：这里以使用 2.6.32.12-0.7-default 版本的 kernel-debuginfo 解析为例）</p>
+
+
+
+<h4 id="步骤四-确认生成了-vmlinux-2-6-32-12-0-7-default-gz-压缩包">步骤四：确认生成了 vmlinux-2.6.32.12-0.7-default.gz 压缩包</h4>
+
+
+
+<pre class="wp-block-code"><code># ls vmlinux-2.6.32.12-0.7-default.gz</code></pre>
+
+
+
+<p>（注意：如果这里生成了 vmlinux-2.6.32.12-0.7-default.gz 压缩包的话，这里会有 vmlinux-2.6.32.12-0.7-default.gz 信息的显示）</p>
+
+
+
+<p>（补充：这里以确认 2.6.32.12-0.7-default 版本的 kernel-debuginfo 生成的压缩包为例）</p>
+
+
+
+<h4 id="步骤五-解压-vmlinux-2-6-32-12-0-7-default-gz-压缩包">步骤五：解压 vmlinux-2.6.32.12-0.7-default.gz 压缩包</h4>
+
+
+
+<pre class="wp-block-code"><code># gzip -d vmlinux-2.6.32.12-0.7-default.gz</code></pre>
+
+
+
+<p>（补充：这里以解压 2.6.32.12-0.7-default 版本的 kernel-debuginfo 生成的压缩包为例）</p>
+
+
+
+<h4 id="步骤六-分析-kdump-生成的内核奔溃信息">步骤六：分析 KDUMP 生成的内核奔溃信息</h4>
+
+
+
+<p>（步骤略）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Linux 用户登录相关日志</title>
+		<link>https://eternalcenter-now.github.io/login-log/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sat, 12 Feb 2022 15:49:11 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System General Log (系统普通日志)]]></category>
+		<category><![CDATA[System Log (系统日志)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Security Log (系统安全日志)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=21918</guid>
+
+					<description><![CDATA[内容一：所有正在登录的用户 内容二：所有的登录和登出记录 内容三：所有用户最有一次登录记录 内容四：所有错误登录尝试记录 内容五：所有信息 （其中也包括登录相关的记录）]]></description>
+										<content:encoded><![CDATA[
+<h4 id="内容一-所有正在登录的用户">内容一：所有正在登录的用户</h4>
+
+
+
+<pre class="wp-block-code"><code>/var/run/utmp</code></pre>
+
+
+
+<h4 id="内容二-所有的登录和登出记录">内容二：所有的登录和登出记录</h4>
+
+
+
+<pre class="wp-block-code"><code>/var/log/wtmp</code></pre>
+
+
+
+<h4 id="内容三-所有用户最有一次登录记录">内容三：所有用户最有一次登录记录</h4>
+
+
+
+<pre class="wp-block-code"><code>/var/log/lastlog</code></pre>
+
+
+
+<h4 id="内容四-所有错误登录尝试记录">内容四：所有错误登录尝试记录</h4>
+
+
+
+<pre class="wp-block-code"><code>/var/log/btmp</code></pre>
+
+
+
+<h4 id="内容五-所有信息-其中也包括登录相关的记录">内容五：所有信息 （其中也包括登录相关的记录）</h4>
+
+
+
+<pre class="wp-block-code"><code>/var/log/messages</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Linux 周期性计划任务 cron 日志</title>
+		<link>https://eternalcenter-now.github.io/cron-log/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sat, 12 Feb 2022 15:33:20 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System General Log (系统普通日志)]]></category>
+		<category><![CDATA[System Log (系统日志)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=21914</guid>
+
+					<description><![CDATA[如果是 Rocky Linux &#38; RHEL： 如果是 openSUSE &#38; SLE：]]></description>
+										<content:encoded><![CDATA[
+<p>如果是 Rocky Linux &amp; RHEL：</p>
+
+
+
+<pre class="wp-block-code"><code>/var/log/cron</code></pre>
+
+
+
+<p>如果是 openSUSE &amp; SLE：</p>
+
+
+
+<pre class="wp-block-code"><code>/var/spool/mail/&lt;user&gt;</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Linux 关机或重启记录的显示</title>
+		<link>https://eternalcenter-now.github.io/viewing-of-shutdown-or-restart-records/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Wed, 10 Nov 2021 13:09:21 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System General Log (系统普通日志)]]></category>
+		<category><![CDATA[System Log (系统日志)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation (系统操作)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=18281</guid>
+
+					<description><![CDATA[]]></description>
+										<content:encoded><![CDATA[
+<pre class="wp-block-code"><code># /usr/bin/last -xF | egrep "reboot|shutdown|runlevel|system"</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令  dmesg （显示开机日志）</title>
+		<link>https://eternalcenter-now.github.io/dmesg/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Fri, 29 Oct 2021 09:17:24 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System General Log (系统普通日志)]]></category>
+		<category><![CDATA[System Log (系统日志)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=18117</guid>
+
+					<description><![CDATA[内容一：dmesg 简介 Linux 的 kernel 会把开机日子存储在 ring buffer 和 /var/log/message 中，其中 ring buffer 里的开机日志可以使用 dmesg 来显示，如果开机时的提示信息来不及阅读的话，可以通过 dmesg 命令来显示 内容二：dmesg 命令的选项 1) -c 显示 ring buffer 的日志后清空 ring buffer2) -n 显示日志的层级3) -cn 显示 ring buffer 的日志后清空 ring buffer，同时显示日志的层级4) -s 设置缓冲区的大小，默认为 8196 与 ring buffer 的大小一样 内容三：dmesg 命令的使用案例3.1 显示所有开机日志 3.2 显示所有日志，显示 ring buffer 的日志后清空 ring buffer，同时显示日志的层级 3.3 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/dmesg/" class="more-link">Continue reading<span class="screen-reader-text"> "[命令] Linux 命令  dmesg （显示开机日志）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h4 id="内容一-dmesg-简介">内容一：dmesg 简介</h4>
+
+
+
+<p>Linux 的 kernel 会把开机日子存储在 ring buffer 和 /var/log/message 中，其中 ring buffer 里的开机日志可以使用 dmesg 来显示，如果开机时的提示信息来不及阅读的话，可以通过 dmesg 命令来显示</p>
+
+
+
+<h4 id="内容二-dmesg-的选项">内容二：dmesg 命令的选项</h4>
+
+
+
+<p>1) -c 显示 ring buffer 的日志后清空 ring buffer<br>2) -n 显示日志的层级<br>3) -cn 显示 ring buffer 的日志后清空 ring buffer，同时显示日志的层级<br>4) -s 设置缓冲区的大小，默认为 8196 与 ring buffer 的大小一样</p>
+
+
+
+<h4 id="内容三-dmesg-命令的使用案例-3-1-显示所有开机日志">内容三：dmesg 命令的使用案例<br>3.1 显示所有开机日志</h4>
+
+
+
+<pre class="wp-block-code"><code># dmesg | less</code></pre>
+
+
+
+<h4 id="3-2-显示所有日志-显示-ring-buffer-的日志后清空-ring-buffer-同时显示日志的层级">3.2 显示所有日志，显示 ring buffer 的日志后清空 ring buffer，同时显示日志的层级</h4>
+
+
+
+<pre class="wp-block-code"><code># dmesg -cn</code></pre>
+
+
+
+<h4 id="3-3-显示所有失败的开机日志">3.3 显示所有失败的开机日志</h4>
+
+
+
+<pre class="wp-block-code"><code># dmesg | egrep -i "fail|warn|error"</code></pre>
+
+
+
+<p></p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] SELinux  的启用 （openSUSE &#038; SLE  版） （不建议）</title>
+		<link>https://eternalcenter-now.github.io/selinux-opensuse-sle/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Tue, 01 Jun 2021 08:50:14 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[SELinux]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System File Security (系统文件安全)]]></category>
+		<category><![CDATA[System Log (系统日志)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Port Security (系统端口安全)]]></category>
+		<category><![CDATA[System Process Security (系统进程安全)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Security Log (系统安全日志)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=14516</guid>
+
+					<description><![CDATA[软件准备： 在 SELinuxProject 的官网上下载 SELinux 策略 UseRefpolicy： https://github.com/SELinuxProject/refpolicy/wiki/UseRefpolicy 注意： 1) 如果使用此文的方法将 openSUSE &#38; SLE 的 SELinux 设置为 Enforcing 则系统将无法设置 IP 地址2) 如果使用此文的方法开启了 SELinux 并且将所有的布尔（boolean）值开启，则系统将无法关机，开启所有布尔值的方法：# for i in semanage boolean -l &#124; awk '{print $1}'; do echo $i;setsebool -P $i 1; done 正文： 步骤目录： 步骤一：安装 SELinux 组件 步骤二：安装 SELinux 策略2.1 解压包含 SELinux 策略的压缩包2.2 将 SELinux 策略移动到 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/selinux-opensuse-sle/" class="more-link">Continue reading<span class="screen-reader-text"> "[步骤] SELinux  的启用 （openSUSE &#038; SLE  版） （不建议）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2 id="软件准备">软件准备：</h2>
+
+
+
+<p>在 SELinuxProject 的官网上下载 SELinux 策略 UseRefpolicy：</p>
+
+
+
+<p class="has-text-align-center"><a href="https://github.com/SELinuxProject/refpolicy/wiki/UseRefpolicy" target="_blank" rel="noreferrer noopener">https://github.com/SELinuxProject/refpolicy/wiki/UseRefpolicy</a></p>
+
+
+
+<h2 id="注意">注意：</h2>
+
+
+
+<p>1) 如果使用此文的方法将 openSUSE &amp; SLE 的 SELinux 设置为 Enforcing 则系统将无法设置 IP 地址<br>2) 如果使用此文的方法开启了 SELinux 并且将所有的布尔（boolean）值开启，则系统将无法关机，开启所有布尔值的方法：# for i in <code>semanage boolean -l | awk '{print $1}'</code>; do echo $i;setsebool -P $i 1; done</p>
+
+
+
+<div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
+
+
+
+<h2 id="正文">正文：</h2>
+
+
+
+<h2 id="步骤目录">步骤目录：</h2>
+
+
+
+<h4 id="步骤一-安装-selinux-组件">步骤一：安装 SELinux 组件</h4>
+
+
+
+<h4 id="步骤二-安装-selinux-策略-2-1-解压包含-selinux-策略的压缩包-2-2-将-selinux-策略移动到-selinux-配置文件的位置-2-3-进入到和-selinux-策略相同目录下-2-4-显示-selinux-策略的安装手册-2-5-创建-selinux-策略的配置文件-2-6-创建-selinux-策略-2-7-编译-selinux-策略-2-8-安装-selinux-策略">步骤二：安装 SELinux 策略<br>2.1 解压包含 SELinux 策略的压缩包<br>2.2 将 SELinux 策略移动到 SELinux 配置文件的位置<br>2.3 进入到和 SELinux 策略相同目录下<br>2.4 显示 SELinux 策略的安装手册<br>2.5 创建 SELinux 策略的配置文件<br>2.6 创建 SELinux 策略<br>2.7 编译 SELinux 策略<br>2.8 安装 SELinux 策略</h4>
+
+
+
+<h4 id="步骤三-配置-selinux-配置文件-3-1-在-selinux-配置文件中将-selinux-设置为-permissive-状态-3-2-在系统内核中禁止使用-apparmor-使用-selinux-并且将-selinux-状态设置为-permissive-3-2-1-设置-grub-文件-3-2-2-让刚刚设置的-grub-文件生效-3-3-刷新系统内所有文件的标签">步骤三：配置 SELinux 配置文件<br>3.1 在 SELinux 配置文件中将 SELinux 设置为 Permissive 状态<br>3.2 在系统内核中禁止使用 AppArmor 使用 SELinux 并且将 SELinux 状态设置为 Permissive<br>3.2.1 设置 grub 文件<br>3.2.2 让刚刚设置的 grub 文件生效<br>3.3 刷新系统内所有文件的标签</h4>
+
+
+
+<h4 id="步骤四-重启系统让-selinux-生效">步骤四：重启系统让 SELinux 生效</h4>
+
+
+
+<h2 id="具体的操作步骤">具体的操作步骤：</h2>
+
+
+
+<h4 id="步骤一-安装-selinux-组件">步骤一：安装 SELinux 组件</h4>
+
+
+
+<pre class="wp-block-code"><code># zypper in libselinux1 libsemanage1 libsepol-devel libsepol1 libselinux-devel mcstrans libselinux1-32bit policycoreutils checkpolicy libsemanage-devel setools-tcl setools-libs setools-java setools-devel setools-console selinux-tools python3-policycoreutils python3-selinux python3-semanage python3-setools restorecond</code></pre>
+
+
+
+<h4 id="步骤二-安装-selinux-策略-2-1-解压包含-selinux-策略的压缩包">步骤二：安装 SELinux 策略<br>2.1 解压包含 SELinux 策略的压缩包</h4>
+
+
+
+<pre class="wp-block-code"><code># tar -xvf refpolicy-2.20210203.tar.bz2</code></pre>
+
+
+
+<p>（补充：这里以解压 refpolicy-2.20210203.tar.bz2 压缩包为例）</p>
+
+
+
+<h4 id="2-2-将-selinux-策略移动到-selinux-配置文件的位置">2.2 将 SELinux 策略移动到 SELinux 配置文件的位置</h4>
+
+
+
+<pre class="wp-block-code"><code># mv refpolicy /etc/selinux/</code></pre>
+
+
+
+<h4 id="2-3-进入到和-selinux-策略相同目录下">2.3 进入到和 SELinux 策略相同目录下</h4>
+
+
+
+<pre class="wp-block-code"><code># cd /etc/selinux/refpolicy/</code></pre>
+
+
+
+<h4 id="2-4-显示-selinux-策略的安装手册">2.4 显示 SELinux 策略的安装手册</h4>
+
+
+
+<pre class="wp-block-code"><code># cat INSTALL</code></pre>
+
+
+
+<h4 id="2-5-创建-selinux-策略的配置文件">2.5 创建 SELinux 策略的配置文件</h4>
+
+
+
+<pre class="wp-block-code"><code># make conf</code></pre>
+
+
+
+<h4 id="2-6-创建-selinux-策略">2.6 创建 SELinux 策略</h4>
+
+
+
+<pre class="wp-block-code"><code># make policy</code></pre>
+
+
+
+<h4 id="2-7-编译-selinux-策略">2.7 编译 SELinux 策略</h4>
+
+
+
+<pre class="wp-block-code"><code># make install</code></pre>
+
+
+
+<h4 id="2-8-安装-selinux-策略">2.8 安装 SELinux 策略</h4>
+
+
+
+<pre class="wp-block-code"><code># make load</code></pre>
+
+
+
+<h4 id="步骤三-配置-selinux-配置文件-3-1-在-selinux-配置文件中将-selinux-设置为-permissive-状态">步骤三：配置 SELinux 配置文件<br>3.1 在 SELinux 配置文件中将 SELinux 设置为 Permissive 状态</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/selinux/config</code></pre>
+
+
+
+<p>创建以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code># This file controls the state of SELinux on the system.
+# SELINUX= can take one of these three values:
+#     enforcing - SELinux security policy is enforced.
+#     permissive - SELinux prints warnings instead of enforcing.
+#     disabled - No SELinux policy is loaded.
+SELINUX=permissive
+# SELINUXTYPE= can take one of three values:
+#     targeted - Targeted processes are protected,
+#     minimum - Modification of targeted policy. Only selected processes are protected.
+#     mls - Multi Level Security protection.
+SELINUXTYPE=refpolicy</code></pre>
+
+
+
+<h4 id="3-2-在系统内核中禁止使用-apparmor-使用-selinux-并且将-selinux-状态设置为-permissive-3-2-1-设置-grub-文件">3.2 在系统内核中禁止使用 AppArmor 使用 SELinux 并且将 SELinux 状态设置为 Permissive<br>3.2.1 设置 grub 文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/default/grub</code></pre>
+
+
+
+<p>在这一行里：</p>
+
+
+
+<pre class="wp-block-code"><code>GRUB_CMDLINE_LINUX_DEFAULT="......"</code></pre>
+
+
+
+<pre class="wp-block-code"><code>添加以下内容：</code></pre>
+
+
+
+<pre class="wp-block-code"><code>GRUB_CMDLINE_LINUX_DEFAULT="...... security=selinux selinux=1 enforcing=0"</code></pre>
+
+
+
+<h4 id="3-2-2-让刚刚设置的-grub-文件生效">3.2.2 让刚刚设置的 grub 文件生效</h4>
+
+
+
+<pre class="wp-block-code"><code># grub2-mkconfig -o /boot/grub2/grub.cfg</code></pre>
+
+
+
+<h4 id="3-3-刷新系统内所有文件的标签">3.3 刷新系统内所有文件的标签</h4>
+
+
+
+<pre class="wp-block-code"><code># restorecon -Rp /</code></pre>
+
+
+
+<h4 id="步骤四-重启系统让-selinux-生效">步骤四：重启系统让 SELinux 生效</h4>
+
+
+
+<pre class="wp-block-code"><code># reboot</code></pre>
+
+
+
+<div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
+
+
+
+<h2 id="参考文献">参考文献：</h2>
+
+
+
+<p class="has-text-align-center">https://documentation.suse.com/sles/15-SP2/html/SLES-all/cha-selinux.html</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Linux SELinux 状态的设置</title>
+		<link>https://eternalcenter-now.github.io/selinux-state/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 31 May 2021 13:37:41 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[SELinux]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System File Security (系统文件安全)]]></category>
+		<category><![CDATA[System Log (系统日志)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Port Security (系统端口安全)]]></category>
+		<category><![CDATA[System Process Security (系统进程安全)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Security Log (系统安全日志)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=14456</guid>
+
+					<description><![CDATA[内容目录： 内容一：SELinux 的状态 内容二：永久切换 SELinux 状态2.1 将 SELinux 永久切换至 Disabled 状态2.1.1 修改 SELinux 配置文件2.1.2 重启系统2.1.3 显示 SELinux 状态2.2 将 SELinux 永久切换至 Permissive 状态2.2.1 修改 SELinux 配置文件2.2.2 重启系统2.2.3 显示 SELinux 状态2.3 将 SELinux 永久切换至 Enforcing 状态2.3.1 修改 SELinux 配置文件2.3.2 重启系统2.3.3 显示 SELinux 状态 内容三：临时切换 SELinux 状态3.1 临时切换到 Permissive 状态3.1.1 临时切换到 Permissive 状态3.1.2 显示 SELinux 状态3.2 临时切换到 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/selinux-state/" class="more-link">Continue reading<span class="screen-reader-text"> "[内容] Linux SELinux 状态的设置"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2 id="内容目录">内容目录：</h2>
+
+
+
+<h4 id="内容一-selinux-的状态">内容一：SELinux 的状态</h4>
+
+
+
+<h4 id="内容二-永久切换-selinux-状态-2-1-将-selinux-永久切换至-disabled-状态-2-1-1-修改-selinux-配置文件-2-1-2-重启系统-2-1-3-显示-selinux-状态-2-2-将-selinux-永久切换至-permissive-状态-2-2-1-修改-selinux-配置文件-2-2-2-重启系统-2-2-3-显示-selinux-状态-2-3-将-selinux-永久切换至-enforcing-状态-2-3-1-修改-selinux-配置文件-2-3-2-重启系统-2-3-3-显示-selinux-状态">内容二：永久切换 SELinux 状态<br>2.1 将 SELinux 永久切换至 Disabled 状态<br>2.1.1 修改 SELinux 配置文件<br>2.1.2 重启系统<br>2.1.3 显示 SELinux 状态<br>2.2 将 SELinux 永久切换至 Permissive 状态<br>2.2.1 修改 SELinux 配置文件<br>2.2.2 重启系统<br>2.2.3 显示 SELinux 状态<br>2.3 将 SELinux 永久切换至 Enforcing 状态<br>2.3.1 修改 SELinux 配置文件<br>2.3.2 重启系统<br>2.3.3 显示 SELinux 状态</h4>
+
+
+
+<h4 id="内容三-临时切换-selinux-状态-3-1-临时切换到-permissive-状态-3-1-1-临时切换到-permissive-状态-3-1-2-显示-selinux-状态-3-2-临时切换到-enforcing-状态-3-2-1-临时切换到-enforcing-状态-3-2-2-显示-selinux-状态">内容三：临时切换 SELinux 状态<br>3.1 临时切换到 Permissive 状态<br>3.1.1 临时切换到 Permissive 状态<br>3.1.2 显示 SELinux 状态<br>3.2 临时切换到 Enforcing 状态<br>3.2.1 临时切换到 Enforcing 状态<br>3.2.2 显示 SELinux 状态</h4>
+
+
+
+<h2 id="具体的内容">具体的内容：</h2>
+
+
+
+<h4 id="内容一-selinux-的状态">内容一：SELinux 的状态</h4>
+
+
+
+<p>1) Disabled：完全关闭 SELinux<br>2) Permissive：即使违反了策略也依旧可以执行，但是违反策略的记录会被记录在日志中<br>3) Enforcing：如果违反了策略就不能之行</p>
+
+
+
+<h4 id="内容二-永久切换-selinux-状态-2-1-将-selinux-永久切换至-disabled-状态-2-1-1-修改-selinux-配置文件">内容二：永久切换 SELinux 状态<br>2.1 将 SELinux 永久切换至 Disabled 状态<br>2.1.1 修改 SELinux 配置文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/selinux/config</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+SELINUX=......
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+SELINUX=disabled
+......</code></pre>
+
+
+
+<h4 id="2-1-2-重启系统">2.1.2 重启系统</h4>
+
+
+
+<pre class="wp-block-code"><code># reboot</code></pre>
+
+
+
+<h4 id="2-1-3-显示-selinux-状态">2.1.3 显示 SELinux 状态</h4>
+
+
+
+<pre class="wp-block-code"><code># getenforce 
+Disabled</code></pre>
+
+
+
+<h4 id="2-2-将-selinux-永久切换至-permissive-状态-2-2-1-修改-selinux-配置文件">2.2 将 SELinux 永久切换至 Permissive 状态<br>2.2.1 修改 SELinux 配置文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/selinux/config</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+SELINUX=......
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+SELINUX=permissive
+......</code></pre>
+
+
+
+<h4 id="2-2-2-重启系统">2.2.2 重启系统</h4>
+
+
+
+<pre class="wp-block-code"><code># reboot</code></pre>
+
+
+
+<h4 id="2-2-3-显示-selinux-状态">2.2.3 显示 SELinux 状态</h4>
+
+
+
+<pre class="wp-block-code"><code># getenforce 
+Permissive</code></pre>
+
+
+
+<h4 id="2-3-将-selinux-永久切换至-enforcing-状态-2-3-1-修改-selinux-配置文件">2.3 将 SELinux 永久切换至 Enforcing 状态<br>2.3.1 修改 SELinux 配置文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/selinux/config</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+SELINUX=......
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+SELINUX=enforcing
+......</code></pre>
+
+
+
+<h4 id="2-3-2-重启系统">2.3.2 重启系统</h4>
+
+
+
+<pre class="wp-block-code"><code># reboot</code></pre>
+
+
+
+<h4 id="2-3-3-显示-selinux-状态">2.3.3 显示 SELinux 状态</h4>
+
+
+
+<pre class="wp-block-code"><code># getenforce 
+Enforcing</code></pre>
+
+
+
+<h4 id="内容三-临时切换-selinux-状态-3-1-临时切换到-permissive-状态-3-1-1-临时切换到-permissive-状态">内容三：临时切换 SELinux 状态<br>3.1 临时切换到 Permissive 状态<br>3.1.1 临时切换到 Permissive 状态</h4>
+
+
+
+<pre class="wp-block-code"><code># setenfoce 0</code></pre>
+
+
+
+<p>（<br>注意：<br>1) 系统重启后失效<br>2) 只能从 Enforcing 状态切换到 Permissive 状态<br>）</p>
+
+
+
+<h4 id="3-1-2-显示-selinux-状态">3.1.2 显示 SELinux 状态</h4>
+
+
+
+<pre class="wp-block-code"><code># getenforce 
+Permissive</code></pre>
+
+
+
+<h4 id="3-2-临时切换到-enforcing-状态-3-2-1-临时切换到-enforcing-状态">3.2 临时切换到 Enforcing 状态<br>3.2.1 临时切换到 Enforcing 状态</h4>
+
+
+
+<pre class="wp-block-code"><code># setenfoce 1</code></pre>
+
+
+
+<p>（<br>注意：<br>1) 系统重启后失效<br>2) 只能从 Permissive 状态切换到 Enforcing 状态<br>）</p>
+
+
+
+<h4 id="3-2-2-显示-selinux-状态">3.2.2 显示 SELinux 状态</h4>
+
+
+
+<pre class="wp-block-code"><code># getenforce 
+Enforcing</code></pre>
+
+
+
+<p></p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[实验] Linux 远程日志的集中管理和分文件存储 （通过 Rsyslog 实现）</title>
+		<link>https://eternalcenter-now.github.io/rsyslog-set/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 12 Oct 2020 14:20:47 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[Other Services (其他服务)]]></category>
+		<category><![CDATA[Rsyslog]]></category>
+		<category><![CDATA[Services (服务)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System General Log (系统普通日志)]]></category>
+		<category><![CDATA[System Log (系统日志)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=11535</guid>
+
+					<description><![CDATA[步骤目录： 步骤一：规划拓扑1.1 服务器列表1.2 服务器列表简介 步骤二：系统环境要求 步骤三：配置 rsyslog 服务端3.1 修改 rsyslog 配置文件的案例3.1.1 案例一3.1.2 案例二3.1.3 案例三3.1.4 案例四3.1.5 案例五3.2 重启 rsyslog 服务 步骤四：配置 rsyslog 客户端4.1 修改 rsyslog 客户端的案例4.2 重启 rsyslog 服务 步骤五：测试 rsyslog 服务5.1 在 rsyslog 客户端上发送日志5.2 在 rsyslog 服务端上显示日志 具体的操作步骤： 步骤一：规划拓扑1.1 服务器列表 rsyslog 服务端 IP 地址:192.168.0.11rsyslog 客户端 IP 地址:192.168.0.12 1.2 服务器列表简介 rsyslog 客户端将日志发送给 rsyslog 服务端，并实现分文件存储 步骤二：系统环境要求 1) &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/rsyslog-set/" class="more-link">Continue reading<span class="screen-reader-text"> "[实验] Linux 远程日志的集中管理和分文件存储 （通过 Rsyslog 实现）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2 id="步骤目录">步骤目录：</h2>
+
+
+
+<h4 id="步骤一-规划拓扑1-1-服务器列表1-2-服务器列表简介">步骤一：规划拓扑<br>1.1 服务器列表<br>1.2 服务器列表简介</h4>
+
+
+
+<h4 id="步骤二-系统环境要求">步骤二：系统环境要求</h4>
+
+
+
+<h4 id="步骤三-配置-rsyslog-服务端3-1-修改-rsyslog-配置文件的案例3-1-1-案例一3-1-2-案例二3-1-3-案例三3-1-4-案例四3-1-5-案例五3-2-重启-rsyslog-服务">步骤三：配置 rsyslog 服务端<br>3.1 修改 rsyslog 配置文件的案例<br>3.1.1 案例一<br>3.1.2 案例二<br>3.1.3 案例三<br>3.1.4 案例四<br>3.1.5 案例五<br>3.2 重启 rsyslog 服务</h4>
+
+
+
+<h4 id="步骤四-配置-rsyslog-客户端4-1-修改-rsyslog-客户端的案例4-2-重启-rsyslog-服务">步骤四：配置 rsyslog 客户端<br>4.1 修改 rsyslog 客户端的案例<br>4.2 重启 rsyslog 服务</h4>
+
+
+
+<h4 id="步骤五-测试-rsyslog-服务5-1-在-rsyslog-客户端上发送日志5-2-在-rsyslog-服务端上显示日志">步骤五：测试 rsyslog 服务<br>5.1 在 rsyslog 客户端上发送日志<br>5.2 在 rsyslog 服务端上显示日志</h4>
+
+
+
+<h2 id="具体的操作步骤">具体的操作步骤：</h2>
+
+
+
+<h4 id="步骤一-规划拓扑1-1-服务器列表">步骤一：规划拓扑<br>1.1 服务器列表</h4>
+
+
+
+<p>rsyslog 服务端 IP 地址:192.168.0.11<br>rsyslog 客户端 IP 地址:192.168.0.12</p>
+
+
+
+<h4 id="1-2-服务器列表简介">1.2 服务器列表简介</h4>
+
+
+
+<p>rsyslog 客户端将日志发送给 rsyslog 服务端，并实现分文件存储</p>
+
+
+
+<h4 id="步骤二-系统环境要求">步骤二：系统环境要求</h4>
+
+
+
+<p>1) 所有服务器的系统都需要是 CentOS 8 版本<br>2) 所有服务器都要关闭防火墙<br>3) 所有服务器都要关闭 SELinux<br>4) 需要按照拓扑图给对应的服务器配置好 IP 地址和主机名<br>5) 所有服务器都要可以相互 ping 通自己和对方的 IP 地址和主机名</p>
+
+
+
+<h4 id="步骤三-配置-rsyslog-服务端3-1-修改-rsyslog-配置文件的案例3-1-1-案例一">步骤三：配置 rsyslog 服务端<br>3.1 修改 rsyslog 配置文件的案例<br>3.1.1 案例一</h4>
+
+
+
+<p>（只在 rsyslog 服务端执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/rsyslog.conf</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+module(load="imudp")
+input(type="imudp" port="514")
+module(load="imtcp")
+input(type="imtcp" port="514")</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 使用 UDP 的 514 端口接收日志<br>2) 使用 TCP 的 514 端口接收日志<br>3) 此配置会将所有 rsyslog 客户端的日志存储在 rsyslog 服务端的 /var/log/message 里<br>）</p>
+
+
+
+<h4 id="3-1-2-案例二">3.1.2 案例二</h4>
+
+
+
+<p>（只在 rsyslog 服务端执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/rsyslog.conf</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+module(load="imudp")
+input(type="imudp" port="514")
+module(load="imtcp")
+input(type="imtcp" port="514")
+
+$template DynFile,"/var/log/%HOSTNAME%.log"
+*.* -?DynFile
+&amp; ~</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 使用 UDP 的 514 端口接收日志<br>2) 使用 TCP 的 514 端口接收日志<br>3) 此配置会将每个 rsyslog 客户端的日志单独存储在 /var/log/ 下的一个文件里，此文件会以其所属系统名命名<br>）</p>
+
+
+
+<h4 id="3-1-3-案例三">3.1.3 案例三</h4>
+
+
+
+<p>（只在 rsyslog 服务端执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/rsyslog.conf</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+module(load="imudp")
+input(type="imudp" port="514")
+module(load="imtcp")
+input(type="imtcp" port="514")
+
+$template DynFile,"/var/log/remotelog/%HOSTNAME%-%$YEAR%-%$MONTH%-%$DAY%-messages.log"
+*.* -?DynFile
+&amp; ~</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 使用 UDP 的 514 端口接收日志<br>2) 使用 TCP 的 514 端口接收日志<br>3) 此配置会将每个 rsyslog 客户端的日志单独存储在 /var/log/remotelog 下的一个文件里，此文件会以其创建时间和其所属系统名命名<br>）</p>
+
+
+
+<h4 id="3-1-4-案例四">3.1.4 案例四</h4>
+
+
+
+<p>（只在 rsyslog 服务端执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/rsyslog.conf</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+module(load="imudp")
+input(type="imudp" port="514")
+module(load="imtcp")
+input(type="imtcp" port="514")
+
+$template DynFile,"/var/log/remotelog/%HOSTNAME%-%$YEAR%-%$MONTH%-%$DAY%-messages.log"
+:fromhost-ip,!isequal,"127.0.0.1" -?DynFile
+&amp; ~</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 使用 UDP 的 514 端口接收日志<br>2) 使用 TCP 的 514 端口接收日志<br>3) 此配置会将每个 rsyslog 客户端的日志单独存储在 /var/log/ 下的一个文件里，此文件会以其创建时间和其所属系统名命名<br>4) 此配置不会单独存储 rsyslog 服务端的日志<br>）</p>
+
+
+
+<h4 id="3-1-5-案例五">3.1.5 案例五</h4>
+
+
+
+<p>（只在 rsyslog 服务端执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/rsyslog.conf</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+module(load="imudp")
+input(type="imudp" port="514")
+module(load="imtcp")
+input(type="imtcp" port="514")
+
+$template DynFile,"/var/log/syslog/system-%HOSTNAME%/messages.log"
+*.* -?DynFile
+&amp; ~</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 使用 UDP 的 514 端口接收日志<br>2) 使用 TCP 的 514 端口接收日志<br>3) 此配置会将每个 rsyslog 客户端的日志单独存储在 /var/log/ 下某个目录的 messages 文件里，此目录会以其所属系统名命名<br>）</p>
+
+
+
+<h4 id="3-2-重启-rsyslog-服务">3.2 重启 rsyslog 服务</h4>
+
+
+
+<p>（只在 rsyslog 服务端执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># systemctl restart rsyslog</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 使用 UDP 的 514 端口接收日志<br>2) 使用 TCP 的 514 端口接收日志<br>3) 需要在 3.1 修改 rsyslog 配置文件的案例中任选其一完成后在执行此步骤<br>）</p>
+
+
+
+<h4 id="步骤四-配置-rsyslog-客户端4-1-修改-rsyslog-客户端的案例">步骤四：配置 rsyslog 客户端<br>4.1 修改 rsyslog 客户端的案例</h4>
+
+
+
+<p>（只在 rsyslog 客户端执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/rsyslog.conf</code></pre>
+
+
+
+<p>添加以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+*.emerg;*.alert;*.crit;*.err;*.warning;*.notice;*.info  @192.168.0.11</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+*.emerg;*.alert;*.crit;*.err;*.warning;*.notice;*.info  @@192.168.0.11</code></pre>
+
+
+
+<p>（<br>补充：<br>1) 这里的 192.168.0.11 是指 rsyslog 服务端的 IP 地址<br>2) IP 地址前一个 “@” 符后是指使用 UDP 端口 514 传输日志<br>3) IP 地址前两个 “@” 符后是指使用 TCP 端口 514 传输日志<br>）</p>
+
+
+
+<h4 id="4-2-重启-rsyslog-服务">4.2 重启 rsyslog 服务</h4>
+
+
+
+<p>（只在 rsyslog 客户端执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># systemctl restart rsyslog</code></pre>
+
+
+
+<h4 id="步骤五-测试-rsyslog-服务5-1-在-rsyslog-客户端上发送日志">步骤五：测试 rsyslog 服务<br>5.1 在 rsyslog 客户端上发送日志</h4>
+
+
+
+<p>（只在 rsyslog 客户端执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># logger "This is our test log"</code></pre>
+
+
+
+<p>（补充：这里以发送 This is our test log 信息为例）</p>
+
+
+
+<h4 id="5-2-在-rsyslog-服务端上显示日志">5.2 在 rsyslog 服务端上显示日志</h4>
+
+
+
+<p>（只在 rsyslog 服务端执行以下步骤）</p>
+
+
+
+<pre class="wp-block-code"><code># cat /var/log/* | grep test</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[步骤] Linux Kdump 的开启 （用于收集内核崩溃时的信息）</title>
+		<link>https://eternalcenter-now.github.io/kdump/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Tue, 22 Sep 2020 15:38:52 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System General Log (系统普通日志)]]></category>
+		<category><![CDATA[System Log (系统日志)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Operation & System Setting & System Software (系统操作 & 系统设置 & 系统软件)]]></category>
+		<category><![CDATA[System Setting (系统设置)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=10575</guid>
+
+					<description><![CDATA[步骤一：允许 Kdump 使用内存1.1 方法一：在 /etc/default/grub 文件里修改 crashkernel 参数1.1.1 在 /etc/default/grub 文件里修改 crashkernel 参数 在这一行里： 确保有： 并确保此文件其他地方没有和 crashkernel= 相关的参数 （补充：这里的 auto 代表系统会根据内存大小自动设置一个值，也可以指定一个值，例如：crashkernel=crashkernel=128M,high、crashkernel=crashkernel=256M,high 等等，但是建议设置成 crashkernel=crashkernel=512M,high） 1.1.2 让刚刚修改的内核参数生效 1.2 方法二：通过 yast 工具修改 crashkernel 参数1.2.1 通过 yast 工具修改 crashkernel 参数 之后将 &#8211;Start-Up 中的 Kdump Low Memory [MiB] (72 &#8211; 3069) 修改为 256，将 &#8211;Start-Up 中的 Kdump High Memory [MiB] (0 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/kdump/" class="more-link">Continue reading<span class="screen-reader-text"> "[步骤] Linux Kdump 的开启 （用于收集内核崩溃时的信息）"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h4 id="步骤一-允许-kdump-使用内存1-1-方法一-在-etc-default-grub-文件里修改-crashkernel-参数1-1-1-在-etc-default-grub-文件里修改-crashkernel-参数">步骤一：允许 Kdump 使用内存<br>1.1 方法一：在 /etc/default/grub 文件里修改 crashkernel 参数<br>1.1.1 在 /etc/default/grub 文件里修改 crashkernel 参数</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/default/grub</code></pre>
+
+
+
+<p>在这一行里：</p>
+
+
+
+<pre class="wp-block-code"><code>.....
+GRUB_CMDLINE_LINUX_DEFAULT="......"
+.....</code></pre>
+
+
+
+<p>确保有：</p>
+
+
+
+<pre class="wp-block-code"><code>.....
+GRUB_CMDLINE_LINUX="crashkernel=auto......"
+.....</code></pre>
+
+
+
+<p>并确保此文件其他地方没有和 crashkernel= 相关的参数</p>
+
+
+
+<p>（补充：这里的 auto 代表系统会根据内存大小自动设置一个值，也可以指定一个值，例如：crashkernel=crashkernel=128M,high、crashkernel=crashkernel=256M,high 等等，但是建议设置成 crashkernel=crashkernel=512M,high）</p>
+
+
+
+<h4 id="1-1-2-让刚刚修改的内核参数生效">1.1.2 让刚刚修改的内核参数生效</h4>
+
+
+
+<pre class="wp-block-code"><code># grub2-mkconfig -o /boot/grub2/grub.cfg</code></pre>
+
+
+
+<pre class="wp-block-code"><code># reboot</code></pre>
+
+
+
+<h4 id="1-2-方法二-通过-yast-工具修改-crashkernel-参数1-2-1-通过-yast-工具修改-crashkernel-参数">1.2 方法二：通过 yast 工具修改 crashkernel 参数<br>1.2.1 通过 yast 工具修改 crashkernel 参数</h4>
+
+
+
+<pre class="wp-block-code"><code># yast kdump</code></pre>
+
+
+
+<p>之后将 &#8211;Start-Up 中的 Kdump Low Memory [MiB] (72 &#8211; 3069) 修改为 256，将 &#8211;Start-Up 中的 Kdump High Memory [MiB] (0 &#8211; 7168) 修改为 512，之后再选择 [ OK ]</p>
+
+
+
+<p>（补充：当 Kdump Low Memory 设置为 256，Kdump High Memory 设置为 512 时更易触发 Kdump）</p>
+
+
+
+<p>（注意：方法二只有 openSUSE &amp; SUSE 可以使用）</p>
+
+
+
+<h4 id="1-2-让刚刚修改的内核参数生效">1.2 让刚刚修改的内核参数生效</h4>
+
+
+
+<pre class="wp-block-code"><code># reboot</code></pre>
+
+
+
+<h4 id="步骤二-修改-kdump-的配置信息2-1-修改-kdump-的配置文件">步骤二：修改 Kdump 的配置信息<br>2.1 修改 Kdump 的配置文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/kdump.conf</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+path /var/crash
+core_collector makedumpfile -l --message-level 1 -d 31
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+path /var/crash
+core_collector makedumpfile -c -l --message-level 1 -d 31
+default reboot
+......</code></pre>
+
+
+
+<p>（<br>补充：<br>1) path /var/crash<br>2) -c 参数会对搜集的内核崩溃时的信息进行压缩<br>3) default reboot 参数会让 KDUMP 收集完内核崩溃时的信息后重启<br>）</p>
+
+
+
+<h4 id="2-2-让刚刚修改的-kdump-配置文件生效">2.2 让刚刚修改的 Kdump 配置文件生效</h4>
+
+
+
+<pre class="wp-block-code"><code># systemctl enable --now kdump.service</code></pre>
+
+
+
+<h4 id="步骤三-测试-kdump3-1-造成系统内核崩溃">步骤三：测试 Kdump<br>3.1 造成系统内核崩溃</h4>
+
+
+
+<pre class="wp-block-code"><code># echo 1 &gt; /proc/sys/kernel/sysrq ; echo c &gt; /proc/sysrq-trigger</code></pre>
+
+
+
+<p>（注意：此时系统会自动崩溃并重启）</p>
+
+
+
+<h4 id="3-2-显示-kdump-生成内核崩溃信息">3.2 显示 Kdump 生成内核崩溃信息</h4>
+
+
+
+<pre class="wp-block-code"><code># ls /var/crash/&lt;date&gt;/vmcore</code></pre>
+
+
+
+<p>（补充：这里的内核崩溃信息存放目录 /var/crash/，是刚刚在 /etc/kdump.conf 文件里指定的）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[命令] Linux 命令 iptables （设置防火墙日志）</title>
+		<link>https://eternalcenter-now.github.io/iptables-log/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Tue, 28 Jul 2020 07:01:45 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System Firewall (系统防火墙)]]></category>
+		<category><![CDATA[System Log (系统日志)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Security Log (系统安全日志)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=10349</guid>
+
+					<description><![CDATA[内容一：iptables 防火墙开启日志的案例1.1 案例一：让日志记录未匹配任何规则的 TCP 数据包，之后再将其丢弃的方法 在所有规则后面添加以下两条规则： （补充：这里以记录进来的数据并将 IPTABLES TCP IN: 作为前缀保存日志为例） 1.2 案例二：让日志记录未匹配任何规则的 UDP 数据包，之后再将其丢弃的方法 在所有规则后面添加以下两条规则： （补充：这里以记录进来的数据并将 IPTABLES TCP OUT: 作为前缀保存日志为例） 1.3 案例三：让日志记录未匹配任何规则的 ICMP 数据包，之后再将其丢弃的方法 在所有规则后面添加以下两条规则： （补充：这里以记录进来的数据并将 IPTABLES TCP ICMP: 作为前缀保存日志为例） 内容二：显示 iptables 防火墙日志的方法]]></description>
+										<content:encoded><![CDATA[
+<h4 id="内容一-iptables-防火墙开启日志的案例1-1-案例一-让日志记录未匹配任何规则的-tcp-数据包-之后再将其丢弃的方法">内容一：iptables 防火墙开启日志的案例<br>1.1 案例一：让日志记录未匹配任何规则的 TCP 数据包，之后再将其丢弃的方法</h4>
+
+
+
+<p>在所有规则后面添加以下两条规则：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+# iptables -A INPUT -i -p tcp -j LOG --log-prefix "IPTABLES TCP IN: " 
+# iptables -A INPUT -i -p tcp -j DROP</code></pre>
+
+
+
+<p>（补充：这里以记录进来的数据并将 IPTABLES TCP IN: 作为前缀保存日志为例）</p>
+
+
+
+<h4 id="1-2-案例二-让日志记录未匹配任何规则的-udp-数据包-之后再将其丢弃的方法">1.2 案例二：让日志记录未匹配任何规则的 UDP 数据包，之后再将其丢弃的方法</h4>
+
+
+
+<p>在所有规则后面添加以下两条规则：</p>
+
+
+
+<pre class="wp-block-code"><code>...... 
+# iptables -A INPUT -i -p tcp -j LOG --log-prefix "IPTABLES TCP OUT: " 
+# iptables -A INPUT -i -p tcp -j DROP</code></pre>
+
+
+
+<p>（补充：这里以记录进来的数据并将 IPTABLES TCP OUT: 作为前缀保存日志为例）</p>
+
+
+
+<h4 id="1-3-案例三-让日志记录未匹配任何规则的-icmp-数据包-之后再将其丢弃的方法">1.3 案例三：让日志记录未匹配任何规则的 ICMP 数据包，之后再将其丢弃的方法</h4>
+
+
+
+<p>在所有规则后面添加以下两条规则：</p>
+
+
+
+<pre class="wp-block-code"><code>...... 
+# iptables -A INPUT -i -p tcp -j LOG --log-prefix "IPTABLES TCP ICMP: " 
+# iptables -A INPUT -i -p tcp -j DROP</code></pre>
+
+
+
+<p>（补充：这里以记录进来的数据并将 IPTABLES TCP ICMP: 作为前缀保存日志为例）</p>
+
+
+
+<h4 id="内容二-查看-iptables-防火墙日志的方法">内容二：显示 iptables 防火墙日志的方法</h4>
+
+
+
+<pre class="wp-block-code"><code># cat /log/var/message</code></pre>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Linux SELinux 标签的设置</title>
+		<link>https://eternalcenter-now.github.io/selinux-label/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Sat, 25 Jul 2020 07:11:03 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[SELinux]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System File Security (系统文件安全)]]></category>
+		<category><![CDATA[System Log (系统日志)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Port Security (系统端口安全)]]></category>
+		<category><![CDATA[System Process Security (系统进程安全)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Security Log (系统安全日志)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=10257</guid>
+
+					<description><![CDATA[内容目录： 内容一：开启 SELinux 标签1.1 修改 SELinux 配置文件1.2 重启系统 内容二：SELinux 的常见特性2.1 SELinux 特性一：创建的文件或目录会自动继承其父目录的 SELinux 标签2.1.1 在 /var/www/html/ 目录下新创建 index.html 文件2.1.2 显示 /var/www/html/ 目录的 SELinux 标签2.1.3 显示新生成的 /var/www/html/index.html 标签2.2 SELinux 特性二：移动文件或目录和保留属性复制文件或目录不会改变其 SELinux 标签，普通复制会改变 SELinux 标签2.2.1 在 /tmp/ 目录下新创建 file1，file2，file3 文件2.2.2 显示 ls -Zd /tmp/ 目录的 SELinux 标签2.2.3 显示新创建文件的标签2.2.4 将 /tmp/file1 复制到 /var/www/html/2.2.5 将 /tmp/file2 移动到 /var/www/html/2.2.6 将 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/selinux-label/" class="more-link">Continue reading<span class="screen-reader-text"> "[内容] Linux SELinux 标签的设置"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2 id="内容目录">内容目录：</h2>
+
+
+
+<h4 id="内容一-开启-selinux-标签1-1-修改-selinux-配置文件1-2-重启系统">内容一：开启 SELinux 标签<br>1.1 修改 SELinux 配置文件<br>1.2 重启系统</h4>
+
+
+
+<h4 id="内容二-selinux-的常见特性2-1-selinux-特性一-创建的文件或目录会自动继承其父目录的-selinux-标签2-1-1-在-var-www-html-目录下新创建-index-html-文件2-1-2-显示-var-www-html-目录的-selinux-标签2-1-3-显示新生成的-var-www-html-index-html-标签2-2-selinux-特性二-移动文件或目录和保留属性复制文件或目录不会改变其-selinux-标签-普通复制会改变-selinux-标签2-2-1-在-tmp-目录下新创建-file1-file2-file3-文件2-2-2-显示-ls-zd-tmp-目录的-selinux-标签2-2-3-显示新创建文件的标签2-2-4-将-tmp-file1-复制到-var-www-html-2-2-5-将-tmp-file2-移动到-var-www-html-2-2-6-将-tmp-file2-复制到-var-www-html-并使用-a-选项保留文件属性2-2-7-显示这些文件的-selinux-标签">内容二：SELinux 的常见特性<br>2.1 SELinux 特性一：创建的文件或目录会自动继承其父目录的 SELinux 标签<br>2.1.1 在 /var/www/html/ 目录下新创建 index.html 文件<br>2.1.2 显示 /var/www/html/ 目录的 SELinux 标签<br>2.1.3 显示新生成的 /var/www/html/index.html 标签<br>2.2 SELinux 特性二：移动文件或目录和保留属性复制文件或目录不会改变其 SELinux 标签，普通复制会改变 SELinux 标签<br>2.2.1 在 /tmp/ 目录下新创建 file1，file2，file3 文件<br>2.2.2 显示 ls -Zd /tmp/ 目录的 SELinux 标签<br>2.2.3 显示新创建文件的标签<br>2.2.4 将 /tmp/file1 复制到 /var/www/html/<br>2.2.5 将 /tmp/file2 移动到 /var/www/html/<br>2.2.6 将 /tmp/file2 复制到 /var/www/html/，并使用 -a 选项保留文件属性<br>2.2.7 显示这些文件的 SELinux 标签</h4>
+
+
+
+<h4 id="内容三-显示某个文件或目录-selinux-标签3-1-显示某个文件-selinux-标签3-2-显示某个目录-selinux-标签3-3-显示某个进程-selinux-标签">内容三：显示某个文件或目录 SELinux 标签<br>3.1 显示某个文件 SELinux 标签<br>3.2 显示某个目录 SELinux 标签<br>3.3 显示某个进程 SELinux 标签</h4>
+
+
+
+<h4 id="内容四-显示所有-selinux-标签4-1-显示所有文件和目录的-selinux-标签4-2-显示所有端口的-selinux-标签4-3-显示所有进程的-selinux-标签">内容四：显示所有 SELinux 标签<br>4.1 显示所有文件和目录的 SELinux 标签<br>4.2 显示所有端口的 SELinux 标签<br>4.3 显示所有进程的 SELinux 标签</h4>
+
+
+
+<h4 id="内容五-设置-selinux-标签5-1-设置文件和目录-selinux-标签5-1-1-使用-semanage-fcontext-命令和-restorecon-命令设置文件和目录的-selinux-标签5-1-1-1-semanage-fcontext-命令的常用选项5-1-1-2-使用-semanage-fcontext-命令和-restorecon-命令设置文件和目录的-selinux-标签5-1-1-2-1-使用-smanage-fcontext-命令设置-selinux-标签5-1-1-2-2-使用-restorecon-命令修改默认上下文5-1-2-使用-chcon-命令设置-selinux-标签5-2-设置端口-selinux">内容五：设置 SELinux 标签<br>5.1 设置文件和目录 SELinux 标签<br>5.1.1 使用 semanage fcontext 命令和 restorecon 命令设置文件和目录的 SELinux 标签<br>5.1.1.1 semanage fcontext 命令的常用选项<br>5.1.1.2 使用 semanage fcontext 命令和 restorecon 命令设置文件和目录的 SELinux 标签<br>5.1.1.2.1 使用 smanage fcontext 命令设置 SELinux 标签<br>5.1.1.2.2 使用 restorecon 命令修改默认上下文<br>5.1.2 使用 chcon 命令设置 SELinux 标签<br>5.2 设置端口 SELinux</h4>
+
+
+
+<h2 id="具体的内容">具体的内容：</h2>
+
+
+
+<h4 id="内容一-开启-selinux-标签1-1-修改-selinux-配置文件">内容一：开启 SELinux 标签<br>1.1 修改 SELinux 配置文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/selinux/config</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+SELINUX=disabled
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+SELINUX=enforcing
+......</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+SELINUX=perssive
+......</code></pre>
+
+
+
+<h4 id="1-2-重启系统">1.2 重启系统</h4>
+
+
+
+<pre class="wp-block-code"><code># reboot</code></pre>
+
+
+
+<h4 id="内容二-selinux-的常见特性2-1-selinux-特性一-创建的文件或目录会自动继承其父目录的-selinux-标签2-1-1-在-var-www-html-目录下新创建-index-html-文件">内容二：SELinux 的常见特性<br>2.1 SELinux 特性一：创建的文件或目录会自动继承其父目录的 SELinux 标签<br>2.1.1 在 /var/www/html/ 目录下新创建 index.html 文件</h4>
+
+
+
+<pre class="wp-block-code"><code># echo website &gt; /var/www/html/index.html</code></pre>
+
+
+
+<p>（补充：这里以在 /var/www/html/ 目录下生成 index.html 文件为例）</p>
+
+
+
+<h4 id="2-1-2-显示-var-www-html-目录的-selinux-标签">2.1.2 显示 /var/www/html/ 目录的 SELinux 标签</h4>
+
+
+
+<pre class="wp-block-code"><code># ls -dZ /var/www/html/
+unconfined_u:object_r:httpd_sys_content_t:s0 index.html</code></pre>
+
+
+
+<h4 id="2-1-3-显示新生成的-var-www-html-index-html-标签">2.1.3 显示新生成的 /var/www/html/index.html 标签</h4>
+
+
+
+<pre class="wp-block-code"><code># ls -Z /var/www/html/index.html/index.html 
+unconfined_u:object_r:httpd_sys_content_t:s0 index.html</code></pre>
+
+
+
+<p>（补充：从内容 1.1.2 和内容 1.1.3 命令的结果可以看出新生成的文件或其父目录的 SELinux 标签一致）</p>
+
+
+
+<h4 id="2-2-selinux-特性二-移动文件或目录和保留属性复制文件或目录不会改变其-selinux-标签-普通复制会改变-selinux-标签2-2-1-在-tmp-目录下新创建-file1-file2-file3-文件">2.2 SELinux 特性二：移动文件或目录和保留属性复制文件或目录不会改变其 SELinux 标签，普通复制会改变 SELinux 标签<br>2.2.1 在 /tmp/ 目录下新创建 file1，file2，file3 文件</h4>
+
+
+
+<pre class="wp-block-code"><code># touch /tmp/file{1,2,3}</code></pre>
+
+
+
+<h4 id="2-2-2-显示-ls-zd-tmp-目录的-selinux-标签">2.2.2 显示 ls -Zd /tmp/ 目录的 selinux 标签</h4>
+
+
+
+<pre class="wp-block-code"><code># ls -Zd /tmp/
+unconfined_u:object_r:user_tmp_t:s0 /tmp/</code></pre>
+
+
+
+<h4 id="2-2-3-显示新创建文件的标签">2.2.3 显示新创建文件的标签</h4>
+
+
+
+<pre class="wp-block-code"><code># ls -Z /tmp/file*
+unconfined_u:object_r:user_tmp_t:s0 /tmp/file1  unconfined_u:object_r:user_tmp_t:s0 /tmp/file2
+unconfined_u:object_r:user_tmp_t:s0 /tmp/file3</code></pre>
+
+
+
+<h4 id="2-2-4-将-tmp-file1-复制到-var-www-html">2.2.4 将 /tmp/file1 复制到 /var/www/html/</h4>
+
+
+
+<pre class="wp-block-code"><code># cp /tmp/file1 /var/www/html/</code></pre>
+
+
+
+<h4 id="2-2-5-将-tmp-file2-移动到-var-www-html">2.2.5 将 /tmp/file2 移动到 /var/www/html/</h4>
+
+
+
+<pre class="wp-block-code"><code># mv /tmp/file2 /var/www/html/</code></pre>
+
+
+
+<h4 id="2-2-6-将-tmp-file2-复制到-var-www-html-并使用-a-选项保留文件属性">2.2.6 将 /tmp/file2 复制到 /var/www/html/，并使用 -a 选项保留文件属性</h4>
+
+
+
+<pre class="wp-block-code"><code># cp -a /tmp/file3 /var/www/html/</code></pre>
+
+
+
+<h4 id="2-2-7-显示这些文件的-selinux-标签">2.2.7 显示这些文件的 SELinux 标签</h4>
+
+
+
+<pre class="wp-block-code"><code># ls -Z /var/www/html/file*
+unconfined_u:object_r:httpd_sys_content_t:s0 file1           unconfined_u:object_r:user_tmp_t:s0 file3
+unconfined_u:object_r:user_tmp_t:s0 file2</code></pre>
+
+
+
+<p>（补充：从内容 2.2.3 和内容 2.2.7 命令的结果可以看出只有普通复制会改变 SELinux 标签 ）</p>
+
+
+
+<h4 id="内容三-显示某个文件-目录或进程-selinux-标签3-1-显示某个文件-selinux-标签">内容三：显示某个文件、目录或进程 SELinux 标签<br>3.1 显示某个文件 SELinux 标签</h4>
+
+
+
+<pre class="wp-block-code"><code># ls -Z &lt;file&gt;</code></pre>
+
+
+
+<h4 id="3-2-显示某个目录-selinux-标签">3.2 显示某个目录 SELinux 标签</h4>
+
+
+
+<pre class="wp-block-code"><code># ls -Zd &lt;directory&gt;</code></pre>
+
+
+
+<h4 id="3-3-显示某个进程-selinux-标签">3.3 显示某个进程 SELinux 标签</h4>
+
+
+
+<pre class="wp-block-code"><code># ps -auxZ | grep &lt;process&gt;</code></pre>
+
+
+
+<h4 id="内容四-显示所有-selinux-标签4-1-显示所有文件和目录的-selinux-标签">内容四：显示所有 SELinux 标签<br>4.1 显示所有文件和目录的 SELinux 标签</h4>
+
+
+
+<pre class="wp-block-code"><code># semanage fcontext -l</code></pre>
+
+
+
+<p>（注意：需要单独安装 policycoreutils-python-utils 后才能使用 semanage 命令）</p>
+
+
+
+<h4 id="4-2-显示所有端口的-selinux-标签">4.2 显示所有端口的 SELinux 标签</h4>
+
+
+
+<pre class="wp-block-code"><code># semanage port -l</code></pre>
+
+
+
+<p>（注意：需要单独安装 policycoreutils-python-utils 后才能使用 semanage 命令）</p>
+
+
+
+<h4 id="4-3-显示所有进程的-selinux-标签">4.3 显示所有进程的 SELinux 标签</h4>
+
+
+
+<pre class="wp-block-code"><code># ps -auxZ</code></pre>
+
+
+
+<h4 id="内容五-设置-selinux-标签5-1-设置文件和目录-selinux-标签5-1-1-使用-semanage-fcontext-命令和-restorecon-命令设置文件和目录的-selinux-标签5-1-1-1-semanage-fcontext-命令的常用选项">内容五：设置 SELinux 标签<br>5.1 设置文件和目录 SELinux 标签<br>5.1.1 使用 semanage fcontext 命令和 restorecon 命令设置文件和目录的 SELinux 标签<br>5.1.1.1 semanage fcontext 命令的常用选项</h4>
+
+
+
+<p>1) -a 添加或变更 SELinux 标签<br>2) -d 删除 SELinux 标签<br>3) -l 显示所有的 SELinux 标签<br>4) -t 指定上下文 SELinux 标签<br>5) -v 显示修改 SELinux 标签的内容<br>6) -R 递归设置 SELinux 标签<br>7) -m 变更 SELinux 标签</p>
+
+
+
+<h4 id="5-1-1-2-使用-semanage-fcontext-命令和-restorecon-命令设置文件和目录的-selinux-标签5-1-1-2-1-使用-smanage-fcontext-命令设置-selinux-标签">5.1.1.2 使用 semanage fcontext 命令和 restorecon 命令设置文件和目录的 SELinux 标签<br>5.1.1.2.1 使用 smanage fcontext 命令设置 SELinux 标签</h4>
+
+
+
+<pre class="wp-block-code"><code># semanage fcontext -a -t httpd_sys_content_t "/tmp(/.*)?"</code></pre>
+
+
+
+<p>（补充：这里以将 /tmp(/.*) 的 SELinux 标签设置为 httpd_sys_content_t 为例）</p>
+
+
+
+<p>（注意：需要单独安装 policycoreutils-python-utils 后才能使用 semanage 命令）</p>
+
+
+
+<h4 id="5-1-1-2-2-使用-restorecon-命令修改默认上下文">5.1.1.2.2 使用 restorecon 命令修改默认上下文</h4>
+
+
+
+<pre class="wp-block-code"><code># restorecon -Rv /tmp
+Relabeled /tmp from unconfined_u:object_r:default_t:s0 to unconfined_u:object_r:httpd_sys_content_t:s0</code></pre>
+
+
+
+<h4 id="5-1-2-使用-chcon-命令设置-selinux-标签">5.1.2 使用 chcon 命令设置 SELinux 标签</h4>
+
+
+
+<pre class="wp-block-code"><code># chcon -t httpd_sys_content_t /tmp/*</code></pre>
+
+
+
+<p>（补充：这里以将 /tmp/* 的 SELinux 标签设置为 httpd_sys_content_t 为例）</p>
+
+
+
+<h4 id="5-2-设置端口-selinux">5.2 设置端口 SELinux</h4>
+
+
+
+<pre class="wp-block-code"><code># semanage port -a -t http_port_t -p tcp 82</code></pre>
+
+
+
+<p>（补充：这里以将 TCP 82 端口的 SELinux 标签设置为 http_port_t 为例）</p>
+
+
+
+<p>（注意：需要单独安装 policycoreutils-python-utils 后才能使用 semanage 命令）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[模板] Linux 日志保存时间策略的配置模板 （logrotate 的配置模板）</title>
+		<link>https://eternalcenter-now.github.io/logrotate-template/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 20 Jul 2020 05:34:49 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System General Log (系统普通日志)]]></category>
+		<category><![CDATA[System Log (系统日志)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=10116</guid>
+
+					<description><![CDATA[（补充：1) /etc/logrotate.d/messages 这个配置文件里的设置会影响到日志文件 /var/log/messages2) 在配置文件里添加 /var/log/secure 参数则代表会将 /var/log/secure 日志文件里的内容添加到 /var/log/messages 日志文件里3) 在配置文件里添加 delaycompress 参数则代表会将归档的日志进行压缩4) 在配置文件里添加 rotate 5 参数则代表只会保留最近的 5 次的日志压缩文件5) 在配置文件里添加 weekly 参数则代表每周会压缩一次日志文件6) 在配置文件里添加 create 755 root root 参数则代表日志文件的所属主和所属组都是 root，权限是 755）]]></description>
+										<content:encoded><![CDATA[
+<pre class="wp-block-code"><code># vim /etc/logrotate.d/messages
+/var/log/messages
+/var/log/secure
+/var/log/maillog
+{
+    delaycompress
+    nodateext
+    rotate 5
+    missingok
+    notifempty
+    weekly
+    create 755 root root
+    sharedscripts
+    postrotate
+        /bin/kill -HUP `cat /var/run/syslogd.pid 2&gt; /dev/null` 2&gt; /dev/null || true
+    endscript
+}</code></pre>
+
+
+
+<p>（<br>补充：<br>1) /etc/logrotate.d/messages 这个配置文件里的设置会影响到日志文件 /var/log/messages<br>2) 在配置文件里添加 /var/log/secure 参数则代表会将 /var/log/secure 日志文件里的内容添加到 /var/log/messages 日志文件里<br>3) 在配置文件里添加 delaycompress 参数则代表会将归档的日志进行压缩<br>4) 在配置文件里添加 rotate 5 参数则代表只会保留最近的 5 次的日志压缩文件<br>5) 在配置文件里添加 weekly 参数则代表每周会压缩一次日志文件<br>6) 在配置文件里添加 create 755 root root 参数则代表日志文件的所属主和所属组都是 root，权限是 755<br>）</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] 日志记录的清除 （last ） （CentOS Linux &#038; RHEL  版）</title>
+		<link>https://eternalcenter-now.github.io/last-record-clean-centosrhel-centos-linux-rhel/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Mon, 20 Jul 2020 03:00:30 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System General Log (系统普通日志)]]></category>
+		<category><![CDATA[System Log (系统日志)]]></category>
+		<category><![CDATA[System Login Security (系统登录安全)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Security Log (系统安全日志)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=10095</guid>
+
+					<description><![CDATA[步骤目录： 步骤一：显示原来的 last 记录 步骤二：清除原来的 last 记录2.1 确认原有 last 记录的日志文件2.2 将原有 last 记录的日志文件移走2.3 创建新的 last 记录的日志文件2.4 给新创建的 last 记录的日志文件对应的权限 步骤三：显示 last 记录有没有被成功清除 具体的操作步骤： 步骤一：显示原来的 last 记录 步骤二：清除原来的 last 记录2.1 确认原有 last 记录的日志文件 2.2 将原有 last 记录的日志文件移走 2.3 创建新的 last 记录的日志文件 2.4 给新创建的 last 记录的日志文件对应的权限 步骤三：显示 last 记录有没有被成功清除]]></description>
+										<content:encoded><![CDATA[
+<h2 id="步骤目录">步骤目录：</h2>
+
+
+
+<h4 id="步骤一-查看原来的-last-记录">步骤一：显示原来的 last 记录</h4>
+
+
+
+<h4 id="步骤二-清除原来的-last-记录2-1-确认原有-last-记录的日志文件2-2-将原有-last-记录的日志文件移走2-3-创建新的-last-记录的日志文件2-4-给新创建的-last-记录的日志文件对应的权限">步骤二：清除原来的 last 记录<br>2.1 确认原有 last 记录的日志文件<br>2.2 将原有 last 记录的日志文件移走<br>2.3 创建新的 last 记录的日志文件<br>2.4 给新创建的 last 记录的日志文件对应的权限</h4>
+
+
+
+<h4 id="步骤三-查看-last-记录有没有被成功清除">步骤三：显示 last 记录有没有被成功清除</h4>
+
+
+
+<h2 id="具体的操作步骤">具体的操作步骤：</h2>
+
+
+
+<h4 id="步骤一-查看原来的-last-记录">步骤一：显示原来的 last 记录</h4>
+
+
+
+<pre class="wp-block-code"><code># last</code></pre>
+
+
+
+<h4 id="步骤二-清除原来的-last-记录2-1-确认原有-last-记录的日志文件">步骤二：清除原来的 last 记录<br>2.1 确认原有 last 记录的日志文件</h4>
+
+
+
+<pre class="wp-block-code"><code># ls -arlt /var/log/wtmp
+-rw-rw-r--. 1 root utmp 294920 Jul 20 09:57 lastlog</code></pre>
+
+
+
+<h4 id="2-2-将原有-last-记录的日志文件移走">2.2 将原有 last 记录的日志文件移走</h4>
+
+
+
+<pre class="wp-block-code"><code># mv /var/log/wtmp /var/log/wtmp.backup</code></pre>
+
+
+
+<h4 id="2-3-创建新的-last-记录的日志文件">2.3 创建新的 last 记录的日志文件</h4>
+
+
+
+<pre class="wp-block-code"><code># touch /var/log/wtmp</code></pre>
+
+
+
+<h4 id="2-4-给新创建的-last-记录的日志文件对应的权限">2.4 给新创建的 last 记录的日志文件对应的权限</h4>
+
+
+
+<pre class="wp-block-code"><code># chown root:utmp /var/log/wtmp</code></pre>
+
+
+
+<h4 id="步骤三-查看-last-记录有没有被成功清除">步骤三：显示 last 记录有没有被成功清除</h4>
+
+
+
+<pre class="wp-block-code"><code># last
+
+wtmp begins Mon Jul 20 10:07:11 2020</code></pre>
+
+
+
+<p></p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>[内容] Linux SELinux 布尔 （boolean） 值的设置</title>
+		<link>https://eternalcenter-now.github.io/selinux-boolean/</link>
+		
+		<dc:creator><![CDATA[Mingyu Zhu]]></dc:creator>
+		<pubDate>Thu, 16 Jul 2020 11:56:09 +0000</pubDate>
+				<category><![CDATA[Chinese (中文)]]></category>
+		<category><![CDATA[SELinux]]></category>
+		<category><![CDATA[System (系统)]]></category>
+		<category><![CDATA[System File Security (系统文件安全)]]></category>
+		<category><![CDATA[System Log (系统日志)]]></category>
+		<category><![CDATA[System Network & System Security & System Log (系统网络 & 系统安全 & 系统日志)]]></category>
+		<category><![CDATA[System Port Security (系统端口安全)]]></category>
+		<category><![CDATA[System Process Security (系统进程安全)]]></category>
+		<category><![CDATA[System Security (系统安全)]]></category>
+		<category><![CDATA[System Security Log (系统安全日志)]]></category>
+		<guid isPermaLink="false">https://eternalcenter-now.github.io/?p=10063</guid>
+
+					<description><![CDATA[内容目录： 内容一：开启 SELinux 布尔（boolean）值1.1 显示当前 SELinux 状态1.2 将 SELinux 的状态设置为 Enforcing 以开启布尔（boolean）值1.2.1 当当前 SELinux 的状态为 Disabled 时开启布尔（boolean）值的方法1.2.1.1 修改 SELinux 配置文件1.2.1.2 重启系统1.2.2 当当前 SELinux 的状态为 Perssive 时开启布尔（boolean）值的方法 内容二：显示所有 SELinux 布尔（boolean）值 内容三：布尔（boolean）值的管理3.1 允许某一个 SELinux 布尔（boolean）值开启3.1.1 临时允许某一个 SELinux 布尔（boolean）值开启3.1.1.1 临时允许某一个 SELinux 布尔（boolean）值开启的格式3.1.1.2 临时允许某一个 SELinux 布尔（boolean）值开启的案例3.1.2 永久允许某一个 SELinux 布尔（boolean）值开启3.1.2.1 永久允许某一个 SELinux 布尔（boolean）值开启的格式3.1.2.2 永久允许某一个 SELinux 布尔（boolean）值开启的案例3.2 取消某一个 SELinux 布尔（boolean）值开启3.2.1 临时取消某一个 &#8230; <p class="link-more"><a href="https://eternalcenter-now.github.io/selinux-boolean/" class="more-link">Continue reading<span class="screen-reader-text"> "[内容] Linux SELinux 布尔 （boolean） 值的设置"</span></a></p>]]></description>
+										<content:encoded><![CDATA[
+<h2 id="内容目录">内容目录：</h2>
+
+
+
+<h4 id="内容一-开启-selinux-布尔-boolean-值1-1-显示当前-selinux-状态1-2-将-selinux-的状态设置为-enforcing-以开启布尔-boolean-值1-2-1-当当前-selinux-的状态为-disabled-时开启布尔-boolean-值的方法1-2-1-1-修改-selinux-配置文件1-2-1-2-重启系统1-2-2-当当前-selinux-的状态为-perssive-时开启布尔-boolean-值的方法">内容一：开启 SELinux 布尔（boolean）值<br>1.1 显示当前 SELinux 状态<br>1.2 将 SELinux 的状态设置为 Enforcing 以开启布尔（boolean）值<br>1.2.1 当当前 SELinux 的状态为 Disabled 时开启布尔（boolean）值的方法<br>1.2.1.1 修改 SELinux 配置文件<br>1.2.1.2 重启系统<br>1.2.2 当当前 SELinux 的状态为 Perssive 时开启布尔（boolean）值的方法</h4>
+
+
+
+<h4 id="内容二-查看所有-selinux-布尔-boolean-值">内容二：显示所有 SELinux 布尔（boolean）值</h4>
+
+
+
+<h4 id="内容三-布尔-boolean-值的管理3-1-允许某一个-selinux-布尔-boolean-值开启3-1-1-临时允许某一个-selinux-布尔-boolean-值开启3-1-1-1-临时允许某一个-selinux-布尔-boolean-值开启的格式3-1-1-2-临时允许某一个-selinux-布尔-boolean-值开启的案例3-1-2-永久允许某一个-selinux-布尔-boolean-值开启3-1-2-1-永久允许某一个-selinux-布尔-boolean-值开启的格式3-1-2-2-永久允许某一个-selinux-布尔-boolean-值开启的案例3-2-取消某一个-selinux-布尔-boolean-值开启3-2-1-临时取消某一个-selinux-布尔-boolean-值开启3-2-1-1-临时取消某一个-selinux-布尔-boolean-值开启的格式3-2-1-2-临时取消某一个-selinux-布尔-boolean-值开启的案例3-2-2-永久取消某一个-selinux-布尔-boolean-值关闭3-2-2-1-永久取消某一个-selinux-布尔-boolean-值开启的格式3-2-2-2-永久取消某一个-selinux-布尔-boolean-值开启的案例">内容三：布尔（boolean）值的管理<br>3.1 允许某一个 SELinux 布尔（boolean）值开启<br>3.1.1 临时允许某一个 SELinux 布尔（boolean）值开启<br>3.1.1.1 临时允许某一个 SELinux 布尔（boolean）值开启的格式<br>3.1.1.2 临时允许某一个 SELinux 布尔（boolean）值开启的案例<br>3.1.2 永久允许某一个 SELinux 布尔（boolean）值开启<br>3.1.2.1 永久允许某一个 SELinux 布尔（boolean）值开启的格式<br>3.1.2.2 永久允许某一个 SELinux 布尔（boolean）值开启的案例<br>3.2 取消某一个 SELinux 布尔（boolean）值开启<br>3.2.1 临时取消某一个 SELinux 布尔（boolean）值开启<br>3.2.1.1 临时取消某一个 SELinux 布尔（boolean）值开启的格式<br>3.2.1.2 临时取消某一个 SELinux 布尔（boolean）值开启的案例<br>3.2.2 永久取消某一个 SELinux 布尔（boolean）值关闭<br>3.2.2.1 永久取消某一个 SELinux 布尔（boolean）值开启的格式<br>3.2.2.2 永久取消某一个 SELinux 布尔（boolean）值开启的案例</h4>
+
+
+
+<h2 id="具体的操作步骤">具体的操作步骤：</h2>
+
+
+
+<h4 id="内容一-开启-selinux-布尔-boolean-值1-1-显示当前-selinux-状态">内容一：开启 SELinux 布尔（boolean）值<br>1.1 显示当前 SELinux 状态</h4>
+
+
+
+<pre class="wp-block-code"><code># getenforce</code></pre>
+
+
+
+<h4 id="1-2-将-selinux-的状态设置为-enforcing-以开启布尔-boolean-值1-2-1-当当前-selinux-的状态为-disabled-时开启布尔-boolean-值的方法1-2-1-1-修改-selinux-配置文件">1.2 将 SELinux 的状态设置为 Enforcing 以开启布尔（boolean）值<br>1.2.1 当当前 SELinux 的状态为 Disabled 时开启布尔（boolean）值的方法<br>1.2.1.1 修改 SELinux 配置文件</h4>
+
+
+
+<pre class="wp-block-code"><code># vim /etc/selinux/config</code></pre>
+
+
+
+<p>将以下内容：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+SELINUX=disabled
+......</code></pre>
+
+
+
+<p>修改为：</p>
+
+
+
+<pre class="wp-block-code"><code>......
+SELINUX=enforcing
+......</code></pre>
+
+
+
+<h4 id="1-2-1-2-重启系统">1.2.1.2 重启系统</h4>
+
+
+
+<pre class="wp-block-code"><code># reboot</code></pre>
+
+
+
+<h4 id="1-2-2-当当前-selinux-的状态为-perssive-时开启布尔-boolean-值的方法">1.2.2 当当前 SELinux 的状态为 Perssive 时开启布尔（boolean）值的方法</h4>
+
+
+
+<pre class="wp-block-code"><code># setenfoce 1</code></pre>
+
+
+
+<p>（补充：系统重启后失效）</p>
+
+
+
+<h4 id="内容二-查看所有-selinux-布尔-boolean-值">内容二：显示所有 SELinux 布尔（boolean）值</h4>
+
+
+
+<pre class="wp-block-code"><code># semanage boolean -l</code></pre>
+
+
+
+<h4 id="内容三-布尔-boolean-值的管理3-1-允许某一个-selinux-布尔-boolean-值开启3-1-1-临时允许某一个-selinux-布尔-boolean-值开启3-1-1-1-临时允许某一个-selinux-布尔-boolean-值开启的格式">内容三：布尔（boolean）值的管理<br>3.1 允许某一个 SELinux 布尔（boolean）值开启<br>3.1.1 临时允许某一个 SELinux 布尔（boolean）值开启<br>3.1.1.1 临时允许某一个 SELinux 布尔（boolean）值开启的格式</h4>
+
+
+
+<pre class="wp-block-code"><code># setsebool &lt;boolean value&gt; 1</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># setsebool &lt;boolean value&gt; on</code></pre>
+
+
+
+<h4 id="3-1-1-2-临时允许某一个-selinux-布尔-boolean-值开启的案例">3.1.1.2 临时允许某一个 SELinux 布尔（boolean）值开启的案例</h4>
+
+
+
+<pre class="wp-block-code"><code># setsebool httpd_can_network_connect 1</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># setsebool httpd_can_network_connect on</code></pre>
+
+
+
+<h4 id="3-1-2-永久允许某一个-selinux-布尔-boolean-值开启3-1-2-1-永久允许某一个-selinux-布尔-boolean-值开启的格式">3.1.2 永久允许某一个 SELinux 布尔（boolean）值开启<br>3.1.2.1 永久允许某一个 SELinux 布尔（boolean）值开启的格式</h4>
+
+
+
+<pre class="wp-block-code"><code># setsebool -P &lt;boolean value&gt; 1</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># setsebool -P &lt;boolean value&gt; on</code></pre>
+
+
+
+<h4 id="3-1-2-2-永久允许某一个-selinux-布尔-boolean-值开启的案例">3.1.2.2 永久允许某一个 SELinux 布尔（boolean）值开启的案例</h4>
+
+
+
+<pre class="wp-block-code"><code># setsebool -P httpd_can_network_connect 1</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># setsebool -P httpd_can_network_connect on</code></pre>
+
+
+
+<h4 id="3-2-取消某一个-selinux-布尔-boolean-值开启3-2-1-临时取消某一个-selinux-布尔-boolean-值开启3-2-1-1-临时取消某一个-selinux-布尔-boolean-值开启的格式">3.2 取消某一个 SELinux 布尔（boolean）值开启<br>3.2.1 临时取消某一个 SELinux 布尔（boolean）值开启<br>3.2.1.1 临时取消某一个 SELinux 布尔（boolean）值开启的格式</h4>
+
+
+
+<pre class="wp-block-code"><code># setsebool &lt;boolean value&gt; 0</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># setsebool &lt;boolean value&gt; off</code></pre>
+
+
+
+<h4 id="3-2-1-2-临时取消某一个-selinux-布尔-boolean-值开启的案例">3.2.1.2 临时取消某一个 SELinux 布尔（boolean）值开启的案例</h4>
+
+
+
+<pre class="wp-block-code"><code># setsebool httpd_can_network_connect 0</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># setsebool httpd_can_network_connect off</code></pre>
+
+
+
+<h4 id="3-2-2-永久取消某一个-selinux-布尔-boolean-值关闭3-2-2-1-永久取消某一个-selinux-布尔-boolean-值开启的格式">3.2.2 永久取消某一个 SELinux 布尔（boolean）值关闭<br>3.2.2.1 永久取消某一个 SELinux 布尔（boolean）值开启的格式</h4>
+
+
+
+<pre class="wp-block-code"><code># setsebool -P &lt;boolean value&gt; 0</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># setsebool -P &lt;boolean value&gt; off</code></pre>
+
+
+
+<h4 id="3-2-2-2-永久取消某一个-selinux-布尔-boolean-值开启的案例">3.2.2.2 永久取消某一个 SELinux 布尔（boolean）值开启的案例</h4>
+
+
+
+<pre class="wp-block-code"><code># setsebool -P httpd_can_network_connect 0</code></pre>
+
+
+
+<p>或者：</p>
+
+
+
+<pre class="wp-block-code"><code># setsebool -P httpd_can_network_connect off</code></pre>
+
+
+
+<p></p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>
